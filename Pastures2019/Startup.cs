@@ -14,6 +14,7 @@ using Pastures2019.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Pastures2019.Models;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Pastures2019
 {
@@ -51,6 +52,8 @@ namespace Pastures2019
                 .AddRoles<IdentityRole>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

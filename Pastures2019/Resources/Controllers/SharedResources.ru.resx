@@ -123,6 +123,9 @@
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Обратно к списку</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
   </data>
@@ -141,11 +144,23 @@
   <data name="Contact" xml:space="preserve">
     <value>Контакты</value>
   </data>
+  <data name="Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value>Текущий пароль</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Эл. адрес</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Найти</value>
   </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Забыли пароль</value>
@@ -207,6 +222,12 @@
   <data name="ResetPasswordConfirmation" xml:space="preserve">
     <value>Подтверждение сброса пароля</value>
   </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Роли</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>
   </data>
@@ -225,11 +246,17 @@
   <data name="UpdatePassword" xml:space="preserve">
     <value>Обновить пароль</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
   <data name="Username" xml:space="preserve">
     <value>Имя пользователя</value>
   </data>
   <data name="UserNameIsAlreadyTaken" xml:space="preserve">
     <value>Имя пользователя {0} уже занято.</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Пользователи</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Ваш пароль был изменен.</value>

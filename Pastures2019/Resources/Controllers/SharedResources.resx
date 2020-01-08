@@ -123,6 +123,9 @@
   <data name="Administrator" xml:space="preserve">
     <value />
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value />
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value />
   </data>
@@ -141,10 +144,22 @@
   <data name="Contact" xml:space="preserve">
     <value />
   </data>
+  <data name="Create" xml:space="preserve">
+    <value />
+  </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value />
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value />
+  </data>
   <data name="Email" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Find" xml:space="preserve">
     <value />
   </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
@@ -207,6 +222,12 @@
   <data name="ResetPasswordConfirmation" xml:space="preserve">
     <value />
   </data>
+  <data name="Roles" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value />
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value />
   </data>
@@ -225,10 +246,16 @@
   <data name="UpdatePassword" xml:space="preserve">
     <value />
   </data>
+  <data name="User" xml:space="preserve">
+    <value />
+  </data>
   <data name="Username" xml:space="preserve">
     <value />
   </data>
   <data name="UserNameIsAlreadyTaken" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Users" xml:space="preserve">
     <value />
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">

@@ -23,7 +23,8 @@ namespace Pastures2019.Models
             };
             var mailMessage = new MailMessage
             {
-                From = new MailAddress("pastureskz@gmail.com")
+                From = new MailAddress("pastureskz@gmail.com"),
+                IsBodyHtml = true
             };
             mailMessage.To.Add(email);
             mailMessage.Subject = subject;

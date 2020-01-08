@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -63,6 +64,12 @@ namespace Pastures2019.Controllers
         public ActionResult Instruction()
         {
             ViewBag.Instruction = true;
+            return View();
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult Administrator()
+        {
             return View();
         }
     }

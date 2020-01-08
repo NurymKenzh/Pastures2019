@@ -44,6 +44,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
                         </li>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

@@ -153,7 +153,13 @@
   <data name="Home" xml:space="preserve">
     <value />
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value />
+  </data>
   <data name="Instruction" xml:space="preserve">
+    <value />
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
     <value />
   </data>
   <data name="Language" xml:space="preserve">
@@ -201,6 +207,12 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value />
   </data>
+  <data name="TheFieldIsNotAValidEmailAddress" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TheFieldIsRequired" xml:space="preserve">
+    <value />
+  </data>
   <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value />
   </data>
@@ -211,6 +223,9 @@
     <value />
   </data>
   <data name="Username" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UserNameIsAlreadyTaken" xml:space="preserve">
     <value />
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">

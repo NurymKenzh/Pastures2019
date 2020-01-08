@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
+using Pastures2019.Controllers;
 
 namespace Pastures2019.Areas.Identity.Pages.Account
 {
@@ -19,17 +21,20 @@ namespace Pastures2019.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IStringLocalizer<SharedResources> sharedLocalizer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -39,12 +44,12 @@ namespace Pastures2019.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
+            [EmailAddress(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsNotAValidEmailAddress")]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
             //[StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [StringLength(100, ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "The0MustBeAtLeast2AndAtMax1CharactersLong", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -89,6 +94,10 @@ namespace Pastures2019.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    if (error.Description.Contains("is already taken"))
+                    {
+                        error.Description = String.Format(_sharedLocalizer["UserNameIsAlreadyTaken"], user?.Email);
+                    }
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }

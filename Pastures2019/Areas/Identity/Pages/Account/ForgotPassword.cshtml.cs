@@ -34,8 +34,8 @@ namespace Pastures2019.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
+            [EmailAddress(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsNotAValidEmailAddress")]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Email")]
             public string Email { get; set; }
         }

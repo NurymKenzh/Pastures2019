@@ -25,12 +25,12 @@ namespace Pastures2019.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
+            [EmailAddress(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsNotAValidEmailAddress")]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
             //[StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [StringLength(100, ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "The0MustBeAtLeast2AndAtMax1CharactersLong", MinimumLength = 6)]
             [DataType(DataType.Password)]

@@ -153,8 +153,14 @@
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Incorrect password.</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Instruction</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Invalid login attempt.</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -201,6 +207,12 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>
   </data>
+  <data name="TheFieldIsNotAValidEmailAddress" xml:space="preserve">
+    <value>The {0} field is not a valid e-mail address.</value>
+  </data>
+  <data name="TheFieldIsRequired" xml:space="preserve">
+    <value>The {0} field is required.</value>
+  </data>
   <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>The new password and confirmation password do not match.</value>
   </data>
@@ -212,6 +224,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UserNameIsAlreadyTaken" xml:space="preserve">
+    <value>User name {0} is already taken.</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Your password has been changed.</value>

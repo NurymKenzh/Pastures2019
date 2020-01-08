@@ -171,9 +171,27 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string IncorrectPassword {
+            get {
+                return ResourceManager.GetString("IncorrectPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Instruction {
             get {
                 return ResourceManager.GetString("Instruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string InvalidLoginAttempt {
+            get {
+                return ResourceManager.GetString("InvalidLoginAttempt", resourceCulture);
             }
         }
         
@@ -315,6 +333,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string TheFieldIsNotAValidEmailAddress {
+            get {
+                return ResourceManager.GetString("TheFieldIsNotAValidEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string TheFieldIsRequired {
+            get {
+                return ResourceManager.GetString("TheFieldIsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string TheNewPasswordAndConfirmationPasswordDoNotMatch {
             get {
                 return ResourceManager.GetString("TheNewPasswordAndConfirmationPasswordDoNotMatch", resourceCulture);
@@ -345,6 +381,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string Username {
             get {
                 return ResourceManager.GetString("Username", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string UserNameIsAlreadyTaken {
+            get {
+                return ResourceManager.GetString("UserNameIsAlreadyTaken", resourceCulture);
             }
         }
         

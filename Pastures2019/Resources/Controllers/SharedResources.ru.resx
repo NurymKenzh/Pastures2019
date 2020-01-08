@@ -153,8 +153,14 @@
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Неверный пароль.</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Инструкция</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Неверная попытка входа.</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -201,6 +207,12 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>
   </data>
+  <data name="TheFieldIsNotAValidEmailAddress" xml:space="preserve">
+    <value>Поле {0} не является действительным адресом электронной почты.</value>
+  </data>
+  <data name="TheFieldIsRequired" xml:space="preserve">
+    <value>Поле {0} обязательно для заполнения.</value>
+  </data>
   <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Новый пароль и подтверждение пароля не совпадают.</value>
   </data>
@@ -212,6 +224,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Имя пользователя</value>
+  </data>
+  <data name="UserNameIsAlreadyTaken" xml:space="preserve">
+    <value>Имя пользователя {0} уже занято.</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Ваш пароль был изменен.</value>

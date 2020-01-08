@@ -153,8 +153,14 @@
   <data name="Home" xml:space="preserve">
     <value>Басты</value>
   </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Қате құпиясөз.</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Нұсқаулық</value>
+  </data>
+  <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value>Кіру әрекеті жарамсыз.</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Тіл</value>
@@ -201,6 +207,12 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} кемінде {2} және максимум {1} таңбадан тұруы керек.</value>
   </data>
+  <data name="TheFieldIsNotAValidEmailAddress" xml:space="preserve">
+    <value>{0} өрісі жарамды электрондық пошта мекенжайы емес.</value>
+  </data>
+  <data name="TheFieldIsRequired" xml:space="preserve">
+    <value>{0} өрісі міндетті.</value>
+  </data>
   <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Жаңа пароль мен растау паролі сәйкес келмейді.</value>
   </data>
@@ -212,6 +224,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Пайдаланушы аты</value>
+  </data>
+  <data name="UserNameIsAlreadyTaken" xml:space="preserve">
+    <value>{0} пайдаланушы аты алынған.</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Сіздің пароліңіз өзгертілді.</value>

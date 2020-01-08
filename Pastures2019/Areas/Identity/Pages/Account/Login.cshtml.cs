@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
+using Pastures2019.Controllers;
 
 namespace Pastures2019.Areas.Identity.Pages.Account
 {
@@ -17,11 +19,15 @@ namespace Pastures2019.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager,
+            ILogger<LoginModel> logger,
+            IStringLocalizer<SharedResources> sharedLocalizer)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -36,12 +42,12 @@ namespace Pastures2019.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
+            [EmailAddress(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsNotAValidEmailAddress")]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
             [DataType(DataType.Password)]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Password")]
             public string Password { get; set; }
@@ -92,7 +98,7 @@ namespace Pastures2019.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, _sharedLocalizer["InvalidLoginAttempt"]);
                     return Page();
                 }
             }

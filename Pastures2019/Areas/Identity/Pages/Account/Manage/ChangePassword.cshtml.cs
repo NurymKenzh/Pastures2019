@@ -39,12 +39,12 @@ namespace Pastures2019.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
             [DataType(DataType.Password)]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "CurrentPassword")]
             public string OldPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
             [StringLength(100, ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "The0MustBeAtLeast2AndAtMax1CharactersLong", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "NewPassword")]
@@ -91,6 +91,10 @@ namespace Pastures2019.Areas.Identity.Pages.Account.Manage
             {
                 foreach (var error in changePasswordResult.Errors)
                 {
+                    if (error.Description == "Incorrect password.")
+                    {
+                        error.Description = _sharedLocalizer["IncorrectPassword"];
+                    }
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return Page();

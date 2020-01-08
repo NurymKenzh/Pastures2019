@@ -120,13 +120,25 @@
   <data name="About" xml:space="preserve">
     <value />
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ChangeYourAccountSettings" xml:space="preserve">
+    <value />
+  </data>
   <data name="ClickingHere" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
     <value />
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value />
   </data>
   <data name="Contact" xml:space="preserve">
+    <value />
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
     <value />
   </data>
   <data name="Email" xml:space="preserve">
@@ -153,6 +165,12 @@
   <data name="Logout" xml:space="preserve">
     <value />
   </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value />
+  </data>
   <data name="Password" xml:space="preserve">
     <value />
   </data>
@@ -160,6 +178,9 @@
     <value />
   </data>
   <data name="PleaseResetYourPasswordBy" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Profile" xml:space="preserve">
     <value />
   </data>
   <data name="Register" xml:space="preserve">
@@ -180,7 +201,19 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value />
   </data>
+  <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value />
+  </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value />
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value />
+  </data>
+  <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value />
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">

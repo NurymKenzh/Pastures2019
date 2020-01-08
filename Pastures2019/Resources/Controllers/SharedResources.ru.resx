@@ -120,14 +120,26 @@
   <data name="About" xml:space="preserve">
     <value>О сайте</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="ChangeYourAccountSettings" xml:space="preserve">
+    <value>Изменить настройки вашего аккаунта</value>
+  </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>нажав здесь</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Подтвердите новый пароль</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Подтвердите пароль</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Контакты</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Текущий пароль</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Эл. адрес</value>
@@ -153,6 +165,12 @@
   <data name="Logout" xml:space="preserve">
     <value>Выйти</value>
   </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Управлять учетной записью</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
@@ -161,6 +179,9 @@
   </data>
   <data name="PleaseResetYourPasswordBy" xml:space="preserve">
     <value>Пожалуйста, сбросьте свой пароль, </value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Регистрация</value>
@@ -180,8 +201,20 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>
   </data>
+  <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value>Новый пароль и подтверждение пароля не совпадают.</value>
+  </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Обновить пароль</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Имя пользователя</value>
+  </data>
+  <data name="YourPasswordHasBeenChanged" xml:space="preserve">
+    <value>Ваш пароль был изменен.</value>
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Ваш пароль был сброшен</value>

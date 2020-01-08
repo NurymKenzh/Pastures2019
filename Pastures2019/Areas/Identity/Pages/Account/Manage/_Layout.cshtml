@@ -1,11 +1,15 @@
-﻿@{
-    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    //Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Manage your account</h1>
+    <h1>@SharedLocalizer["ManageYourAccount"]</h1>
 
 <div>
-    <h4>Change your account settings</h4>
+    @*<h4>Change your account settings</h4>*@
     <hr />
     <div class="row">
         <div class="col-md-3">

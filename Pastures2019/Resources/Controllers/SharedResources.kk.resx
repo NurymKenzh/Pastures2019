@@ -120,14 +120,26 @@
   <data name="About" xml:space="preserve">
     <value>Туралы</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Құпия сөзді өзгерту</value>
+  </data>
+  <data name="ChangeYourAccountSettings" xml:space="preserve">
+    <value>Тіркелгі параметрлерін өзгертіңіз</value>
+  </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>мында басыңыз</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Жаңа құпиясөзді растаңыз</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Құпия сөзді растау</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Байланыс</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Ағымдағы Құпия сөз</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Электрондық пошта</value>
@@ -153,6 +165,12 @@
   <data name="Logout" xml:space="preserve">
     <value>Шығу</value>
   </data>
+  <data name="ManageYourAccount" xml:space="preserve">
+    <value>Есептік жазбаңызды басқарыңыз</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Жаңа Құпия Сөз</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
@@ -161,6 +179,9 @@
   </data>
   <data name="PleaseResetYourPasswordBy" xml:space="preserve">
     <value>Құпия сөзіңізді қалпына келтіріңіз</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Тіркелу</value>
@@ -180,8 +201,20 @@
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} кемінде {2} және максимум {1} таңбадан тұруы керек.</value>
   </data>
+  <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value>Жаңа пароль мен растау паролі сәйкес келмейді.</value>
+  </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Құпия сөз және растау паролі сәйкес келмейді.</value>
+  </data>
+  <data name="UpdatePassword" xml:space="preserve">
+    <value>Парольді жаңартыңыз</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Пайдаланушы аты</value>
+  </data>
+  <data name="YourPasswordHasBeenChanged" xml:space="preserve">
+    <value>Сіздің пароліңіз өзгертілді.</value>
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Құпия сөзіңіз қалпына келтірілді</value>

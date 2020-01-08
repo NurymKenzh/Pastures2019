@@ -27,6 +27,7 @@ namespace Pastures2019.Areas.Identity.Pages.Account.Manage
             _emailSender = emailSender;
         }
 
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Username")]
         public string Username { get; set; }
 
         public bool IsEmailConfirmed { get; set; }

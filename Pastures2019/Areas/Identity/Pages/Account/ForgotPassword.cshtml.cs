@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
+using Pastures2019.Controllers;
 
 namespace Pastures2019.Areas.Identity.Pages.Account
 {
@@ -16,11 +18,15 @@ namespace Pastures2019.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager,
+            IEmailSender emailSender,
+            IStringLocalizer<SharedResources> sharedLocalizer)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -30,6 +36,7 @@ namespace Pastures2019.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
+            [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Email")]
             public string Email { get; set; }
         }
 
@@ -56,8 +63,8 @@ namespace Pastures2019.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    _sharedLocalizer["ResetPassword"],
+                    $"{_sharedLocalizer["PleaseResetYourPasswordBy"]} <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>{_sharedLocalizer["ClickingHere"]}</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

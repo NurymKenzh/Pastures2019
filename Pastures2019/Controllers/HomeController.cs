@@ -6,12 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Pastures2019.Models;
 
 namespace Pastures2019.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
+
+        public HomeController(IStringLocalizer<SharedResources> sharedLocalizer)
+        {
+            _sharedLocalizer = sharedLocalizer;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -38,6 +46,24 @@ namespace Pastures2019.Controllers
             );
 
             return LocalRedirect(returnUrl);
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.About = true;
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Contact = true;
+            return View();
+        }
+
+        public ActionResult Instruction()
+        {
+            ViewBag.Instruction = true;
+            return View();
         }
     }
 }

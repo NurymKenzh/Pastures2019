@@ -1,0 +1,50 @@
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Instruction"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+{
+    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+    {
+        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+            <h2>Текстовая инструкция</h2>
+            <a href="~/Pdf/Manual.pdf" target="_blank">Открыть</a>
+        </div>
+        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+            <h2>Пример по работе с картами</h2>
+            <video controls="controls" style="width: 100%;">
+                @*<source src="~/Video/Help.mp4" type="video/mp4" />*@
+            </video>
+        </div>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+    {
+        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+            <h2>Текстовая инструкция</h2>
+            <a href="~/Pdf/Manual.pdf" target="_blank">Открыть</a>
+        </div>
+        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+            <h2>Пример по работе с картами</h2>
+            <video controls="controls" style="width: 100%;">
+                @*<source src="~/Video/Help.mp4" type="video/mp4" />*@
+            </video>
+        </div>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+    {
+        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+            <h2>Текстовая инструкция</h2>
+            <a href="~/Pdf/Manual.pdf" target="_blank">Открыть</a>
+        </div>
+        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
+            <h2>Пример по работе с картами</h2>
+            <video controls="controls" style="width: 100%;">
+                @*<source src="~/Video/Help.mp4" type="video/mp4" />*@
+            </video>
+        </div>
+    }
+}

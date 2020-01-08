@@ -126,6 +126,12 @@
   <data name="BackToList" xml:space="preserve">
     <value />
   </data>
+  <data name="BClass" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BClasses" xml:space="preserve">
+    <value />
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value />
   </data>
@@ -133,6 +139,9 @@
     <value />
   </data>
   <data name="ClickingHere" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Code" xml:space="preserve">
     <value />
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
@@ -151,6 +160,21 @@
     <value />
   </data>
   <data name="Delete" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DescriptionEN" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DescriptionKK" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DescriptionRU" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Details" xml:space="preserve">
     <value />
   </data>
   <data name="Edit" xml:space="preserve">

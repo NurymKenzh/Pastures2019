@@ -126,6 +126,12 @@
   <data name="BackToList" xml:space="preserve">
     <value>Тізімге оралу</value>
   </data>
+  <data name="BClass" xml:space="preserve">
+    <value>Жайылым класы (жүктеме)</value>
+  </data>
+  <data name="BClasses" xml:space="preserve">
+    <value>Жайылым сыныптары (жүктеме)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Құпия сөзді өзгерту</value>
   </data>
@@ -134,6 +140,9 @@
   </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>мында басыңыз</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Код</value>
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Жаңа құпиясөзді растаңыз</value>
@@ -152,6 +161,21 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Жою</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Сипаттамасы</value>
+  </data>
+  <data name="DescriptionEN" xml:space="preserve">
+    <value>Сипаттама (ағылшынша)</value>
+  </data>
+  <data name="DescriptionKK" xml:space="preserve">
+    <value>Сипаттама (қазақша)</value>
+  </data>
+  <data name="DescriptionRU" xml:space="preserve">
+    <value>Сипаттама (орыс)</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Толығырақ</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Өңдеу</value>

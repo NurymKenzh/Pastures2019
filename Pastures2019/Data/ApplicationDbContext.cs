@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Pastures2019.Models;
 
 namespace Pastures2019.Data
 {
@@ -12,5 +13,6 @@ namespace Pastures2019.Data
             : base(options)
         {
         }
+        public DbSet<Pastures2019.Models.BClass> BClass { get; set; }
     }
 }

@@ -126,6 +126,12 @@
   <data name="BackToList" xml:space="preserve">
     <value>Обратно к списку</value>
   </data>
+  <data name="BClass" xml:space="preserve">
+    <value>Класс пастбищ (Нагрузка)</value>
+  </data>
+  <data name="BClasses" xml:space="preserve">
+    <value>Классы пастбищ (Нагрузка)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
   </data>
@@ -134,6 +140,9 @@
   </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>нажав здесь</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Код</value>
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Подтвердите новый пароль</value>
@@ -152,6 +161,21 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Удалить</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="DescriptionEN" xml:space="preserve">
+    <value>Описание (английский)</value>
+  </data>
+  <data name="DescriptionKK" xml:space="preserve">
+    <value>Описание (казахский)</value>
+  </data>
+  <data name="DescriptionRU" xml:space="preserve">
+    <value>Описание (русский)</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Детали</value>
   </data>
   <data name="Edit" xml:space="preserve">
     <value>Редактировать</value>

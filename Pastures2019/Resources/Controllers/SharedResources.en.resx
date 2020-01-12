@@ -138,6 +138,12 @@
   <data name="BGroups" xml:space="preserve">
     <value>Pasture Groups (Load)</value>
   </data>
+  <data name="BType" xml:space="preserve">
+    <value>Pasture Type (Load)</value>
+  </data>
+  <data name="BTypes" xml:space="preserve">
+    <value>Pasture Types (Load)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>

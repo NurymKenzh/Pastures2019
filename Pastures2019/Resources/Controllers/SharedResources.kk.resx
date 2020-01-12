@@ -138,6 +138,12 @@
   <data name="BGroups" xml:space="preserve">
     <value>Жайылымдық топтар (жүктеме)</value>
   </data>
+  <data name="BType" xml:space="preserve">
+    <value>Жайылым түрі (жүктеме)</value>
+  </data>
+  <data name="BTypes" xml:space="preserve">
+    <value>Жайылым түрлері (жүктеме)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Құпия сөзді өзгерту</value>
   </data>

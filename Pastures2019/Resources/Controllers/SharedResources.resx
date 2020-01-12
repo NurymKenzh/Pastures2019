@@ -138,6 +138,12 @@
   <data name="BGroups" xml:space="preserve">
     <value />
   </data>
+  <data name="BType" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BTypes" xml:space="preserve">
+    <value />
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value />
   </data>

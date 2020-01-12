@@ -1,20 +1,20 @@
-﻿@model Pastures2019.Models.BClassIndexPageViewModel
+﻿@model Pastures2019.Models.BGroupIndexPageViewModel
 @using System.Net
 @using Pastures2019.Controllers
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = SharedLocalizer["BClasses"];
+    ViewData["Title"] = SharedLocalizer["BGroups"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@SharedLocalizer["BClasses"]</h1>
+<h1>@SharedLocalizer["BGroups"]</h1>
 
 <p>
     <a asp-action="Create">@SharedLocalizer["Create"]</a>
 </p>
 
-@using (Html.BeginForm("Index", "BClasses", new { SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter }, FormMethod.Get))
+@using (Html.BeginForm("Index", "BGroups", new { SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter }, FormMethod.Get))
 {
     @Html.Editor("SortOrder", null, new { htmlAttributes = new { @hidden = "hidden" }, value = ViewBag.SortOrder })
     @if (Model.Pager.EndPage > 1)

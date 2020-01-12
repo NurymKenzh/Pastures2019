@@ -11,16 +11,16 @@ using Pastures2019.Models;
 
 namespace Pastures2019.Controllers
 {
-    public class BClassesController : Controller
+    public class BGroupsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BClassesController(ApplicationDbContext context)
+        public BGroupsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: BClasses
+        // GET: BGroups
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Index(
             string SortOrder,
@@ -28,7 +28,7 @@ namespace Pastures2019.Controllers
             string DescriptionFilter,
             int? PageNumber)
         {
-            var bClass = _context.BClass
+            var bGroup = _context.BGroup
                 .Where(b => true);
 
             ViewBag.CodeFilter = CodeFilter;
@@ -39,46 +39,46 @@ namespace Pastures2019.Controllers
 
             if (CodeFilter != null)
             {
-                bClass = bClass.Where(b => b.Code == CodeFilter);
+                bGroup = bGroup.Where(b => b.Code == CodeFilter);
             }
             if (!string.IsNullOrEmpty(DescriptionFilter))
             {
-                bClass = bClass.Where(b => b.Description.Contains(DescriptionFilter));
+                bGroup = bGroup.Where(b => b.Description.Contains(DescriptionFilter));
             }
 
             switch (SortOrder)
             {
                 case "Code":
-                    bClass = bClass.OrderBy(b => b.Code);
+                    bGroup = bGroup.OrderBy(b => b.Code);
                     break;
                 case "CodeDesc":
-                    bClass = bClass.OrderByDescending(b => b.Code);
+                    bGroup = bGroup.OrderByDescending(b => b.Code);
                     break;
                 case "Description":
-                    bClass = bClass.OrderBy(b => b.Description);
+                    bGroup = bGroup.OrderBy(b => b.Description);
                     break;
                 case "DescriptionDesc":
-                    bClass = bClass.OrderByDescending(b => b.Description);
+                    bGroup = bGroup.OrderByDescending(b => b.Description);
                     break;
                 default:
-                    bClass = bClass.OrderBy(b => b.Id);
+                    bGroup = bGroup.OrderBy(b => b.Id);
                     break;
             }
 
             ViewBag.SortOrder = SortOrder;
 
-            var pager = new Pager(bClass.Count(), PageNumber);
+            var pager = new Pager(bGroup.Count(), PageNumber);
 
-            var viewModel = new BClassIndexPageViewModel
+            var viewModel = new BGroupIndexPageViewModel
             {
-                Items = bClass.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Items = bGroup.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
                 Pager = pager
             };
 
             return View(viewModel);
         }
 
-        // GET: BClasses/Details/5
+        // GET: BGroups/Details/5
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
@@ -87,41 +87,41 @@ namespace Pastures2019.Controllers
                 return NotFound();
             }
 
-            var bClass = await _context.BClass
+            var bGroup = await _context.BGroup
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (bClass == null)
+            if (bGroup == null)
             {
                 return NotFound();
             }
 
-            return View(bClass);
+            return View(bGroup);
         }
 
-        // GET: BClasses/Create
+        // GET: BGroups/Create
         [Authorize(Roles = "Administrator, Moderator")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: BClasses/Create
+        // POST: BGroups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator, Moderator")]
-        public async Task<IActionResult> Create([Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN")] BClass bClass)
+        public async Task<IActionResult> Create([Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN")] BGroup bGroup)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bClass);
+                _context.Add(bGroup);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(bClass);
+            return View(bGroup);
         }
 
-        // GET: BClasses/Edit/5
+        // GET: BGroups/Edit/5
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -130,23 +130,23 @@ namespace Pastures2019.Controllers
                 return NotFound();
             }
 
-            var bClass = await _context.BClass.FindAsync(id);
-            if (bClass == null)
+            var bGroup = await _context.BGroup.FindAsync(id);
+            if (bGroup == null)
             {
                 return NotFound();
             }
-            return View(bClass);
+            return View(bGroup);
         }
 
-        // POST: BClasses/Edit/5
+        // POST: BGroups/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator, Moderator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN")] BClass bClass)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN")] BGroup bGroup)
         {
-            if (id != bClass.Id)
+            if (id != bGroup.Id)
             {
                 return NotFound();
             }
@@ -155,12 +155,12 @@ namespace Pastures2019.Controllers
             {
                 try
                 {
-                    _context.Update(bClass);
+                    _context.Update(bGroup);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BClassExists(bClass.Id))
+                    if (!BGroupExists(bGroup.Id))
                     {
                         return NotFound();
                     }
@@ -171,10 +171,10 @@ namespace Pastures2019.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(bClass);
+            return View(bGroup);
         }
 
-        // GET: BClasses/Delete/5
+        // GET: BGroups/Delete/5
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -183,31 +183,31 @@ namespace Pastures2019.Controllers
                 return NotFound();
             }
 
-            var bClass = await _context.BClass
+            var bGroup = await _context.BGroup
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (bClass == null)
+            if (bGroup == null)
             {
                 return NotFound();
             }
 
-            return View(bClass);
+            return View(bGroup);
         }
 
-        // POST: BClasses/Delete/5
+        // POST: BGroups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var bClass = await _context.BClass.FindAsync(id);
-            _context.BClass.Remove(bClass);
+            var bGroup = await _context.BGroup.FindAsync(id);
+            _context.BGroup.Remove(bGroup);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BClassExists(int id)
+        private bool BGroupExists(int id)
         {
-            return _context.BClass.Any(e => e.Id == id);
+            return _context.BGroup.Any(e => e.Id == id);
         }
     }
 }

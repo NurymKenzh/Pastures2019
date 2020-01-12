@@ -132,6 +132,12 @@
   <data name="BClasses" xml:space="preserve">
     <value>Классы пастбищ (Нагрузка)</value>
   </data>
+  <data name="BGroup" xml:space="preserve">
+    <value>Группа пастбищ (Нагрузка)</value>
+  </data>
+  <data name="BGroups" xml:space="preserve">
+    <value>Группы пастбищ (Нагрузка)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
   </data>

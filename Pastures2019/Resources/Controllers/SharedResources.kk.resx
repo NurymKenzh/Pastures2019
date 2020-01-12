@@ -132,6 +132,12 @@
   <data name="BClasses" xml:space="preserve">
     <value>Жайылым сыныптары (жүктеме)</value>
   </data>
+  <data name="BGroup" xml:space="preserve">
+    <value>Жайылымдық топ (жүктеме)</value>
+  </data>
+  <data name="BGroups" xml:space="preserve">
+    <value>Жайылымдық топтар (жүктеме)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Құпия сөзді өзгерту</value>
   </data>

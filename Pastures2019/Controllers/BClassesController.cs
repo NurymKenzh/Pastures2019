@@ -26,7 +26,7 @@ namespace Pastures2019.Controllers
             string SortOrder,
             int? CodeFilter,
             string DescriptionFilter,
-            int? Page)
+            int? PageNumber)
         {
             var bclass = _context.BClass
                 .Where(b => true);
@@ -67,7 +67,7 @@ namespace Pastures2019.Controllers
 
             ViewBag.SortOrder = SortOrder;
 
-            var pager = new Pager(bclass.Count(), Page);
+            var pager = new Pager(bclass.Count(), PageNumber);
 
             var viewModel = new BClassIndexPageViewModel
             {

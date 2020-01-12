@@ -13,6 +13,7 @@
 <p>
     <a asp-action="Create">@SharedLocalizer["Create"]</a>
 </p>
+
 @using (Html.BeginForm("Index", "BClasses", new { SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter }, FormMethod.Get))
 {
     @Html.Editor("SortOrder", null, new { htmlAttributes = new { @hidden = "hidden" }, value = ViewBag.SortOrder })
@@ -27,7 +28,7 @@
                 </li>
                 <li>
                     @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
-                        new { Page = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
             }
 
@@ -35,7 +36,7 @@
             {
                 <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
                     @Html.ActionLink(page.ToString(), "Index",
-                        new { Page = page, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = page, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
             }
 
@@ -43,11 +44,11 @@
             {
                 <li>
                     @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
-                        new { Page = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
                 <li>
                     @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
-                        new { Page = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
             }
         </ul>
@@ -83,7 +84,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">@SharedLocalizer["Edit"]</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp->@SharedLocalizer["Edit"]</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">@SharedLocalizer["Details"]</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["Delete"]</a>
                 </td>
@@ -101,7 +102,7 @@
                 </li>
                 <li>
                     @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
-                        new { Page = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
             }
 
@@ -109,7 +110,7 @@
             {
                 <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
                     @Html.ActionLink(page.ToString(), "Index",
-                        new { Page = page, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = page, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
             }
 
@@ -117,11 +118,11 @@
             {
                 <li>
                     @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
-                        new { Page = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
                 <li>
                     @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
-                        new { Page = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                        new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
                 </li>
             }
         </ul>

@@ -10,7 +10,30 @@
 
 <a asp-area="" asp-controller="Users" asp-action="Index">@SharedLocalizer["Users"]</a>
 <br />
+@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+{
+    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+    {
+        <h>
+            Нагрузка сельскохозяйственных животных на пастбища Республики Казахстан
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+    {
+        <h>
+            Қазақстан Республикасының жайылымдарына ауылшаруашылық жануарларының жүктемесі
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+    {
+        <h>
+            The load of farm animals on the pastures of the Republic of Kazakhstan
+        </h>
+    }
+}
+<br />
 <a asp-area="" asp-controller="BurOtdels" asp-action="Index">@SharedLocalizer["BurOtdels"]</a>
 <a asp-area="" asp-controller="BTypes" asp-action="Index">@SharedLocalizer["BTypes"]</a>
+<a asp-area="" asp-controller="BurSubOtdels" asp-action="Index">@SharedLocalizer["BurSubOtdels"]</a>
 <a asp-area="" asp-controller="BClasses" asp-action="Index">@SharedLocalizer["BClasses"]</a>
 <a asp-area="" asp-controller="BGroups" asp-action="Index">@SharedLocalizer["BGroups"]</a>

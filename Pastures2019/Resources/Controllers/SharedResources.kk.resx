@@ -150,6 +150,12 @@
   <data name="BurOtdels" xml:space="preserve">
     <value>Жайылым департаменттері</value>
   </data>
+  <data name="BurSubOtdel" xml:space="preserve">
+    <value>Жайылымдық бөлімше (жүктеме)</value>
+  </data>
+  <data name="BurSubOtdels" xml:space="preserve">
+    <value>Жайылым бөлімшелері (жүктеме)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Құпия сөзді өзгерту</value>
   </data>

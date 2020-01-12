@@ -150,6 +150,12 @@
   <data name="BurOtdels" xml:space="preserve">
     <value>Pasture Departments (Load)</value>
   </data>
+  <data name="BurSubOtdel" xml:space="preserve">
+    <value>Pasture Branch (Load)</value>
+  </data>
+  <data name="BurSubOtdels" xml:space="preserve">
+    <value>Pasture Subdivisions (Load)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>

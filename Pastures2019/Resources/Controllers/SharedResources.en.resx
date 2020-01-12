@@ -144,6 +144,12 @@
   <data name="BTypes" xml:space="preserve">
     <value>Pasture Types (Load)</value>
   </data>
+  <data name="BurOtdel" xml:space="preserve">
+    <value>Pasture Department (Load)</value>
+  </data>
+  <data name="BurOtdels" xml:space="preserve">
+    <value>Pasture Departments (Load)</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>

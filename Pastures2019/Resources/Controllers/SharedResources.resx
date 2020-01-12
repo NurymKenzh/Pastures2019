@@ -144,6 +144,12 @@
   <data name="BTypes" xml:space="preserve">
     <value />
   </data>
+  <data name="BurOtdel" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BurOtdels" xml:space="preserve">
+    <value />
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value />
   </data>

@@ -144,6 +144,12 @@
   <data name="BTypes" xml:space="preserve">
     <value>Жайылым түрлері (жүктеме)</value>
   </data>
+  <data name="BurOtdel" xml:space="preserve">
+    <value>Жайылым бөлімі (жүктеме)</value>
+  </data>
+  <data name="BurOtdels" xml:space="preserve">
+    <value>Жайылым департаменттері</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Құпия сөзді өзгерту</value>
   </data>

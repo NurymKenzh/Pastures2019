@@ -16,5 +16,6 @@ namespace Pastures2019.Data
         public DbSet<Pastures2019.Models.BClass> BClass { get; set; }
         public DbSet<Pastures2019.Models.BGroup> BGroup { get; set; }
         public DbSet<Pastures2019.Models.BType> BType { get; set; }
+        public DbSet<Pastures2019.Models.BurOtdel> BurOtdel { get; set; }
     }
 }

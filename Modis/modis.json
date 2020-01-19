@@ -1,0 +1,15 @@
+{
+  "Server": false,
+  "ServerSettings": {
+    "DownloadDir": "",
+    "GeoServerDataDir": "",
+    "CMDPath": "C:\\Windows\\system32\\cmd.exe",
+    "Python27Scripts": "Program Files\\Python36\\Scripts"
+  },
+  "DebugSettings": {
+    "DownloadDir": "E:\\Documents\\New\\Modis\\Download",
+    "GeoServerDataDir": "E:\\Documents\\Google Drive\\Geoserver\\data_dir",
+    "CMDPath": "C:\\Windows\\system32\\cmd.exe",
+    "Python27Scripts": "Python37\\Scripts"
+  }
+}

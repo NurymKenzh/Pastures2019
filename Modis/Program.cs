@@ -16,7 +16,8 @@ namespace Modis
         const string ModisSource = "MOLT",
             ModisProduct = "MOD13Q1.006",
             ModisDataSet = "NDVI",
-            ModisProjection = "4326";
+            ModisProjection = "4326",
+            GeoServerWorkspace = "MODIS";
         static void Main(string[] args)
         {
             DateTime dateTimeLast = new DateTime(2000, 1, 1);
@@ -60,8 +61,12 @@ namespace Modis
                     }
                 }
                 string DownloadDir = JObject.Parse(settingsJObject.ToString())["DownloadDir"],
-                   GeoServerDataDir = JObject.Parse(settingsJObject.ToString())["GeoServerDataDir"],
-                   CMDPath = JObject.Parse(settingsJObject.ToString())["CMDPath"];
+                   GeoServerModisDataDir = JObject.Parse(settingsJObject.ToString())["GeoServerModisDataDir"],
+                   CMDPath = JObject.Parse(settingsJObject.ToString())["CMDPath"],
+                   //CURLPath = JObject.Parse(settingsJObject.ToString())["CURLPath"],
+                   GeoServerUser = JObject.Parse(settingsJObject.ToString())["GeoServerUser"],
+                   GeoServerPassword = JObject.Parse(settingsJObject.ToString())["GeoServerPassword"],
+                   GeoServerURL = JObject.Parse(settingsJObject.ToString())["GeoServerURL"];
 
                 // delete folders which names start with "!" 
                 foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
@@ -108,7 +113,7 @@ namespace Modis
                         arguments);
 
                     // convert
-                    foreach(string tif in Directory.EnumerateFiles(folderDownload, "*tif", SearchOption.TopDirectoryOnly))
+                    foreach (string tif in Directory.EnumerateFiles(folderDownload, "*tif", SearchOption.TopDirectoryOnly))
                     {
                         string tifReprojected = $"{Path.GetFileNameWithoutExtension(tif)}_{ModisProjection}";
                         arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e {ModisProjection} {tif}";
@@ -117,6 +122,49 @@ namespace Modis
                             "modis_convert.py",
                             folderDownload,
                             arguments);
+                    }
+
+                    // move to GeoServer
+                    // publish
+                    foreach (string file in Directory.EnumerateFiles(folderDownload, $"*{ModisProjection}.tif", SearchOption.TopDirectoryOnly))
+                    {
+                        // move to GeoServer
+                        string fileGeoServer = Path.Combine(GeoServerModisDataDir, Path.GetFileName(file));
+                        File.Move(
+                            file,
+                            fileGeoServer
+                            );
+                        // publish
+                        string layerName = Path.GetFileNameWithoutExtension(fileGeoServer);
+                        // store
+                        string publishParameters = $" -v -u" +
+                            $" {GeoServerUser}:{GeoServerPassword}" +
+                            $" -POST -H \"Content-type: text/xml\"" +
+                            $" -d \"<coverageStore><name>{layerName}</name><type>GeoTIFF</type><enabled>true</enabled><workspace>{GeoServerWorkspace}</workspace><url>" +
+                            $"/data/{GeoServerWorkspace}/{layerName}.tif</url></coverageStore>\"" +
+                            $" {GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores?configure=all";
+                        CurlExecute(
+                            CMDPath,
+                            publishParameters);
+                        // layer
+                        publishParameters = $" -v -u" +
+                            $" {GeoServerUser}:{GeoServerPassword}" +
+                            $" -PUT -H \"Content-type: text/xml\"" +
+                            $" -d \"<coverage><name>{layerName}</name><title>{layerName}</title><defaultInterpolationMethod><name>nearest neighbor</name></defaultInterpolationMethod></coverage>\"" +
+                            $" \"{GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores/{layerName}/coverages?recalculate=nativebbox\"";
+                        CurlExecute(
+                            CMDPath,
+                            publishParameters);
+                        // style
+                        string style = 
+                        publishParameters = $" -v -u" +
+                            $" {GeoServerUser}:{GeoServerPassword}" +
+                            $" -X PUT -H \"Content-type: text/xml\"" +
+                            $" -d \"<layer><defaultStyle><name>{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace('.', '_')}_{ModisDataSet}</name></defaultStyle></layer>\"" +
+                            $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
+                        CurlExecute(
+                            CMDPath,
+                            publishParameters);
                     }
                 }
                 catch
@@ -145,7 +193,7 @@ namespace Modis
         public static void ModisExecute(
             string CMDPath,
             string ModisFileName,
-            string FolderToMove,
+            string FolderToNavigate,
             params string[] Parameters)
         {
             Process process = new Process();
@@ -160,10 +208,10 @@ namespace Modis
                 process.Start();
 
                 // move to folder
-                if(!string.IsNullOrEmpty(FolderToMove))
+                if(!string.IsNullOrEmpty(FolderToNavigate))
                 {
-                    process.StandardInput.WriteLine($"{FolderToMove[0]}:");
-                    process.StandardInput.WriteLine($"cd {FolderToMove}");
+                    process.StandardInput.WriteLine($"{FolderToNavigate[0]}:");
+                    process.StandardInput.WriteLine($"cd {FolderToNavigate}");
                 }
 
                 process.StandardInput.WriteLine(ModisFileName + " " + string.Join(" ", Parameters));
@@ -174,6 +222,39 @@ namespace Modis
                 Log(error);
                 process.WaitForExit();
                 if (!string.IsNullOrEmpty(error))
+                {
+                    throw new Exception(error);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.ToString(), exception?.InnerException);
+            }
+        }
+
+        public static void CurlExecute(
+            string CMDPath,
+            string Parameters)
+        {
+            Process process = new Process();
+            try
+            {
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.FileName = CMDPath;
+                process.Start();
+
+                process.StandardInput.WriteLine($"curl {Parameters}");
+                process.StandardInput.WriteLine("exit");
+
+                string output = process.StandardOutput.ReadToEnd();
+                Log(output);
+                string error = process.StandardError.ReadToEnd();
+                Log(error);
+                process.WaitForExit();
+                if (error.ToLower().Contains("error"))
                 {
                     throw new Exception(error);
                 }

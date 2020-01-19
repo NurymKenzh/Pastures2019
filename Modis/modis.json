@@ -4,12 +4,20 @@
     "DownloadDir": "",
     "GeoServerDataDir": "",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
-    "Python27Scripts": "Program Files\\Python36\\Scripts"
+    "GeoServerModisDataDir": "",
+    //"CURLPath": "C:\\Windows\\curl.exe",
+    "GeoServerUser": "",
+    "GeoServerPassword": "",
+    "GeoServerURL": ""
   },
   "DebugSettings": {
     "DownloadDir": "E:\\Documents\\New\\Modis\\Download",
     "GeoServerDataDir": "E:\\Documents\\Google Drive\\Geoserver\\data_dir",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
-    "Python27Scripts": "Python37\\Scripts"
+    "GeoServerModisDataDir": "E:\\Documents\\Google Drive\\Geoserver\\data_dir\\data\\MODIS",
+    //"CURLPath": "C:\\Windows\\curl.exe",
+    "GeoServerUser": "admin",
+    "GeoServerPassword": "geoserver",
+    "GeoServerURL": "http://localhost:8080/geoserver/"
   }
 }

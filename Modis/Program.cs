@@ -137,11 +137,12 @@ namespace Modis
                         string arguments = $"-U caesarmod -P caesar023Earthdata -r -t {string.Join(',', ModisSpans)} -p {ModisProduct}" +
                             $" -f {dateTimeStart.ToString("yyyy-MM-dd")} -e {dateTimeFinish.ToString("yyyy-MM-dd")}" +
                             $" {folderDownload}";
-                        ModisExecute(CMDPath, "modis_download.py", arguments);
+                        ModisExecute(CMDPath, "modis_download.py", folderDownload, arguments);
 
                         // mosaic
-                        string modisListFile = Directory.EnumerateFiles(folderDownload, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault();
-                        arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_{ModisDataSet}.tif" +
+                        string modisListFile = Directory.EnumerateFiles(folderDownload, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault(),
+                            index = ModisDataSetIndex.ToString().PadLeft(2, '0');
+                        arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}.tif" +
                             $" -s \"{ModisDataSetIndex.ToString()}\"" +
                             $" {modisListFile}";
                         ModisExecute(

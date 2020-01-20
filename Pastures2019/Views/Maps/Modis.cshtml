@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewData["Title"] = "Modis";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/lib/ol/ol.css" rel="stylesheet" />
+<script src="~/lib/ol/ol.js"></script>
+<h1>Modis</h1>
+
+<select id="Year">
+    <option value="2000">2000</option>
+</select>
+<select id="DayOfYear" onchange="ChangeModis()">
+    <option value="049">049</option>
+    <option value="065">065</option>
+    <option value="081">081</option>
+    <option value="097">097</option>
+    <option value="113">113</option>
+</select>
+<div id="map"></div>
+
+@* layers *@
+<script>
+    var geoserver_url = 'http://89.250.84.186:8080/geoserver/',
+        geoserver_workspace_name = 'MODIS',
+        layerModisTemplate = '_MOLT_MOD13Q1006_B01_NDVI_4326';
+    var layerModis = 'A' + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate;
+
+    var Source_OSM = new ol.source.OSM();
+    var Layer_Base = new ol.layer.Tile({
+        source: Source_OSM
+    });
+    Layer_Base.set('name', 'Base');
+    Layer_Base.setOpacity(0.80);
+
+    var url_Modis = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_Modis = new ol.source.TileWMS({
+        url: url_Modis,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            "LAYERS": geoserver_workspace_name + ':' + layerModis
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_Modis = new ol.layer.Tile({
+        source: Source_Modis
+    });
+    Layer_Modis.set('name', 'Modis');
+    Layer_Modis.setOpacity(0.80);
+</script>
+
+@* map *@
+<script>
+    var map = new ol.Map({
+        target: 'map',
+        controls: new ol.control.defaults({ attributionOptions: { collapsible: true } }).extend([
+            new ol.control.ScaleLine()
+        ]),
+        layers: [
+            Layer_Base,
+            Layer_Modis
+        ],
+        //overlays: [overlay],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([66.902, 48.714]),
+            zoom: 5
+        })
+    });
+</script>
+
+<script>
+    function ChangeModis() {
+        layerModis = 'A' + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate;
+        Source_Modis = new ol.source.TileWMS({
+            url: geoserver_url + geoserver_workspace_name + '/wms',
+            params: {
+                'FORMAT': 'image/png',
+                'VERSION': '1.1.1',
+                tiled: true,
+                "LAYERS": geoserver_workspace_name + ':' + layerModis
+            },
+            serverType: 'geoserver'
+        });
+        Layer_Modis.setSource(Source_Modis);
+    }
+</script>

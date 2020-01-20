@@ -92,7 +92,7 @@ namespace Modis
                 }
 
                 DateTime dateTimeStart = ModisDateStart,
-                    dateTimeFinish = dateTimeStart; // dateTimeStart.AddDays(ModisPeriod - 1);
+                    dateTimeFinish = new DateTime(dateTimeStart.Year, dateTimeStart.Month, 1).AddMonths(1).AddDays(-1); // dateTimeStart.AddDays(ModisPeriod - 1);
                 while (true)
                 {
                     // determine period (dateTimeStart, dateTimeFinish)

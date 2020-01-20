@@ -141,7 +141,7 @@ namespace Modis
 
                         // mosaic
                         string modisListFile = Directory.EnumerateFiles(folderDownload, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault();
-                        arguments = $"-o {ModisSource}_{ModisProduct.Replace('.', '_')}_{ModisDataSet}.tif" +
+                        arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_{ModisDataSet}.tif" +
                             $" -s \"{ModisDataSetIndex.ToString()}\"" +
                             $" {modisListFile}";
                         ModisExecute(
@@ -198,7 +198,7 @@ namespace Modis
                             publishParameters = $" -v -u" +
                                 $" {GeoServerUser}:{GeoServerPassword}" +
                                 $" -X PUT -H \"Content-type: text/xml\"" +
-                                $" -d \"<layer><defaultStyle><name>{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace('.', '_')}_{ModisDataSet}</name></defaultStyle></layer>\"" +
+                                $" -d \"<layer><defaultStyle><name>{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_{ModisDataSet}</name></defaultStyle></layer>\"" +
                                 $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
                             CurlExecute(
                                 CMDPath,

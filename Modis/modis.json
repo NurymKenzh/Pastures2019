@@ -3,17 +3,15 @@
   "ModisUser": "caesarmod",
   "ModisPassword": "caesar023Earthdata",
   "ServerSettings": {
-    "DownloadDir": "",
-    "GeoServerDataDir": "",
+    "DownloadDir": "D:\\Modis\\MOLT\\MOD13Q1006",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
-    "GeoServerModisDataDir": "",
-    "GeoServerUser": "",
-    "GeoServerPassword": "",
-    "GeoServerURL": ""
+    "GeoServerModisDataDir": "D:\\GeoServer\\data_dir\\data\\MODIS",
+    "GeoServerUser": "admin",
+    "GeoServerPassword": "geoserver",
+    "GeoServerURL": "http://localhost:8080/geoserver/"
   },
   "DebugSettings": {
     "DownloadDir": "E:\\Documents\\New\\Modis\\Download",
-    "GeoServerDataDir": "E:\\Documents\\Google Drive\\Geoserver\\data_dir",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
     "GeoServerModisDataDir": "E:\\Documents\\Google Drive\\Geoserver\\data_dir\\data\\MODIS",
     "GeoServerUser": "admin",

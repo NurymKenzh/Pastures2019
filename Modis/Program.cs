@@ -78,23 +78,23 @@ namespace Modis
                    GeoServerPassword = JObject.Parse(settingsJObject.ToString())["GeoServerPassword"],
                    GeoServerURL = JObject.Parse(settingsJObject.ToString())["GeoServerURL"];
 
-                // delete folders which names start with "!"
-                foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
-                {
-                    try
-                    {
-                        Directory.Delete(folder, true);
-                    }
-                    catch
-                    {
-
-                    }
-                }
-
                 DateTime dateTimeStart = ModisDateStart,
                     dateTimeFinish = new DateTime(dateTimeStart.Year, dateTimeStart.Month, 1).AddMonths(1).AddDays(-1); // dateTimeStart.AddDays(ModisPeriod - 1);
                 while (true)
                 {
+                    // delete folders which names start with "!"
+                    foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
+                    {
+                        try
+                        {
+                            Directory.Delete(folder, true);
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
                     // determine period (dateTimeStart, dateTimeFinish)
                     foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
                     {
@@ -218,8 +218,11 @@ namespace Modis
                         }
                     }
                 }
-                // 1 hour
-                Thread.Sleep(60 * 60 * 60);
+                if (dateTimeFinish == DateTime.Today)
+                {
+                    // 1 hour
+                    Thread.Sleep(60 * 60 * 60);
+                }
             }
         }
 

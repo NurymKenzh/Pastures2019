@@ -1,4 +1,4 @@
-﻿
+﻿@using Pastures2019.Controllers
 @{
     ViewData["Title"] = "Modis";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,24 +7,47 @@
 <script src="~/lib/ol/ol.js"></script>
 <h1>Modis</h1>
 
-<select id="Year">
-    <option value="2000">2000</option>
+@{
+    YearDay[] yearDays = ViewBag.YearDays;
+    string maxYear = yearDays.Max(y => y.year),
+        maxDay = yearDays.Where(y => y.year == maxYear).Max(y => y.day);
+}
+
+<select id="Year" onchange="ChangeYear()">
+    @foreach (string year in yearDays.Select(y => y.year).Distinct().OrderBy(y => y))
+    {
+        if (year == maxYear)
+        {
+            <option value="@year" selected>@year</option>
+        }
+        else
+        {
+            <option value="@year">@year</option>
+        }
+    }
 </select>
 <select id="DayOfYear" onchange="ChangeModis()">
-    <option value="049">049</option>
-    <option value="065">065</option>
-    <option value="081">081</option>
-    <option value="097">097</option>
-    <option value="113">113</option>
+    @foreach (string day in yearDays.Where(y => y.year == maxYear).Select(y => y.day).Distinct().OrderBy(y => y))
+    {
+        if (day == maxDay)
+        {
+            <option value="@day" selected>@day</option>
+        }
+        else
+        {
+            <option value="@day">@day</option>
+        }
+    }
 </select>
 <div id="map"></div>
 
 @* layers *@
 <script>
-    var geoserver_url = 'http://89.250.84.186:8080/geoserver/',
-        geoserver_workspace_name = 'MODIS',
-        layerModisTemplate = '_MOLT_MOD13Q1006_B01_NDVI_4326';
-    var layerModis = 'A' + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate;
+    var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
+        geoserver_workspace_name = '@ViewBag.ModisWorkspace', //'MODIS',
+        layerModisTemplate1 = '@ViewBag.ModisLayerTemplate1', //'A',
+        layerModisTemplate2 = '@ViewBag.ModisLayerTemplate2'; //'_MOLT_MOD13Q1006_B01_NDVI_4326';
+    var layerModis = layerModisTemplate1 + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate2;
 
     var Source_OSM = new ol.source.OSM();
     var Layer_Base = new ol.layer.Tile({
@@ -71,8 +94,31 @@
 </script>
 
 <script>
+    function ChangeYear() {
+        $("#DayOfYear").html('');
+        var maxday = '001';
+        for (i = 0; i < yeardays.length; i++) {
+            if (yeardays[i].year == $("#Year").val().toString()) {
+                if (parseInt(yeardays[i].day) > parseInt(maxday)) {
+                    maxday = yeardays[i].day;
+                }
+            }
+        }
+        for (i = 0; i < yeardays.length; i++) {
+            if (yeardays[i].year == $("#Year").val().toString()) {
+                if (yeardays[i].day == maxday) {
+                    $("#DayOfYear").append($("<option selected />").val(yeardays[i].day).text(yeardays[i].day));
+                }
+                else {
+                    $("#DayOfYear").append($("<option />").val(yeardays[i].day).text(yeardays[i].day));
+                }
+            }
+        }
+        ChangeModis();
+    }
+
     function ChangeModis() {
-        layerModis = 'A' + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate;
+        layerModis = layerModisTemplate1 + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate2;
         Source_Modis = new ol.source.TileWMS({
             url: geoserver_url + geoserver_workspace_name + '/wms',
             params: {
@@ -86,3 +132,16 @@
         Layer_Modis.setSource(Source_Modis);
     }
 </script>
+
+<script>
+    var yeardays = [];
+</script>
+@foreach (YearDay yearDay in yearDays.OrderBy(y => y.year).ThenBy(y => y.day))
+{
+    <script>
+        yeardays.push({
+            year: '@yearDay.year',
+            day: '@yearDay.day'
+        });
+    </script>
+}

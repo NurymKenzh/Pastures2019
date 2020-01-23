@@ -240,6 +240,9 @@
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Управлять учетной записью</value>
   </data>
+  <data name="Maps" xml:space="preserve">
+    <value>Карты</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
   </data>

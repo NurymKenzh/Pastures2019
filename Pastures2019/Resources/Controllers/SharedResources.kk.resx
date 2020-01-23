@@ -240,6 +240,9 @@
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Есептік жазбаңызды басқарыңыз</value>
   </data>
+  <data name="Maps" xml:space="preserve">
+    <value>Карталар</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Жаңа Құпия Сөз</value>
   </data>

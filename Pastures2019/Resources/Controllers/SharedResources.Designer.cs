@@ -432,6 +432,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Maps {
+            get {
+                return ResourceManager.GetString("Maps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string NewPassword {
             get {
                 return ResourceManager.GetString("NewPassword", resourceCulture);

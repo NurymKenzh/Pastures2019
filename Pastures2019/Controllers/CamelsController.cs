@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -110,23 +112,20 @@ namespace Pastures2019.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,BreedRU,BreedKK,BreedEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,RangeRU,RangeKK,RangeEN,DescriptionRU,DescriptionKK,DescriptionEN,Photo")] Camel camel)
+        public async Task<IActionResult> Create([Bind("Id,Code,BreedRU,BreedKK,BreedEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,RangeRU,RangeKK,RangeEN,FormFile,DescriptionRU,DescriptionKK,DescriptionEN")] Camel camel)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    var files = HttpContext.Request.Form.Files;
-            //    if (files.FirstOrDefault()!=null)
-            //    {
-            //        var photo = files.FirstOrDefault();
-            //        MemoryStream ms = new MemoryStream();
-            //        photo.CopyTo(ms);
-            //        camel.Photo = ms.ToArray();
-            //    }
+            if (ModelState.IsValid)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await camel.FormFile.CopyToAsync(memoryStream);
+                    camel.Photo = memoryStream.ToArray();
+                }
 
-            //    _context.Add(camel);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
+                _context.Add(camel);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
             return View(camel);
         }
 
@@ -153,7 +152,7 @@ namespace Pastures2019.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator, Moderator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,BreedRU,BreedKK,BreedEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,RangeRU,RangeKK,RangeEN,Photo,DescriptionRU,DescriptionKK,DescriptionEN")] Camel camel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,BreedRU,BreedKK,BreedEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,RangeRU,RangeKK,RangeEN,FormFile,DescriptionRU,DescriptionKK,DescriptionEN")] Camel camel)
         {
             if (id != camel.Id)
             {
@@ -164,6 +163,16 @@ namespace Pastures2019.Controllers
             {
                 try
                 {
+                    if (camel.FormFile != null && camel.FormFile.Length > 0)
+                    {
+                        camel.Photo = null;
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await camel.FormFile.CopyToAsync(memoryStream);
+                            camel.Photo = memoryStream.ToArray();
+                        }
+                    }
+
                     _context.Update(camel);
                     await _context.SaveChangesAsync();
                 }

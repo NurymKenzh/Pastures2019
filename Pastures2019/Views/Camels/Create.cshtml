@@ -14,9 +14,9 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
+            <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
                 <input asp-for="Code" class="form-control" />
                 <span asp-validation-for="Code" class="text-danger"></span>
@@ -50,13 +50,13 @@
                 <label asp-for="WeightEN" class="control-label"></label>
                 <input asp-for="WeightEN" class="form-control" />
                 <span asp-validation-for="WeightEN" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
                 <label asp-for="SlaughterYield" class="control-label"></label>
                 <input asp-for="SlaughterYield" class="form-control" />
                 <span asp-validation-for="SlaughterYield" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
                 <label asp-for="EwesYieldRU" class="control-label"></label>
                 <input asp-for="EwesYieldRU" class="form-control" />
                 <span asp-validation-for="EwesYieldRU" class="text-danger"></span>
@@ -95,14 +95,13 @@
                 <label asp-for="RangeEN" class="control-label"></label>
                 <input asp-for="RangeEN" class="form-control" />
                 <span asp-validation-for="RangeEN" class="text-danger"></span>
-            </div>*@
-            <div class="form-group">
-                <label asp-for="Photo" class="control-label"></label>
-                @*<input asp-for="Photo" class="form-control" />
-                    <span asp-validation-for="Photo" class="text-danger"></span>*@
-                <input type="file" class="form-control" />
             </div>
-            @*<div class="form-group">
+            <div class="form-group">
+                <label asp-for="FormFile" class="control-label"></label>
+                <input asp-for="FormFile" type="file" class="form-control" />
+                <span asp-validation-for="FormFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="DescriptionRU" class="control-label"></label>
                 <input asp-for="DescriptionRU" class="form-control" />
                 <span asp-validation-for="DescriptionRU" class="text-danger"></span>
@@ -116,7 +115,7 @@
                 <label asp-for="DescriptionEN" class="control-label"></label>
                 <input asp-for="DescriptionEN" class="form-control" />
                 <span asp-validation-for="DescriptionEN" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
                 <input type="submit" value="@SharedLocalizer["Create"]" class="btn btn-primary" />
             </div>
@@ -129,8 +128,8 @@
 </div>
 
 @*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}*@
 <script>
     $.validator.methods.range = function (value, element, param) {
         var globalizedValue = value.replace(",", ".");
@@ -140,18 +139,3 @@
         return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
     }
 </script>
-@*<script>
-        $.validator.methods.range = function (value, element, param) {
-            var globalizedValue = value.replace(",", ".");
-            return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
-        }
-
-        $.validator.methods.number = function (value, element) {
-            return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
-        }
-        //Date dd/MM/yyyy
-        $.validator.methods.date = function (value, element) {
-            var date = value.split("/");
-            return this.optional(element) || !/Invalid|NaN/.test(new Date(date[2], date[1], date[0]).toString());
-        }
-    </script>*@

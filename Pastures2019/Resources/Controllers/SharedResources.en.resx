@@ -204,6 +204,18 @@
   <data name="BustRU" xml:space="preserve">
     <value>Chest circumference (Russian)</value>
   </data>
+  <data name="Camel" xml:space="preserve">
+    <value>Camel</value>
+  </data>
+  <data name="Camels" xml:space="preserve">
+    <value>Camels</value>
+  </data>
+  <data name="Cattle" xml:space="preserve">
+    <value>Cattle</value>
+  </data>
+  <data name="Cattles" xml:space="preserve">
+    <value>Cattles</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
   </data>
@@ -314,6 +326,12 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Horse" xml:space="preserve">
+    <value>Horse</value>
+  </data>
+  <data name="Horses" xml:space="preserve">
+    <value>Horses</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Incorrect password.</value>
@@ -443,6 +461,12 @@
   </data>
   <data name="SlaughterYield" xml:space="preserve">
     <value>Killer exit</value>
+  </data>
+  <data name="SmallCattle" xml:space="preserve">
+    <value>Small cattle</value>
+  </data>
+  <data name="SmallCattles" xml:space="preserve">
+    <value>Small cattles</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>

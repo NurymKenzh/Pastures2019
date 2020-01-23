@@ -204,6 +204,18 @@
   <data name="BustRU" xml:space="preserve">
     <value>Обхват груди (русский)</value>
   </data>
+  <data name="Camel" xml:space="preserve">
+    <value>Верблюд</value>
+  </data>
+  <data name="Camels" xml:space="preserve">
+    <value>Верблюды</value>
+  </data>
+  <data name="Cattle" xml:space="preserve">
+    <value>Крупный рогатый скот</value>
+  </data>
+  <data name="Cattles" xml:space="preserve">
+    <value>Крупный рогатый скот</value>
+  </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
   </data>
@@ -314,6 +326,12 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
+  </data>
+  <data name="Horse" xml:space="preserve">
+    <value>Лошадь</value>
+  </data>
+  <data name="Horses" xml:space="preserve">
+    <value>Лошади</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Неверный пароль.</value>
@@ -443,6 +461,12 @@
   </data>
   <data name="SlaughterYield" xml:space="preserve">
     <value>Убойный выход</value>
+  </data>
+  <data name="SmallCattle" xml:space="preserve">
+    <value>Мелкий рогатый скот</value>
+  </data>
+  <data name="SmallCattles" xml:space="preserve">
+    <value>Мелкие рогатый скот</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>

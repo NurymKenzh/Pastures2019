@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -66,12 +68,6 @@ namespace Pastures2019.Models
         }
 
         [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
-        //[Range(minimum: 0, maximum: 100, ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsNotAValidEmailAddress")]
-        [DataType(DataType.Currency, ErrorMessage = "!!!")]
-        //[RegularExpression(@"\d", ErrorMessage = "!!!")]
-        //[RegularExpression("([0-9]+)", ErrorMessage = "Regular1")]
-        [RegularExpression("^[0-9]([.,][0-9]{1,3})?$", ErrorMessage = "Regular2")]
-        //[DisplayFormat(DataFormatString = "{0:G}", ApplyFormatInEditMode = true)]
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "SlaughterYield")]
         public decimal SlaughterYield { get; set; }
 
@@ -134,6 +130,10 @@ namespace Pastures2019.Models
 
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Photo")]
         public byte[] Photo { get; set; }
+
+        [NotMapped]
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Photo")]
+        public IFormFile FormFile { get; set; }
 
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "DescriptionRU")]
         public string DescriptionRU { get; set; }

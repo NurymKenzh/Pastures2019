@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Localization;
 
 namespace Pastures2019
 {
@@ -70,10 +71,31 @@ namespace Pastures2019
 
             services.AddLocalization(options => { options.ResourcesPath = "Resources"; });
 
-            services.AddMvc()
+            services.AddMvc(options =>
+            {
+                var iStrFactory = services.BuildServiceProvider().GetService<IStringLocalizerFactory>();
+                var L = iStrFactory.Create("ModelBindingMessages", "Pastures2019");
+
+                options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor((x) => L["The field is required."]);
+                options.ModelBindingMessageProvider.SetValueIsInvalidAccessor((x) => L["The value '{0}' is invalid."]);
+                options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor((x) => L["The field {0} must be a number."]);
+                options.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor((x) => L["A value for the '{0}' property was not provided.", x]);
+                options.ModelBindingMessageProvider.SetAttemptedValueIsInvalidAccessor((x, y) => L["The value '{0}' is not valid for {1}.", x, y]);
+                options.ModelBindingMessageProvider.SetMissingKeyOrValueAccessor(() => L["A value is required."]);
+                options.ModelBindingMessageProvider.SetUnknownValueIsInvalidAccessor((x) => L["The supplied value is invalid for {0}.", x]);
+                options.ModelBindingMessageProvider.SetValueMustBeANumberAccessor((x) => L["Null value is invalid", x]);
+            })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddDataAnnotationsLocalization()
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix,
                     options => { options.ResourcesPath = "Resources"; });
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { new CultureInfo("ru"), new CultureInfo("kk"), new CultureInfo("en") };
+                options.DefaultRequestCulture = new RequestCulture("ru", "ru");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

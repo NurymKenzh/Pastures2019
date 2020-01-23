@@ -138,6 +138,42 @@
   <data name="BGroups" xml:space="preserve">
     <value>Pasture Groups (Load)</value>
   </data>
+  <data name="BodyLength" xml:space="preserve">
+    <value>Torso length</value>
+  </data>
+  <data name="BodyLengthEN" xml:space="preserve">
+    <value>Torso length (English)</value>
+  </data>
+  <data name="BodyLengthKK" xml:space="preserve">
+    <value>Torso length (Kazakh)</value>
+  </data>
+  <data name="BodyLengthRU" xml:space="preserve">
+    <value>Torso length (Russian)</value>
+  </data>
+  <data name="Bred" xml:space="preserve">
+    <value>Withdrawn</value>
+  </data>
+  <data name="BredEN" xml:space="preserve">
+    <value>Withdrawn (English)</value>
+  </data>
+  <data name="BredKK" xml:space="preserve">
+    <value>Withdrawn (Kazakh)</value>
+  </data>
+  <data name="BredRU" xml:space="preserve">
+    <value>Withdrawn (Russian)</value>
+  </data>
+  <data name="Breed" xml:space="preserve">
+    <value>Breed</value>
+  </data>
+  <data name="BreedEN" xml:space="preserve">
+    <value>Breed (English)</value>
+  </data>
+  <data name="BreedKK" xml:space="preserve">
+    <value>Breed (Kazakh)</value>
+  </data>
+  <data name="BreedRU" xml:space="preserve">
+    <value>Breed (Russian)</value>
+  </data>
   <data name="BType" xml:space="preserve">
     <value>Pasture Type (Load)</value>
   </data>
@@ -155,6 +191,18 @@
   </data>
   <data name="BurSubOtdels" xml:space="preserve">
     <value>Pasture Subdivisions (Load)</value>
+  </data>
+  <data name="Bust" xml:space="preserve">
+    <value>Chest circumference</value>
+  </data>
+  <data name="BustEN" xml:space="preserve">
+    <value>Chest circumference (English)</value>
+  </data>
+  <data name="BustKK" xml:space="preserve">
+    <value>Chest circumference (Kazakh)</value>
+  </data>
+  <data name="BustRU" xml:space="preserve">
+    <value>Chest circumference (Russian)</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
@@ -201,11 +249,47 @@
   <data name="Details" xml:space="preserve">
     <value>Details</value>
   </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Direction</value>
+  </data>
+  <data name="DirectionEN" xml:space="preserve">
+    <value>Direction (English)</value>
+  </data>
+  <data name="DirectionKK" xml:space="preserve">
+    <value>Direction (Kazakh)</value>
+  </data>
+  <data name="DirectionRU" xml:space="preserve">
+    <value>Direction (Russian)</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EwesYield" xml:space="preserve">
+    <value>Uterine milk</value>
+  </data>
+  <data name="EwesYieldEN" xml:space="preserve">
+    <value>Uterine milk (English)</value>
+  </data>
+  <data name="EwesYieldKK" xml:space="preserve">
+    <value>Uterine milk (Kazakh)</value>
+  </data>
+  <data name="EwesYieldRU" xml:space="preserve">
+    <value>Uterine milk (Russian)</value>
+  </data>
+  <data name="Fertility" xml:space="preserve">
+    <value>Fertility</value>
+  </data>
+  <data name="FertilityEN" xml:space="preserve">
+    <value>Fertility (English)</value>
+  </data>
+  <data name="FertilityKK" xml:space="preserve">
+    <value>Fertility (Kazakh)</value>
+  </data>
+  <data name="FertilityRU" xml:space="preserve">
+    <value>Fertility (Russian)</value>
   </data>
   <data name="Find" xml:space="preserve">
     <value>Find</value>
@@ -215,6 +299,18 @@
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Height at the withers</value>
+  </data>
+  <data name="HeightEN" xml:space="preserve">
+    <value>Height at the withers (English)</value>
+  </data>
+  <data name="HeightKK" xml:space="preserve">
+    <value>Height at the withers (Kazakh)</value>
+  </data>
+  <data name="HeightRU" xml:space="preserve">
+    <value>Height at the withers (Russian)</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -243,11 +339,53 @@
   <data name="Maps" xml:space="preserve">
     <value>Maps</value>
   </data>
+  <data name="Metacarpus" xml:space="preserve">
+    <value>Metacarpal circumference</value>
+  </data>
+  <data name="MetacarpusEN" xml:space="preserve">
+    <value>Metacarpal circumference (English)</value>
+  </data>
+  <data name="MetacarpusKK" xml:space="preserve">
+    <value>Metacarpal circumference (Kazakh)</value>
+  </data>
+  <data name="MetacarpusRU" xml:space="preserve">
+    <value>Metacarpal circumference (Russian)</value>
+  </data>
+  <data name="MilkFatContent" xml:space="preserve">
+    <value>Milk fat</value>
+  </data>
+  <data name="MilkYield" xml:space="preserve">
+    <value>Milk production</value>
+  </data>
+  <data name="MilkYieldEN" xml:space="preserve">
+    <value>Milk production (English)</value>
+  </data>
+  <data name="MilkYieldKK" xml:space="preserve">
+    <value>Milk production (Kazakh)</value>
+  </data>
+  <data name="MilkYieldRU" xml:space="preserve">
+    <value>Milk production (Russian)</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="NoteEN" xml:space="preserve">
+    <value>Note (English)</value>
+  </data>
+  <data name="NoteKK" xml:space="preserve">
+    <value>Note (Kazakh)</value>
+  </data>
+  <data name="NoteRU" xml:space="preserve">
+    <value>Note (Russian)</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>A photo</value>
   </data>
   <data name="PleaseCheckYourEmailToResetYourPassword" xml:space="preserve">
     <value>Please check your email to reset your password</value>
@@ -257,6 +395,18 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Breeding range</value>
+  </data>
+  <data name="RangeEN" xml:space="preserve">
+    <value>Breeding range (English)</value>
+  </data>
+  <data name="RangeKK" xml:space="preserve">
+    <value>Breeding range (Kazakh)</value>
+  </data>
+  <data name="RangeRU" xml:space="preserve">
+    <value>Breeding range (Russian)</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
@@ -279,6 +429,21 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Shearings" xml:space="preserve">
+    <value>Sheared wool</value>
+  </data>
+  <data name="ShearingsEN" xml:space="preserve">
+    <value>Sheared wool (English)</value>
+  </data>
+  <data name="ShearingsKK" xml:space="preserve">
+    <value>Sheared wool (Kazakh)</value>
+  </data>
+  <data name="ShearingsRU" xml:space="preserve">
+    <value>Sheared wool (Russian)</value>
+  </data>
+  <data name="SlaughterYield" xml:space="preserve">
+    <value>Killer exit</value>
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>
   </data>
@@ -294,6 +459,9 @@
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
+  <data name="TotalGoals" xml:space="preserve">
+    <value>Total Goals</value>
+  </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value>Update password</value>
   </data>
@@ -308,6 +476,42 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="WashedWoolYield" xml:space="preserve">
+    <value>Washed wool yield</value>
+  </data>
+  <data name="WashedWoolYieldEN" xml:space="preserve">
+    <value>Washed wool yield (English)</value>
+  </data>
+  <data name="WashedWoolYieldKK" xml:space="preserve">
+    <value>Washed wool yield (Kazakh)</value>
+  </data>
+  <data name="WashedWoolYieldRU" xml:space="preserve">
+    <value>Washed wool yield (Russian)</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Live weight</value>
+  </data>
+  <data name="WeightEN" xml:space="preserve">
+    <value>Live weight (English)</value>
+  </data>
+  <data name="WeightKK" xml:space="preserve">
+    <value>Live weight (Kazakh)</value>
+  </data>
+  <data name="WeightRU" xml:space="preserve">
+    <value>Live weight (Russian)</value>
+  </data>
+  <data name="WoolLength" xml:space="preserve">
+    <value>Wool length</value>
+  </data>
+  <data name="WoolLengthEN" xml:space="preserve">
+    <value>Wool length (English)</value>
+  </data>
+  <data name="WoolLengthKK" xml:space="preserve">
+    <value>Wool length (Kazakh)</value>
+  </data>
+  <data name="WoolLengthRU" xml:space="preserve">
+    <value>Wool length (Russian)</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Your password has been changed.</value>

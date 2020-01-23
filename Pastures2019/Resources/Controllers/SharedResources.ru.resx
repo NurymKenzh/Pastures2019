@@ -138,6 +138,42 @@
   <data name="BGroups" xml:space="preserve">
     <value>Группы пастбищ (Нагрузка)</value>
   </data>
+  <data name="BodyLength" xml:space="preserve">
+    <value>Длина туловища</value>
+  </data>
+  <data name="BodyLengthEN" xml:space="preserve">
+    <value>Длина туловища (английский)</value>
+  </data>
+  <data name="BodyLengthKK" xml:space="preserve">
+    <value>Длина туловища (казахский)</value>
+  </data>
+  <data name="BodyLengthRU" xml:space="preserve">
+    <value>Длина туловища (русский)</value>
+  </data>
+  <data name="Bred" xml:space="preserve">
+    <value>Выведена</value>
+  </data>
+  <data name="BredEN" xml:space="preserve">
+    <value>Выведена (английский)</value>
+  </data>
+  <data name="BredKK" xml:space="preserve">
+    <value>Выведена (казахский)</value>
+  </data>
+  <data name="BredRU" xml:space="preserve">
+    <value>Выведена (русский)</value>
+  </data>
+  <data name="Breed" xml:space="preserve">
+    <value>Порода</value>
+  </data>
+  <data name="BreedEN" xml:space="preserve">
+    <value>Порода (английский)</value>
+  </data>
+  <data name="BreedKK" xml:space="preserve">
+    <value>Порода (казахский)</value>
+  </data>
+  <data name="BreedRU" xml:space="preserve">
+    <value>Порода (русский)</value>
+  </data>
   <data name="BType" xml:space="preserve">
     <value>Тип пастбищ (Нагрузка)</value>
   </data>
@@ -155,6 +191,18 @@
   </data>
   <data name="BurSubOtdels" xml:space="preserve">
     <value>Подотделы пастбищ (Нагрузка)</value>
+  </data>
+  <data name="Bust" xml:space="preserve">
+    <value>Обхват груди</value>
+  </data>
+  <data name="BustEN" xml:space="preserve">
+    <value>Обхват груди (английский)</value>
+  </data>
+  <data name="BustKK" xml:space="preserve">
+    <value>Обхват груди (казахский)</value>
+  </data>
+  <data name="BustRU" xml:space="preserve">
+    <value>Обхват груди (русский)</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
@@ -201,11 +249,47 @@
   <data name="Details" xml:space="preserve">
     <value>Детали</value>
   </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Направление</value>
+  </data>
+  <data name="DirectionEN" xml:space="preserve">
+    <value>Направление (английский)</value>
+  </data>
+  <data name="DirectionKK" xml:space="preserve">
+    <value>Направление (казахский)</value>
+  </data>
+  <data name="DirectionRU" xml:space="preserve">
+    <value>Направление (русский)</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Редактировать</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Эл. адрес</value>
+  </data>
+  <data name="EwesYield" xml:space="preserve">
+    <value>Удой маток</value>
+  </data>
+  <data name="EwesYieldEN" xml:space="preserve">
+    <value>Удой маток (английский)</value>
+  </data>
+  <data name="EwesYieldKK" xml:space="preserve">
+    <value>Удой маток (казахский)</value>
+  </data>
+  <data name="EwesYieldRU" xml:space="preserve">
+    <value>Удой маток (русский)</value>
+  </data>
+  <data name="Fertility" xml:space="preserve">
+    <value>Плодовитость</value>
+  </data>
+  <data name="FertilityEN" xml:space="preserve">
+    <value>Плодовитость (английский)</value>
+  </data>
+  <data name="FertilityKK" xml:space="preserve">
+    <value>Плодовитость (казахский)</value>
+  </data>
+  <data name="FertilityRU" xml:space="preserve">
+    <value>Плодовитость (русский)</value>
   </data>
   <data name="Find" xml:space="preserve">
     <value>Найти</value>
@@ -215,6 +299,18 @@
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Забыли свой пароль?</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Высота в холке</value>
+  </data>
+  <data name="HeightEN" xml:space="preserve">
+    <value>Высота в холке (английский)</value>
+  </data>
+  <data name="HeightKK" xml:space="preserve">
+    <value>Высота в холке (казахский)</value>
+  </data>
+  <data name="HeightRU" xml:space="preserve">
+    <value>Высота в холке (русский)</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
@@ -243,11 +339,53 @@
   <data name="Maps" xml:space="preserve">
     <value>Карты</value>
   </data>
+  <data name="Metacarpus" xml:space="preserve">
+    <value>Обхват пясти</value>
+  </data>
+  <data name="MetacarpusEN" xml:space="preserve">
+    <value>Обхват пясти (английский)</value>
+  </data>
+  <data name="MetacarpusKK" xml:space="preserve">
+    <value>Обхват пясти (казахский)</value>
+  </data>
+  <data name="MetacarpusRU" xml:space="preserve">
+    <value>Обхват пясти (русский)</value>
+  </data>
+  <data name="MilkFatContent" xml:space="preserve">
+    <value>Жирность молока</value>
+  </data>
+  <data name="MilkYield" xml:space="preserve">
+    <value>Молочная продуктивность</value>
+  </data>
+  <data name="MilkYieldEN" xml:space="preserve">
+    <value>Молочная продуктивность (английский)</value>
+  </data>
+  <data name="MilkYieldKK" xml:space="preserve">
+    <value>Молочная продуктивность (казахский)</value>
+  </data>
+  <data name="MilkYieldRU" xml:space="preserve">
+    <value>Молочная продуктивность (русский)</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="NoteEN" xml:space="preserve">
+    <value>Примечание (английский)</value>
+  </data>
+  <data name="NoteKK" xml:space="preserve">
+    <value>Примечание (казахский)</value>
+  </data>
+  <data name="NoteRU" xml:space="preserve">
+    <value>Примечание (русский)</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Фото</value>
   </data>
   <data name="PleaseCheckYourEmailToResetYourPassword" xml:space="preserve">
     <value>Пожалуйста, проверьте свою электронную почту, чтобы сбросить пароль</value>
@@ -257,6 +395,18 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Ареал разведения</value>
+  </data>
+  <data name="RangeEN" xml:space="preserve">
+    <value>Ареал разведения (английский)</value>
+  </data>
+  <data name="RangeKK" xml:space="preserve">
+    <value>Ареал разведения (казахский)</value>
+  </data>
+  <data name="RangeRU" xml:space="preserve">
+    <value>Ареал разведения (русский)</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Регистрация</value>
@@ -279,6 +429,21 @@
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="Shearings" xml:space="preserve">
+    <value>Настриг шерсти</value>
+  </data>
+  <data name="ShearingsEN" xml:space="preserve">
+    <value>Настриг шерсти (английский)</value>
+  </data>
+  <data name="ShearingsKK" xml:space="preserve">
+    <value>Настриг шерсти (казахский)</value>
+  </data>
+  <data name="ShearingsRU" xml:space="preserve">
+    <value>Настриг шерсти (русский)</value>
+  </data>
+  <data name="SlaughterYield" xml:space="preserve">
+    <value>Убойный выход</value>
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>
   </data>
@@ -294,6 +459,9 @@
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Пароль и подтверждение пароля не совпадают.</value>
   </data>
+  <data name="TotalGoals" xml:space="preserve">
+    <value>Всего голов</value>
+  </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value>Обновить пароль</value>
   </data>
@@ -308,6 +476,42 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Пользователи</value>
+  </data>
+  <data name="WashedWoolYield" xml:space="preserve">
+    <value>Выход мытой шерсти</value>
+  </data>
+  <data name="WashedWoolYieldEN" xml:space="preserve">
+    <value>Выход мытой шерсти (английский)</value>
+  </data>
+  <data name="WashedWoolYieldKK" xml:space="preserve">
+    <value>Выход мытой шерсти (казахский)</value>
+  </data>
+  <data name="WashedWoolYieldRU" xml:space="preserve">
+    <value>Выход мытой шерсти (русский)</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Живая масса</value>
+  </data>
+  <data name="WeightEN" xml:space="preserve">
+    <value>Живая масса (английский)</value>
+  </data>
+  <data name="WeightKK" xml:space="preserve">
+    <value>Живая масса (казахский)</value>
+  </data>
+  <data name="WeightRU" xml:space="preserve">
+    <value>Живая масса (русский)</value>
+  </data>
+  <data name="WoolLength" xml:space="preserve">
+    <value>Длина шерсти</value>
+  </data>
+  <data name="WoolLengthEN" xml:space="preserve">
+    <value>Длина шерсти (английский)</value>
+  </data>
+  <data name="WoolLengthKK" xml:space="preserve">
+    <value>Длина шерсти (казахский)</value>
+  </data>
+  <data name="WoolLengthRU" xml:space="preserve">
+    <value>Длина шерсти (русский)</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Ваш пароль был изменен.</value>

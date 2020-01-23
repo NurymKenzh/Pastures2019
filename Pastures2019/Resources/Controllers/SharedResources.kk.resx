@@ -138,6 +138,42 @@
   <data name="BGroups" xml:space="preserve">
     <value>Жайылымдық топтар (жүктеме)</value>
   </data>
+  <data name="BodyLength" xml:space="preserve">
+    <value>Торсықтың ұзындығы</value>
+  </data>
+  <data name="BodyLengthEN" xml:space="preserve">
+    <value>Торсықтың ұзындығы (ағылшынша)</value>
+  </data>
+  <data name="BodyLengthKK" xml:space="preserve">
+    <value>Торсықтың ұзындығы (қазақша)</value>
+  </data>
+  <data name="BodyLengthRU" xml:space="preserve">
+    <value>Торсықтың ұзындығы (орыс)</value>
+  </data>
+  <data name="Bred" xml:space="preserve">
+    <value>Алынған</value>
+  </data>
+  <data name="BredEN" xml:space="preserve">
+    <value>Алынған (ағылшынша)</value>
+  </data>
+  <data name="BredKK" xml:space="preserve">
+    <value>Алынған (қазақша)</value>
+  </data>
+  <data name="BredRU" xml:space="preserve">
+    <value>Алынған (орыс)</value>
+  </data>
+  <data name="Breed" xml:space="preserve">
+    <value>Асыл тұқымды</value>
+  </data>
+  <data name="BreedEN" xml:space="preserve">
+    <value>Асыл тұқымды (ағылшынша)</value>
+  </data>
+  <data name="BreedKK" xml:space="preserve">
+    <value>Асыл тұқымды (қазақша)</value>
+  </data>
+  <data name="BreedRU" xml:space="preserve">
+    <value>Асыл тұқымды (орыс)</value>
+  </data>
   <data name="BType" xml:space="preserve">
     <value>Жайылым түрі (жүктеме)</value>
   </data>
@@ -155,6 +191,18 @@
   </data>
   <data name="BurSubOtdels" xml:space="preserve">
     <value>Жайылым бөлімшелері (жүктеме)</value>
+  </data>
+  <data name="Bust" xml:space="preserve">
+    <value>Кеуде өлшемі</value>
+  </data>
+  <data name="BustEN" xml:space="preserve">
+    <value>Кеуде өлшемі (ағылшынша)</value>
+  </data>
+  <data name="BustKK" xml:space="preserve">
+    <value>Кеуде өлшемі (қазақша)</value>
+  </data>
+  <data name="BustRU" xml:space="preserve">
+    <value>Кеуде өлшемі (орыс)</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Құпия сөзді өзгерту</value>
@@ -201,11 +249,47 @@
   <data name="Details" xml:space="preserve">
     <value>Толығырақ</value>
   </data>
+  <data name="Direction" xml:space="preserve">
+    <value>Бағыт</value>
+  </data>
+  <data name="DirectionEN" xml:space="preserve">
+    <value>Бағыт (ағылшынша)</value>
+  </data>
+  <data name="DirectionKK" xml:space="preserve">
+    <value>Бағыт (қазақша)</value>
+  </data>
+  <data name="DirectionRU" xml:space="preserve">
+    <value>Бағыт (орыс)</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Өңдеу</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Электрондық пошта</value>
+  </data>
+  <data name="EwesYield" xml:space="preserve">
+    <value>Жатыр сүті</value>
+  </data>
+  <data name="EwesYieldEN" xml:space="preserve">
+    <value>Жатыр сүті (ағылшынша)</value>
+  </data>
+  <data name="EwesYieldKK" xml:space="preserve">
+    <value>Жатыр сүті (қазақша)</value>
+  </data>
+  <data name="EwesYieldRU" xml:space="preserve">
+    <value>Жатыр сүті (орыс)</value>
+  </data>
+  <data name="Fertility" xml:space="preserve">
+    <value>Құнарлылық</value>
+  </data>
+  <data name="FertilityEN" xml:space="preserve">
+    <value>Құнарлылық (ағылшынша)</value>
+  </data>
+  <data name="FertilityKK" xml:space="preserve">
+    <value>Құнарлылық (қазақша)</value>
+  </data>
+  <data name="FertilityRU" xml:space="preserve">
+    <value>Құнарлылық (орыс)</value>
   </data>
   <data name="Find" xml:space="preserve">
     <value>Табыңыз</value>
@@ -215,6 +299,18 @@
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Құпия сөзіңізді ұмыттыңыз ба?</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Биіктігі құрғақ жерде</value>
+  </data>
+  <data name="HeightEN" xml:space="preserve">
+    <value>Биіктігі құрғақ жерде (ағылшынша)</value>
+  </data>
+  <data name="HeightKK" xml:space="preserve">
+    <value>Биіктігі құрғақ жерде (қазақша)</value>
+  </data>
+  <data name="HeightRU" xml:space="preserve">
+    <value>Биіктігі құрғақ жерде (орыс)</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Басты</value>
@@ -243,11 +339,53 @@
   <data name="Maps" xml:space="preserve">
     <value>Карталар</value>
   </data>
+  <data name="Metacarpus" xml:space="preserve">
+    <value>Метакарпальды шеңбер</value>
+  </data>
+  <data name="MetacarpusEN" xml:space="preserve">
+    <value>Метакарпальды шеңбер (ағылшынша)</value>
+  </data>
+  <data name="MetacarpusKK" xml:space="preserve">
+    <value>Метакарпальды шеңбер (қазақша)</value>
+  </data>
+  <data name="MetacarpusRU" xml:space="preserve">
+    <value>Метакарпальды шеңбер (орыс)</value>
+  </data>
+  <data name="MilkFatContent" xml:space="preserve">
+    <value>Сүт майы</value>
+  </data>
+  <data name="MilkYield" xml:space="preserve">
+    <value>Сүт өндірісі</value>
+  </data>
+  <data name="MilkYieldEN" xml:space="preserve">
+    <value>Сүт өндірісі (ағылшынша)</value>
+  </data>
+  <data name="MilkYieldKK" xml:space="preserve">
+    <value>Сүт өндірісі (қазақша)</value>
+  </data>
+  <data name="MilkYieldRU" xml:space="preserve">
+    <value>Сүт өндірісі (орыс)</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Жаңа Құпия Сөз</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Ескерту</value>
+  </data>
+  <data name="NoteEN" xml:space="preserve">
+    <value>Ескерту (ағылшынша)</value>
+  </data>
+  <data name="NoteKK" xml:space="preserve">
+    <value>Ескерту (қазақша)</value>
+  </data>
+  <data name="NoteRU" xml:space="preserve">
+    <value>Ескерту (орыс)</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="Photo" xml:space="preserve">
+    <value>Фото</value>
   </data>
   <data name="PleaseCheckYourEmailToResetYourPassword" xml:space="preserve">
     <value>Құпия сөзді қалпына келтіру үшін электрондық поштаны тексеріңіз</value>
@@ -257,6 +395,18 @@
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Асыл тұқымды ассортимент</value>
+  </data>
+  <data name="RangeEN" xml:space="preserve">
+    <value>Асыл тұқымды ассортимент (ағылшынша)</value>
+  </data>
+  <data name="RangeKK" xml:space="preserve">
+    <value>Асыл тұқымды ассортимент (қазақша)</value>
+  </data>
+  <data name="RangeRU" xml:space="preserve">
+    <value>Асыл тұқымды ассортимент (орыс)</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Тіркелу</value>
@@ -279,6 +429,21 @@
   <data name="Save" xml:space="preserve">
     <value>Сақтау</value>
   </data>
+  <data name="Shearings" xml:space="preserve">
+    <value>Кесілген жүн</value>
+  </data>
+  <data name="ShearingsEN" xml:space="preserve">
+    <value>Кесілген жүн (ағылшынша)</value>
+  </data>
+  <data name="ShearingsKK" xml:space="preserve">
+    <value>Кесілген жүн (қазақша)</value>
+  </data>
+  <data name="ShearingsRU" xml:space="preserve">
+    <value>Кесілген жүн (орыс)</value>
+  </data>
+  <data name="SlaughterYield" xml:space="preserve">
+    <value>Киллердің шығуы</value>
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} кемінде {2} және максимум {1} таңбадан тұруы керек.</value>
   </data>
@@ -294,6 +459,9 @@
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Құпия сөз және растау паролі сәйкес келмейді.</value>
   </data>
+  <data name="TotalGoals" xml:space="preserve">
+    <value>Жалпы мақсаттар</value>
+  </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value>Парольді жаңартыңыз</value>
   </data>
@@ -308,6 +476,42 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Пайдаланушылар</value>
+  </data>
+  <data name="WashedWoolYield" xml:space="preserve">
+    <value>Жүннің жуылуы</value>
+  </data>
+  <data name="WashedWoolYieldEN" xml:space="preserve">
+    <value>Жүннің жуылуы (ағылшынша)</value>
+  </data>
+  <data name="WashedWoolYieldKK" xml:space="preserve">
+    <value>Жүннің жуылуы (қазақша)</value>
+  </data>
+  <data name="WashedWoolYieldRU" xml:space="preserve">
+    <value>Жүннің жуылуы (орыс)</value>
+  </data>
+  <data name="Weight" xml:space="preserve">
+    <value>Тірі салмақ</value>
+  </data>
+  <data name="WeightEN" xml:space="preserve">
+    <value>Тірі салмақ (ағылшынша)</value>
+  </data>
+  <data name="WeightKK" xml:space="preserve">
+    <value>Тірі салмақ (қазақша)</value>
+  </data>
+  <data name="WeightRU" xml:space="preserve">
+    <value>Тірі салмақ (орыс)</value>
+  </data>
+  <data name="WoolLength" xml:space="preserve">
+    <value>Жүн ұзындығы</value>
+  </data>
+  <data name="WoolLengthEN" xml:space="preserve">
+    <value>Жүн ұзындығы (ағылшынша)</value>
+  </data>
+  <data name="WoolLengthKK" xml:space="preserve">
+    <value>Жүн ұзындығы (қазақша)</value>
+  </data>
+  <data name="WoolLengthRU" xml:space="preserve">
+    <value>Жүн ұзындығы (орыс)</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Сіздің пароліңіз өзгертілді.</value>

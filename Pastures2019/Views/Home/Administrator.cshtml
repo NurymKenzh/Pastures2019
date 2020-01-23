@@ -15,6 +15,30 @@
     if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
     {
         <h>
+            Породное районирование сельскохозяйственных животных Республики Казахстан
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+    {
+        <h>
+            Қазақстан Республикасының ауыл шаруашылығы жануарларын асылдандыру
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+    {
+        <h>
+            Breeding zoning of farm animals of the Republic of Kazakhstan
+        </h>
+    }
+}
+<br />
+<a asp-area="" asp-controller="Camels" asp-action="Index">@SharedLocalizer["Camels"]</a>
+<br />
+@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+{
+    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+    {
+        <h>
             Нагрузка сельскохозяйственных животных на пастбища Республики Казахстан
         </h>
     }

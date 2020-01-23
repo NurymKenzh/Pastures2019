@@ -11,6 +11,7 @@ namespace Pastures2019.Models
     {
         public int Id { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Code")]
         public int Code { get; set; }
 

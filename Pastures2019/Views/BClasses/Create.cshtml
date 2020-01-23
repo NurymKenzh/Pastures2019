@@ -3,7 +3,7 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = @SharedLocalizer["Create"];
+    ViewData["Title"] = SharedLocalizer["Create"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

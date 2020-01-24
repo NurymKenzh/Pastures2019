@@ -212,7 +212,7 @@ namespace Modis
         private static void ModisMosaic(string Folder)
         {
             string modisListFile = Directory.EnumerateFiles(Folder, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault(),
-                            index = ModisDataSetIndex.ToString().PadLeft(2, '0');
+                index = ModisDataSetIndex.ToString().PadLeft(2, '0');
             string arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}.tif" +
                 $" -s \"{ModisDataSetIndex.ToString()}\"" +
                 $" {modisListFile}";
@@ -290,7 +290,8 @@ namespace Modis
                     CMDPath,
                     publishParameters);
                 // style
-                string style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_{ModisDataSet}";
+                string index = ModisDataSetIndex.ToString().PadLeft(2, '0');
+                    string style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}";
                 publishParameters = $" -v -u" +
                     $" {GeoServerUser}:{GeoServerPassword}" +
                     $" -X PUT -H \"Content-type: text/xml\"" +

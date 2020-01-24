@@ -181,7 +181,7 @@ body {
     text-transform: uppercase !important;
     letter-spacing: 1px !important;
     font-size:smaller;
-    color: #FFFFFF !important
+    /*color: #FFFFFF !important*/
 }
 
 .navbar-expand-lg .navbar-brand:hover {

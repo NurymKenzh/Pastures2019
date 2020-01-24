@@ -16,21 +16,29 @@ namespace Modis
         const string ModisSource = "MOLT",
             ModisProduct = "MOD13Q1.006",
             ModisDataSet = "NDVI",
-            ModisProjection = "4326",
+            ModisProjection = "3857",
             GeoServerWorkspace = "MODIS";
+
+        static string ModisUser = "",
+            ModisPassword = "",
+            CMDPath = "",
+            GeoServerModisDataDir = "",
+            GeoServerUser = "",
+            GeoServerPassword = "",
+            GeoServerURL = "",
+            ClipShape = "";
+
         static void Main(string[] args)
         {
             DateTime dateTimeLast = new DateTime(2000, 1, 1);
             while (true)
             {
-                if((DateTime.Now - dateTimeLast).TotalDays < 1)
+                if ((DateTime.Now - dateTimeLast).TotalDays < 1)
                 {
                     continue;
                 }
                 bool Server = true;
-                string settingsString = System.IO.File.ReadAllText(@"modis.json"),
-                    ModisUser = "",
-                    ModisPassword = "";
+                string settingsString = System.IO.File.ReadAllText(@"modis.json");
                 var json = JObject.Parse(settingsString);
                 foreach (JProperty property in json.Properties())
                 {
@@ -45,6 +53,10 @@ namespace Modis
                     if (property.Name == "ModisPassword")
                     {
                         ModisPassword = property.Value.ToString();
+                    }
+                    if (property.Name == "ClipShape")
+                    {
+                        ClipShape = property.Value.ToString();
                     }
                 }
                 dynamic settingsJObject = null;
@@ -70,13 +82,13 @@ namespace Modis
                         }
                     }
                 }
-                string DownloadDir = JObject.Parse(settingsJObject.ToString())["DownloadDir"],
-                   GeoServerModisDataDir = JObject.Parse(settingsJObject.ToString())["GeoServerModisDataDir"],
-                   CMDPath = JObject.Parse(settingsJObject.ToString())["CMDPath"],
-                   //CURLPath = JObject.Parse(settingsJObject.ToString())["CURLPath"],
-                   GeoServerUser = JObject.Parse(settingsJObject.ToString())["GeoServerUser"],
-                   GeoServerPassword = JObject.Parse(settingsJObject.ToString())["GeoServerPassword"],
-                   GeoServerURL = JObject.Parse(settingsJObject.ToString())["GeoServerURL"];
+                string DownloadDir = JObject.Parse(settingsJObject.ToString())["DownloadDir"];
+                CMDPath = JObject.Parse(settingsJObject.ToString())["CMDPath"];
+                GeoServerModisDataDir = JObject.Parse(settingsJObject.ToString())["GeoServerModisDataDir"];
+                ClipShape = Path.Combine(GeoServerModisDataDir, ClipShape);
+                GeoServerUser = JObject.Parse(settingsJObject.ToString())["GeoServerUser"];
+                GeoServerPassword = JObject.Parse(settingsJObject.ToString())["GeoServerPassword"];
+                GeoServerURL = JObject.Parse(settingsJObject.ToString())["GeoServerURL"];
 
                 DateTime dateTimeStart = ModisDateStart,
                     dateTimeFinish = new DateTime(dateTimeStart.Year, dateTimeStart.Month, 1).AddMonths(1).AddDays(-1); // dateTimeStart.AddDays(ModisPeriod - 1);
@@ -117,7 +129,7 @@ namespace Modis
                         {
                             dateTimeStart = dateTimeFinishCurrent.AddDays(1);
                             dateTimeFinish = dateTimeStart.AddMonths(1).AddDays(-1);
-                            if(dateTimeFinish > DateTime.Today)
+                            if (dateTimeFinish > DateTime.Today)
                             {
                                 dateTimeFinish = DateTime.Today;
                             }
@@ -129,86 +141,45 @@ namespace Modis
                     }
                     try
                     {
-                        // create subfolder
-                        string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
-                        Directory.CreateDirectory(folderDownload);
+                        //// create subfolder
+                        //string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+                        //Directory.CreateDirectory(folderDownload);
 
-                        // download modis
-                        string arguments = $"-U caesarmod -P caesar023Earthdata -r -t {string.Join(',', ModisSpans)} -p {ModisProduct}" +
-                            $" -f {dateTimeStart.ToString("yyyy-MM-dd")} -e {dateTimeFinish.ToString("yyyy-MM-dd")}" +
-                            $" {folderDownload}";
-                        ModisExecute(CMDPath, "modis_download.py", folderDownload, arguments);
+                        //// download modis
+                        //ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
 
-                        // mosaic
-                        string modisListFile = Directory.EnumerateFiles(folderDownload, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault(),
-                            index = ModisDataSetIndex.ToString().PadLeft(2, '0');
-                        arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}.tif" +
-                            $" -s \"{ModisDataSetIndex.ToString()}\"" +
-                            $" {modisListFile}";
-                        ModisExecute(
-                            CMDPath,
-                            "modis_mosaic.py",
-                            folderDownload,
-                            arguments);
+                        //// mosaic
+                        //ModisMosaic(folderDownload);
 
-                        // convert
-                        foreach (string tif in Directory.EnumerateFiles(folderDownload, "*tif", SearchOption.TopDirectoryOnly))
+                        //// convert
+                        //ModisConvert(folderDownload);
+
+                        //// clip
+                        //TifClip(folderDownload);
+
+                        //// move to GeoServer
+                        //// publish
+                        //Publish(folderDownload);
+
+                        //// rename folder (remove "!")
+                        //string folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+                        //Directory.Move(folderDownload, folderDownloadFinale);
+
+                        foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
                         {
-                            string tifReprojected = $"{Path.GetFileNameWithoutExtension(tif)}_{ModisProjection}";
-                            arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e {ModisProjection} {tif}";
-                            ModisExecute(
-                                CMDPath,
-                                "modis_convert.py",
-                                folderDownload,
-                                arguments);
-                        }
+                            // mosaic
+                            ModisMosaic(folder);
 
-                        // move to GeoServer
-                        // publish
-                        foreach (string file in Directory.EnumerateFiles(folderDownload, $"*{ModisProjection}.tif", SearchOption.TopDirectoryOnly))
-                        {
+                            // convert
+                            ModisConvert(folder);
+
+                            // clip
+                            TifClip(folder);
+
                             // move to GeoServer
-                            string fileGeoServer = Path.Combine(GeoServerModisDataDir, Path.GetFileName(file));
-                            File.Move(
-                                file,
-                                fileGeoServer
-                                );
                             // publish
-                            string layerName = Path.GetFileNameWithoutExtension(fileGeoServer);
-                            // store
-                            string publishParameters = $" -v -u" +
-                                $" {GeoServerUser}:{GeoServerPassword}" +
-                                $" -POST -H \"Content-type: text/xml\"" +
-                                $" -d \"<coverageStore><name>{layerName}</name><type>GeoTIFF</type><enabled>true</enabled><workspace>{GeoServerWorkspace}</workspace><url>" +
-                                $"/data/{GeoServerWorkspace}/{layerName}.tif</url></coverageStore>\"" +
-                                $" {GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores?configure=all";
-                            CurlExecute(
-                                CMDPath,
-                                publishParameters);
-                            // layer
-                            publishParameters = $" -v -u" +
-                                $" {GeoServerUser}:{GeoServerPassword}" +
-                                $" -PUT -H \"Content-type: text/xml\"" +
-                                $" -d \"<coverage><name>{layerName}</name><title>{layerName}</title><defaultInterpolationMethod><name>nearest neighbor</name></defaultInterpolationMethod></coverage>\"" +
-                                $" \"{GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores/{layerName}/coverages?recalculate=nativebbox\"";
-                            CurlExecute(
-                                CMDPath,
-                                publishParameters);
-                            // style
-                            string style =
-                            publishParameters = $" -v -u" +
-                                $" {GeoServerUser}:{GeoServerPassword}" +
-                                $" -X PUT -H \"Content-type: text/xml\"" +
-                                $" -d \"<layer><defaultStyle><name>{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_{ModisDataSet}</name></defaultStyle></layer>\"" +
-                                $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
-                            CurlExecute(
-                                CMDPath,
-                                publishParameters);
+                            Publish(folder);
                         }
-
-                        // rename folder (remove "!")
-                        string folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
-                        Directory.Move(folderDownload, folderDownloadFinale);
                     }
                     catch
                     {
@@ -227,7 +198,111 @@ namespace Modis
             }
         }
 
-        public static void Log(string log)
+        private static void ModisDownload(
+            DateTime DateTimeStart,
+            DateTime DateTimeFinish,
+            string Folder)
+        {
+            string arguments = $"-U {ModisUser} -P {ModisPassword} -r -t {string.Join(',', ModisSpans)} -p {ModisProduct}" +
+                $" -f {DateTimeStart.ToString("yyyy-MM-dd")} -e {DateTimeFinish.ToString("yyyy-MM-dd")}" +
+                $" {Folder}";
+            GDALExecute(CMDPath, "modis_download.py", Folder, arguments);
+        }
+
+        private static void ModisMosaic(string Folder)
+        {
+            string modisListFile = Directory.EnumerateFiles(Folder, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault(),
+                            index = ModisDataSetIndex.ToString().PadLeft(2, '0');
+            string arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}.tif" +
+                $" -s \"{ModisDataSetIndex.ToString()}\"" +
+                $" {modisListFile}";
+            GDALExecute(
+                CMDPath,
+                "modis_mosaic.py",
+                Folder,
+                arguments);
+        }
+
+        private static void ModisConvert(string Folder)
+        {
+            foreach (string tif in Directory.EnumerateFiles(Folder, "*tif", SearchOption.TopDirectoryOnly))
+            {
+                string xml = tif + ".xml",
+                    tifReprojected = $"{Path.GetFileNameWithoutExtension(tif)}_{ModisProjection}",
+                    arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e {ModisProjection} {tif}";
+                GDALExecute(
+                    CMDPath,
+                    "modis_convert.py",
+                    Folder,
+                    arguments);
+                File.Delete(tif);
+                File.Delete(xml);
+            }
+        }
+
+        private static void TifClip(string Folder)
+        {
+            foreach (string tif in Directory.EnumerateFiles(Folder, "*tif", SearchOption.TopDirectoryOnly))
+            {
+                string xml = tif + ".xml",
+                    tifTiClip = Path.GetFileName(tif),
+                    tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif",
+                    arguments = $"-cutline {ClipShape} {tif} {tifClipped}";
+                GDALExecute(
+                    CMDPath,
+                    "gdalwarp",
+                    Folder,
+                    arguments);
+                File.Delete(tif);
+                File.Delete(xml);
+            }
+        }
+
+        private static void Publish(string Folder)
+        {
+            foreach (string file in Directory.EnumerateFiles(Folder, $"*{ModisProjection}*.tif", SearchOption.TopDirectoryOnly))
+            {
+                // move to GeoServer
+                string fileGeoServer = Path.Combine(GeoServerModisDataDir, Path.GetFileName(file));
+                File.Move(
+                    file,
+                    fileGeoServer
+                    );
+                // publish
+                string layerName = Path.GetFileNameWithoutExtension(fileGeoServer);
+                // store
+                string publishParameters = $" -v -u" +
+                    $" {GeoServerUser}:{GeoServerPassword}" +
+                    $" -POST -H \"Content-type: text/xml\"" +
+                    $" -d \"<coverageStore><name>{layerName}</name><type>GeoTIFF</type><enabled>true</enabled><workspace>{GeoServerWorkspace}</workspace><url>" +
+                    $"/data/{GeoServerWorkspace}/{layerName}.tif</url></coverageStore>\"" +
+                    $" {GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores?configure=all";
+                CurlExecute(
+                    CMDPath,
+                    publishParameters);
+                // layer
+                publishParameters = $" -v -u" +
+                    $" {GeoServerUser}:{GeoServerPassword}" +
+                    $" -PUT -H \"Content-type: text/xml\"" +
+                    $" -d \"<coverage><name>{layerName}</name><title>{layerName}</title><defaultInterpolationMethod><name>nearest neighbor</name></defaultInterpolationMethod></coverage>\"" +
+                    $" \"{GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores/{layerName}/coverages?recalculate=nativebbox\"";
+                CurlExecute(
+                    CMDPath,
+                    publishParameters);
+                // style
+                string style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_{ModisDataSet}";
+                publishParameters = $" -v -u" +
+                    $" {GeoServerUser}:{GeoServerPassword}" +
+                    $" -X PUT -H \"Content-type: text/xml\"" +
+                    $" -d \"<layer><defaultStyle><name>{style}</name></defaultStyle></layer>\"" +
+                    $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
+                CurlExecute(
+                    CMDPath,
+                    publishParameters);
+            }
+        }
+
+        private static void Log(string log)
         {
             foreach(string line in log.Split("\r\n"))
             {
@@ -235,7 +310,7 @@ namespace Modis
             }
         }
 
-        public static void ModisExecute(
+        private static void GDALExecute(
             string CMDPath,
             string ModisFileName,
             string FolderToNavigate,
@@ -277,7 +352,7 @@ namespace Modis
             }
         }
 
-        public static void CurlExecute(
+        private static void CurlExecute(
             string CMDPath,
             string Parameters)
         {

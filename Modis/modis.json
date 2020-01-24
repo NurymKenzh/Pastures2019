@@ -3,7 +3,7 @@
   "ModisUser": "caesarmod",
   "ModisPassword": "caesar023Earthdata",
   "ServerSettings": {
-    "DownloadDir": "D:\\Modis\\MOLT\\MOD13Q1006",
+    "DownloadDir": "D:\\MODIS\\MOLT\\MOD13Q1006",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
     "GeoServerModisDataDir": "D:\\GeoServer\\data_dir\\data\\MODIS",
     "GeoServerUser": "admin",
@@ -11,11 +11,12 @@
     "GeoServerURL": "http://localhost:8080/geoserver/"
   },
   "DebugSettings": {
-    "DownloadDir": "E:\\Documents\\New\\Modis\\Download",
+    "DownloadDir": "D:\\MODIS\\MOLT\\MOD13Q1006",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
     "GeoServerModisDataDir": "E:\\Documents\\Google Drive\\Geoserver\\data_dir\\data\\MODIS",
     "GeoServerUser": "admin",
     "GeoServerPassword": "geoserver",
     "GeoServerURL": "http://localhost:8080/geoserver/"
-  }
+  },
+  "ClipShape": "ClipMask3857.shp"
 }

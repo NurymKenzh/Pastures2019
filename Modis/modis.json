@@ -1,5 +1,5 @@
 {
-  "Server": false,
+  "Server": true,
   "ModisUser": "caesarmod",
   "ModisPassword": "caesar023Earthdata",
   "ServerSettings": {

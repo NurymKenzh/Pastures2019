@@ -244,17 +244,17 @@ namespace Modis
         {
             foreach (string tif in Directory.EnumerateFiles(Folder, "*tif", SearchOption.TopDirectoryOnly))
             {
-                string xml = tif + ".xml",
-                    tifTiClip = Path.GetFileName(tif),
+                string tifToClip = Path.GetFileName(tif),
                     tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif",
-                    arguments = $"-cutline {ClipShape} {tif} {tifClipped}";
+                    //arguments = $"-cutline {ClipShape} {tifToClip} {tifClipped}"; // old clip
+                    arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline {ClipShape} -crop_to_cutline" +
+                    $" {tifToClip} {tifClipped}";
                 GDALExecute(
                     CMDPath,
                     "gdalwarp",
                     Folder,
                     arguments);
                 File.Delete(tif);
-                File.Delete(xml);
             }
         }
 

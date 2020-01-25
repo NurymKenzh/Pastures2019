@@ -166,3 +166,40 @@ body {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
 }
+
+
+/* navbar
+-------------------------------------------------- */
+@import 'https://fonts.googleapis.com/css?family=Montserrat|Open+Sans';
+
+.navbar-brand {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase
+}
+.navbar .nav-link {
+    font-family: 'Open Sans', sans-serif !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size:smaller;
+    /*color: #FFFFFF !important*/
+}
+
+.navbar-expand-lg .navbar-brand:hover {
+    color: #FFCC00
+}
+.navbar-expand-lg .navbar-nav > li > a:hover,
+.navbar-expand-lg .navbar-nav > li > a:focus {
+    color: #FFCC00 !important;
+}
+
+.navbar-expand-lg .navbar-nav > .open > a:focus {
+    color: #FFCC00
+}
+
+.navbar-expand-lg .navbar-nav > .active > a:focus {
+    color: #FFCC00
+}
+
+.dropdown-menu > li > a:focus {
+    color: #FFCC00
+}

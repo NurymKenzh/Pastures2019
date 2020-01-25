@@ -42,35 +42,35 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #003300;">
             <div class="container">
-                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pastures2019</a>*@
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="#">Pasture 2019</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
+                <div class="collapse navbar-collapse" id="navbarPasture">
+                    <ul class="navbar-nav mr-auto">
+                        <li>
+                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
+                            <a class="nav-link" asp-area="" asp-controller="Maps" asp-action="Index">@SharedLocalizer["Maps"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Maps" asp-action="Index">@SharedLocalizer["Maps"]</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu" aria-labelledby="somemenu">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
                         </li>
                         @if (User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
                             </li>
                         }
                     </ul>
@@ -78,21 +78,18 @@
             </div>
         </nav>
     </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
             @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
+            @RenderSection("Scripts", required: false)
+        </div>
+    </main>
+    <footer class="border-top footer mt-auto">
         <div class="container">
             &copy; @DateTime.Now.Year.ToString() - Pastures @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
             @await Html.PartialAsync("_SelectLanguagePartial")
         </div>
-    </footer>
-
-
-    @RenderSection("Scripts", required: false)
+    </footer>    
 </body>
 </html>

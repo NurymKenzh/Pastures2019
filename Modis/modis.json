@@ -3,9 +3,9 @@
   "ModisUser": "caesarmod",
   "ModisPassword": "caesar023Earthdata",
   "ServerSettings": {
-    "DownloadDir": "D:\\MODIS\\MOLT\\MOD13Q1006",
+    "DownloadDir": "R:\\MODIS\\MOLT\\MOD13Q1006",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
-    "GeoServerModisDataDir": "D:\\GeoServer\\data_dir\\data\\MODIS",
+    "GeoServerModisDataDir": "D:\\GeoServer\\data_dir\\data\\MODIS2",
     "GeoServerUser": "admin",
     "GeoServerPassword": "geoserver",
     "GeoServerURL": "http://localhost:8080/geoserver/"

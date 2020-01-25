@@ -17,7 +17,7 @@ namespace Modis
             ModisProduct = "MOD13Q1.006",
             ModisDataSet = "NDVI",
             ModisProjection = "3857",
-            GeoServerWorkspace = "MODIS";
+            GeoServerWorkspace = "MODIS2";
 
         static string ModisUser = "",
             ModisPassword = "",
@@ -245,10 +245,13 @@ namespace Modis
             foreach (string tif in Directory.EnumerateFiles(Folder, "*tif", SearchOption.TopDirectoryOnly))
             {
                 string tifToClip = Path.GetFileName(tif),
-                    tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif",
-                    //arguments = $"-cutline {ClipShape} {tifToClip} {tifClipped}"; // old clip
-                    arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline {ClipShape} -crop_to_cutline" +
-                    $" {tifToClip} {tifClipped}";
+                    tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif";
+                //// 1 (MODIS1) old clip
+                //string arguments = $"-cutline {ClipShape} {tifToClip} {tifClipped}";
+                //// 0 (MODIS) with crop and compress
+                //string arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
+                // 2 (MODIS2) with crop without compress
+                string arguments = $"-overwrite -dstnodata -3000 -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
                 GDALExecute(
                     CMDPath,
                     "gdalwarp",

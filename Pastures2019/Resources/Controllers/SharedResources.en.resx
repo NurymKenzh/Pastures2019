@@ -384,6 +384,12 @@
   <data name="MilkYieldRU" xml:space="preserve">
     <value>Milk production (Russian)</value>
   </data>
+  <data name="MODISProduct" xml:space="preserve">
+    <value>MODIS Product</value>
+  </data>
+  <data name="MODISProducts" xml:space="preserve">
+    <value>MODIS Products</value>
+  </data>
   <data name="MODISSource" xml:space="preserve">
     <value>MODIS Source</value>
   </data>

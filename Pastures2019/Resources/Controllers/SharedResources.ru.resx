@@ -384,6 +384,12 @@
   <data name="MilkYieldRU" xml:space="preserve">
     <value>Молочная продуктивность (русский)</value>
   </data>
+  <data name="MODISProduct" xml:space="preserve">
+    <value>Продукт MODIS </value>
+  </data>
+  <data name="MODISProducts" xml:space="preserve">
+    <value>Продукты MODIS</value>
+  </data>
   <data name="MODISSource" xml:space="preserve">
     <value>Источник MODIS</value>
   </data>

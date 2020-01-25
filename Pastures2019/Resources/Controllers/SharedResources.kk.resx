@@ -384,6 +384,12 @@
   <data name="MilkYieldRU" xml:space="preserve">
     <value>Сүт өндірісі (орыс)</value>
   </data>
+  <data name="MODISProduct" xml:space="preserve">
+    <value>MODIS өнімі</value>
+  </data>
+  <data name="MODISProducts" xml:space="preserve">
+    <value>MODIS өнімдері</value>
+  </data>
   <data name="MODISSource" xml:space="preserve">
     <value>MODIS көзі</value>
   </data>

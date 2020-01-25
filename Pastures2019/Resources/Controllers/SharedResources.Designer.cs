@@ -864,6 +864,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string MODISProduct {
+            get {
+                return ResourceManager.GetString("MODISProduct", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string MODISProducts {
+            get {
+                return ResourceManager.GetString("MODISProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string MODISSource {
             get {
                 return ResourceManager.GetString("MODISSource", resourceCulture);

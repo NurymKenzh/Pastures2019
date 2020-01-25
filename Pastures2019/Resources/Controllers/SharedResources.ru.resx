@@ -303,6 +303,12 @@
   <data name="EwesYieldRU" xml:space="preserve">
     <value>Удой маток (русский)</value>
   </data>
+  <data name="Extract" xml:space="preserve">
+    <value>Извлекать</value>
+  </data>
+  <data name="ExtractStarted" xml:space="preserve">
+    <value>Извлечение запущено</value>
+  </data>
   <data name="Fertility" xml:space="preserve">
     <value>Плодовитость</value>
   </data>
@@ -320,6 +326,9 @@
   </data>
   <data name="Find" xml:space="preserve">
     <value>Найти</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Папка</value>
   </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Забыли пароль</value>

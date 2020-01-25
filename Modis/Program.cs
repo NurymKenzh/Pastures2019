@@ -216,7 +216,7 @@ namespace Modis
                 index = ModisDataSetIndex.ToString().PadLeft(2, '0');
             string arguments = $"-o {ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}.tif" +
                 $" -s \"{ModisDataSetIndex.ToString()}\"" +
-                $" {modisListFile}";
+                $" \"{modisListFile}\"";
             GDALExecute(
                 CMDPath,
                 "modis_mosaic.py",

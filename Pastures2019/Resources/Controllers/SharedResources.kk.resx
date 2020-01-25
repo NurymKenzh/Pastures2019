@@ -303,6 +303,12 @@
   <data name="EwesYieldRU" xml:space="preserve">
     <value>Жатыр сүті (орыс)</value>
   </data>
+  <data name="Extract" xml:space="preserve">
+    <value>Шығарыңыз</value>
+  </data>
+  <data name="ExtractStarted" xml:space="preserve">
+    <value>Шығару басталды</value>
+  </data>
   <data name="Fertility" xml:space="preserve">
     <value>Құнарлылық</value>
   </data>
@@ -320,6 +326,9 @@
   </data>
   <data name="Find" xml:space="preserve">
     <value>Табыңыз</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Қалта</value>
   </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Құпия сөзді растауды ұмыттыңыз</value>

@@ -303,6 +303,12 @@
   <data name="EwesYieldRU" xml:space="preserve">
     <value>Uterine milk (Russian)</value>
   </data>
+  <data name="Extract" xml:space="preserve">
+    <value>Extract</value>
+  </data>
+  <data name="ExtractStarted" xml:space="preserve">
+    <value>Extract started</value>
+  </data>
   <data name="Fertility" xml:space="preserve">
     <value>Fertility</value>
   </data>
@@ -320,6 +326,9 @@
   </data>
   <data name="Find" xml:space="preserve">
     <value>Find</value>
+  </data>
+  <data name="Folder" xml:space="preserve">
+    <value>Folder</value>
   </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Forgot password confirmation</value>

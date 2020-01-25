@@ -111,6 +111,41 @@ namespace Pastures2019.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Administrator, Moderator")]
+        public IActionResult Extract()
+        {
+            ViewData["MODISDataSetId"] = new SelectList(_context.MODISDataSet.OrderBy(m => m.Name), "Id", "Name");
+            ViewData["Folder"] = new SelectList(Directory.EnumerateDirectories(Startup.Configuration["ModisDownloadDirectory"].ToString()));
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
+        public async Task<IActionResult> Extract(
+            int MODISDataSetId,
+            string Folder)
+        {
+            string CMDPath = Startup.Configuration["CMDPath"].ToString(),
+                DownloadDir = Startup.Configuration["ModisDownloadDirectory"].ToString(),
+                folder = Path.Combine(DownloadDir, Folder),
+                ClipShape = Path.Combine(DownloadDir, Startup.Configuration["ClipShape"].ToString());
+            MODISDataSet mODISDataSet = _context.MODISDataSet
+                .Include(m => m.MODISProduct)
+                .Include(m => m.MODISProduct.MODISSource)
+                .FirstOrDefault(m => m.Id == MODISDataSetId);
+            Thread ModisExtractThread = new Thread(() => ModisExtract(
+                folder,
+                mODISDataSet,
+                CMDPath,
+                ClipShape));
+            ModisExtractThread.Start();
+
+            ViewData["MODISDataSetId"] = new SelectList(_context.MODISDataSet.OrderBy(m => m.Name), "Id", "Name");
+            ViewBag.ExtractStarted = _localizer["ExtractStarted"];
+            return View();
+        }
+
         public void ModisDownload(DateTime DateTimeStart,
             DateTime DateTimeFinish,
             string Folder,
@@ -124,6 +159,57 @@ namespace Pastures2019.Controllers
                 $" -f {DateTimeStart.ToString("yyyy-MM-dd")} -e {DateTimeFinish.ToString("yyyy-MM-dd")}" +
                 $" \"{Folder}\"";
             GDALExecute(CMDPath, "modis_download.py", Folder, arguments);
+        }
+
+        public void ModisExtract(
+            string Folder,
+            MODISDataSet MODISDataSet,
+            string CMDPath,
+            // ClipShape - full path
+            string ClipShape)
+        {
+            // mosaic
+            string modisListFile = Directory.EnumerateFiles(Folder, "*listfile*", SearchOption.TopDirectoryOnly).FirstOrDefault(),
+                index = MODISDataSet.Index.ToString().PadLeft(2, '0');
+            string arguments = $"-o {MODISDataSet.MODISProduct.MODISSource.Name}_" +
+                $"{MODISDataSet.MODISProduct.Name.Replace(".", "")}_" +
+                $"B{index}_" +
+                $"{MODISDataSet.Name}.tif" +
+                $" -s \"{MODISDataSet.Index.ToString()}\"" +
+                $" \"{modisListFile}\"";
+            GDALExecute(
+                CMDPath,
+                "modis_mosaic.py",
+                Folder,
+                arguments);
+            // convert
+            foreach (string tif in Directory.EnumerateFiles(Folder, "*tif", SearchOption.TopDirectoryOnly))
+            {
+                string xml = tif + ".xml",
+                    tifReprojected = $"{Path.GetFileNameWithoutExtension(tif)}_3857";
+                arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e 3857 {tif}";
+                GDALExecute(
+                    CMDPath,
+                    "modis_convert.py",
+                    Folder,
+                    arguments);
+                System.IO.File.Delete(tif);
+                System.IO.File.Delete(xml);
+            }
+            // clip
+            foreach (string tif in Directory.EnumerateFiles(Folder, "*tif", SearchOption.TopDirectoryOnly))
+            {
+                string tifToClip = Path.GetFileName(tif),
+                    tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif";
+                // 0 (MODIS) with crop and compress
+                arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline \"{ClipShape}\" -crop_to_cutline {tifToClip} {tifClipped}";
+                GDALExecute(
+                    CMDPath,
+                    "gdalwarp",
+                    Folder,
+                    arguments);
+                System.IO.File.Delete(tif);
+            }
         }
 
         private void GDALExecute(

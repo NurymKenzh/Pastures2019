@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 using Pastures2019.Data;
 using Pastures2019.Models;
 
@@ -17,10 +18,13 @@ namespace Pastures2019.Controllers
     public class MODISController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IStringLocalizer<SharedResources> _localizer;
 
-        public MODISController(ApplicationDbContext context)
+        public MODISController(ApplicationDbContext context,
+            IStringLocalizer<SharedResources> localizer)
         {
             _context = context;
+            _localizer = localizer;
         }
 
         [Authorize(Roles = "Administrator, Moderator")]
@@ -102,6 +106,8 @@ namespace Pastures2019.Controllers
             ModisDownloadThread.Start();
 
             ViewData["MODISDataSetId"] = new SelectList(_context.MODISDataSet.OrderBy(m => m.Name), "Id", "Name");
+            ViewBag.DownloadStarted = _localizer["DownloadStarted"];
+            ViewBag.FilesWillBeDownloadedToTheFolder = string.Format(_localizer["FilesWillBeDownloadedToTheFolder"], folder);
             return View();
         }
 

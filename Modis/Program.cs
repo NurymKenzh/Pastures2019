@@ -17,7 +17,7 @@ namespace Modis
             ModisProduct = "MOD13Q1.006",
             ModisDataSet = "NDVI",
             ModisProjection = "3857",
-            GeoServerWorkspace = "MODIS2";
+            GeoServerWorkspace = "MODIS";
 
         static string ModisUser = "",
             ModisPassword = "",
@@ -141,45 +141,46 @@ namespace Modis
                     }
                     try
                     {
-                        //// create subfolder
-                        //string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
-                        //Directory.CreateDirectory(folderDownload);
+                        // create subfolder
+                        string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+                        Directory.CreateDirectory(folderDownload);
 
-                        //// download modis
-                        //ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
+                        // download modis
+                        ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
 
-                        //// mosaic
-                        //ModisMosaic(folderDownload);
+                        // mosaic
+                        ModisMosaic(folderDownload);
 
-                        //// convert
-                        //ModisConvert(folderDownload);
+                        // convert
+                        ModisConvert(folderDownload);
 
-                        //// clip
-                        //TifClip(folderDownload);
+                        // clip
+                        TifClip(folderDownload);
 
-                        //// move to GeoServer
-                        //// publish
-                        //Publish(folderDownload);
+                        // move to GeoServer
+                        // publish
+                        Publish(folderDownload);
 
-                        //// rename folder (remove "!")
-                        //string folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
-                        //Directory.Move(folderDownload, folderDownloadFinale);
+                        // rename folder (remove "!")
+                        string folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+                        Directory.Move(folderDownload, folderDownloadFinale);
 
-                        foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
-                        {
-                            // mosaic
-                            ModisMosaic(folder);
+                        //// work with downloaded MODIS
+                        //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
+                        //{
+                        //    // mosaic
+                        //    ModisMosaic(folder);
 
-                            // convert
-                            ModisConvert(folder);
+                        //    // convert
+                        //    ModisConvert(folder);
 
-                            // clip
-                            TifClip(folder);
+                        //    // clip
+                        //    TifClip(folder);
 
-                            // move to GeoServer
-                            // publish
-                            Publish(folder);
-                        }
+                        //    // move to GeoServer
+                        //    // publish
+                        //    Publish(folder);
+                        //}
                     }
                     catch
                     {
@@ -248,10 +249,10 @@ namespace Modis
                     tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif";
                 //// 1 (MODIS1) old clip
                 //string arguments = $"-cutline {ClipShape} {tifToClip} {tifClipped}";
-                //// 0 (MODIS) with crop and compress
-                //string arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
-                // 2 (MODIS2) with crop without compress
-                string arguments = $"-overwrite -dstnodata -3000 -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
+                // 0 (MODIS) with crop and compress
+                string arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
+                //// 2 (MODIS2) with crop without compress
+                //string arguments = $"-overwrite -dstnodata -3000 -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
                 GDALExecute(
                     CMDPath,
                     "gdalwarp",

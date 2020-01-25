@@ -384,6 +384,15 @@
   <data name="MilkYieldRU" xml:space="preserve">
     <value />
   </data>
+  <data name="MODISSource" xml:space="preserve">
+    <value />
+  </data>
+  <data name="MODISSources" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value />
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value />
   </data>

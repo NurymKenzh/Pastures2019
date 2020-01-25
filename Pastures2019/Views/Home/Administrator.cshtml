@@ -10,6 +10,12 @@
 
 <a asp-area="" asp-controller="Users" asp-action="Index">@SharedLocalizer["Users"]</a>
 <br />
+<h>
+    MODIS
+</h>
+<br />
+<a asp-area="" asp-controller="MODISSources" asp-action="Index">@SharedLocalizer["MODISSources"]</a>
+<br />
 @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
 {
     if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")

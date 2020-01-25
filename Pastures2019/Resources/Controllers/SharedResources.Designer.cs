@@ -720,6 +720,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Index {
+            get {
+                return ResourceManager.GetString("Index", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Instruction {
             get {
                 return ResourceManager.GetString("Instruction", resourceCulture);
@@ -858,6 +867,24 @@ namespace Pastures2019.Resources.Controllers {
         public static string MilkYieldRU {
             get {
                 return ResourceManager.GetString("MilkYieldRU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string MODISDataSet {
+            get {
+                return ResourceManager.GetString("MODISDataSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string MODISDataSets {
+            get {
+                return ResourceManager.GetString("MODISDataSets", resourceCulture);
             }
         }
         

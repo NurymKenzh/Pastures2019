@@ -336,6 +336,9 @@
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Неверный пароль.</value>
   </data>
+  <data name="Index" xml:space="preserve">
+    <value>Индекс</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Инструкция</value>
   </data>
@@ -383,6 +386,12 @@
   </data>
   <data name="MilkYieldRU" xml:space="preserve">
     <value>Молочная продуктивность (русский)</value>
+  </data>
+  <data name="MODISDataSet" xml:space="preserve">
+    <value>Набор данных MODIS</value>
+  </data>
+  <data name="MODISDataSets" xml:space="preserve">
+    <value>Наборы данных MODIS</value>
   </data>
   <data name="MODISProduct" xml:space="preserve">
     <value>Продукт MODIS </value>

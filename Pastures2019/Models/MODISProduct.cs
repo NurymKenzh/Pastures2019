@@ -14,8 +14,7 @@ namespace Pastures2019.Models
         public MODISSource MODISSource { get; set; }
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "MODISSource")]
         public int MODISSourceId { get; set; }
-
-
+        
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Name")]
         public string Name { get; set; }
     }

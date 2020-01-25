@@ -142,6 +142,7 @@ namespace Pastures2019.Controllers
             ModisExtractThread.Start();
 
             ViewData["MODISDataSetId"] = new SelectList(_context.MODISDataSet.OrderBy(m => m.Name), "Id", "Name");
+            ViewData["Folder"] = new SelectList(Directory.EnumerateDirectories(Startup.Configuration["ModisDownloadDirectory"].ToString()));
             ViewBag.ExtractStarted = _localizer["ExtractStarted"];
             return View();
         }
@@ -187,7 +188,7 @@ namespace Pastures2019.Controllers
             {
                 string xml = tif + ".xml",
                     tifReprojected = $"{Path.GetFileNameWithoutExtension(tif)}_3857";
-                arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e 3857 {tif}";
+                arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e 3857 \"{tif}\"";
                 GDALExecute(
                     CMDPath,
                     "modis_convert.py",

@@ -230,7 +230,7 @@ namespace Modis
             {
                 string xml = tif + ".xml",
                     tifReprojected = $"{Path.GetFileNameWithoutExtension(tif)}_{ModisProjection}",
-                    arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e {ModisProjection} {tif}";
+                    arguments = $"-v -s \"( 1 )\" -o {tifReprojected} -e {ModisProjection} \"{tif}\"";
                 GDALExecute(
                     CMDPath,
                     "modis_convert.py",

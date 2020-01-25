@@ -206,7 +206,7 @@ namespace Modis
         {
             string arguments = $"-U {ModisUser} -P {ModisPassword} -r -t {string.Join(',', ModisSpans)} -p {ModisProduct}" +
                 $" -f {DateTimeStart.ToString("yyyy-MM-dd")} -e {DateTimeFinish.ToString("yyyy-MM-dd")}" +
-                $" {Folder}";
+                $" \"{Folder}\"";
             GDALExecute(CMDPath, "modis_download.py", Folder, arguments);
         }
 
@@ -250,7 +250,7 @@ namespace Modis
                 //// 1 (MODIS1) old clip
                 //string arguments = $"-cutline {ClipShape} {tifToClip} {tifClipped}";
                 // 0 (MODIS) with crop and compress
-                string arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
+                string arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline \"{ClipShape}\" -crop_to_cutline {tifToClip} {tifClipped}";
                 //// 2 (MODIS2) with crop without compress
                 //string arguments = $"-overwrite -dstnodata -3000 -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
                 GDALExecute(

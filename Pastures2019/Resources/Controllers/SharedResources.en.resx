@@ -243,6 +243,12 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>Current password</value>
   </data>
+  <data name="DateTimeFinish" xml:space="preserve">
+    <value>Final date</value>
+  </data>
+  <data name="DateTimeStart" xml:space="preserve">
+    <value>Start date</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -273,6 +279,12 @@
   <data name="DirectionRU" xml:space="preserve">
     <value>Direction (Russian)</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="DownloadStarted" xml:space="preserve">
+    <value>Download started</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -302,6 +314,9 @@
   </data>
   <data name="FertilityRU" xml:space="preserve">
     <value>Fertility (Russian)</value>
+  </data>
+  <data name="FilesWillBeDownloadedToTheFolder" xml:space="preserve">
+    <value>Files will be downloaded to the folder {0}.</value>
   </data>
   <data name="Find" xml:space="preserve">
     <value>Find</value>

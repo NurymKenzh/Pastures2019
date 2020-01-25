@@ -243,6 +243,12 @@
   <data name="CurrentPassword" xml:space="preserve">
     <value>Ағымдағы Құпия сөз</value>
   </data>
+  <data name="DateTimeFinish" xml:space="preserve">
+    <value>Аяқталу күні</value>
+  </data>
+  <data name="DateTimeStart" xml:space="preserve">
+    <value>Басталу күні</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Жою</value>
   </data>
@@ -273,6 +279,12 @@
   <data name="DirectionRU" xml:space="preserve">
     <value>Бағыт (орыс)</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Жүктеу</value>
+  </data>
+  <data name="DownloadStarted" xml:space="preserve">
+    <value>Жүктеу басталды</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Өңдеу</value>
   </data>
@@ -302,6 +314,9 @@
   </data>
   <data name="FertilityRU" xml:space="preserve">
     <value>Құнарлылық (орыс)</value>
+  </data>
+  <data name="FilesWillBeDownloadedToTheFolder" xml:space="preserve">
+    <value>Файлдар папкаға {0} жүктеледі.</value>
   </data>
   <data name="Find" xml:space="preserve">
     <value>Табыңыз</value>

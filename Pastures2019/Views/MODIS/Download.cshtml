@@ -1,0 +1,40 @@
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Download"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@SharedLocalizer["Download"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Download">
+            <div class="form-group">
+                <label class="control-label">@SharedLocalizer["DateTimeStart"]</label>
+                <input name="DateTimeStart" type="date" class="form-control" value="@DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd")"/>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@SharedLocalizer["DateTimeFinish"]</label>
+                <input name="DateTimeFinish" type="date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">@SharedLocalizer["MODISDataSet"]</label>
+                @Html.DropDownList("MODISDataSetId", (IEnumerable<SelectListItem>)ViewBag.MODISDataSetId, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label class="control-label">@SharedLocalizer["User"]</label>
+                <input name="User" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">@SharedLocalizer["Password"]</label>
+                <input name="Password" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@SharedLocalizer["Download"]" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

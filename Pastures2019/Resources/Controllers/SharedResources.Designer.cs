@@ -441,6 +441,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string DateTimeFinish {
+            get {
+                return ResourceManager.GetString("DateTimeFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DateTimeStart {
+            get {
+                return ResourceManager.GetString("DateTimeStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
@@ -531,6 +549,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DownloadStarted {
+            get {
+                return ResourceManager.GetString("DownloadStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Edit {
             get {
                 return ResourceManager.GetString("Edit", resourceCulture);
@@ -615,6 +651,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string FertilityRU {
             get {
                 return ResourceManager.GetString("FertilityRU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string FilesWillBeDownloadedToTheFolder {
+            get {
+                return ResourceManager.GetString("FilesWillBeDownloadedToTheFolder", resourceCulture);
             }
         }
         

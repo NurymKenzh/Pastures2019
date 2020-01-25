@@ -1,0 +1,11 @@
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = "MODIS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>MODIS</h1>
+
+<a asp-area="" asp-controller="MODIS" asp-action="Download">@SharedLocalizer["Download"]</a>

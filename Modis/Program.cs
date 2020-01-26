@@ -318,8 +318,8 @@ namespace Modis
                     CMDPath,
                     publishParameters);
                 // style
-                string index = ModisDataSetIndex.ToString().PadLeft(2, '0');
-                    string style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}";
+                string index = ModisDataSetIndex.ToString().PadLeft(2, '0'),
+                    style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}";
                 publishParameters = $" -v -u" +
                     $" {GeoServerUser}:{GeoServerPassword}" +
                     $" -X PUT -H \"Content-type: text/xml\"" +
@@ -399,6 +399,39 @@ namespace Modis
                 "gdal_calc.py",
                 Folder,
                 arguments);
+
+            // publish
+            string layerName = Path.GetFileNameWithoutExtension(anomalyFile);
+            // store
+            string publishParameters = $" -v -u" +
+                $" {GeoServerUser}:{GeoServerPassword}" +
+                $" -POST -H \"Content-type: text/xml\"" +
+                $" -d \"<coverageStore><name>{layerName}</name><type>GeoTIFF</type><enabled>true</enabled><workspace>{GeoServerWorkspace}</workspace><url>" +
+                $"/data/{GeoServerWorkspace}/{layerName}.tif</url></coverageStore>\"" +
+                $" {GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores?configure=all";
+            CurlExecute(
+                CMDPath,
+                publishParameters);
+            // layer
+            publishParameters = $" -v -u" +
+                $" {GeoServerUser}:{GeoServerPassword}" +
+                $" -PUT -H \"Content-type: text/xml\"" +
+                $" -d \"<coverage><name>{layerName}</name><title>{layerName}</title><defaultInterpolationMethod><name>nearest neighbor</name></defaultInterpolationMethod></coverage>\"" +
+                $" \"{GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores/{layerName}/coverages?recalculate=nativebbox\"";
+            CurlExecute(
+                CMDPath,
+                publishParameters);
+            // style
+            string index = ModisDataSetIndex.ToString().PadLeft(2, '0'),
+                style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}_Anomaly";
+            publishParameters = $" -v -u" +
+                $" {GeoServerUser}:{GeoServerPassword}" +
+                $" -X PUT -H \"Content-type: text/xml\"" +
+                $" -d \"<layer><defaultStyle><name>{style}</name></defaultStyle></layer>\"" +
+                $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
+            CurlExecute(
+                CMDPath,
+                publishParameters);
         }
 
         private static void Log(string log)

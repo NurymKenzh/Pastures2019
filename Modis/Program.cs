@@ -369,7 +369,8 @@ namespace Modis
                 for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
                 {
                     int letterIndex = year - AnomalyStartYear;
-                    arguments += $" -{letters[letterIndex]} {Path.GetFileName(baseFile)}";
+                    string baseYearFile = Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif");
+                    arguments += $" -{letters[letterIndex]} {Path.GetFileName(baseYearFile)}";
                 }
                 arguments += $" --outfile={Path.GetFileName(baseFile)}";
                 arguments += $" --calc=\"((";

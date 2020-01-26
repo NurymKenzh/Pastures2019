@@ -181,6 +181,10 @@ namespace Modis
                         // anomaly
                         foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
                         {
+                            if (file.Contains("Anomaly") || file.Contains("BASE"))
+                            {
+                                continue;
+                            }
                             // calculate anomaly
                             Anomaly(GeoServerModisDataDir, file);
                         }
@@ -332,53 +336,63 @@ namespace Modis
             string FileCalc)
         {
             string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileCalc),
-                anomalyFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension + "_Anomaly", "tif"));
+                anomalyFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension + "_Anomaly", "tif")),
+                baseFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension($"ABASE{fileNameWithoutExtension.Substring(5)}", "tif")),
+                letters = "ABCDEFGHIJKLMNOPQRSTUVWXY";
 
-            // check if base layers for anomaly calculation already exist
-            bool baseExists = true;
-            for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
-            {
-                string baseFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif"));
-                if (!File.Exists(baseFile))
-                {
-                    baseExists = false;
-                    break;
-                }
-            }
-            if (!baseExists)
+            // check if anomaly already exists
+            if (File.Exists(anomalyFile))
             {
                 return;
             }
 
-            // check if anomaly already exists then delete it
-            if (File.Exists(anomalyFile))
+            // check if base layer for anomaly calculation already exists, if no then try to create it
+            string arguments = "--co COMPRESS=LZW";
+            if (!File.Exists(baseFile))
             {
-                try
+                // check if base layers for base calculation already exist
+                bool baseExists = true;
+                for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
                 {
-                    File.Delete(anomalyFile);
+                    string baseYearFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif"));
+                    if (!File.Exists(baseYearFile))
+                    {
+                        baseExists = false;
+                        break;
+                    }
                 }
-                catch { }
+                if (!baseExists)
+                {
+                    return;
+                }
+                // create base file to day
+                for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+                {
+                    int letterIndex = year - AnomalyStartYear;
+                    arguments += $" -{letters[letterIndex]} {Path.GetFileName(baseFile)}";
+                }
+                arguments += $" --outfile={Path.GetFileName(baseFile)}";
+                arguments += $" --calc=\"((";
+                for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+                {
+                    int letterIndex = year - AnomalyStartYear;
+                    arguments += $"{letters[letterIndex]}+";
+                }
+                arguments = arguments.Remove(arguments.Length - 1);
+                arguments += $")/{(AnomalyFinishYear - AnomalyStartYear + 1).ToString()})\"";
+                GDALExecute(
+                    CMDPath,
+                    "gdal_calc.py",
+                    Folder,
+                    arguments);
             }
 
             // calculate
-            string letters = "ABCDEFGHIJKLMNOPQRSTUVWXY",
-                arguments = "";
-            for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
-            {
-                string baseFile = Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif");
-                int letterIndex = year - AnomalyStartYear;
-                arguments += $"-{letters[letterIndex]} {baseFile} ";
-            }
-            arguments += $"-{letters[AnomalyFinishYear - AnomalyStartYear + 1]} {Path.GetFileName(FileCalc)} ";
+            arguments = "--co COMPRESS=LZW";
+            arguments += $" -{letters[0]} {Path.GetFileName(baseFile)}";
+            arguments += $" -{letters[1]} {Path.GetFileName(FileCalc)} ";
             arguments += $"--outfile={Path.GetFileName(anomalyFile)} ";
-            arguments += $"--calc=\"({letters[AnomalyFinishYear - AnomalyStartYear + 1]}-((";
-            for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
-            {
-                int letterIndex = year - AnomalyStartYear;
-                arguments += $"{letters[letterIndex]}+";
-            }
-            arguments = arguments.Remove(arguments.Length - 1);
-            arguments += $")/{(AnomalyFinishYear - AnomalyStartYear).ToString()}))*0.01";
+            arguments += $"--calc=\"(B-A)*0.01\"";
             GDALExecute(
                 CMDPath,
                 "gdal_calc.py",

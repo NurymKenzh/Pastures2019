@@ -19,6 +19,6 @@
     "GeoServerURL": "http://localhost:8080/geoserver/"
   },
   "ClipShape": "ClipMask3857.shp",
-  "AnomalyStartYear": 2001,
-  "AnomalyFinishYear": 2016
+  "AnomalyStartYear": 2005,
+  "AnomalyFinishYear": 2019
 }

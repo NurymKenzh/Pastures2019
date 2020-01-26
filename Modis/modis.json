@@ -18,5 +18,7 @@
     "GeoServerPassword": "geoserver",
     "GeoServerURL": "http://localhost:8080/geoserver/"
   },
-  "ClipShape": "ClipMask3857.shp"
+  "ClipShape": "ClipMask3857.shp",
+  "AnomalyStartYear": 2001,
+  "AnomalyFinishYear": 2016
 }

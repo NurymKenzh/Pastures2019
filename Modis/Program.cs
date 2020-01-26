@@ -28,6 +28,9 @@ namespace Modis
             GeoServerURL = "",
             ClipShape = "";
 
+        static int AnomalyStartYear = 0,
+            AnomalyFinishYear = 0;
+
         static void Main(string[] args)
         {
             DateTime dateTimeLast = new DateTime(2000, 1, 1);
@@ -37,6 +40,8 @@ namespace Modis
                 {
                     continue;
                 }
+
+                // load parameters
                 bool Server = true;
                 string settingsString = System.IO.File.ReadAllText(@"modis.json");
                 var json = JObject.Parse(settingsString);
@@ -57,6 +62,14 @@ namespace Modis
                     if (property.Name == "ClipShape")
                     {
                         ClipShape = property.Value.ToString();
+                    }
+                    if (property.Name == "AnomalyStartYear")
+                    {
+                        AnomalyStartYear = Convert.ToInt32(property.Value);
+                    }
+                    if (property.Name == "AnomalyFinishYear")
+                    {
+                        AnomalyFinishYear = Convert.ToInt32(property.Value);
                     }
                 }
                 dynamic settingsJObject = null;
@@ -164,6 +177,13 @@ namespace Modis
                         // rename folder (remove "!")
                         string folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
                         Directory.Move(folderDownload, folderDownloadFinale);
+
+                        // anomaly
+                        foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
+                        {
+                            // calculate anomaly
+                            Anomaly(GeoServerModisDataDir, file);
+                        }
 
                         //// work with downloaded MODIS
                         //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
@@ -305,6 +325,65 @@ namespace Modis
                     CMDPath,
                     publishParameters);
             }
+        }
+
+        private static void Anomaly(string Folder,
+            // File - full path
+            string FileCalc)
+        {
+            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileCalc),
+                anomalyFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension + "_Anomaly", "tif"));
+
+            // check if base layers for anomaly calculation already exist
+            bool baseExists = true;
+            for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+            {
+                string baseFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif"));
+                if (!File.Exists(baseFile))
+                {
+                    baseExists = false;
+                    break;
+                }
+            }
+            if (!baseExists)
+            {
+                return;
+            }
+
+            // check if anomaly already exists then delete it
+            if (File.Exists(anomalyFile))
+            {
+                try
+                {
+                    File.Delete(anomalyFile);
+                }
+                catch { }
+            }
+
+            // calculate
+            string letters = "ABCDEFGHIJKLMNOPQRSTUVWXY",
+                arguments = "";
+            for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+            {
+                string baseFile = Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif");
+                int letterIndex = year - AnomalyStartYear;
+                arguments += $"-{letters[letterIndex]} {baseFile} ";
+            }
+            arguments += $"-{letters[AnomalyFinishYear - AnomalyStartYear + 1]} {Path.GetFileName(FileCalc)} ";
+            arguments += $"--outfile={Path.GetFileName(anomalyFile)} ";
+            arguments += $"--calc=\"({letters[AnomalyFinishYear - AnomalyStartYear + 1]}-((";
+            for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+            {
+                int letterIndex = year - AnomalyStartYear;
+                arguments += $"{letters[letterIndex]}+";
+            }
+            arguments = arguments.Remove(arguments.Length - 1);
+            arguments += $")/{(AnomalyFinishYear - AnomalyStartYear).ToString()}))*0.01";
+            GDALExecute(
+                CMDPath,
+                "gdal_calc.py",
+                Folder,
+                arguments);
         }
 
         private static void Log(string log)

@@ -4,42 +4,112 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
 <script src="~/lib/ol/ol.js"></script>
-<h1>Modis</h1>
 
 @{
     YearDay[] yearDays = ViewBag.YearDays;
     string maxYear = yearDays.Max(y => y.year),
         maxDay = yearDays.Where(y => y.year == maxYear).Max(y => y.day);
 }
+<div class="container-fluid sticky-top p-0">
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <!-- close sidebar menu -->
+        <div class="dismiss">
+            <i class="fa fa-arrow-left"></i>
+        </div>
+        <div class="logo">
+            <h3>Pasture</h3>
+        </div>
+        <ul class="list-unstyled menu-elements m-3">
+            <li class="active">
+                <form>
+                    <div class="form-group">
+                        <label for="ModDataset">Dataset</label>
+                        <select class="form-control form-control-sm" id="ModDataset">
+                            <option>Terra MODIS 16-day</option>
+                            <option>Aqua MODIS 16-day</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ModeProduct">Dataset</label>
+                        <select class="form-control form-control-sm" id="ModeProduct">
+                            <option>NDVI</option>
+                            <option>NDVI Anomaly %</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Year">Year</label>
+                        <select class="form-control form-control-sm" id="Year" onchange="ChangeYear()">
+                            @foreach (string year in yearDays.Select(y => y.year).Distinct().OrderBy(y => y))
+                            {
+                                if (year == maxYear)
+                                {
+                                    <option value="@year" selected>@year</option>
+                                }
+                                else
+                                {
+                                    <option value="@year">@year</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="DayOfYear">Start DOY : MM/DD Range</label>
+                        <select class="form-control form-control-sm" id="DayOfYear" onchange="ChangeModis()">
+                            @foreach (string day in yearDays.Where(y => y.year == maxYear).Select(y => y.day).Distinct().OrderBy(y => y))
+                            {
+                                if (day == maxDay)
+                                {
+                                    <option value="@day" selected>@day</option>
+                                }
+                                else
+                                {
+                                    <option value="@day">@day</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </form>
+            </li>           
+            <li>
+                <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+                    <i class="fas fa-sync"></i>Layers:
+                </a>
+                <ul class="collapse list-unstyled" id="otherSections">
+                    <li>
+                        <a class="scroll-link" href="#section-3">Base Map</a>
+                    </li>
+                    <li>
+                        <a class="scroll-link" href="#section-4">Tematic Map</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="dark-light-buttons">
+            <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+            <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+        </div>
+    </nav>
+    <!-- End sidebar -->
+    <!-- Content -->
+    <div class="content">
+        <!-- open sidebar menu -->
+        <a class="btn btn-light btn-customized open-menu" href="#" role="button">
+            <i class="fa fa-align-left"></i> <span>Menu</span>
+        </a>
+        <!-- Map content -->
+        <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0 bg-light" style="height: calc(100% - 100px);"></div>
+    </div>
+    <!-- End content -->
+</div>
 
-<select id="Year" onchange="ChangeYear()">
-    @foreach (string year in yearDays.Select(y => y.year).Distinct().OrderBy(y => y))
-    {
-        if (year == maxYear)
-        {
-            <option value="@year" selected>@year</option>
-        }
-        else
-        {
-            <option value="@year">@year</option>
-        }
-    }
-</select>
-<select id="DayOfYear" onchange="ChangeModis()">
-    @foreach (string day in yearDays.Where(y => y.year == maxYear).Select(y => y.day).Distinct().OrderBy(y => y))
-    {
-        if (day == maxDay)
-        {
-            <option value="@day" selected>@day</option>
-        }
-        else
-        {
-            <option value="@day">@day</option>
-        }
-    }
-</select>
-<div id="map"></div>
+
+
+
+
+
 
 @* layers *@
 <script>
@@ -145,3 +215,33 @@
         });
     </script>
 }
+@*Sidebar Menu*@
+<script>
+    jQuery(document).ready(function () {
+        /*
+            Sidebar
+        */
+        $('.dismiss, .overlay').on('click', function () {
+            $('.sidebar').removeClass('active');
+        });
+
+        $('.open-menu').on('click', function (e) {
+            e.preventDefault();
+            $('.sidebar').addClass('active');
+            // close opened sub-menus
+            $('.collapse.show').toggleClass('show');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+        /* change sidebar style */
+        $('a.btn-customized-dark').on('click', function (e) {
+            e.preventDefault();
+            $('.sidebar').removeClass('light');
+        });
+        $('a.btn-customized-light').on('click', function (e) {
+            e.preventDefault();
+            $('.sidebar').addClass('light');
+        });
+
+
+    });
+</script>

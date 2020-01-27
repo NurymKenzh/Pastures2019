@@ -42,7 +42,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top navbar-dark" style="background-color: #003300;">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark position-sticky" style="background-color: #0d77b6;">
             <div class="container">
                 <a class="navbar-brand" href="#">Pasture 2019</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,18 +78,16 @@
             </div>
         </nav>
     </header>
-    <main role="main" class="flex-shrink-0">
-        <div class="container">
-            <partial name="_CookieConsentPartial" />
-            @RenderBody()
-            @RenderSection("Scripts", required: false)
-        </div>
+    <main role="main" class="flex-shrink-0 p-0">
+        <partial name="_CookieConsentPartial" />
+        @RenderBody()
+        @RenderSection("Scripts", required: false)
     </main>
-    <footer class="border-top footer mt-auto">
+    <footer class="footer fixed-bottom mt-auto">
         <div class="container">
             &copy; @DateTime.Now.Year.ToString() - Pastures @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
             @await Html.PartialAsync("_SelectLanguagePartial")
         </div>
-    </footer>    
+    </footer> 
 </body>
 </html>

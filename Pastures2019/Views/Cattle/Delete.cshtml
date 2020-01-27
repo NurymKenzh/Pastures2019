@@ -1,4 +1,4 @@
-﻿@model Pastures2019.Models.Camel
+﻿@model Pastures2019.Models.Cattle
 @using Pastures2019.Controllers
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
@@ -11,7 +11,7 @@
 
 <h3>@SharedLocalizer["Delete"]?</h3>
 <div>
-    <h4>@SharedLocalizer["Camel"]</h4>
+    <h4>@SharedLocalizer["Cattle"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -25,6 +25,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Breed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direction)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Weight)
@@ -55,6 +61,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.MilkFatContent)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bred)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bred)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Range)

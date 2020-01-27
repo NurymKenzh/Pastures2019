@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Pastures2019.Models
 {
-    public class Camel
+    public class Cattle
     {
         public int Id { get; set; }
 
@@ -37,6 +37,31 @@ namespace Pastures2019.Models
                 if (language == "en")
                 {
                     name = BreedEN;
+                }
+                return name;
+            }
+        }
+
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "DirectionRU")]
+        public string DirectionRU { get; set; }
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "DirectionKK")]
+        public string DirectionKK { get; set; }
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "DirectionEN")]
+        public string DirectionEN { get; set; }
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Direction")]
+        public string Direction
+        {
+            get
+            {
+                string language = new RequestLocalizationOptions().DefaultRequestCulture.Culture.Name,
+                    name = DirectionRU;
+                if (language == "kk")
+                {
+                    name = DirectionKK;
+                }
+                if (language == "en")
+                {
+                    name = DirectionEN;
                 }
                 return name;
             }
@@ -103,6 +128,31 @@ namespace Pastures2019.Models
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "MilkFatContent")]
         public string MilkFatContent { get; set; }
 
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "BredRU")]
+        public string BredRU { get; set; }
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "BredKK")]
+        public string BredKK { get; set; }
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "BredEN")]
+        public string BredEN { get; set; }
+        [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Bred")]
+        public string Bred
+        {
+            get
+            {
+                string language = new RequestLocalizationOptions().DefaultRequestCulture.Culture.Name,
+                    name = BredRU;
+                if (language == "kk")
+                {
+                    name = BredKK;
+                }
+                if (language == "en")
+                {
+                    name = BredEN;
+                }
+                return name;
+            }
+        }
+
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "RangeRU")]
         public string RangeRU { get; set; }
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "RangeKK")]
@@ -160,9 +210,9 @@ namespace Pastures2019.Models
         }
     }
 
-    public class CamelIndexPageViewModel
+    public class CattleIndexPageViewModel
     {
-        public IEnumerable<Camel> Items { get; set; }
+        public IEnumerable<Cattle> Items { get; set; }
         public Pager Pager { get; set; }
     }
 }

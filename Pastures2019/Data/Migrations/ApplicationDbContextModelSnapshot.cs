@@ -320,6 +320,68 @@ namespace Pastures2019.Data.Migrations
                     b.ToTable("Camel");
                 });
 
+            modelBuilder.Entity("Pastures2019.Models.Cattle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BredEN");
+
+                    b.Property<string>("BredKK");
+
+                    b.Property<string>("BredRU");
+
+                    b.Property<string>("BreedEN");
+
+                    b.Property<string>("BreedKK");
+
+                    b.Property<string>("BreedRU");
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.Property<string>("DirectionEN");
+
+                    b.Property<string>("DirectionKK");
+
+                    b.Property<string>("DirectionRU");
+
+                    b.Property<string>("EwesYieldEN");
+
+                    b.Property<string>("EwesYieldKK");
+
+                    b.Property<string>("EwesYieldRU");
+
+                    b.Property<string>("MilkFatContent");
+
+                    b.Property<byte[]>("Photo");
+
+                    b.Property<string>("RangeEN");
+
+                    b.Property<string>("RangeKK");
+
+                    b.Property<string>("RangeRU");
+
+                    b.Property<decimal>("SlaughterYield");
+
+                    b.Property<int>("TotalGoals");
+
+                    b.Property<string>("WeightEN");
+
+                    b.Property<string>("WeightKK");
+
+                    b.Property<string>("WeightRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cattle");
+                });
+
             modelBuilder.Entity("Pastures2019.Models.MODISDataSet", b =>
                 {
                     b.Property<int>("Id")

@@ -6,7 +6,8 @@
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
 <script src="~/lib/ol/ol.js"></script>
-
+<link href="~/lib/vendor/jBox/dist/jBox.all.css" rel="stylesheet" />
+<script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
 @{
     YearDay[] yearDays_MOLT_MOD13Q1006_B01_NDVI = ViewBag.YearDays_MOLT_MOD13Q1006_B01_NDVI;
     string maxYear_MOLT_MOD13Q1006_B01_NDVI = yearDays_MOLT_MOD13Q1006_B01_NDVI.Max(y => y.year),
@@ -18,114 +19,132 @@
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar">
-        <!-- close sidebar menu -->
-        <div class="dismiss">
-            <i class="fa fa-arrow-left"></i>
-        </div>
-        <div class="logo">
-            <h3>Pasture</h3>
-        </div>
-        <ul class="list-unstyled menu-elements m-3">
-            <li class="active">
-                <form>
-                    <div class="form-group">
-                        <label for="ModDataset">Satellite</label>
-                        <select class="form-control form-control-sm" id="ModDataset">
-                            <option>Terra MODIS 16-day</option>
-                            <option>Aqua MODIS 16-day</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="DataSet">DataSet</label>
-                        <select class="form-control form-control-sm" id="DataSet" onchange="ChangeDataSet()">
-                            <option value="NDVI">NDVI</option>
-                            <option value="Anomaly">NDVI Anomaly %</option>
-                        </select>
-                    </div>
-                    <div class="form-group NDVI">
-                        <label for="Year_MOLT_MOD13Q1006_B01_NDVI">Year</label>
-                        <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeYear()">
-                            @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI.Select(y => y.year).Distinct().OrderBy(y => y))
-                            {
-                                if (year == maxYear_MOLT_MOD13Q1006_B01_NDVI)
+        <div class="page-wrapper chiller-theme">
+            <!-- close sidebar menu -->
+            <div class="dismiss">
+                <i class="fa fa-arrow-left"></i>
+            </div>
+            <div class="logo">
+                <h3>Pasture</h3>
+            </div>
+            <ul class="list-unstyled menu-elements m-3">
+                <li class="active">
+                    <form>
+                        <div class="form-group">
+                            <label for="ModDataset">Satellite</label>
+                            <select class="form-control form-control-sm" id="ModDataset">
+                                <option>Terra MODIS 16-day</option>
+                                <option>Aqua MODIS 16-day</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="DataSet">DataSet</label>
+                            <select class="form-control form-control-sm" id="DataSet" onchange="ChangeDataSet()">
+                                <option value="NDVI">NDVI</option>
+                                <option value="Anomaly">NDVI Anomaly %</option>
+                            </select>
+                        </div>
+                        <div class="form-group NDVI">
+                            <label for="Year_MOLT_MOD13Q1006_B01_NDVI">Year</label>
+                            <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeYear()">
+                                @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI.Select(y => y.year).Distinct().OrderBy(y => y))
                                 {
-                                    <option value="@year" selected>@year</option>
+                                    if (year == maxYear_MOLT_MOD13Q1006_B01_NDVI)
+                                    {
+                                        <option value="@year" selected>@year</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@year">@year</option>
+                                    }
                                 }
-                                else
+                            </select>
+                        </div>
+                        <div class="form-group NDVI">
+                            <label for="DayOfYear_MOLT_MOD13Q1006_B01_NDVI">Start DOY : MM/DD Range</label>
+                            <select class="form-control form-control-sm" id="DayOfYear_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeModis()">
+                                @foreach (string day in yearDays_MOLT_MOD13Q1006_B01_NDVI.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI).Select(y => y.day).Distinct().OrderBy(y => y))
                                 {
-                                    <option value="@year">@year</option>
+                                    if (day == maxDay_MOLT_MOD13Q1006_B01_NDVI)
+                                    {
+                                        <option value="@day" selected>@day</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@day">@day</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group NDVI">
-                        <label for="DayOfYear_MOLT_MOD13Q1006_B01_NDVI">Start DOY : MM/DD Range</label>
-                        <select class="form-control form-control-sm" id="DayOfYear_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeModis()">
-                            @foreach (string day in yearDays_MOLT_MOD13Q1006_B01_NDVI.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI).Select(y => y.day).Distinct().OrderBy(y => y))
-                            {
-                                if (day == maxDay_MOLT_MOD13Q1006_B01_NDVI)
+                            </select>
+                        </div>
+                        <div class="form-group Anomaly" style="display: none;">
+                            <label for="Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly">Year</label>
+                            <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly" onchange="ChangeYear()">
+                                @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Select(y => y.year).Distinct().OrderBy(y => y))
                                 {
-                                    <option value="@day" selected>@day</option>
+                                    if (year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly)
+                                    {
+                                        <option value="@year" selected>@year</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@year">@year</option>
+                                    }
                                 }
-                                else
+                            </select>
+                        </div>
+                        <div class="form-group Anomaly" style="display: none;">
+                            <label for="DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly">Start DOY : MM/DD Range</label>
+                            <select class="form-control form-control-sm" id="DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly" onchange="ChangeModis()">
+                                @foreach (string day in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly).Select(y => y.day).Distinct().OrderBy(y => y))
                                 {
-                                    <option value="@day">@day</option>
+                                    if (day == maxDay_MOLT_MOD13Q1006_B01_NDVI_Anomaly)
+                                    {
+                                        <option value="@day" selected>@day</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@day">@day</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group Anomaly" style="display: none;">
-                        <label for="Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly">Year</label>
-                        <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly" onchange="ChangeYear()">
-                            @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Select(y => y.year).Distinct().OrderBy(y => y))
-                            {
-                                if (year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly)
-                                {
-                                    <option value="@year" selected>@year</option>
-                                }
-                                else
-                                {
-                                    <option value="@year">@year</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group Anomaly" style="display: none;">
-                        <label for="DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly">Start DOY : MM/DD Range</label>
-                        <select class="form-control form-control-sm" id="DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly" onchange="ChangeModis()">
-                            @foreach (string day in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly).Select(y => y.day).Distinct().OrderBy(y => y))
-                            {
-                                if (day == maxDay_MOLT_MOD13Q1006_B01_NDVI_Anomaly)
-                                {
-                                    <option value="@day" selected>@day</option>
-                                }
-                                else
-                                {
-                                    <option value="@day">@day</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </form>
-            </li>
-            <li>
-                <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
-                    <i class="fas fa-sync"></i>Layers:
+                            </select>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+                        <i class="fas fa-sync"></i>Layers:
+                    </a>
+                    <ul class="collapse list-unstyled" id="otherSections">
+                        <li>
+                            <a class="scroll-link" href="#section-3">Base Map</a>
+                        </li>
+                        <li>
+                            <a class="scroll-link" href="#section-4">Tematic Map</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="dark-light-buttons">
+                <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+                <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+            </div>
+            <div class="sidebar-footer">
+                <a href="#">
+                    <i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
                 </a>
-                <ul class="collapse list-unstyled" id="otherSections">
-                    <li>
-                        <a class="scroll-link" href="#section-3">Base Map</a>
-                    </li>
-                    <li>
-                        <a class="scroll-link" href="#section-4">Tematic Map</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <div class="dark-light-buttons">
-            <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
-            <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+                <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
+                    <i class="fa fa-bar-chart-o" data-toggle="tooltip" data-placement="top" title="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
+                    <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
+                </a>
+                <a href="#" id="LegendBtn" class="target-click">
+                    <i class="fa fa-list-alt" data-toggle="tooltip" data-placement="top" title="Легенда"></i>
+                </a>
+                <a href="#" id="MapTitleBtn" class="target-click">
+                    <i class="fa fa-bookmark" data-toggle="tooltip" data-placement="top" title="Информация о слое"></i>
+                </a>
+            </div>
         </div>
+
     </nav>
     <!-- End sidebar -->
     <!-- Content -->
@@ -135,7 +154,7 @@
             <i class="fa fa-align-left"></i> <span>Menu</span>
         </a>
         <!-- Map content -->
-        <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0 bg-light" style="height: calc(100% - 100px);"></div>
+        <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
     </div>
     <!-- End content -->
 </div>
@@ -207,7 +226,9 @@
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([66.902, 48.714]),
-            zoom: 5
+            zoom: 5,
+            minZoom: 5,
+            extent: [5028944.964937042,4754994.655562972,10214432.963802021,7494497.74930296]
         })
     });
 </script>
@@ -352,6 +373,61 @@
             e.preventDefault();
             $('.sidebar').addClass('light');
         });
+
+
+    });
+</script>
+
+@*tooltips, modal windows*@
+<script>
+    $(document).ready(function () {
+
+        // Map Title
+        new jBox('Modal', {
+            attach: '#MapTitleBtn',
+            theme: 'TooltipBorder',
+            width: 260,
+            blockScroll: false,
+            animation: 'flip',
+            closeButton: false,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 70
+            },
+            content: (
+                '<h5 class="Card-title text-center text-white">Map title</h5>' +
+                '<p class="card-text text-center text-white">This content is a little bit longer.</p>'
+            ),
+            overlay: false,
+            reposition: true,
+            repositionOnOpen: false
+        }).open();
+        // Map Legend
+        new jBox('Modal', {
+            autoOpen: true,
+            attach: '#LegendBtn',
+            theme: 'TooltipBorder',
+            width: 250,
+            blockScroll: false,
+            animation: 'flip',
+            closeButton: true,
+            position: {
+                x: 'right',
+                y: 'bottom'
+            },
+            offset: {
+                x: -10,
+                y: -90
+            },
+            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
+            overlay: false,
+            reposition: true,
+            repositionOnOpen: false
+        }).open();
 
 
     });

@@ -4,8 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +12,16 @@ using Pastures2019.Models;
 
 namespace Pastures2019.Controllers
 {
-    public class CamelsController : Controller
+    public class CattleController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CamelsController(ApplicationDbContext context)
+        public CattleController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Camels
+        // GET: Cattle
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Index(
             string SortOrder,
@@ -31,7 +29,7 @@ namespace Pastures2019.Controllers
             string BreedFilter,
             int? PageNumber)
         {
-            var camel = _context.Camel
+            var cattle = _context.Cattle
                 .Where(c => true);
 
             ViewBag.CodeFilter = CodeFilter;
@@ -42,46 +40,46 @@ namespace Pastures2019.Controllers
 
             if (CodeFilter != null)
             {
-                camel = camel.Where(c => c.Code == CodeFilter);
+                cattle = cattle.Where(c => c.Code == CodeFilter);
             }
             if (!string.IsNullOrEmpty(BreedFilter))
             {
-                camel = camel.Where(c => c.Breed.Contains(BreedFilter));
+                cattle = cattle.Where(c => c.Breed.Contains(BreedFilter));
             }
 
             switch (SortOrder)
             {
                 case "Code":
-                    camel = camel.OrderBy(c => c.Code);
+                    cattle = cattle.OrderBy(c => c.Code);
                     break;
                 case "CodeDesc":
-                    camel = camel.OrderByDescending(c => c.Code);
+                    cattle = cattle.OrderByDescending(c => c.Code);
                     break;
                 case "Breed":
-                    camel = camel.OrderBy(c => c.Breed);
+                    cattle = cattle.OrderBy(c => c.Breed);
                     break;
                 case "BreedDesc":
-                    camel = camel.OrderByDescending(c => c.Breed);
+                    cattle = cattle.OrderByDescending(c => c.Breed);
                     break;
                 default:
-                    camel = camel.OrderBy(c => c.Id);
+                    cattle = cattle.OrderBy(c => c.Id);
                     break;
             }
 
             ViewBag.SortOrder = SortOrder;
 
-            var pager = new Pager(camel.Count(), PageNumber);
+            var pager = new Pager(cattle.Count(), PageNumber);
 
-            var viewModel = new CamelIndexPageViewModel
+            var viewModel = new CattleIndexPageViewModel
             {
-                Items = camel.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Items = cattle.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
                 Pager = pager
             };
 
             return View(viewModel);
         }
 
-        // GET: Camels/Details/5
+        // GET: Cattle/Details/5
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
@@ -90,46 +88,47 @@ namespace Pastures2019.Controllers
                 return NotFound();
             }
 
-            var camel = await _context.Camel
+            var cattle = await _context.Cattle
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (camel == null)
+            if (cattle == null)
             {
                 return NotFound();
             }
 
-            return View(camel);
+            return View(cattle);
         }
 
-        // GET: Camels/Create
+        // GET: Cattle/Create
         [Authorize(Roles = "Administrator, Moderator")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Camels/Create
+        // POST: Cattle/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,BreedRU,BreedKK,BreedEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,RangeRU,RangeKK,RangeEN,FormFile,DescriptionRU,DescriptionKK,DescriptionEN")] Camel camel)
+        [Authorize(Roles = "Administrator, Moderator")]
+        public async Task<IActionResult> Create([Bind("Id,Code,BreedRU,BreedKK,BreedEN,DirectionRU,DirectionKK,DirectionEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,BredRU,BredKK,BredEN,RangeRU,RangeKK,RangeEN,FormFile,DescriptionRU,DescriptionKK,DescriptionEN")] Cattle cattle)
         {
             if (ModelState.IsValid)
             {
                 using (var memoryStream = new MemoryStream())
                 {
-                    await camel.FormFile.CopyToAsync(memoryStream);
-                    camel.Photo = memoryStream.ToArray();
+                    await cattle.FormFile.CopyToAsync(memoryStream);
+                    cattle.Photo = memoryStream.ToArray();
                 }
 
-                _context.Add(camel);
+                _context.Add(cattle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(camel);
+            return View(cattle);
         }
 
-        // GET: Camels/Edit/5
+        // GET: Cattle/Edit/5
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -138,23 +137,23 @@ namespace Pastures2019.Controllers
                 return NotFound();
             }
 
-            var camel = await _context.Camel.FindAsync(id);
-            if (camel == null)
+            var cattle = await _context.Cattle.FindAsync(id);
+            if (cattle == null)
             {
                 return NotFound();
             }
-            return View(camel);
+            return View(cattle);
         }
 
-        // POST: Camels/Edit/5
+        // POST: Cattle/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator, Moderator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,BreedRU,BreedKK,BreedEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,RangeRU,RangeKK,RangeEN,FormFile,DescriptionRU,DescriptionKK,DescriptionEN")] Camel camel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Code,BreedRU,BreedKK,BreedEN,DirectionRU,DirectionKK,DirectionEN,WeightRU,WeightKK,WeightEN,SlaughterYield,EwesYieldRU,EwesYieldKK,EwesYieldEN,TotalGoals,MilkFatContent,BredRU,BredKK,BredEN,RangeRU,RangeKK,RangeEN,FormFile,DescriptionRU,DescriptionKK,DescriptionEN")] Cattle cattle)
         {
-            if (id != camel.Id)
+            if (id != cattle.Id)
             {
                 return NotFound();
             }
@@ -163,22 +162,22 @@ namespace Pastures2019.Controllers
             {
                 try
                 {
-                    if (camel.FormFile != null && camel.FormFile.Length > 0)
+                    if (cattle.FormFile != null && cattle.FormFile.Length > 0)
                     {
-                        camel.Photo = null;
+                        cattle.Photo = null;
                         using (var memoryStream = new MemoryStream())
                         {
-                            await camel.FormFile.CopyToAsync(memoryStream);
-                            camel.Photo = memoryStream.ToArray();
+                            await cattle.FormFile.CopyToAsync(memoryStream);
+                            cattle.Photo = memoryStream.ToArray();
                         }
                     }
 
-                    _context.Update(camel);
+                    _context.Update(cattle);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CamelExists(camel.Id))
+                    if (!CattleExists(cattle.Id))
                     {
                         return NotFound();
                     }
@@ -189,10 +188,10 @@ namespace Pastures2019.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(camel);
+            return View(cattle);
         }
 
-        // GET: Camels/Delete/5
+        // GET: Cattle/Delete/5
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -201,31 +200,31 @@ namespace Pastures2019.Controllers
                 return NotFound();
             }
 
-            var camel = await _context.Camel
+            var cattle = await _context.Cattle
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (camel == null)
+            if (cattle == null)
             {
                 return NotFound();
             }
 
-            return View(camel);
+            return View(cattle);
         }
 
-        // POST: Camels/Delete/5
+        // POST: Cattle/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var camel = await _context.Camel.FindAsync(id);
-            _context.Camel.Remove(camel);
+            var cattle = await _context.Cattle.FindAsync(id);
+            _context.Cattle.Remove(cattle);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CamelExists(int id)
+        private bool CattleExists(int id)
         {
-            return _context.Camel.Any(e => e.Id == id);
+            return _context.Cattle.Any(e => e.Id == id);
         }
     }
 }

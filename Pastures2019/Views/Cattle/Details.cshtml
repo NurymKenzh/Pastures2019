@@ -1,17 +1,16 @@
-﻿@model Pastures2019.Models.Camel
+﻿@model Pastures2019.Models.Cattle
 @using Pastures2019.Controllers
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = SharedLocalizer["Delete"];
+    ViewData["Title"] = SharedLocalizer["Details"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@SharedLocalizer["Delete"]</h1>
+<h1>@SharedLocalizer["Details"]</h1>
 
-<h3>@SharedLocalizer["Delete"]?</h3>
 <div>
-    <h4>@SharedLocalizer["Camel"]</h4>
+    <h4>@SharedLocalizer["Cattle"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -25,6 +24,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Breed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Direction)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Direction)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Weight)
@@ -57,6 +62,12 @@
             @Html.DisplayFor(model => model.MilkFatContent)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Bred)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Bred)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Range)
         </dt>
         <dd class="col-sm-10">
@@ -84,10 +95,8 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
-        <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-    </form>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">@SharedLocalizer["Edit"]</a> |
+    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
 </div>

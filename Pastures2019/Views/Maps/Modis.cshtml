@@ -5,118 +5,133 @@
 }
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="~/lib/ol/ol.js"></script>
-<link href="~/lib/vendor/jBox/dist/jBox.all.css" rel="stylesheet" />
-<script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
 
 @{
-    YearDay[] yearDays = ViewBag.YearDays;
-    string maxYear = yearDays.Max(y => y.year),
-        maxDay = yearDays.Where(y => y.year == maxYear).Max(y => y.day);
+    YearDay[] yearDays_MOLT_MOD13Q1006_B01_NDVI = ViewBag.YearDays_MOLT_MOD13Q1006_B01_NDVI;
+    string maxYear_MOLT_MOD13Q1006_B01_NDVI = yearDays_MOLT_MOD13Q1006_B01_NDVI.Max(y => y.year),
+        maxDay_MOLT_MOD13Q1006_B01_NDVI = yearDays_MOLT_MOD13Q1006_B01_NDVI.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI).Max(y => y.day);
+    YearDay[] yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly = ViewBag.YearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly;
+    string maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly = yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Max(y => y.year),
+        maxDay_MOLT_MOD13Q1006_B01_NDVI_Anomaly = yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly).Max(y => y.day);
 }
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar">
-        <div class="page-wrapper chiller-theme">
-            <!-- close sidebar menu -->
-            <div class="dismiss">
-                <i class="fa fa-arrow-left"></i>
-            </div>
-            <div class="logo">
-                <h3>Pasture</h3>
-            </div>
-            <ul class="list-unstyled menu-elements m-3">
-                <li class="active">
-                    <form>
-                        <div class="form-group">
-                            <label for="ModDataset">Dataset</label>
-                            <select class="form-control form-control-sm" id="ModDataset">
-                                <option>Terra MODIS 16-day</option>
-                                <option>Aqua MODIS 16-day</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="ModeProduct">Dataset</label>
-                            <select class="form-control form-control-sm" id="ModeProduct">
-                                <option>NDVI</option>
-                                <option>NDVI Anomaly %</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="Year">Year</label>
-                            <select class="form-control form-control-sm" id="Year" onchange="ChangeYear()">
-                                @foreach (string year in yearDays.Select(y => y.year).Distinct().OrderBy(y => y))
+        <!-- close sidebar menu -->
+        <div class="dismiss">
+            <i class="fa fa-arrow-left"></i>
+        </div>
+        <div class="logo">
+            <h3>Pasture</h3>
+        </div>
+        <ul class="list-unstyled menu-elements m-3">
+            <li class="active">
+                <form>
+                    <div class="form-group">
+                        <label for="ModDataset">Satellite</label>
+                        <select class="form-control form-control-sm" id="ModDataset">
+                            <option>Terra MODIS 16-day</option>
+                            <option>Aqua MODIS 16-day</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="DataSet">DataSet</label>
+                        <select class="form-control form-control-sm" id="DataSet" onchange="ChangeDataSet()">
+                            <option value="NDVI">NDVI</option>
+                            <option value="Anomaly">NDVI Anomaly %</option>
+                        </select>
+                    </div>
+                    <div class="form-group NDVI">
+                        <label for="Year_MOLT_MOD13Q1006_B01_NDVI">Year</label>
+                        <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeYear()">
+                            @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI.Select(y => y.year).Distinct().OrderBy(y => y))
+                            {
+                                if (year == maxYear_MOLT_MOD13Q1006_B01_NDVI)
                                 {
-                                    if (year == maxYear)
-                                    {
-                                        <option value="@year" selected>@year</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@year">@year</option>
-                                    }
+                                    <option value="@year" selected>@year</option>
                                 }
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="DayOfYear">Start DOY : MM/DD Range</label>
-                            <select class="form-control form-control-sm" id="DayOfYear" onchange="ChangeModis()">
-                                @foreach (string day in yearDays.Where(y => y.year == maxYear).Select(y => y.day).Distinct().OrderBy(y => y))
+                                else
                                 {
-                                    if (day == maxDay)
-                                    {
-                                        <option value="@day" selected>@day</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@day">@day</option>
-                                    }
+                                    <option value="@year">@year</option>
                                 }
-                            </select>
-                        </div>
-                    </form>
-                </li>
-                <li>
-                    <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
-                        <i class="fas fa-sync"></i>Layers:
-                    </a>
-                    <ul class="collapse list-unstyled" id="otherSections">
-                        <li>
-                            <a class="scroll-link" href="#section-3">Base Map</a>
-                        </li>
-                        <li>
-                            <a class="scroll-link" href="#section-4">Tematic Map</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="dark-light-buttons">
-                <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
-                <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-            </div>
-            <div class="sidebar-footer icon-speech">
-                <a href="#">
-                    <i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group NDVI">
+                        <label for="DayOfYear_MOLT_MOD13Q1006_B01_NDVI">Start DOY : MM/DD Range</label>
+                        <select class="form-control form-control-sm" id="DayOfYear_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeModis()">
+                            @foreach (string day in yearDays_MOLT_MOD13Q1006_B01_NDVI.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI).Select(y => y.day).Distinct().OrderBy(y => y))
+                            {
+                                if (day == maxDay_MOLT_MOD13Q1006_B01_NDVI)
+                                {
+                                    <option value="@day" selected>@day</option>
+                                }
+                                else
+                                {
+                                    <option value="@day">@day</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group Anomaly" style="display: none;">
+                        <label for="Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly">Year</label>
+                        <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly" onchange="ChangeYear()">
+                            @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Select(y => y.year).Distinct().OrderBy(y => y))
+                            {
+                                if (year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly)
+                                {
+                                    <option value="@year" selected>@year</option>
+                                }
+                                else
+                                {
+                                    <option value="@year">@year</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group Anomaly" style="display: none;">
+                        <label for="DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly">Start DOY : MM/DD Range</label>
+                        <select class="form-control form-control-sm" id="DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly" onchange="ChangeModis()">
+                            @foreach (string day in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.Where(y => y.year == maxYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly).Select(y => y.day).Distinct().OrderBy(y => y))
+                            {
+                                if (day == maxDay_MOLT_MOD13Q1006_B01_NDVI_Anomaly)
+                                {
+                                    <option value="@day" selected>@day</option>
+                                }
+                                else
+                                {
+                                    <option value="@day">@day</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </form>
+            </li>
+            <li>
+                <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+                    <i class="fas fa-sync"></i>Layers:
                 </a>
-                <a href="#" id="ChartsButton" value="Выделять">
-                    <i class="fa fa-bar-chart-o" data-toggle="tooltip" data-placement="top" title="Для построение Графика, сначало выберите объект на карте"></i>
-                    <span id="chartSpan" class="badge badge-pill badge-info notification">0</span>
-                </a>
-                <a href="#" id="LegendBtn" class="target-click">
-                    <i class="fa fa-list-alt" data-toggle="tooltip" data-placement="top" title="Легенда"></i>
-                </a>
-                <a href="#" id="MapTitleBtn" class="target-click">
-                    <i class="fa fa-bookmark" data-toggle="tooltip" data-placement="top" title="Информация о слое"></i>
-                </a>
-            </div>
+                <ul class="collapse list-unstyled" id="otherSections">
+                    <li>
+                        <a class="scroll-link" href="#section-3">Base Map</a>
+                    </li>
+                    <li>
+                        <a class="scroll-link" href="#section-4">Tematic Map</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <div class="dark-light-buttons">
+            <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+            <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
         </div>
     </nav>
     <!-- End sidebar -->
     <!-- Content -->
     <div class="content">
         <!-- open sidebar menu -->
-        <a class="btn btn-sm btn-customized open-menu" href="#" role="button">
+        <a class="btn btn-light btn-customized open-menu" href="#" role="button">
             <i class="fa fa-align-left"></i> <span>Menu</span>
         </a>
         <!-- Map content -->
@@ -125,15 +140,15 @@
     <!-- End content -->
 </div>
 
-
-
 @* layers *@
 <script>
     var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
         geoserver_workspace_name = '@ViewBag.ModisWorkspace', //'MODIS',
         layerModisTemplate1 = '@ViewBag.ModisLayerTemplate1', //'A',
-        layerModisTemplate2 = '@ViewBag.ModisLayerTemplate2'; //'_MOLT_MOD13Q1006_B01_NDVI_4326';
-    var layerModis = layerModisTemplate1 + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate2;
+        layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI = '@ViewBag.ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI',
+        layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly = '@ViewBag.ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly';
+    var layerNDVI = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006_B01_NDVI').val() + $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI,
+        layerAnomaly = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly').val() + $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly;
 
     var Source_OSM = new ol.source.OSM();
     var Layer_Base = new ol.layer.Tile({
@@ -142,22 +157,40 @@
     Layer_Base.set('name', 'Base');
     Layer_Base.setOpacity(0.80);
 
-    var url_Modis = geoserver_url + geoserver_workspace_name + '/wms';
-    var Source_Modis = new ol.source.TileWMS({
-        url: url_Modis,
+    var url_NDVI = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_NDVI = new ol.source.TileWMS({
+        url: url_NDVI,
         params: {
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             tiled: true,
-            "LAYERS": geoserver_workspace_name + ':' + layerModis
+            'LAYERS': geoserver_workspace_name + ':' + layerNDVI
         },
         serverType: 'geoserver'
     });
-    var Layer_Modis = new ol.layer.Tile({
-        source: Source_Modis
+    var Layer_NDVI = new ol.layer.Tile({
+        source: Source_NDVI
     });
-    Layer_Modis.set('name', 'Modis');
-    Layer_Modis.setOpacity(0.80);
+    Layer_NDVI.set('name', 'NDVI');
+    Layer_NDVI.setOpacity(0.80);
+
+    var url_Anomaly = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_Anomaly = new ol.source.TileWMS({
+        url: url_Anomaly,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':' + layerAnomaly
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_Anomaly = new ol.layer.Tile({
+        source: Source_Anomaly
+    });
+    Layer_Anomaly.set('name', 'Anomaly');
+    Layer_Anomaly.setVisible(false);
+    Layer_Anomaly.setOpacity(0.80);
 </script>
 
 @* map *@
@@ -169,9 +202,9 @@
         ]),
         layers: [
             Layer_Base,
-            Layer_Modis
+            Layer_NDVI,
+            Layer_Anomaly
         ],
-        //overlays: [overlay],
         view: new ol.View({
             center: ol.proj.fromLonLat([66.902, 48.714]),
             zoom: 5
@@ -180,23 +213,59 @@
 </script>
 
 <script>
+    function ChangeDataSet() {
+        if ($('#DataSet').val() == 'NDVI') {
+            Layer_NDVI.setVisible(true);
+            Layer_Anomaly.setVisible(false);
+            $('.NDVI').show();
+            $('.Anomaly').hide();
+        }
+        else if ($('#DataSet').val() == 'Anomaly') {
+            Layer_NDVI.setVisible(false);
+            Layer_Anomaly.setVisible(true);
+            $('.Anomaly').show();
+            $('.NDVI').hide();
+        }
+    }
+
     function ChangeYear() {
-        $("#DayOfYear").html('');
-        var maxday = '001';
-        for (i = 0; i < yeardays.length; i++) {
-            if (yeardays[i].year == $("#Year").val().toString()) {
-                if (parseInt(yeardays[i].day) > parseInt(maxday)) {
-                    maxday = yeardays[i].day;
+        // NDVI
+        $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI').html('');
+        var maxday_MOLT_MOD13Q1006_B01_NDVI = '001';
+        for (i = 0; i < yeardays_MOLT_MOD13Q1006_B01_NDVI.length; i++) {
+            if (yeardays_MOLT_MOD13Q1006_B01_NDVI[i].year == $('#Year_MOLT_MOD13Q1006_B01_NDVI').val().toString()) {
+                if (parseInt(yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day) > parseInt(maxday_MOLT_MOD13Q1006_B01_NDVI)) {
+                    maxday_MOLT_MOD13Q1006_B01_NDVI = yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day;
                 }
             }
         }
-        for (i = 0; i < yeardays.length; i++) {
-            if (yeardays[i].year == $("#Year").val().toString()) {
-                if (yeardays[i].day == maxday) {
-                    $("#DayOfYear").append($("<option selected />").val(yeardays[i].day).text(yeardays[i].day));
+        for (i = 0; i < yeardays_MOLT_MOD13Q1006_B01_NDVI.length; i++) {
+            if (yeardays_MOLT_MOD13Q1006_B01_NDVI[i].year == $('#Year_MOLT_MOD13Q1006_B01_NDVI').val().toString()) {
+                if (yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day == maxday_MOLT_MOD13Q1006_B01_NDVI) {
+                    $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI').append($('<option selected />').val(yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day).text(yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day));
                 }
                 else {
-                    $("#DayOfYear").append($("<option />").val(yeardays[i].day).text(yeardays[i].day));
+                    $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI').append($('<option />').val(yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day).text(yeardays_MOLT_MOD13Q1006_B01_NDVI[i].day));
+                }
+            }
+        }
+        // Anomaly
+        $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly').html('');
+        var maxday_MOLT_MOD13Q1006_B01_NDVI_Anomaly = '001';
+        for (i = 0; i < yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.length; i++) {
+            if (yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].year == $('#Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly').val().toString()) {
+                if (parseInt(yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day) > parseInt(maxday_MOLT_MOD13Q1006_B01_NDVI_Anomaly)) {
+                    maxday_MOLT_MOD13Q1006_B01_NDVI_Anomaly = yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day;
+                }
+            }
+        }
+        for (i = 0; i < yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.length; i++) {
+            if (yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].year == $('#Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly').val().toString()) {
+                if (yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day == maxday_MOLT_MOD13Q1006_B01_NDVI_Anomaly) {
+                    $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly').append($('<option selected />').val(yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day).text(yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day));
+                }
+                else {
+                    $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly').append($('<option />').val(yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day).text(yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly[i].day));
                 }
             }
         }
@@ -204,33 +273,59 @@
     }
 
     function ChangeModis() {
-        layerModis = layerModisTemplate1 + $('#Year').val() + $('#DayOfYear').val() + layerModisTemplate2;
-        Source_Modis = new ol.source.TileWMS({
+        layerNDVI = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006_B01_NDVI').val() + $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI;
+        Source_NDVI = new ol.source.TileWMS({
             url: geoserver_url + geoserver_workspace_name + '/wms',
             params: {
                 'FORMAT': 'image/png',
                 'VERSION': '1.1.1',
                 tiled: true,
-                "LAYERS": geoserver_workspace_name + ':' + layerModis
+                'LAYERS': geoserver_workspace_name + ':' + layerNDVI
             },
             serverType: 'geoserver'
         });
-        Layer_Modis.setSource(Source_Modis);
+        Layer_NDVI.setSource(Source_NDVI);
+
+        layerAnomaly = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006_B01_NDVI_Anomaly').val() + $('#DayOfYear_MOLT_MOD13Q1006_B01_NDVI_Anomaly').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly;
+        Source_Anomaly = new ol.source.TileWMS({
+            url: geoserver_url + geoserver_workspace_name + '/wms',
+            params: {
+                'FORMAT': 'image/png',
+                'VERSION': '1.1.1',
+                tiled: true,
+                'LAYERS': geoserver_workspace_name + ':' + layerAnomaly
+            },
+            serverType: 'geoserver'
+        });
+        Layer_Anomaly.setSource(Source_Anomaly);
     }
 </script>
 
 <script>
-    var yeardays = [];
+    var yeardays_MOLT_MOD13Q1006_B01_NDVI = [];
 </script>
-@foreach (YearDay yearDay in yearDays.OrderBy(y => y.year).ThenBy(y => y.day))
+@foreach (YearDay yearDay in yearDays_MOLT_MOD13Q1006_B01_NDVI.OrderBy(y => y.year).ThenBy(y => y.day))
 {
     <script>
-        yeardays.push({
+        yeardays_MOLT_MOD13Q1006_B01_NDVI.push({
             year: '@yearDay.year',
             day: '@yearDay.day'
         });
     </script>
 }
+<script>
+    var yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly = [];
+</script>
+@foreach (YearDay yearDay in yearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.OrderBy(y => y.year).ThenBy(y => y.day))
+{
+    <script>
+        yeardays_MOLT_MOD13Q1006_B01_NDVI_Anomaly.push({
+            year: '@yearDay.year',
+            day: '@yearDay.day'
+        });
+    </script>
+}
+
 @*Sidebar Menu*@
 <script>
     jQuery(document).ready(function () {
@@ -240,6 +335,7 @@
         $('.dismiss, .overlay').on('click', function () {
             $('.sidebar').removeClass('active');
         });
+
         $('.open-menu').on('click', function (e) {
             e.preventDefault();
             $('.sidebar').addClass('active');
@@ -256,56 +352,7 @@
             e.preventDefault();
             $('.sidebar').addClass('light');
         });
-    });
-</script>
 
-<script>
-    $(document).ready(function () {
-        // Map Title
-        new jBox('Modal', {
-            attach: '#MapTitleBtn',
-            theme: 'TooltipBorder',
-            width: 200,
-            blockScroll: false,
-            animation: 'flip',
-            closeButton: false,
-            position: {
-                x: 'right',
-                y: 'top'
-            },
-            offset: {
-                x: -10,
-                y: 70
-            },
-            content: (
-                '<h5 class="text-center text-white card-title p-0">Map Title</h5>' +
-                '<p class="text-center text-white card-text">Year an day</p>'
-            ),
-            overlay: false,
-            reposition: true,
-            repositionOnOpen: false
-        }).open();
-        // Map Legend
-        new jBox('Modal', {
-            autoOpen: true,
-            attach: '#LegendBtn',
-            theme: 'TooltipBorder',
-            width: 250,
-            blockScroll: false,
-            animation: 'flip',
-            closeButton: true,
-            position: {
-                x: 'right',
-                y: 'bottom'
-            },
-            offset: {
-                x: -10,
-                y: -90
-            },
-            content: '<div class="p-0"><img id="legend" class="m-0 card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
-            overlay: false,
-            reposition: true,
-            repositionOnOpen: false
-        });
+
     });
 </script>

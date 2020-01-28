@@ -12,7 +12,7 @@
 }
 
 .jBox-container {
-  background: #3a465d;
+  background: #258ecd;
 }
 
 .jBox-content {
@@ -58,7 +58,7 @@
   width: 20px;
   height: 20px;
   position: absolute;
-  background: #3a465d;
+  background: #258ecd;
   transform: rotate(45deg);
   box-sizing: border-box;
 }

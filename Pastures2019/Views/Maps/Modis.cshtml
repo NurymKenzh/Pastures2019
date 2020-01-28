@@ -5,7 +5,10 @@
 }
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="~/lib/ol/ol.js"></script>
+<link href="~/lib/vendor/jBox/dist/jBox.all.css" rel="stylesheet" />
+<script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
 
 @{
     YearDay[] yearDays = ViewBag.YearDays;
@@ -15,88 +18,105 @@
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar">
-        <!-- close sidebar menu -->
-        <div class="dismiss">
-            <i class="fa fa-arrow-left"></i>
-        </div>
-        <div class="logo">
-            <h3>Pasture</h3>
-        </div>
-        <ul class="list-unstyled menu-elements m-3">
-            <li class="active">
-                <form>
-                    <div class="form-group">
-                        <label for="ModDataset">Dataset</label>
-                        <select class="form-control form-control-sm" id="ModDataset">
-                            <option>Terra MODIS 16-day</option>
-                            <option>Aqua MODIS 16-day</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="ModeProduct">Dataset</label>
-                        <select class="form-control form-control-sm" id="ModeProduct">
-                            <option>NDVI</option>
-                            <option>NDVI Anomaly %</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="Year">Year</label>
-                        <select class="form-control form-control-sm" id="Year" onchange="ChangeYear()">
-                            @foreach (string year in yearDays.Select(y => y.year).Distinct().OrderBy(y => y))
-                            {
-                                if (year == maxYear)
+        <div class="page-wrapper chiller-theme">
+            <!-- close sidebar menu -->
+            <div class="dismiss">
+                <i class="fa fa-arrow-left"></i>
+            </div>
+            <div class="logo">
+                <h3>Pasture</h3>
+            </div>
+            <ul class="list-unstyled menu-elements m-3">
+                <li class="active">
+                    <form>
+                        <div class="form-group">
+                            <label for="ModDataset">Dataset</label>
+                            <select class="form-control form-control-sm" id="ModDataset">
+                                <option>Terra MODIS 16-day</option>
+                                <option>Aqua MODIS 16-day</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="ModeProduct">Dataset</label>
+                            <select class="form-control form-control-sm" id="ModeProduct">
+                                <option>NDVI</option>
+                                <option>NDVI Anomaly %</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Year">Year</label>
+                            <select class="form-control form-control-sm" id="Year" onchange="ChangeYear()">
+                                @foreach (string year in yearDays.Select(y => y.year).Distinct().OrderBy(y => y))
                                 {
-                                    <option value="@year" selected>@year</option>
+                                    if (year == maxYear)
+                                    {
+                                        <option value="@year" selected>@year</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@year">@year</option>
+                                    }
                                 }
-                                else
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="DayOfYear">Start DOY : MM/DD Range</label>
+                            <select class="form-control form-control-sm" id="DayOfYear" onchange="ChangeModis()">
+                                @foreach (string day in yearDays.Where(y => y.year == maxYear).Select(y => y.day).Distinct().OrderBy(y => y))
                                 {
-                                    <option value="@year">@year</option>
+                                    if (day == maxDay)
+                                    {
+                                        <option value="@day" selected>@day</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@day">@day</option>
+                                    }
                                 }
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="DayOfYear">Start DOY : MM/DD Range</label>
-                        <select class="form-control form-control-sm" id="DayOfYear" onchange="ChangeModis()">
-                            @foreach (string day in yearDays.Where(y => y.year == maxYear).Select(y => y.day).Distinct().OrderBy(y => y))
-                            {
-                                if (day == maxDay)
-                                {
-                                    <option value="@day" selected>@day</option>
-                                }
-                                else
-                                {
-                                    <option value="@day">@day</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                </form>
-            </li>           
-            <li>
-                <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
-                    <i class="fas fa-sync"></i>Layers:
+                            </select>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <a href="#otherSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="otherSections">
+                        <i class="fas fa-sync"></i>Layers:
+                    </a>
+                    <ul class="collapse list-unstyled" id="otherSections">
+                        <li>
+                            <a class="scroll-link" href="#section-3">Base Map</a>
+                        </li>
+                        <li>
+                            <a class="scroll-link" href="#section-4">Tematic Map</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="dark-light-buttons">
+                <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+                <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+            </div>
+            <div class="sidebar-footer icon-speech">
+                <a href="#">
+                    <i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
                 </a>
-                <ul class="collapse list-unstyled" id="otherSections">
-                    <li>
-                        <a class="scroll-link" href="#section-3">Base Map</a>
-                    </li>
-                    <li>
-                        <a class="scroll-link" href="#section-4">Tematic Map</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <div class="dark-light-buttons">
-            <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
-            <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+                <a href="#" id="ChartsButton" value="Выделять">
+                    <i class="fa fa-bar-chart-o" data-toggle="tooltip" data-placement="top" title="Для построение Графика, сначало выберите объект на карте"></i>
+                    <span id="chartSpan" class="badge badge-pill badge-info notification">0</span>
+                </a>
+                <a href="#" id="LegendBtn" class="target-click">
+                    <i class="fa fa-list-alt" data-toggle="tooltip" data-placement="top" title="Легенда"></i>
+                </a>
+                <a href="#" id="MapTitleBtn" class="target-click">
+                    <i class="fa fa-bookmark" data-toggle="tooltip" data-placement="top" title="Информация о слое"></i>
+                </a>
+            </div>
         </div>
     </nav>
     <!-- End sidebar -->
     <!-- Content -->
     <div class="content">
         <!-- open sidebar menu -->
-        <a class="btn btn-light btn-customized open-menu" href="#" role="button">
+        <a class="btn btn-sm btn-customized open-menu" href="#" role="button">
             <i class="fa fa-align-left"></i> <span>Menu</span>
         </a>
         <!-- Map content -->
@@ -104,10 +124,6 @@
     </div>
     <!-- End content -->
 </div>
-
-
-
-
 
 
 
@@ -224,7 +240,6 @@
         $('.dismiss, .overlay').on('click', function () {
             $('.sidebar').removeClass('active');
         });
-
         $('.open-menu').on('click', function (e) {
             e.preventDefault();
             $('.sidebar').addClass('active');
@@ -241,7 +256,56 @@
             e.preventDefault();
             $('.sidebar').addClass('light');
         });
+    });
+</script>
 
-
+<script>
+    $(document).ready(function () {
+        // Map Title
+        new jBox('Modal', {
+            attach: '#MapTitleBtn',
+            theme: 'TooltipBorder',
+            width: 200,
+            blockScroll: false,
+            animation: 'flip',
+            closeButton: false,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 70
+            },
+            content: (
+                '<h5 class="text-center text-white card-title p-0">Map Title</h5>' +
+                '<p class="text-center text-white card-text">Year an day</p>'
+            ),
+            overlay: false,
+            reposition: true,
+            repositionOnOpen: false
+        }).open();
+        // Map Legend
+        new jBox('Modal', {
+            autoOpen: true,
+            attach: '#LegendBtn',
+            theme: 'TooltipBorder',
+            width: 250,
+            blockScroll: false,
+            animation: 'flip',
+            closeButton: true,
+            position: {
+                x: 'right',
+                y: 'bottom'
+            },
+            offset: {
+                x: -10,
+                y: -90
+            },
+            content: '<div class="p-0"><img id="legend" class="m-0 card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
+            overlay: false,
+            reposition: true,
+            repositionOnOpen: false
+        });
     });
 </script>

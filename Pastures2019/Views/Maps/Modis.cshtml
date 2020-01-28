@@ -18,7 +18,7 @@
 }
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
-    <nav class="sidebar">
+    <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
             <!-- close sidebar menu -->
             <div class="dismiss">
@@ -45,6 +45,7 @@
                             </select>
                         </div>
                         <div class="form-group NDVI">
+
                             <label for="Year_MOLT_MOD13Q1006_B01_NDVI">Year</label>
                             <select class="form-control form-control-sm" id="Year_MOLT_MOD13Q1006_B01_NDVI" onchange="ChangeYear()">
                                 @foreach (string year in yearDays_MOLT_MOD13Q1006_B01_NDVI.Select(y => y.year).Distinct().OrderBy(y => y))
@@ -130,21 +131,20 @@
             </div>
             <div class="sidebar-footer">
                 <a href="#">
-                    <i class="fa fa-file" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
+                    <i class="SomeInfo fa fa-file" InfoTitle="Tooltip on top"></i>
                 </a>
                 <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
-                    <i class="fa fa-bar-chart-o" data-toggle="tooltip" data-placement="top" title="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
+                    <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
                     <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">
-                    <i class="fa fa-list-alt" data-toggle="tooltip" data-placement="top" title="Легенда"></i>
+                    <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
                 </a>
                 <a href="#" id="MapTitleBtn" class="target-click">
-                    <i class="fa fa-bookmark" data-toggle="tooltip" data-placement="top" title="Информация о слое"></i>
+                    <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
                 </a>
             </div>
         </div>
-
     </nav>
     <!-- End sidebar -->
     <!-- Content -->
@@ -428,7 +428,17 @@
             reposition: true,
             repositionOnOpen: false
         }).open();
-
-
+        // Tooltip below to the right  
+        new jBox('Tooltip', {
+            theme: 'TooltipDark',
+            attach: '.SomeInfo',
+            getTitle: 'InfoTitle',
+            closeOnMouseleave: true,
+            pointer: 'center:-20',
+            maxWidth: 400,
+            minWidth: 100,
+            adjustPosition: true,
+            adjustTracker: true
+        });
     });
 </script>

@@ -62,7 +62,7 @@
     width: 250px;
     height: 65%;
     position: fixed;
-    top: 60px;
+    top: 65px;
     left: -255px;
     z-index: 999;
     background: #47a3da;
@@ -389,7 +389,7 @@ a.btn-customized {
     a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
     a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
         outline: 0;
-        background: #6FFF72;
+        background: #f35b3f;
         background: rgba(114, 219, 255, 0.7);
         border: 0;
         color: #fff;

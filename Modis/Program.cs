@@ -152,10 +152,11 @@ namespace Modis
                     {
                         break;
                     }
+                    string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+
                     try
                     {
-                        // create subfolder
-                        string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+                        // create subfolder                        
                         Directory.CreateDirectory(folderDownload);
 
                         // download modis
@@ -214,6 +215,15 @@ namespace Modis
                             Directory.Delete(folder, true);
                         }
                     }
+
+                    // delete empty folder
+                    if (Directory.EnumerateFiles(folderDownload, "*hdf*").Count() == 0)
+                    {
+                        Directory.Delete(folderDownload, true);
+                    }
+
+                    // rename last subfolder date finish if it is ...
+
                 }
                 if (dateTimeFinish == DateTime.Today)
                 {

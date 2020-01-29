@@ -28,25 +28,25 @@ namespace Pastures2019.Controllers
         public async Task<IActionResult> Index(
             string SortOrder,
             int? CodeFilter,
-            string RangeFilter,
+            string BreedFilter,
             int? PageNumber)
         {
             var camel = _context.Camel
                 .Where(c => true);
 
             ViewBag.CodeFilter = CodeFilter;
-            ViewBag.RangeFilter = RangeFilter;
+            ViewBag.BreedFilter = BreedFilter;
 
             ViewBag.CodeSort = SortOrder == "Code" ? "CodeDesc" : "Code";
-            ViewBag.RangeSort = SortOrder == "Range" ? "RangeDesc" : "Range";
+            ViewBag.BreedSort = SortOrder == "Breed" ? "BreedDesc" : "Breed";
 
             if (CodeFilter != null)
             {
                 camel = camel.Where(c => c.Code == CodeFilter);
             }
-            if (!string.IsNullOrEmpty(RangeFilter))
+            if (!string.IsNullOrEmpty(BreedFilter))
             {
-                camel = camel.Where(c => c.Range.Contains(RangeFilter));
+                camel = camel.Where(c => c.Breed.Contains(BreedFilter));
             }
 
             switch (SortOrder)
@@ -57,11 +57,11 @@ namespace Pastures2019.Controllers
                 case "CodeDesc":
                     camel = camel.OrderByDescending(c => c.Code);
                     break;
-                case "Range":
-                    camel = camel.OrderBy(c => c.Range);
+                case "Breed":
+                    camel = camel.OrderBy(c => c.Breed);
                     break;
-                case "RangeDesc":
-                    camel = camel.OrderByDescending(c => c.Range);
+                case "BreedDesc":
+                    camel = camel.OrderByDescending(c => c.Breed);
                     break;
                 default:
                     camel = camel.OrderBy(c => c.Id);

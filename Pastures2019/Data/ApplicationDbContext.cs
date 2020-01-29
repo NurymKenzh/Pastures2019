@@ -22,5 +22,6 @@ namespace Pastures2019.Data
         public DbSet<Pastures2019.Models.MODISSource> MODISSource { get; set; }
         public DbSet<Pastures2019.Models.MODISProduct> MODISProduct { get; set; }
         public DbSet<Pastures2019.Models.MODISDataSet> MODISDataSet { get; set; }
+        public DbSet<Pastures2019.Models.Cattle> Cattle { get; set; }
     }
 }

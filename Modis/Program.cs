@@ -9,7 +9,9 @@ namespace Modis
 {
     class Program
     {
-        static DateTime ModisDateStart = new DateTime(2000, 02, 18);
+        static DateTime ModisDateStart1 = new DateTime(2000, 02, 18),
+            ModisDateStart2 = new DateTime(2002, 07, 04),
+            ModisDateStart = DateTime.Now;
         const int ModisPeriod = 16,
             ModisDataSetIndex = 1;
         static string[] ModisSpans = { "h21v03", "h21v04", "h22v03", "h22v04", "h23v03", "h23v04" };
@@ -112,11 +114,16 @@ namespace Modis
 
                 ModisSource = ModisSource1;
                 ModisProduct = ModisProduct1;
+                ModisDateStart = ModisDateStart1;
                 MODIS(DownloadDir1);
 
                 ModisSource = ModisSource2;
                 ModisProduct = ModisProduct2;
+                ModisDateStart = ModisDateStart2;
                 MODIS(DownloadDir2);
+
+                // 1 hour
+                Thread.Sleep(60 * 60 * 60);
             }
         }
 
@@ -263,22 +270,28 @@ namespace Modis
                     }
                 }
 
-                // delete empty folder
-                if (Directory.Exists(folderDownloadFinale))
+                // delete every empty folder
+                //if (Directory.Exists(folderDownloadFinale))
+                foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*", SearchOption.TopDirectoryOnly))
                 {
-                    if (Directory.EnumerateFiles(folderDownloadFinale, "*hdf*").Count() == 0)
+                    if (Directory.EnumerateFiles(folder, "*hdf*").Count() == 0)
                     {
-                        Directory.Delete(folderDownloadFinale, true);
+                        try
+                        {
+                            Directory.Delete(folder, true);
+                        }
+                        catch { }
 
                         // 3 hours
                         Thread.Sleep(60 * 60 * 60 * 3);
                     }
                 }
-            }
-            if (dateTimeFinish == DateTime.Today)
-            {
-                // 1 hour
-                Thread.Sleep(60 * 60 * 60);
+                if (dateTimeFinish == DateTime.Today)
+                {
+                    //// 1 hour
+                    //Thread.Sleep(60 * 60 * 60);
+                    break;
+                }
             }
         }
 

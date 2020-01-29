@@ -222,8 +222,23 @@ namespace Modis
                         Directory.Delete(folderDownload, true);
                     }
 
-                    // rename last subfolder date finish if it is ...
-
+                    // rename last subfolder date finish if it is 30 days recent
+                    if (dateTimeFinish.AddDays(30) > DateTime.Now)
+                    {
+                        // get last hdf date
+                        DateTime dateTimeLastHDF = dateTimeFinish;
+                        foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.hdf", SearchOption.TopDirectoryOnly))
+                        {
+                            string fileDate = Path.GetFileName(file).Split('.')[1].Remove(0, 1);
+                            DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)));
+                            if(dateTimeHDF >= dateTimeLastHDF)
+                            {
+                                dateTimeLastHDF = dateTimeHDF;
+                            }
+                        }
+                        string folderDownloadRename = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeLastHDF.ToString("yyyy.MM.dd")}");
+                        Directory.Move(folderDownload, folderDownloadRename);
+                    }
                 }
                 if (dateTimeFinish == DateTime.Today)
                 {

@@ -13,11 +13,17 @@ namespace Modis
         const int ModisPeriod = 16,
             ModisDataSetIndex = 1;
         static string[] ModisSpans = { "h21v03", "h21v04", "h22v03", "h22v04", "h23v03", "h23v04" };
-        const string ModisSource = "MOLT",
-            ModisProduct = "MOD13Q1.006",
+        const string ModisSource1 = "MOLT",
+            ModisSource2 = "MOLA",
+            ModisProduct1 = "MOD13Q1.006",
+            ModisProduct2 = "MYD13Q1.006",
             ModisDataSet = "NDVI",
             ModisProjection = "3857",
             GeoServerWorkspace = "MODIS";
+
+        static string ModisSource = "",
+            ModisProduct = "";
+
 
         static string ModisUser = "",
             ModisPassword = "",
@@ -95,7 +101,8 @@ namespace Modis
                         }
                     }
                 }
-                string DownloadDir = JObject.Parse(settingsJObject.ToString())["DownloadDir"];
+                string DownloadDir1 = JObject.Parse(settingsJObject.ToString())["DownloadDir1"],
+                    DownloadDir2 = JObject.Parse(settingsJObject.ToString())["DownloadDir2"];
                 CMDPath = JObject.Parse(settingsJObject.ToString())["CMDPath"];
                 GeoServerModisDataDir = JObject.Parse(settingsJObject.ToString())["GeoServerModisDataDir"];
                 ClipShape = Path.Combine(GeoServerModisDataDir, ClipShape);
@@ -103,160 +110,175 @@ namespace Modis
                 GeoServerPassword = JObject.Parse(settingsJObject.ToString())["GeoServerPassword"];
                 GeoServerURL = JObject.Parse(settingsJObject.ToString())["GeoServerURL"];
 
-                DateTime dateTimeStart = ModisDateStart,
+                ModisSource = ModisSource1;
+                ModisProduct = ModisProduct1;
+                MODIS(DownloadDir1);
+
+                ModisSource = ModisSource2;
+                ModisProduct = ModisProduct2;
+                MODIS(DownloadDir2);
+            }
+        }
+
+        private static void MODIS(
+            string DownloadDir)
+        {
+            DateTime dateTimeStart = ModisDateStart,
                     dateTimeFinish = new DateTime(dateTimeStart.Year, dateTimeStart.Month, 1).AddMonths(1).AddDays(-1); // dateTimeStart.AddDays(ModisPeriod - 1);
-                while (true)
+            while (true)
+            {
+                // delete folders which names start with "!"
+                foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
                 {
-                    // delete folders which names start with "!"
-                    foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
-                    {
-                        try
-                        {
-                            Directory.Delete(folder, true);
-                        }
-                        catch
-                        {
-
-                        }
-                    }
-
-                    // determine period (dateTimeStart, dateTimeFinish)
-                    foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
-                    {
-                        string downloadFolder = Directory.GetParent(Path.Combine(folder, "file.file")).Name;
-                        if (downloadFolder.Contains("!"))
-                        {
-                            continue;
-                        }
-                        string dateTimeStartCurrentS = downloadFolder.Split("-")[0],
-                            dateTimeFinishCurrentS = downloadFolder.Split("-")[1];
-                        int yearStart = Convert.ToInt32(dateTimeStartCurrentS.Split(".")[0]),
-                            monthStart = Convert.ToInt32(dateTimeStartCurrentS.Split(".")[1]),
-                            dayStart = Convert.ToInt32(dateTimeStartCurrentS.Split(".")[2]),
-                            yearFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[0]),
-                            monthFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[1]),
-                            dayFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[2]);
-                        DateTime dateTimeStartCurrent = new DateTime(yearStart, monthStart, dayStart),
-                            dateTimeFinishCurrent = new DateTime(yearFinish, monthFinish, dayFinish);
-                        if (dateTimeFinishCurrent >= dateTimeStart)
-                        {
-                            dateTimeStart = dateTimeFinishCurrent.AddDays(1);
-                            dateTimeFinish = dateTimeStart.AddMonths(1).AddDays(-1);
-                            if (dateTimeFinish > DateTime.Today)
-                            {
-                                dateTimeFinish = DateTime.Today;
-                            }
-                        }
-                    }
-                    if (dateTimeStart == DateTime.Today)
-                    {
-                        break;
-                    }
-                    string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}"),
-                        folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
-
                     try
                     {
-                        // create subfolder                        
-                        Directory.CreateDirectory(folderDownload);
-
-                        // download modis
-                        ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
-
-                        // mosaic
-                        ModisMosaic(folderDownload);
-
-                        // convert
-                        ModisConvert(folderDownload);
-
-                        // clip
-                        TifClip(folderDownload);
-
-                        // move to GeoServer
-                        // publish
-                        Publish(folderDownload);
-
-                        // rename folder (remove "!")
-                        Directory.Move(folderDownload, folderDownloadFinale);
-
-                        // anomaly
-                        foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
-                        {
-                            if (file.Contains("Anomaly") || file.Contains("BASE"))
-                            {
-                                continue;
-                            }
-                            // calculate anomaly
-                            Anomaly(GeoServerModisDataDir, file);
-                        }
-
-                        //// work with downloaded MODIS
-                        //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
-                        //{
-                        //    // mosaic
-                        //    ModisMosaic(folder);
-
-                        //    // convert
-                        //    ModisConvert(folder);
-
-                        //    // clip
-                        //    TifClip(folder);
-
-                        //    // move to GeoServer
-                        //    // publish
-                        //    Publish(folder);
-                        //}
+                        Directory.Delete(folder, true);
                     }
                     catch
                     {
-                        // delete folders which names start with "!" 
-                        foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
-                        {
-                            Directory.Delete(folder, true);
-                        }
 
-                        // 8 hours
-                        Thread.Sleep(60 * 60 * 60 * 8);
+                    }
+                }
+
+                // determine period (dateTimeStart, dateTimeFinish)
+                foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
+                {
+                    string downloadFolder = Directory.GetParent(Path.Combine(folder, "file.file")).Name;
+                    if (downloadFolder.Contains("!"))
+                    {
+                        continue;
+                    }
+                    string dateTimeStartCurrentS = downloadFolder.Split("-")[0],
+                        dateTimeFinishCurrentS = downloadFolder.Split("-")[1];
+                    int yearStart = Convert.ToInt32(dateTimeStartCurrentS.Split(".")[0]),
+                        monthStart = Convert.ToInt32(dateTimeStartCurrentS.Split(".")[1]),
+                        dayStart = Convert.ToInt32(dateTimeStartCurrentS.Split(".")[2]),
+                        yearFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[0]),
+                        monthFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[1]),
+                        dayFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[2]);
+                    DateTime dateTimeStartCurrent = new DateTime(yearStart, monthStart, dayStart),
+                        dateTimeFinishCurrent = new DateTime(yearFinish, monthFinish, dayFinish);
+                    if (dateTimeFinishCurrent >= dateTimeStart)
+                    {
+                        dateTimeStart = dateTimeFinishCurrent.AddDays(1);
+                        dateTimeFinish = dateTimeStart.AddMonths(1).AddDays(-1);
+                        if (dateTimeFinish > DateTime.Today)
+                        {
+                            dateTimeFinish = DateTime.Today;
+                        }
+                    }
+                }
+                if (dateTimeStart == DateTime.Today)
+                {
+                    break;
+                }
+                string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}"),
+                    folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+
+                try
+                {
+                    // create subfolder                        
+                    Directory.CreateDirectory(folderDownload);
+
+                    // download modis
+                    ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
+
+                    // mosaic
+                    ModisMosaic(folderDownload);
+
+                    // convert
+                    ModisConvert(folderDownload);
+
+                    // clip
+                    TifClip(folderDownload);
+
+                    // move to GeoServer
+                    // publish
+                    Publish(folderDownload);
+
+                    // rename folder (remove "!")
+                    Directory.Move(folderDownload, folderDownloadFinale);
+
+                    // anomaly
+                    foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
+                    {
+                        if (file.Contains("Anomaly") || file.Contains("BASE"))
+                        {
+                            continue;
+                        }
+                        // calculate anomaly
+                        Anomaly(GeoServerModisDataDir, file);
                     }
 
-                    // rename last subfolder date finish if it is 30 days recent
+                    //// work with downloaded MODIS
+                    //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
+                    //{
+                    //    // mosaic
+                    //    ModisMosaic(folder);
+
+                    //    // convert
+                    //    ModisConvert(folder);
+
+                    //    // clip
+                    //    TifClip(folder);
+
+                    //    // move to GeoServer
+                    //    // publish
+                    //    Publish(folder);
+                    //}
+                }
+                catch
+                {
+                    // delete folders which names start with "!" 
+                    foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
+                    {
+                        Directory.Delete(folder, true);
+                    }
+
                     if (dateTimeFinish.AddDays(30) > DateTime.Now)
                     {
-                        // get last hdf date
-                        DateTime dateTimeLastHDF = dateTimeStart;
-                        foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.hdf", SearchOption.TopDirectoryOnly))
-                        {
-                            string fileDate = Path.GetFileName(file).Split('.')[1].Remove(0, 1);
-                            DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)));
-                            if (dateTimeHDF >= dateTimeLastHDF)
-                            {
-                                dateTimeLastHDF = dateTimeHDF;
-                            }
-                        }
-                        string folderDownloadRename = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeLastHDF.ToString("yyyy.MM.dd")}");
-                        if (Directory.Exists(folderDownloadFinale))
-                        {
-                            Directory.Move(folderDownloadFinale, folderDownloadRename);
-                        }
-                    }
-
-                    // delete empty folder
-                    if(Directory.Exists(folderDownloadFinale))
-                    {
-                        if (Directory.EnumerateFiles(folderDownloadFinale, "*hdf*").Count() == 0)
-                        {
-                            Directory.Delete(folderDownloadFinale, true);
-
-                            // 8 hours
-                            Thread.Sleep(60 * 60 * 60 * 8);
-                        }
+                        // 3 hours
+                        Thread.Sleep(60 * 60 * 60 * 3);
                     }
                 }
-                if (dateTimeFinish == DateTime.Today)
+
+                // rename last subfolder date finish if it is 30 days recent
+                if (dateTimeFinish.AddDays(30) > DateTime.Now)
                 {
-                    // 1 hour
-                    Thread.Sleep(60 * 60 * 60);
+                    // get last hdf date
+                    DateTime dateTimeLastHDF = dateTimeStart;
+                    foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.hdf", SearchOption.TopDirectoryOnly))
+                    {
+                        string fileDate = Path.GetFileName(file).Split('.')[1].Remove(0, 1);
+                        DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)));
+                        if (dateTimeHDF >= dateTimeLastHDF)
+                        {
+                            dateTimeLastHDF = dateTimeHDF;
+                        }
+                    }
+                    string folderDownloadRename = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeLastHDF.ToString("yyyy.MM.dd")}");
+                    if (Directory.Exists(folderDownloadFinale))
+                    {
+                        Directory.Move(folderDownloadFinale, folderDownloadRename);
+                    }
                 }
+
+                // delete empty folder
+                if (Directory.Exists(folderDownloadFinale))
+                {
+                    if (Directory.EnumerateFiles(folderDownloadFinale, "*hdf*").Count() == 0)
+                    {
+                        Directory.Delete(folderDownloadFinale, true);
+
+                        // 3 hours
+                        Thread.Sleep(60 * 60 * 60 * 3);
+                    }
+                }
+            }
+            if (dateTimeFinish == DateTime.Today)
+            {
+                // 1 hour
+                Thread.Sleep(60 * 60 * 60);
             }
         }
 

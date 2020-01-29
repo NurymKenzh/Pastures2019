@@ -138,7 +138,7 @@ namespace Modis
                             dayFinish = Convert.ToInt32(dateTimeFinishCurrentS.Split(".")[2]);
                         DateTime dateTimeStartCurrent = new DateTime(yearStart, monthStart, dayStart),
                             dateTimeFinishCurrent = new DateTime(yearFinish, monthFinish, dayFinish);
-                        if (dateTimeFinishCurrent > dateTimeStart)
+                        if (dateTimeFinishCurrent >= dateTimeStart)
                         {
                             dateTimeStart = dateTimeFinishCurrent.AddDays(1);
                             dateTimeFinish = dateTimeStart.AddMonths(1).AddDays(-1);
@@ -214,30 +214,42 @@ namespace Modis
                         {
                             Directory.Delete(folder, true);
                         }
-                    }
 
-                    // delete empty folder
-                    if (Directory.EnumerateFiles(folderDownloadFinale, "*hdf*").Count() == 0)
-                    {
-                        Directory.Delete(folderDownloadFinale, true);
+                        // 8 hours
+                        Thread.Sleep(60 * 60 * 60 * 8);
                     }
 
                     // rename last subfolder date finish if it is 30 days recent
                     if (dateTimeFinish.AddDays(30) > DateTime.Now)
                     {
                         // get last hdf date
-                        DateTime dateTimeLastHDF = dateTimeFinish;
+                        DateTime dateTimeLastHDF = dateTimeStart;
                         foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.hdf", SearchOption.TopDirectoryOnly))
                         {
                             string fileDate = Path.GetFileName(file).Split('.')[1].Remove(0, 1);
                             DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)));
-                            if(dateTimeHDF >= dateTimeLastHDF)
+                            if (dateTimeHDF >= dateTimeLastHDF)
                             {
                                 dateTimeLastHDF = dateTimeHDF;
                             }
                         }
-                        string folderDownloadRename = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeLastHDF.ToString("yyyy.MM.dd")}");
-                        Directory.Move(folderDownloadFinale, folderDownloadRename);
+                        string folderDownloadRename = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeLastHDF.ToString("yyyy.MM.dd")}");
+                        if (Directory.Exists(folderDownloadFinale))
+                        {
+                            Directory.Move(folderDownloadFinale, folderDownloadRename);
+                        }
+                    }
+
+                    // delete empty folder
+                    if(Directory.Exists(folderDownloadFinale))
+                    {
+                        if (Directory.EnumerateFiles(folderDownloadFinale, "*hdf*").Count() == 0)
+                        {
+                            Directory.Delete(folderDownloadFinale, true);
+
+                            // 8 hours
+                            Thread.Sleep(60 * 60 * 60 * 8);
+                        }
                     }
                 }
                 if (dateTimeFinish == DateTime.Today)

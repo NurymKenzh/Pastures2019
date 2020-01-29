@@ -152,7 +152,8 @@ namespace Modis
                     {
                         break;
                     }
-                    string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
+                    string folderDownload = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}"),
+                        folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
 
                     try
                     {
@@ -176,7 +177,6 @@ namespace Modis
                         Publish(folderDownload);
 
                         // rename folder (remove "!")
-                        string folderDownloadFinale = Path.Combine(DownloadDir, $"{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeFinish.ToString("yyyy.MM.dd")}");
                         Directory.Move(folderDownload, folderDownloadFinale);
 
                         // anomaly
@@ -217,9 +217,9 @@ namespace Modis
                     }
 
                     // delete empty folder
-                    if (Directory.EnumerateFiles(folderDownload, "*hdf*").Count() == 0)
+                    if (Directory.EnumerateFiles(folderDownloadFinale, "*hdf*").Count() == 0)
                     {
-                        Directory.Delete(folderDownload, true);
+                        Directory.Delete(folderDownloadFinale, true);
                     }
 
                     // rename last subfolder date finish if it is 30 days recent
@@ -237,7 +237,7 @@ namespace Modis
                             }
                         }
                         string folderDownloadRename = Path.Combine(DownloadDir, $"!{dateTimeStart.ToString("yyyy.MM.dd")}-{dateTimeLastHDF.ToString("yyyy.MM.dd")}");
-                        Directory.Move(folderDownload, folderDownloadRename);
+                        Directory.Move(folderDownloadFinale, folderDownloadRename);
                     }
                 }
                 if (dateTimeFinish == DateTime.Today)

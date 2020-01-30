@@ -1,22 +1,20 @@
-﻿@model Pastures2019.Models.Cattle
+﻿@model Pastures2019.Models.Horse
 @using Pastures2019.Controllers
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = SharedLocalizer["Edit"];
+    ViewData["Title"] = SharedLocalizer["Create"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-<h1>@SharedLocalizer["Edit"]</h1>
 
-<h4>@SharedLocalizer["Cattle"]</h4>
+<h1>@SharedLocalizer["Create"]</h1>
+
+<h4>@SharedLocalizer["Horse"]</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit" enctype="multipart/form-data">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Code" class="control-label"></label>
                 <input asp-for="Code" class="form-control" />
@@ -68,34 +66,84 @@
                 <span asp-validation-for="WeightEN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="SlaughterYield" class="control-label"></label>
-                <input asp-for="SlaughterYield" class="form-control" />
-                <span asp-validation-for="SlaughterYield" class="text-danger"></span>
+                <label asp-for="HeightRU" class="control-label"></label>
+                <input asp-for="HeightRU" class="form-control" />
+                <span asp-validation-for="HeightRU" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EwesYieldRU" class="control-label"></label>
-                <input asp-for="EwesYieldRU" class="form-control" />
-                <span asp-validation-for="EwesYieldRU" class="text-danger"></span>
+                <label asp-for="HeightKK" class="control-label"></label>
+                <input asp-for="HeightKK" class="form-control" />
+                <span asp-validation-for="HeightKK" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EwesYieldKK" class="control-label"></label>
-                <input asp-for="EwesYieldKK" class="form-control" />
-                <span asp-validation-for="EwesYieldKK" class="text-danger"></span>
+                <label asp-for="HeightEN" class="control-label"></label>
+                <input asp-for="HeightEN" class="form-control" />
+                <span asp-validation-for="HeightEN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EwesYieldEN" class="control-label"></label>
-                <input asp-for="EwesYieldEN" class="form-control" />
-                <span asp-validation-for="EwesYieldEN" class="text-danger"></span>
+                <label asp-for="MilkYieldRU" class="control-label"></label>
+                <input asp-for="MilkYieldRU" class="form-control" />
+                <span asp-validation-for="MilkYieldRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MilkYieldKK" class="control-label"></label>
+                <input asp-for="MilkYieldKK" class="form-control" />
+                <span asp-validation-for="MilkYieldKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MilkYieldEN" class="control-label"></label>
+                <input asp-for="MilkYieldEN" class="form-control" />
+                <span asp-validation-for="MilkYieldEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyLengthRU" class="control-label"></label>
+                <input asp-for="BodyLengthRU" class="form-control" />
+                <span asp-validation-for="BodyLengthRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyLengthKK" class="control-label"></label>
+                <input asp-for="BodyLengthKK" class="form-control" />
+                <span asp-validation-for="BodyLengthKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BodyLengthEN" class="control-label"></label>
+                <input asp-for="BodyLengthEN" class="form-control" />
+                <span asp-validation-for="BodyLengthEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BustRU" class="control-label"></label>
+                <input asp-for="BustRU" class="form-control" />
+                <span asp-validation-for="BustRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BustKK" class="control-label"></label>
+                <input asp-for="BustKK" class="form-control" />
+                <span asp-validation-for="BustKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BustEN" class="control-label"></label>
+                <input asp-for="BustEN" class="form-control" />
+                <span asp-validation-for="BustEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetacarpusRU" class="control-label"></label>
+                <input asp-for="MetacarpusRU" class="form-control" />
+                <span asp-validation-for="MetacarpusRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetacarpusKK" class="control-label"></label>
+                <input asp-for="MetacarpusKK" class="form-control" />
+                <span asp-validation-for="MetacarpusKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MetacarpusEN" class="control-label"></label>
+                <input asp-for="MetacarpusEN" class="form-control" />
+                <span asp-validation-for="MetacarpusEN" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TotalGoals" class="control-label"></label>
                 <input asp-for="TotalGoals" class="form-control" />
                 <span asp-validation-for="TotalGoals" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MilkFatContent" class="control-label"></label>
-                <input asp-for="MilkFatContent" class="form-control" />
-                <span asp-validation-for="MilkFatContent" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="BredRU" class="control-label"></label>
@@ -148,7 +196,7 @@
                 <span asp-validation-for="DescriptionEN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="@SharedLocalizer["Save"]" class="btn btn-primary" />
+                <input type="submit" value="@SharedLocalizer["Create"]" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -158,15 +206,6 @@
     <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
 </div>
 
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
-<script>
-    $.validator.methods.range = function (value, element, param) {
-        var globalizedValue = value.replace(",", ".");
-        return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
-    }
-    $.validator.methods.number = function (value, element) {
-        return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
-    }
-</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

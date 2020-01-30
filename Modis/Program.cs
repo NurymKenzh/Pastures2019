@@ -300,7 +300,7 @@ namespace Modis
             DateTime DateTimeFinish,
             string Folder)
         {
-            string arguments = $"-U {ModisUser} -P {ModisPassword} -r -t {string.Join(',', ModisSpans)} -p {ModisProduct}" +
+            string arguments = $"-U {ModisUser} -P {ModisPassword} -r -t {string.Join(',', ModisSpans)} -s {ModisSource} -p {ModisProduct}" +
                 $" -f {DateTimeStart.ToString("yyyy-MM-dd")} -e {DateTimeFinish.ToString("yyyy-MM-dd")}" +
                 $" \"{Folder}\"";
             GDALExecute(CMDPath, "modis_download.py", Folder, arguments);

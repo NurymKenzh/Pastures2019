@@ -30,6 +30,12 @@
             </div>
             <div class="col">
                 <form>
+                    <input type="checkbox" id="layerMODISShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerMODISShow">
+                        MODIS
+                    </label>
+                    <input id="layerMODISOpacity" type="range" class="form-control-range" min="0" max="100" value="80" oninput="ChangeLayers()" />
+
                     <div class="form-group mt-1 mb-0">
                         <label class="m-0" for="SourceProduct">Satellite</label>
                         <select class="w-100" id="SourceProduct" onchange="ChangeSourceProduct()">
@@ -64,9 +70,9 @@
                     <div class="form-check MOLT_MOD13Q1006 form-check-inline w-100">
                         <div class="input-group-prepend">
                             @*<button class="btn btn-sm" id="minus-btn" onclick="DateMinusMOLT_MOD13Q1006()">
-                                <i class="fa fa-minus"></i>
-                            </button>*@
-                            <input type="button" value="-" onclick="DateMinusMOLT_MOD13Q1006()"/>
+                    <i class="fa fa-minus"></i>
+                </button>*@
+                            <input type="button" value="-" onclick="DateMinusMOLT_MOD13Q1006()" />
                         </div>
                         <select class="w-100" id="DayOfYear_MOLT_MOD13Q1006" aria-describedby="DayHelpBlock" onchange="ChangeModis()">
                             @foreach (YearDay day in yearDays_MOLT_MOD13Q1006.Where(y => y.year == maxYear_MOLT_MOD13Q1006).Distinct().OrderBy(y => y.day))
@@ -83,14 +89,14 @@
                         </select>
                         <div class="input-group-append">
                             @*<button class="btn btn-sm" id="plus-btn">
-                                <i class="fa fa-plus"></i>
-                            </button>*@
-                            <input type="button" value="+" onclick="DatePlusMOLT_MOD13Q1006()"/>
+                    <i class="fa fa-plus"></i>
+                </button>*@
+                            <input type="button" value="+" onclick="DatePlusMOLT_MOD13Q1006()" />
                         </div>
                     </div>
                     @*<small id="DayHelpBlock" class="form-text">
-                        Exsample 017 : 01/17 - 01/24
-                    </small>*@
+            Exsample 017 : 01/17 - 01/24
+        </small>*@
 
                     <div class="form-group MOLA_MYD13Q1006" style="display: none;">
                         <label for="Year_MOLA_MYD13Q1006">Year</label>
@@ -137,7 +143,33 @@
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
-                    Base Map
+                    <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
+                        <option value="OSM">OpenStreetMap</option>
+                        <option value="BingAerialWithLabels">Bing Aerial</option>
+                        <option value="BingRoadStatic">Bing Road (static)</option>
+                        <option value="BingRoadDynamic">Bing Road (dynamic)</option>
+                        <option value="HERENormalDay">HERE Normal Day</option>
+                        <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
+                        <option value="HERETerrainDay">HERE Terrain Day</option>
+                        <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
+                        <option value="StamenWatercolor">Stamen Watercolor</option>
+                        <option value="StamenTerrain">Stamen Terrain</option>
+                        <option value="StamenToner">Stamen Toner</option>
+                        <option value="ArcGIS">ArcGIS</option>
+                        <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
+                        <option value="ThunderforestTransport">Thunderforest Transport</option>
+                        <option value="ThunderforestLandscape">Thunderforest Landscape</option>
+                        <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
+                        <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
+                        <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
+                        <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
+                        <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
+                    </select>
+                    <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerBaseShow">
+                        Базовые слои
+                    </label>
+                    <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -187,12 +219,157 @@
     var layerNDVI = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006').val() + $('#DayOfYear_MOLT_MOD13Q1006').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI,
         layerAnomaly = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006').val() + $('#DayOfYear_MOLT_MOD13Q1006').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly;
 
+    var HEREappId = 'SLdBasp4s1oq2oUbVGxy';
+    var HEREappCode = 'D9-h9iVhjgUB_9eUlFETXA';
+
     var Source_OSM = new ol.source.OSM();
+
+    Source_BingAerialWithLabels = new ol.source.BingMaps({
+        key: 'AmYNYRGlIrw_kppWvrIhfzY1v046b4Ft5nopz6Av94XDvTTo8xTkHCEaZ_zMwCOJ',
+        imagerySet: 'AerialWithLabels',
+    });
+
+    Source_BingRoadStatic = new ol.source.BingMaps({
+        key: 'AmYNYRGlIrw_kppWvrIhfzY1v046b4Ft5nopz6Av94XDvTTo8xTkHCEaZ_zMwCOJ',
+        imagerySet: 'Road',
+    });
+    Source_BingRoadDynamic = new ol.source.BingMaps({
+        key: 'AmYNYRGlIrw_kppWvrIhfzY1v046b4Ft5nopz6Av94XDvTTo8xTkHCEaZ_zMwCOJ',
+        imagerySet: 'RoadOnDemand',
+    });
+
+    var urlTpl = 'https://{1-4}.{base}.maps.cit.api.here.com' +
+        '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
+        '?app_id={app_id}&app_code={app_code}';
+    function HEREcreateUrl(tpl, HERElayerDesc) {
+        return tpl
+            .replace('{base}', HERElayerDesc.base)
+            .replace('{type}', HERElayerDesc.type)
+            .replace('{scheme}', HERElayerDesc.scheme)
+            .replace('{app_id}', HERElayerDesc.app_id)
+            .replace('{app_code}', HERElayerDesc.app_code);
+    };
+
+    var HERElayerDescNormalDay = {
+        base: 'base',
+        type: 'maptile',
+        scheme: 'normal.day',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HERENormalDay = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescNormalDay),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+            '<a href="http://developer.here.com">HERE</a>'
+    });
+
+    var HERElayerDescNormalDayTransit = {
+        base: 'base',
+        type: 'maptile',
+        scheme: 'normal.day.transit',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HERENormalDayTransit = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescNormalDayTransit),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+            '<a href="http://developer.here.com">HERE</a>'
+    });
+
+    var HERElayerDescTerrainDay = {
+        base: 'aerial',
+        type: 'maptile',
+        scheme: 'terrain.day',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HERETerrainDay = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescTerrainDay),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+            '<a href="http://developer.here.com">HERE</a>'
+    });
+
+    var HERElayerDescHybridDay = {
+        base: 'aerial',
+        type: 'maptile',
+        scheme: 'hybrid.day',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HEREHybridDay = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescHybridDay),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' + '<a href="http://developer.here.com">HERE</a>'
+    });
+
+    var Source_StamenWatercolor = new ol.source.Stamen({
+        layer: 'watercolor'
+    });
+
+    var Source_StamenTerrain = new ol.source.Stamen({
+        layer: 'terrain'
+    });
+
+    var Source_StamenToner = new ol.source.Stamen({
+        layer: 'toner'
+    });
+
+    var Source_ArcGIS = new ol.source.XYZ({
+        attributions: 'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+            'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+            'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+    });
+
+    var Source_ThunderforestOpenCycleMap = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestTransport = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/transport/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestLandscape = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestOutdoors = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestTransportDark = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestSpinalMap = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestPioneer = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestMobileAtlas = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
+    var Source_ThunderforestNeighbourhood = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+
     var Layer_Base = new ol.layer.Tile({
-        source: Source_OSM
+        source: Source_HEREHybridDay
     });
     Layer_Base.set('name', 'Base');
-    Layer_Base.setOpacity(0.80);
+    Layer_Base.setOpacity(1);
 
     var url_NDVI = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_NDVI = new ol.source.TileWMS({
@@ -426,6 +603,92 @@
             $("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex', 0);
             ChangeModis();
         }
+    }
+</script>
+
+<script>
+    function ChangeLayers() {
+        map.getLayers().forEach(function (layer) {
+            if (layer.get('name') == 'Base') {
+                layer.setVisible(document.getElementById("layerBaseShow").checked);
+                layer.setOpacity($('#layerBaseOpacity').val() / 100)
+                if ($('#layerBaseType').val() == 'OSM') {
+                    layer.setSource(Source_OSM);
+                }
+                else if ($('#layerBaseType').val() == 'BingAerialWithLabels') {
+                    layer.setSource(Source_BingAerialWithLabels);
+                }
+                else if ($('#layerBaseType').val() == 'BingRoadStatic') {
+                    layer.setSource(Source_BingRoadStatic);
+                }
+                else if ($('#layerBaseType').val() == 'BingRoadDynamic') {
+                    layer.setSource(Source_BingRoadDynamic);
+                }
+                else if ($('#layerBaseType').val() == 'HERENormalDay') {
+                    layer.setSource(Source_HERENormalDay);
+                }
+                else if ($('#layerBaseType').val() == 'HERENormalDayTransit') {
+                    layer.setSource(Source_HERENormalDayTransit);
+                }
+                else if ($('#layerBaseType').val() == 'HERETerrainDay') {
+                    layer.setSource(Source_HERETerrainDay);
+                }
+                else if ($('#layerBaseType').val() == 'HEREHybridDay') {
+                    layer.setSource(Source_HEREHybridDay);
+                }
+                else if ($('#layerBaseType').val() == 'StamenWatercolor') {
+                    layer.setSource(Source_StamenWatercolor);
+                }
+                else if ($('#layerBaseType').val() == 'StamenTerrain') {
+                    layer.setSource(Source_StamenTerrain);
+                }
+                else if ($('#layerBaseType').val() == 'StamenToner') {
+                    layer.setSource(Source_StamenToner);
+                }
+                else if ($('#layerBaseType').val() == 'ArcGIS') {
+                    layer.setSource(Source_ArcGIS);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestOpenCycleMap') {
+                    layer.setSource(Source_ThunderforestOpenCycleMap);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestTransport') {
+                    layer.setSource(Source_ThunderforestTransport);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestLandscape') {
+                    layer.setSource(Source_ThunderforestLandscape);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestOutdoors') {
+                    layer.setSource(Source_ThunderforestOutdoors);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestTransportDark') {
+                    layer.setSource(Source_ThunderforestTransportDark);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestSpinalMap') {
+                    layer.setSource(Source_ThunderforestSpinalMap);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestPioneer') {
+                    layer.setSource(Source_ThunderforestPioneer);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestMobileAtlas') {
+                    layer.setSource(Source_ThunderforestMobileAtlas);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestNeighbourhood') {
+                    layer.setSource(Source_ThunderforestNeighbourhood);
+                }
+            }
+            if (layer.get('name') == 'NDVI') {
+                if ($('#DataSet').val() == 'NDVI') {
+                    layer.setVisible(document.getElementById("layerMODISShow").checked);
+                }
+                layer.setOpacity($('#layerMODISOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'Anomaly') {
+                if ($('#DataSet').val() == 'Anomaly') {
+                    layer.setVisible(document.getElementById("layerMODISShow").checked);
+                }
+                layer.setOpacity($('#layerMODISOpacity').val() / 100);
+            }
+        })
     }
 </script>
 

@@ -63,7 +63,10 @@
                     @*<label class="m-0" for="DayOfYear_MOLT_MOD13Q1006">Start DOY : MM/DD Range</label>*@
                     <div class="form-check MOLT_MOD13Q1006 form-check-inline w-100">
                         <div class="input-group-prepend">
-                            <button class="btn btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+                            @*<button class="btn btn-sm" id="minus-btn" onclick="DateMinusMOLT_MOD13Q1006()">
+                                <i class="fa fa-minus"></i>
+                            </button>*@
+                            <input type="button" value="-" onclick="DateMinusMOLT_MOD13Q1006()"/>
                         </div>
                         <select class="w-100" id="DayOfYear_MOLT_MOD13Q1006" aria-describedby="DayHelpBlock" onchange="ChangeModis()">
                             @foreach (YearDay day in yearDays_MOLT_MOD13Q1006.Where(y => y.year == maxYear_MOLT_MOD13Q1006).Distinct().OrderBy(y => y.day))
@@ -79,7 +82,10 @@
                             }
                         </select>
                         <div class="input-group-append">
-                            <button class="btn btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                            @*<button class="btn btn-sm" id="plus-btn">
+                                <i class="fa fa-plus"></i>
+                            </button>*@
+                            <input type="button" value="+" onclick="DatePlusMOLT_MOD13Q1006()"/>
                         </div>
                     </div>
                     @*<small id="DayHelpBlock" class="form-text">
@@ -105,7 +111,8 @@
                     <div class="form-check MOLA_MYD13Q1006 form-check-inline w-100" style="display: none;">
                         @*<label for="DayOfYear_MOLA_MYD13Q1006">Start DOY : MM/DD Range</label>*@
                         <div class="input-group-prepend">
-                            <button class="btn btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
+                            @*<button class="btn btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>*@
+                            <input type="button" value="-" onclick="DateMinusMOLA_MYD13Q1006()" />
                         </div>
                         <select class="w-100" id="DayOfYear_MOLA_MYD13Q1006" onchange="ChangeModis()">
                             @foreach (YearDay day in yearDays_MOLA_MYD13Q1006.Where(y => y.year == maxYear_MOLA_MYD13Q1006).Distinct().OrderBy(y => y.day))
@@ -121,7 +128,8 @@
                             }
                         </select>
                         <div class="input-group-append">
-                            <button class="btn btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>
+                            @*<button class="btn btn-sm" id="plus-btn"><i class="fa fa-plus"></i></button>*@
+                            <input type="button" value="+" onclick="DatePlusMOLA_MYD13Q1006()" />
                         </div>
                     </div>
                 </form>
@@ -366,6 +374,57 @@
                 serverType: 'geoserver'
             });
             Layer_Anomaly.setSource(Source_Anomaly);
+        }
+    }
+</script>
+
+@* DateMinusMOLT_MOD13Q1006 *@
+<script>
+    function DateMinusMOLT_MOD13Q1006() {
+        if ($("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex') > 0) {
+            $("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex', $("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex') - 1);
+            ChangeModis();
+        }
+        else if ($("#Year_MOLT_MOD13Q1006").prop('selectedIndex') > 0) {
+            $("#Year_MOLT_MOD13Q1006").prop('selectedIndex', $("#Year_MOLT_MOD13Q1006").prop('selectedIndex') - 1);
+            ChangeYear();
+        }
+    }
+
+    function DatePlusMOLT_MOD13Q1006() {
+        if ($("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex') < $('#DayOfYear_MOLT_MOD13Q1006 option').length - 1) {
+            $("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex', $("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex') + 1);
+            ChangeModis();
+        }
+        else if ($("#Year_MOLT_MOD13Q1006").prop('selectedIndex') < $('#Year_MOLT_MOD13Q1006 option').length - 1) {
+            $("#Year_MOLT_MOD13Q1006").prop('selectedIndex', $("#Year_MOLT_MOD13Q1006").prop('selectedIndex') + 1);
+            ChangeYear();
+            $("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex', 0);
+            ChangeModis();
+        }
+    }
+
+    function DateMinusMOLA_MYD13Q1006() {
+        if ($("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex') > 0) {
+            $("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex', $("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex') - 1);
+            ChangeModis();
+        }
+        else if ($("#Year_MOLA_MYD13Q1006").prop('selectedIndex') > 0) {
+            $("#Year_MOLA_MYD13Q1006").prop('selectedIndex', $("#Year_MOLA_MYD13Q1006").prop('selectedIndex') - 1);
+            ChangeYear();
+        }
+    }
+
+    function DatePlusMOLA_MYD13Q1006() {
+        if ($("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex') < $('#DayOfYear_MOLA_MYD13Q1006 option').length - 1) {
+            $("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex', $("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex') + 1);
+            ChangeModis();
+        }
+        else if ($("#Year_MOLA_MYD13Q1006").prop('selectedIndex') < $('#Year_MOLA_MYD13Q1006 option').length - 1) {
+            $("#Year_MOLA_MYD13Q1006").prop('selectedIndex', $("#Year_MOLA_MYD13Q1006").prop('selectedIndex') + 1);
+            ChangeYear();
+            $("#DayOfYear_MOLA_MYD13Q1006").prop('selectedIndex', 0);
+            ChangeModis();
         }
     }
 </script>

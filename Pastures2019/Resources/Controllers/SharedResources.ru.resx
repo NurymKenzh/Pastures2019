@@ -532,7 +532,7 @@
     <value>Мелкий рогатый скот</value>
   </data>
   <data name="SmallCattles" xml:space="preserve">
-    <value>Мелкие рогатый скот</value>
+    <value>Мелкий рогатый скот</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>

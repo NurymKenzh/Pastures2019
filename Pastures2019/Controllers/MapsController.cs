@@ -30,12 +30,14 @@ namespace Pastures2019.Controllers
             ViewBag.ModisLayerTemplate1 = Startup.Configuration["ModisLayerTemplate1"].ToString();
             ViewBag.ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI = Startup.Configuration["ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI"].ToString();
             ViewBag.ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly = Startup.Configuration["ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly"].ToString();
-            ViewBag.YearDays_MOLT_MOD13Q1006_B01_NDVI = GetModisYearDays_MOLT_MOD13Q1006_B01_NDVI();
-            ViewBag.YearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly = GetModisYearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly();
+            ViewBag.ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI = Startup.Configuration["ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI"].ToString();
+            ViewBag.ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI_Anomaly = Startup.Configuration["ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI_Anomaly"].ToString();
+            ViewBag.YearDays_MOLT_MOD13Q1006 = GetModisYearDays_MOLT_MOD13Q1006();
+            ViewBag.YearDays_MOLA_MYD13Q1006 = GetModisYearDays_MOLA_MYD13Q1006();
             return View();
         }
 
-        private YearDay[] GetModisYearDays_MOLT_MOD13Q1006_B01_NDVI()
+        private YearDay[] GetModisYearDays_MOLT_MOD13Q1006()
         {
             List<YearDay> yearDays = new List<YearDay>();
             string[] layers = GetModisLayers();
@@ -56,14 +58,14 @@ namespace Pastures2019.Controllers
             return yearDays.ToArray();
         }
 
-        private YearDay[] GetModisYearDays_MOLT_MOD13Q1006_B01_NDVI_Anomaly()
+        private YearDay[] GetModisYearDays_MOLA_MYD13Q1006()
         {
             List<YearDay> yearDays = new List<YearDay>();
             string[] layers = GetModisLayers();
             for (int i = 0; i < layers.Length; i++)
             {
                 layers[i] = layers[i]
-                    .Replace(Startup.Configuration["ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly"].ToString(), "")
+                    .Replace(Startup.Configuration["ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI"].ToString(), "")
                     .Replace(Startup.Configuration["ModisLayerTemplate1"].ToString(), "");
                 if(layers[i].Length == 7)
                 {

@@ -66,15 +66,15 @@
                             <button class="btn btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
                         </div>
                         <select class="w-100" id="DayOfYear_MOLT_MOD13Q1006" aria-describedby="DayHelpBlock" onchange="ChangeModis()">
-                            @foreach (string day in yearDays_MOLT_MOD13Q1006.Where(y => y.year == maxYear_MOLT_MOD13Q1006).Select(y => y.day).Distinct().OrderBy(y => y))
+                            @foreach (YearDay day in yearDays_MOLT_MOD13Q1006.Where(y => y.year == maxYear_MOLT_MOD13Q1006).Distinct().OrderBy(y => y.day))
                             {
-                                if (day == maxDay_MOLT_MOD13Q1006)
+                                if (day.day == maxDay_MOLT_MOD13Q1006)
                                 {
-                                    <option value="@day" selected>@day</option>
+                                    <option value="@day.day" selected>@day.monthday</option>
                                 }
                                 else
                                 {
-                                    <option value="@day">@day</option>
+                                    <option value="@day.day">@day.monthday</option>
                                 }
                             }
                         </select>
@@ -83,8 +83,8 @@
                         </div>
                     </div>
                     @*<small id="DayHelpBlock" class="form-text">
-                            Exsample 017 : 01/17 - 01/24
-                        </small>*@
+                        Exsample 017 : 01/17 - 01/24
+                    </small>*@
 
                     <div class="form-group MOLA_MYD13Q1006" style="display: none;">
                         <label for="Year_MOLA_MYD13Q1006">Year</label>
@@ -108,15 +108,15 @@
                             <button class="btn btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>
                         </div>
                         <select class="w-100" id="DayOfYear_MOLA_MYD13Q1006" onchange="ChangeModis()">
-                            @foreach (string day in yearDays_MOLA_MYD13Q1006.Where(y => y.year == maxYear_MOLA_MYD13Q1006).Select(y => y.day).Distinct().OrderBy(y => y))
+                            @foreach (YearDay day in yearDays_MOLA_MYD13Q1006.Where(y => y.year == maxYear_MOLA_MYD13Q1006).Distinct().OrderBy(y => y.day))
                             {
-                                if (day == maxDay_MOLA_MYD13Q1006)
+                                if (day.day == maxDay_MOLA_MYD13Q1006)
                                 {
-                                    <option value="@day" selected>@day</option>
+                                    <option value="@day.day" selected>@day.monthday</option>
                                 }
                                 else
                                 {
-                                    <option value="@day">@day</option>
+                                    <option value="@day.day">@day.monthday</option>
                                 }
                             }
                         </select>
@@ -281,10 +281,10 @@
         for (i = 0; i < yeardays_MOLT_MOD13Q1006.length; i++) {
             if (yeardays_MOLT_MOD13Q1006[i].year == $('#Year_MOLT_MOD13Q1006').val().toString()) {
                 if (yeardays_MOLT_MOD13Q1006[i].day == maxday_MOLT_MOD13Q1006) {
-                    $('#DayOfYear_MOLT_MOD13Q1006').append($('<option selected />').val(yeardays_MOLT_MOD13Q1006[i].day).text(yeardays_MOLT_MOD13Q1006[i].day));
+                    $('#DayOfYear_MOLT_MOD13Q1006').append($('<option selected />').val(yeardays_MOLT_MOD13Q1006[i].day).text(yeardays_MOLT_MOD13Q1006[i].monthday));
                 }
                 else {
-                    $('#DayOfYear_MOLT_MOD13Q1006').append($('<option />').val(yeardays_MOLT_MOD13Q1006[i].day).text(yeardays_MOLT_MOD13Q1006[i].day));
+                    $('#DayOfYear_MOLT_MOD13Q1006').append($('<option />').val(yeardays_MOLT_MOD13Q1006[i].day).text(yeardays_MOLT_MOD13Q1006[i].monthday));
                 }
             }
         }
@@ -302,10 +302,10 @@
         for (i = 0; i < yeardays_MOLA_MYD13Q1006.length; i++) {
             if (yeardays_MOLA_MYD13Q1006[i].year == $('#Year_MOLA_MYD13Q1006').val().toString()) {
                 if (yeardays_MOLA_MYD13Q1006[i].day == maxday_MOLA_MYD13Q1006) {
-                    $('#DayOfYear_MOLA_MYD13Q1006').append($('<option selected />').val(yeardays_MOLA_MYD13Q1006[i].day).text(yeardays_MOLA_MYD13Q1006[i].day));
+                    $('#DayOfYear_MOLA_MYD13Q1006').append($('<option selected />').val(yeardays_MOLA_MYD13Q1006[i].day).text(yeardays_MOLA_MYD13Q1006[i].monthday));
                 }
                 else {
-                    $('#DayOfYear_MOLA_MYD13Q1006').append($('<option />').val(yeardays_MOLA_MYD13Q1006[i].day).text(yeardays_MOLA_MYD13Q1006[i].day));
+                    $('#DayOfYear_MOLA_MYD13Q1006').append($('<option />').val(yeardays_MOLA_MYD13Q1006[i].day).text(yeardays_MOLA_MYD13Q1006[i].monthday));
                 }
             }
         }
@@ -378,7 +378,8 @@
     <script>
         yeardays_MOLT_MOD13Q1006.push({
             year: '@yearDay.year',
-            day: '@yearDay.day'
+            day: '@yearDay.day',
+            monthday: '@yearDay.monthday'
         });
     </script>
 }
@@ -390,7 +391,8 @@
     <script>
         yeardays_MOLA_MYD13Q1006.push({
             year: '@yearDay.year',
-            day: '@yearDay.day'
+            day: '@yearDay.day',
+            monthday: '@yearDay.monthday'
         });
     </script>
 }

@@ -14,6 +14,7 @@ namespace Pastures2019.Controllers
     {
         public string year;
         public string day;
+        public string monthday;
     }
 
     public class MapsController : Controller
@@ -51,7 +52,11 @@ namespace Pastures2019.Controllers
                     yearDays.Add(new YearDay()
                     {
                         year = layers[i].Substring(0, 4),
-                        day = layers[i].Substring(4, 3)
+                        day = layers[i].Substring(4, 3),
+                        monthday = $"{layers[i].Substring(4, 3)}: " +
+                            $"{(new DateTime(Convert.ToInt32(layers[i].Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(layers[i].Substring(4, 3)))).ToString("dd/MM")}".Replace('.', '/') +
+                            $" - " +
+                            $"{(new DateTime(Convert.ToInt32(layers[i].Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(layers[i].Substring(4, 3)) + 16)).ToString("dd/MM")}".Replace('.', '/')
                     });
                 }
             }
@@ -72,7 +77,11 @@ namespace Pastures2019.Controllers
                     yearDays.Add(new YearDay()
                     {
                         year = layers[i].Substring(0, 4),
-                        day = layers[i].Substring(4, 3)
+                        day = layers[i].Substring(4, 3),
+                        monthday = $"{layers[i].Substring(4, 3)}: " +
+                            $"{(new DateTime(Convert.ToInt32(layers[i].Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(layers[i].Substring(4, 3)))).ToString("dd/MM")}".Replace('.', '/') +
+                            $" - " +
+                            $"{(new DateTime(Convert.ToInt32(layers[i].Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(layers[i].Substring(4, 3)) + 16)).ToString("dd/MM")}".Replace('.', '/')
                     });
                 }
             }

@@ -123,8 +123,14 @@
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
+  <data name="Anomaly" xml:space="preserve">
+    <value>Аномалия</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Обратно к списку</value>
+  </data>
+  <data name="BaseLayer" xml:space="preserve">
+    <value>Базовый слой</value>
   </data>
   <data name="BClass" xml:space="preserve">
     <value>Класс пастбищ (Нагрузка)</value>
@@ -242,6 +248,12 @@
   </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value>Текущий пароль</value>
+  </data>
+  <data name="Dataset" xml:space="preserve">
+    <value>Набор данных</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
   </data>
   <data name="DateTimeFinish" xml:space="preserve">
     <value>Конечная дата</value>
@@ -384,6 +396,9 @@
   <data name="Maps" xml:space="preserve">
     <value>Карты</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Меню</value>
+  </data>
   <data name="Metacarpus" xml:space="preserve">
     <value>Обхват пясти</value>
   </data>
@@ -492,6 +507,9 @@
   <data name="Roles" xml:space="preserve">
     <value>Роли</value>
   </data>
+  <data name="Satellite" xml:space="preserve">
+    <value>Спутник</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
@@ -584,6 +602,9 @@
   </data>
   <data name="WoolLengthRU" xml:space="preserve">
     <value>Длина шерсти (русский)</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Год</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Ваш пароль был изменен.</value>

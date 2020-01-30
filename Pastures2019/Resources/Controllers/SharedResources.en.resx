@@ -123,8 +123,14 @@
   <data name="Administrator" xml:space="preserve">
     <value>Administration</value>
   </data>
+  <data name="Anomaly" xml:space="preserve">
+    <value>Anomaly</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Back To List</value>
+  </data>
+  <data name="BaseLayer" xml:space="preserve">
+    <value>Base Layer</value>
   </data>
   <data name="BClass" xml:space="preserve">
     <value>Pasture Class (Load)</value>
@@ -242,6 +248,12 @@
   </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value>Current password</value>
+  </data>
+  <data name="Dataset" xml:space="preserve">
+    <value>Dataset</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="DateTimeFinish" xml:space="preserve">
     <value>Final date</value>
@@ -384,6 +396,9 @@
   <data name="Maps" xml:space="preserve">
     <value>Maps</value>
   </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="Metacarpus" xml:space="preserve">
     <value>Metacarpal circumference</value>
   </data>
@@ -492,6 +507,9 @@
   <data name="Roles" xml:space="preserve">
     <value>Roles</value>
   </data>
+  <data name="Satellite" xml:space="preserve">
+    <value>Satellite</value>
+  </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
@@ -584,6 +602,9 @@
   </data>
   <data name="WoolLengthRU" xml:space="preserve">
     <value>Wool length (Russian)</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Your password has been changed.</value>

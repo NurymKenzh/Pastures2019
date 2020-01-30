@@ -1,6 +1,8 @@
 ﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = "Modis";
+    ViewData["Title"] = "MODIS";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
@@ -37,21 +39,21 @@
                     <input id="layerMODISOpacity" type="range" class="form-control-range" min="0" max="100" value="80" oninput="ChangeLayers()" />
 
                     <div class="form-group mt-1 mb-0">
-                        <label class="m-0" for="SourceProduct">Satellite</label>
+                        <label class="m-0" for="SourceProduct">@SharedLocalizer["Satellite"]</label>
                         <select class="w-100" id="SourceProduct" onchange="ChangeSourceProduct()">
                             <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
                             <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
                         </select>
                     </div>
                     <div class="form-group mt-1 mb-0">
-                        <label class="m-0" for="DataSet">DataSet</label>
+                        <label class="m-0" for="DataSet">@SharedLocalizer["Dataset"]</label>
                         <select class="w-100" id="DataSet" onchange="ChangeDataSet()">
                             <option value="NDVI">NDVI</option>
-                            <option value="Anomaly">NDVI Anomaly %</option>
+                            <option value="Anomaly">@SharedLocalizer["Anomaly"]</option>
                         </select>
                     </div>
                     <div class="form-group mt-1 mb-1 MOLT_MOD13Q1006">
-                        <label class="m-0" for="Year_MOLT_MOD13Q1006">Year</label>
+                        <label class="m-0" for="Year_MOLT_MOD13Q1006">@SharedLocalizer["Year"]</label>
                         <select class="w-100" id="Year_MOLT_MOD13Q1006" onchange="ChangeYear()">
                             @foreach (string year in yearDays_MOLT_MOD13Q1006.Select(y => y.year).Distinct().OrderBy(y => y))
                             {
@@ -66,12 +68,12 @@
                             }
                         </select>
                     </div>
-                    @*<label class="m-0" for="DayOfYear_MOLT_MOD13Q1006">Start DOY : MM/DD Range</label>*@
+                    <label class="m-0" for="DayOfYear_MOLT_MOD13Q1006">@SharedLocalizer["Date"]</label>
                     <div class="form-check MOLT_MOD13Q1006 form-check-inline w-100">
                         <div class="input-group-prepend">
                             @*<button class="btn btn-sm" id="minus-btn" onclick="DateMinusMOLT_MOD13Q1006()">
-                    <i class="fa fa-minus"></i>
-                </button>*@
+                                    <i class="fa fa-minus"></i>
+                                </button>*@
                             <input type="button" value="-" onclick="DateMinusMOLT_MOD13Q1006()" />
                         </div>
                         <select class="w-100" id="DayOfYear_MOLT_MOD13Q1006" aria-describedby="DayHelpBlock" onchange="ChangeModis()">
@@ -89,17 +91,17 @@
                         </select>
                         <div class="input-group-append">
                             @*<button class="btn btn-sm" id="plus-btn">
-                    <i class="fa fa-plus"></i>
-                </button>*@
+                                    <i class="fa fa-plus"></i>
+                                </button>*@
                             <input type="button" value="+" onclick="DatePlusMOLT_MOD13Q1006()" />
                         </div>
                     </div>
                     @*<small id="DayHelpBlock" class="form-text">
-            Exsample 017 : 01/17 - 01/24
-        </small>*@
+                            Exsample 017 : 01/17 - 01/24
+                        </small>*@
 
                     <div class="form-group MOLA_MYD13Q1006" style="display: none;">
-                        <label for="Year_MOLA_MYD13Q1006">Year</label>
+                        <label for="Year_MOLA_MYD13Q1006">@SharedLocalizer["Year"]</label>
                         <select class="form-control form-control-sm" id="Year_MOLA_MYD13Q1006" onchange="ChangeYear()">
                             @foreach (string year in yearDays_MOLA_MYD13Q1006.Select(y => y.year).Distinct().OrderBy(y => y))
                             {
@@ -115,7 +117,7 @@
                         </select>
                     </div>
                     <div class="form-check MOLA_MYD13Q1006 form-check-inline w-100" style="display: none;">
-                        @*<label for="DayOfYear_MOLA_MYD13Q1006">Start DOY : MM/DD Range</label>*@
+                        <label for="DayOfYear_MOLA_MYD13Q1006">@SharedLocalizer["Date"]</label>
                         <div class="input-group-prepend">
                             @*<button class="btn btn-sm" id="minus-btn"><i class="fa fa-minus"></i></button>*@
                             <input type="button" value="-" onclick="DateMinusMOLA_MYD13Q1006()" />
@@ -167,7 +169,7 @@
                     </select>
                     <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
                     <label class="form-check-label text-white" for="layerBaseShow">
-                        Базовые слои
+                        @SharedLocalizer["BaseLayer"]
                     </label>
                     <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                 </div>
@@ -199,7 +201,7 @@
     <div class="content">
         <!-- open sidebar menu -->
         <a class="btn btn-light btn-customized open-menu" href="#" role="button">
-            <i class="fa fa-align-left"></i> <span>Menu</span>
+            <i class="fa fa-align-left"></i> <span>@SharedLocalizer["Menu"]</span>
         </a>
         <!-- Map content -->
         <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>

@@ -360,6 +360,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string CATO {
+            get {
+                return ResourceManager.GetString("CATO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Cattle {
             get {
                 return ResourceManager.GetString("Cattle", resourceCulture);
@@ -1047,6 +1056,33 @@ namespace Pastures2019.Resources.Controllers {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название (английский).
+        /// </summary>
+        public static string NameEN {
+            get {
+                return ResourceManager.GetString("NameEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название (казахский).
+        /// </summary>
+        public static string NameKK {
+            get {
+                return ResourceManager.GetString("NameKK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Название (русский).
+        /// </summary>
+        public static string NameRU {
+            get {
+                return ResourceManager.GetString("NameRU", resourceCulture);
             }
         }
         

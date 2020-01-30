@@ -216,6 +216,9 @@
   <data name="Camels" xml:space="preserve">
     <value>Верблюды</value>
   </data>
+  <data name="CATO" xml:space="preserve">
+    <value>КАТО</value>
+  </data>
   <data name="Cattle" xml:space="preserve">
     <value>Крупный рогатый скот</value>
   </data>
@@ -446,6 +449,15 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Название</value>
+  </data>
+  <data name="NameEN" xml:space="preserve">
+    <value>Название (английский)</value>
+  </data>
+  <data name="NameKK" xml:space="preserve">
+    <value>Название (казахский)</value>
+  </data>
+  <data name="NameRU" xml:space="preserve">
+    <value>Название (русский)</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>

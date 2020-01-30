@@ -23,6 +23,30 @@
     if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
     {
         <h>
+            Кормовые ресурсы Республики Казахстан
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+    {
+        <h>
+            Қазақстан Республикасының азық ресурстары
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+    {
+        <h>
+            Feed resources of the Republic of Kazakhstan
+        </h>
+    }
+}
+<br />
+<a asp-area="" asp-controller="CATOes" asp-action="Index">@SharedLocalizer["CATO"]</a>
+<br />
+@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+{
+    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+    {
+        <h>
             Породное районирование сельскохозяйственных животных Республики Казахстан
         </h>
     }

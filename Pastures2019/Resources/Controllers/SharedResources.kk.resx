@@ -216,6 +216,9 @@
   <data name="Camels" xml:space="preserve">
     <value>Түйелер</value>
   </data>
+  <data name="CATO" xml:space="preserve">
+    <value>КАТО</value>
+  </data>
   <data name="Cattle" xml:space="preserve">
     <value>Ірі-қара мал</value>
   </data>
@@ -446,6 +449,15 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Атауы</value>
+  </data>
+  <data name="NameEN" xml:space="preserve">
+    <value>Атауы (ағылшынша)</value>
+  </data>
+  <data name="NameKK" xml:space="preserve">
+    <value>Атауы (қазақша)</value>
+  </data>
+  <data name="NameRU" xml:space="preserve">
+    <value>Атауы (орыс)</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Жаңа Құпия Сөз</value>

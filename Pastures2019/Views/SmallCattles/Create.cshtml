@@ -1,0 +1,196 @@
+﻿@model Pastures2019.Models.SmallCattle
+@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Create"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@SharedLocalizer["Create"]</h1>
+
+<h4>@SharedLocalizer["SmallCattle"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreedRU" class="control-label"></label>
+                <input asp-for="BreedRU" class="form-control" />
+                <span asp-validation-for="BreedRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreedKK" class="control-label"></label>
+                <input asp-for="BreedKK" class="form-control" />
+                <span asp-validation-for="BreedKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BreedEN" class="control-label"></label>
+                <input asp-for="BreedEN" class="form-control" />
+                <span asp-validation-for="BreedEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DirectionRU" class="control-label"></label>
+                <input asp-for="DirectionRU" class="form-control" />
+                <span asp-validation-for="DirectionRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DirectionKK" class="control-label"></label>
+                <input asp-for="DirectionKK" class="form-control" />
+                <span asp-validation-for="DirectionKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DirectionEN" class="control-label"></label>
+                <input asp-for="DirectionEN" class="form-control" />
+                <span asp-validation-for="DirectionEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeightRU" class="control-label"></label>
+                <input asp-for="WeightRU" class="form-control" />
+                <span asp-validation-for="WeightRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeightKK" class="control-label"></label>
+                <input asp-for="WeightKK" class="form-control" />
+                <span asp-validation-for="WeightKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WeightEN" class="control-label"></label>
+                <input asp-for="WeightEN" class="form-control" />
+                <span asp-validation-for="WeightEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShearingsRU" class="control-label"></label>
+                <input asp-for="ShearingsRU" class="form-control" />
+                <span asp-validation-for="ShearingsRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShearingsKK" class="control-label"></label>
+                <input asp-for="ShearingsKK" class="form-control" />
+                <span asp-validation-for="ShearingsKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShearingsEN" class="control-label"></label>
+                <input asp-for="ShearingsEN" class="form-control" />
+                <span asp-validation-for="ShearingsEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WashedWoolYieldRU" class="control-label"></label>
+                <input asp-for="WashedWoolYieldRU" class="form-control" />
+                <span asp-validation-for="WashedWoolYieldRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WashedWoolYieldKK" class="control-label"></label>
+                <input asp-for="WashedWoolYieldKK" class="form-control" />
+                <span asp-validation-for="WashedWoolYieldKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WashedWoolYieldEN" class="control-label"></label>
+                <input asp-for="WashedWoolYieldEN" class="form-control" />
+                <span asp-validation-for="WashedWoolYieldEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FertilityRU" class="control-label"></label>
+                <input asp-for="FertilityRU" class="form-control" />
+                <span asp-validation-for="FertilityRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FertilityKK" class="control-label"></label>
+                <input asp-for="FertilityKK" class="form-control" />
+                <span asp-validation-for="FertilityKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FertilityEN" class="control-label"></label>
+                <input asp-for="FertilityEN" class="form-control" />
+                <span asp-validation-for="FertilityEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WoolLengthRU" class="control-label"></label>
+                <input asp-for="WoolLengthRU" class="form-control" />
+                <span asp-validation-for="WoolLengthRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WoolLengthKK" class="control-label"></label>
+                <input asp-for="WoolLengthKK" class="form-control" />
+                <span asp-validation-for="WoolLengthKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WoolLengthEN" class="control-label"></label>
+                <input asp-for="WoolLengthEN" class="form-control" />
+                <span asp-validation-for="WoolLengthEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalGoals" class="control-label"></label>
+                <input asp-for="TotalGoals" class="form-control" />
+                <span asp-validation-for="TotalGoals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BredRU" class="control-label"></label>
+                <input asp-for="BredRU" class="form-control" />
+                <span asp-validation-for="BredRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BredKK" class="control-label"></label>
+                <input asp-for="BredKK" class="form-control" />
+                <span asp-validation-for="BredKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BredEN" class="control-label"></label>
+                <input asp-for="BredEN" class="form-control" />
+                <span asp-validation-for="BredEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RangeRU" class="control-label"></label>
+                <input asp-for="RangeRU" class="form-control" />
+                <span asp-validation-for="RangeRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RangeKK" class="control-label"></label>
+                <input asp-for="RangeKK" class="form-control" />
+                <span asp-validation-for="RangeKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RangeEN" class="control-label"></label>
+                <input asp-for="RangeEN" class="form-control" />
+                <span asp-validation-for="RangeEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormFile" class="control-label"></label>
+                <input asp-for="FormFile" type="file" class="form-control" />
+                <span asp-validation-for="FormFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionRU" class="control-label"></label>
+                <input asp-for="DescriptionRU" class="form-control" />
+                <span asp-validation-for="DescriptionRU" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionKK" class="control-label"></label>
+                <input asp-for="DescriptionKK" class="form-control" />
+                <span asp-validation-for="DescriptionKK" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescriptionEN" class="control-label"></label>
+                <input asp-for="DescriptionEN" class="form-control" />
+                <span asp-validation-for="DescriptionEN" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@SharedLocalizer["Create"]" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

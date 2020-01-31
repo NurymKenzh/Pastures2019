@@ -219,6 +219,9 @@
   <data name="CATO" xml:space="preserve">
     <value>КАТО</value>
   </data>
+  <data name="CATOSpecies" xml:space="preserve">
+    <value>КATO тұқымдары</value>
+  </data>
   <data name="Cattle" xml:space="preserve">
     <value>Ірі-қара мал</value>
   </data>

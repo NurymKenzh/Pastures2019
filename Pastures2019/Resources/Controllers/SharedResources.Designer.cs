@@ -369,6 +369,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string CATOSpecies {
+            get {
+                return ResourceManager.GetString("CATOSpecies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Cattle {
             get {
                 return ResourceManager.GetString("Cattle", resourceCulture);

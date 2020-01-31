@@ -234,6 +234,12 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Тіркелгі параметрлерін өзгертіңіз</value>
   </data>
+  <data name="ChemicalComp" xml:space="preserve">
+    <value>Судың химиялық құрамы</value>
+  </data>
+  <data name="ChemicalComps" xml:space="preserve">
+    <value>Судың химиялық құрамы</value>
+  </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>мында басыңыз</value>
   </data>

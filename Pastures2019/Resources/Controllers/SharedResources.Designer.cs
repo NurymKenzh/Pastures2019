@@ -414,6 +414,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string ChemicalComp {
+            get {
+                return ResourceManager.GetString("ChemicalComp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ChemicalComps {
+            get {
+                return ResourceManager.GetString("ChemicalComps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string ClickingHere {
             get {
                 return ResourceManager.GetString("ClickingHere", resourceCulture);

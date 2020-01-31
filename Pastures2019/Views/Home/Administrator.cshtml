@@ -75,6 +75,30 @@
     if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
     {
         <h>
+            Обводнение пастбищ Республики Казахстан
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+    {
+        <h>
+            Қазақстан Республикасының суармалы жайылымдары
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+    {
+        <h>
+            Watering pastures of the Republic of Kazakhstan
+        </h>
+    }
+}
+<br />
+<a asp-area="" asp-controller="ChemicalComps" asp-action="Index">@SharedLocalizer["ChemicalComps"]</a>
+<br />
+@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+{
+    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+    {
+        <h>
             Нагрузка сельскохозяйственных животных на пастбища Республики Казахстан
         </h>
     }

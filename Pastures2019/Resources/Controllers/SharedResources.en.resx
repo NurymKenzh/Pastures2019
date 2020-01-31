@@ -234,6 +234,12 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Change your account settings</value>
   </data>
+  <data name="ChemicalComp" xml:space="preserve">
+    <value>Chemical composition of water</value>
+  </data>
+  <data name="ChemicalComps" xml:space="preserve">
+    <value>Chemical compositions of water</value>
+  </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>clicking here</value>
   </data>

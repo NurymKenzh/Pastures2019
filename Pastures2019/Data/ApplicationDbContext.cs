@@ -27,5 +27,6 @@ namespace Pastures2019.Data
         public DbSet<Pastures2019.Models.SmallCattle> SmallCattle { get; set; }
         public DbSet<Pastures2019.Models.CATO> CATO { get; set; }
         public DbSet<Pastures2019.Models.CATOSpecies> CATOSpecies { get; set; }
+        public DbSet<Pastures2019.Models.ChemicalComp> ChemicalComp { get; set; }
     }
 }

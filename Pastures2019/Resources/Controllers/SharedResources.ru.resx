@@ -234,6 +234,12 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Изменить настройки вашего аккаунта</value>
   </data>
+  <data name="ChemicalComp" xml:space="preserve">
+    <value>Химический состав воды</value>
+  </data>
+  <data name="ChemicalComps" xml:space="preserve">
+    <value>Химические составы воды</value>
+  </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>нажав здесь</value>
   </data>

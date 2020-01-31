@@ -450,6 +450,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Color {
+            get {
+                return ResourceManager.GetString("Color", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string ConfirmNewPassword {
             get {
                 return ResourceManager.GetString("ConfirmNewPassword", resourceCulture);
@@ -561,6 +570,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string DescriptionKK {
             get {
                 return ResourceManager.GetString("DescriptionKK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DescriptionLat {
+            get {
+                return ResourceManager.GetString("DescriptionLat", resourceCulture);
             }
         }
         
@@ -804,6 +822,24 @@ namespace Pastures2019.Resources.Controllers {
         public static string ForgotYourPassword {
             get {
                 return ResourceManager.GetString("ForgotYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Haying {
+            get {
+                return ResourceManager.GetString("Haying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Hayings {
+            get {
+                return ResourceManager.GetString("Hayings", resourceCulture);
             }
         }
         
@@ -1179,6 +1215,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Otdel {
+            get {
+                return ResourceManager.GetString("Otdel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Otdels {
+            get {
+                return ResourceManager.GetString("Otdels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
@@ -1224,6 +1278,42 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string PSubType {
+            get {
+                return ResourceManager.GetString("PSubType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PSubTypes {
+            get {
+                return ResourceManager.GetString("PSubTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PType {
+            get {
+                return ResourceManager.GetString("PType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PTypes {
+            get {
+                return ResourceManager.GetString("PTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Range {
             get {
                 return ResourceManager.GetString("Range", resourceCulture);
@@ -1260,9 +1350,63 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string RecomCattle {
+            get {
+                return ResourceManager.GetString("RecomCattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string RecomCattles {
+            get {
+                return ResourceManager.GetString("RecomCattles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Recommend {
+            get {
+                return ResourceManager.GetString("Recommend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Recommends {
+            get {
+                return ResourceManager.GetString("Recommends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Register {
             get {
                 return ResourceManager.GetString("Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Relief {
+            get {
+                return ResourceManager.GetString("Relief", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Reliefs {
+            get {
+                return ResourceManager.GetString("Reliefs", resourceCulture);
             }
         }
         
@@ -1389,6 +1533,60 @@ namespace Pastures2019.Resources.Controllers {
         public static string SmallCattles {
             get {
                 return ResourceManager.GetString("SmallCattles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Soob {
+            get {
+                return ResourceManager.GetString("Soob", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Soobs {
+            get {
+                return ResourceManager.GetString("Soobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SType {
+            get {
+                return ResourceManager.GetString("SType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string STypes {
+            get {
+                return ResourceManager.GetString("STypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SupplyRecommend {
+            get {
+                return ResourceManager.GetString("SupplyRecommend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SupplyRecommends {
+            get {
+                return ResourceManager.GetString("SupplyRecommends", resourceCulture);
             }
         }
         
@@ -1530,6 +1728,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string WClass {
+            get {
+                return ResourceManager.GetString("WClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string WClasses {
+            get {
+                return ResourceManager.GetString("WClasses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Weight {
             get {
                 return ResourceManager.GetString("Weight", resourceCulture);
@@ -1602,6 +1818,42 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string WSubType {
+            get {
+                return ResourceManager.GetString("WSubType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string WSubTypes {
+            get {
+                return ResourceManager.GetString("WSubTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string WType {
+            get {
+                return ResourceManager.GetString("WType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string WTypes {
+            get {
+                return ResourceManager.GetString("WTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Year {
             get {
                 return ResourceManager.GetString("Year", resourceCulture);
@@ -1623,6 +1875,60 @@ namespace Pastures2019.Resources.Controllers {
         public static string YourPasswordHasBeenReset {
             get {
                 return ResourceManager.GetString("YourPasswordHasBeenReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Zone {
+            get {
+                return ResourceManager.GetString("Zone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Zones {
+            get {
+                return ResourceManager.GetString("Zones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ZSubType {
+            get {
+                return ResourceManager.GetString("ZSubType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ZSubTypes {
+            get {
+                return ResourceManager.GetString("ZSubTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ZType {
+            get {
+                return ResourceManager.GetString("ZType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string ZTypes {
+            get {
+                return ResourceManager.GetString("ZTypes", resourceCulture);
             }
         }
     }

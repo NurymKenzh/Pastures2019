@@ -246,6 +246,9 @@
   <data name="Code" xml:space="preserve">
     <value>Код</value>
   </data>
+  <data name="Color" xml:space="preserve">
+    <value>Түсі</value>
+  </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Жаңа құпиясөзді растаңыз</value>
   </data>
@@ -284,6 +287,9 @@
   </data>
   <data name="DescriptionKK" xml:space="preserve">
     <value>Сипаттама (қазақша)</value>
+  </data>
+  <data name="DescriptionLat" xml:space="preserve">
+    <value>Сипаттама (Латын)</value>
   </data>
   <data name="DescriptionRU" xml:space="preserve">
     <value>Сипаттама (орыс)</value>
@@ -365,6 +371,12 @@
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Құпия сөзіңізді ұмыттыңыз ба?</value>
+  </data>
+  <data name="Haying" xml:space="preserve">
+    <value>Шөп шабу</value>
+  </data>
+  <data name="Hayings" xml:space="preserve">
+    <value>Шабындықтар</value>
   </data>
   <data name="Height" xml:space="preserve">
     <value>Биіктігі құрғақ жерде</value>
@@ -489,6 +501,12 @@
   <data name="NoteRU" xml:space="preserve">
     <value>Ескерту (орыс)</value>
   </data>
+  <data name="Otdel" xml:space="preserve">
+    <value>Бөлім</value>
+  </data>
+  <data name="Otdels" xml:space="preserve">
+    <value>Бөлімдер</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
@@ -504,6 +522,18 @@
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
   </data>
+  <data name="PSubType" xml:space="preserve">
+    <value>Жайылымның кіші түрі</value>
+  </data>
+  <data name="PSubTypes" xml:space="preserve">
+    <value>Жайылым типтері</value>
+  </data>
+  <data name="PType" xml:space="preserve">
+    <value>Жайылым түрі</value>
+  </data>
+  <data name="PTypes" xml:space="preserve">
+    <value>Жайылым түрлері</value>
+  </data>
   <data name="Range" xml:space="preserve">
     <value>Асыл тұқымды ассортимент</value>
   </data>
@@ -516,8 +546,26 @@
   <data name="RangeRU" xml:space="preserve">
     <value>Асыл тұқымды ассортимент (орыс)</value>
   </data>
+  <data name="RecomCattle" xml:space="preserve">
+    <value>Ірі қара малға кеңес беру</value>
+  </data>
+  <data name="RecomCattles" xml:space="preserve">
+    <value>Мал түріне қатысты ұсыныстар</value>
+  </data>
+  <data name="Recommend" xml:space="preserve">
+    <value>Маусымдық ұсыныс</value>
+  </data>
+  <data name="Recommends" xml:space="preserve">
+    <value>Маусымдық ұсыныстар</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Тіркелу</value>
+  </data>
+  <data name="Relief" xml:space="preserve">
+    <value>Рельеф</value>
+  </data>
+  <data name="Reliefs" xml:space="preserve">
+    <value>Рельефтер</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Мені есте сақта?</value>
@@ -560,6 +608,24 @@
   </data>
   <data name="SmallCattles" xml:space="preserve">
     <value>Ұсақ мал</value>
+  </data>
+  <data name="Soob" xml:space="preserve">
+    <value>Қоғамдастық</value>
+  </data>
+  <data name="Soobs" xml:space="preserve">
+    <value>Қоғамдастықтар</value>
+  </data>
+  <data name="SType" xml:space="preserve">
+    <value>Жер санаттары бойынша жер қоры</value>
+  </data>
+  <data name="STypes" xml:space="preserve">
+    <value>Жер санаттары бойынша жер қоры</value>
+  </data>
+  <data name="SupplyRecommend" xml:space="preserve">
+    <value>Маусымдық ұсыныс (қорық жерлер)</value>
+  </data>
+  <data name="SupplyRecommends" xml:space="preserve">
+    <value>Маусымдық ұсыныстар (қорық)</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} кемінде {2} және максимум {1} таңбадан тұруы керек.</value>
@@ -606,6 +672,12 @@
   <data name="WashedWoolYieldRU" xml:space="preserve">
     <value>Жүннің жуылуы (орыс)</value>
   </data>
+  <data name="WClass" xml:space="preserve">
+    <value>Су көздерінің класы</value>
+  </data>
+  <data name="WClasses" xml:space="preserve">
+    <value>Су көзі кластары</value>
+  </data>
   <data name="Weight" xml:space="preserve">
     <value>Тірі салмақ</value>
   </data>
@@ -630,6 +702,18 @@
   <data name="WoolLengthRU" xml:space="preserve">
     <value>Жүн ұзындығы (орыс)</value>
   </data>
+  <data name="WSubType" xml:space="preserve">
+    <value>Су дамуының түрі</value>
+  </data>
+  <data name="WSubTypes" xml:space="preserve">
+    <value>Су дамуының түрлері</value>
+  </data>
+  <data name="WType" xml:space="preserve">
+    <value>Су көздерінің түрі</value>
+  </data>
+  <data name="WTypes" xml:space="preserve">
+    <value>Су көздерінің түрлері</value>
+  </data>
   <data name="Year" xml:space="preserve">
     <value>Жыл</value>
   </data>
@@ -638,5 +722,23 @@
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Құпия сөзіңіз қалпына келтірілді</value>
+  </data>
+  <data name="Zone" xml:space="preserve">
+    <value>Аймақ</value>
+  </data>
+  <data name="Zones" xml:space="preserve">
+    <value>Аймақтар</value>
+  </data>
+  <data name="ZSubType" xml:space="preserve">
+    <value>Жер санаты</value>
+  </data>
+  <data name="ZSubTypes" xml:space="preserve">
+    <value>Жер асты категориялары</value>
+  </data>
+  <data name="ZType" xml:space="preserve">
+    <value>Жер пайдалану түрі</value>
+  </data>
+  <data name="ZTypes" xml:space="preserve">
+    <value>Жер пайдалану түрлері</value>
   </data>
 </root>

@@ -29,5 +29,21 @@ namespace Pastures2019.Data
         public DbSet<Pastures2019.Models.CATOSpecies> CATOSpecies { get; set; }
         public DbSet<Pastures2019.Models.ChemicalComp> ChemicalComp { get; set; }
         public DbSet<Pastures2019.Models.DominantType> DominantType { get; set; }
+        public DbSet<Pastures2019.Models.Haying> Haying { get; set; }
+        public DbSet<Pastures2019.Models.Otdel> Otdel { get; set; }
+        public DbSet<Pastures2019.Models.PSubType> PSubType { get; set; }
+        public DbSet<Pastures2019.Models.PType> PType { get; set; }
+        public DbSet<Pastures2019.Models.RecomCattle> RecomCattle { get; set; }
+        public DbSet<Pastures2019.Models.Recommend> Recommend { get; set; }
+        public DbSet<Pastures2019.Models.Relief> Relief { get; set; }
+        public DbSet<Pastures2019.Models.Soob> Soob { get; set; }
+        public DbSet<Pastures2019.Models.SType> SType { get; set; }
+        public DbSet<Pastures2019.Models.SupplyRecommend> SupplyRecommend { get; set; }
+        public DbSet<Pastures2019.Models.WClass> WClass { get; set; }
+        public DbSet<Pastures2019.Models.WSubType> WSubType { get; set; }
+        public DbSet<Pastures2019.Models.WType> WType { get; set; }
+        public DbSet<Pastures2019.Models.Zone> Zone { get; set; }
+        public DbSet<Pastures2019.Models.ZSubType> ZSubType { get; set; }
+        public DbSet<Pastures2019.Models.ZType> ZType { get; set; }
     }
 }

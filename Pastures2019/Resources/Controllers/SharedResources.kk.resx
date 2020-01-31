@@ -303,6 +303,12 @@
   <data name="DirectionRU" xml:space="preserve">
     <value>Бағыт (орыс)</value>
   </data>
+  <data name="DominantType" xml:space="preserve">
+    <value>Доминантты жайылым түрі</value>
+  </data>
+  <data name="DominantTypes" xml:space="preserve">
+    <value>Доминантты жайылым түрлері</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Жүктеу</value>
   </data>

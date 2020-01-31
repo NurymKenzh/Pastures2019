@@ -303,6 +303,12 @@
   <data name="DirectionRU" xml:space="preserve">
     <value>Направление (русский)</value>
   </data>
+  <data name="DominantType" xml:space="preserve">
+    <value>Тип доминирующего пастбища</value>
+  </data>
+  <data name="DominantTypes" xml:space="preserve">
+    <value>Типы доминирующих пастбищ</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Скачать</value>
   </data>

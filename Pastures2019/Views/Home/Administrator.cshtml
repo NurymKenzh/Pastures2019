@@ -47,6 +47,30 @@
     if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
     {
         <h>
+            Земельный запас Республики Казахстан
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+    {
+        <h>
+            Қазақстан Республикасының жер қоры
+        </h>
+    }
+    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+    {
+        <h>
+            Land reserve of the Republic of Kazakhstan
+        </h>
+    }
+}
+<br />
+<a asp-area="" asp-controller="DominantTypes" asp-action="Index">@SharedLocalizer["DominantTypes"]</a>
+<br />
+@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+{
+    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+    {
+        <h>
             Породное районирование сельскохозяйственных животных Республики Казахстан
         </h>
     }

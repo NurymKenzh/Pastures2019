@@ -621,6 +621,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string DominantType {
+            get {
+                return ResourceManager.GetString("DominantType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DominantTypes {
+            get {
+                return ResourceManager.GetString("DominantTypes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Download {
             get {
                 return ResourceManager.GetString("Download", resourceCulture);

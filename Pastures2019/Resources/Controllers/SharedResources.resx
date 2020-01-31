@@ -303,6 +303,12 @@
   <data name="DirectionRU" xml:space="preserve">
     <value />
   </data>
+  <data name="DominantType" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DominantTypes" xml:space="preserve">
+    <value />
+  </data>
   <data name="Download" xml:space="preserve">
     <value />
   </data>

@@ -1,54 +1,130 @@
-﻿@model IEnumerable<Pastures2019.Models.PType>
-
+﻿@model Pastures2019.Models.PTypeIndexPageViewModel
+@using System.Net
+@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = SharedLocalizer["PTypes"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>@SharedLocalizer["PTypes"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@SharedLocalizer["Create"]</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Code)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescriptionRU)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescriptionKK)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DescriptionEN)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionRU)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionKK)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DescriptionEN)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+
+@using (Html.BeginForm("Index", "PTypes", new { SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter }, FormMethod.Get))
+{
+    @Html.Editor("SortOrder", null, new { htmlAttributes = new { @hidden = "hidden" }, value = ViewBag.SortOrder })
+    @if (Model.Pager.EndPage > 1)
+    {
+        <ul class="pagination">
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;&laquo;"), "Index",
+                        new { SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
+                        new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+            }
+
+            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                    @Html.ActionLink(page.ToString(), "Index",
+                        new { PageNumber = page, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+            }
+
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
+                        new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
+                        new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+            }
+        </ul>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(t => t.Items.FirstOrDefault().Code).ToString(), "Index",
+                        new { SortOrder = ViewBag.CodeSort, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                    <br />
+                    @Html.Editor("CodeFilter", null, new { htmlAttributes = new { @class = "form-control" }, value = "" })
+                </th>
+                <th>
+                    @Html.ActionLink(Html.DisplayNameFor(t => t.Items.FirstOrDefault().Description).ToString(), "Index",
+                        new { SortOrder = ViewBag.DescriptionSort, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                    <br />
+                    @Html.Editor("DescriptionFilter", null, new { htmlAttributes = new { @class = "form-control" }, value = "" })
+                </th>
+                <th>
+                    <br />
+                    <input type="submit" value="@SharedLocalizer["Find"]" class="btn btn-primary">
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" asp->@SharedLocalizer["Edit"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">@SharedLocalizer["Details"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["Delete"]</a>
+                </td>
+            </tr>
+        }
+    </table>
+    @if (Model.Pager.EndPage > 1)
+    {
+        <ul class="pagination">
+            @if (Model.Pager.CurrentPage > 1)
+            {
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;&laquo;"), "Index",
+                        new { SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
+                        new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+            }
+
+            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                    @Html.ActionLink(page.ToString(), "Index",
+                        new { PageNumber = page, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+            }
+
+            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
+                        new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+                <li>
+                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
+                        new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, CodeFilter = ViewBag.CodeFilter, DescriptionFilter = ViewBag.DescriptionFilter })
+                </li>
+            }
+        </ul>
+    }
 }
-    </tbody>
-</table>

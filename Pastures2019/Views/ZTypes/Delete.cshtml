@@ -1,52 +1,36 @@
 ﻿@model Pastures2019.Models.ZType
-
+@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = SharedLocalizer["Delete"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
+<h1>@SharedLocalizer["Delete"]</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@SharedLocalizer["Delete"]?</h3>
 <div>
-    <h4>ZType</h4>
+    <h4>@SharedLocalizer["ZType"]</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Code)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Code)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescriptionRU)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescriptionRU)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescriptionKK)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescriptionKK)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DescriptionEN)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DescriptionEN)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Color)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Color)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
+        <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
     </form>
 </div>

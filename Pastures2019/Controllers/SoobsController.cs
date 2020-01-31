@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,65 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Soobs
-        public async Task<IActionResult> Index()
+        [Authorize(Roles = "Administrator, Moderator")]
+        public async Task<IActionResult> Index(
+            string SortOrder,
+            int? CodeFilter,
+            string DescriptionFilter,
+            int? PageNumber)
         {
-            return View(await _context.Soob.ToListAsync());
+            var soob = _context.Soob
+                .Where(b => true);
+
+            ViewBag.CodeFilter = CodeFilter;
+            ViewBag.DescriptionFilter = DescriptionFilter;
+
+            ViewBag.CodeSort = SortOrder == "Code" ? "CodeDesc" : "Code";
+            ViewBag.DescriptionSort = SortOrder == "Description" ? "DescriptionDesc" : "Description";
+
+            if (CodeFilter != null)
+            {
+                soob = soob.Where(b => b.Code == CodeFilter);
+            }
+            if (!string.IsNullOrEmpty(DescriptionFilter))
+            {
+                soob = soob.Where(b => b.Description.Contains(DescriptionFilter));
+            }
+
+            switch (SortOrder)
+            {
+                case "Code":
+                    soob = soob.OrderBy(b => b.Code);
+                    break;
+                case "CodeDesc":
+                    soob = soob.OrderByDescending(b => b.Code);
+                    break;
+                case "Description":
+                    soob = soob.OrderBy(b => b.Description);
+                    break;
+                case "DescriptionDesc":
+                    soob = soob.OrderByDescending(b => b.Description);
+                    break;
+                default:
+                    soob = soob.OrderBy(b => b.Id);
+                    break;
+            }
+
+            ViewBag.SortOrder = SortOrder;
+
+            var pager = new Pager(soob.Count(), PageNumber);
+
+            var viewModel = new SoobIndexPageViewModel
+            {
+                Items = soob.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Pager = pager
+            };
+
+            return View(viewModel);
         }
 
         // GET: Soobs/Details/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +98,7 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Soobs/Create
+        [Authorize(Roles = "Administrator, Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +109,7 @@ namespace Pastures2019.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Create([Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN,DescriptionLat")] Soob soob)
         {
             if (ModelState.IsValid)
@@ -66,6 +122,7 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Soobs/Edit/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +143,7 @@ namespace Pastures2019.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN,DescriptionLat")] Soob soob)
         {
             if (id != soob.Id)
@@ -117,6 +175,7 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Soobs/Delete/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +196,7 @@ namespace Pastures2019.Controllers
         // POST: Soobs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var soob = await _context.Soob.FindAsync(id);

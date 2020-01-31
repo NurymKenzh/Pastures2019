@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +21,65 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Recommends
-        public async Task<IActionResult> Index()
+        [Authorize(Roles = "Administrator, Moderator")]
+        public async Task<IActionResult> Index(
+            string SortOrder,
+            int? CodeFilter,
+            string DescriptionFilter,
+            int? PageNumber)
         {
-            return View(await _context.Recommend.ToListAsync());
+            var recommend = _context.Recommend
+                .Where(b => true);
+
+            ViewBag.CodeFilter = CodeFilter;
+            ViewBag.DescriptionFilter = DescriptionFilter;
+
+            ViewBag.CodeSort = SortOrder == "Code" ? "CodeDesc" : "Code";
+            ViewBag.DescriptionSort = SortOrder == "Description" ? "DescriptionDesc" : "Description";
+
+            if (CodeFilter != null)
+            {
+                recommend = recommend.Where(b => b.Code == CodeFilter);
+            }
+            if (!string.IsNullOrEmpty(DescriptionFilter))
+            {
+                recommend = recommend.Where(b => b.Description.Contains(DescriptionFilter));
+            }
+
+            switch (SortOrder)
+            {
+                case "Code":
+                    recommend = recommend.OrderBy(b => b.Code);
+                    break;
+                case "CodeDesc":
+                    recommend = recommend.OrderByDescending(b => b.Code);
+                    break;
+                case "Description":
+                    recommend = recommend.OrderBy(b => b.Description);
+                    break;
+                case "DescriptionDesc":
+                    recommend = recommend.OrderByDescending(b => b.Description);
+                    break;
+                default:
+                    recommend = recommend.OrderBy(b => b.Id);
+                    break;
+            }
+
+            ViewBag.SortOrder = SortOrder;
+
+            var pager = new Pager(recommend.Count(), PageNumber);
+
+            var viewModel = new RecommendIndexPageViewModel
+            {
+                Items = recommend.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize),
+                Pager = pager
+            };
+
+            return View(viewModel);
         }
 
         // GET: Recommends/Details/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +98,7 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Recommends/Create
+        [Authorize(Roles = "Administrator, Moderator")]
         public IActionResult Create()
         {
             return View();
@@ -54,6 +109,7 @@ namespace Pastures2019.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Create([Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN")] Recommend recommend)
         {
             if (ModelState.IsValid)
@@ -66,6 +122,7 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Recommends/Edit/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +143,7 @@ namespace Pastures2019.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Code,DescriptionRU,DescriptionKK,DescriptionEN")] Recommend recommend)
         {
             if (id != recommend.Id)
@@ -117,6 +175,7 @@ namespace Pastures2019.Controllers
         }
 
         // GET: Recommends/Delete/5
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -137,6 +196,7 @@ namespace Pastures2019.Controllers
         // POST: Recommends/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var recommend = await _context.Recommend.FindAsync(id);

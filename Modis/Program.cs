@@ -244,8 +244,9 @@ namespace Modis
 
                     if (dateTimeFinish.AddDays(30) > DateTime.Now)
                     {
-                        // 3 hours
-                        Thread.Sleep(60 * 60 * 60 * 3);
+                        //// 3 hours
+                        //Thread.Sleep(60 * 60 * 60 * 3);
+                        break;
                     }
                 }
 
@@ -272,19 +273,25 @@ namespace Modis
 
                 // delete every empty folder
                 //if (Directory.Exists(folderDownloadFinale))
-                foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*", SearchOption.TopDirectoryOnly))
+                bool empty = false;
+                foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "*", SearchOption.TopDirectoryOnly))
                 {
                     if (Directory.EnumerateFiles(folder, "*hdf*").Count() == 0)
                     {
+                        empty = true;
                         try
                         {
                             Directory.Delete(folder, true);
                         }
                         catch { }
 
-                        // 3 hours
-                        Thread.Sleep(60 * 60 * 60 * 3);
+                        //// 3 hours
+                        //Thread.Sleep(60 * 60 * 60 * 3);
                     }
+                }
+                if (empty)
+                {
+                    break;
                 }
                 if (dateTimeFinish == DateTime.Today)
                 {

@@ -270,6 +270,44 @@ namespace Pastures2019.Data.Migrations
                     b.ToTable("BurSubOtdel");
                 });
 
+            modelBuilder.Entity("Pastures2019.Models.CATO", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AB");
+
+                    b.Property<string>("CD");
+
+                    b.Property<string>("EF");
+
+                    b.Property<string>("HIJ");
+
+                    b.Property<string>("K");
+
+                    b.Property<string>("NameKK");
+
+                    b.Property<string>("NameRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CATO");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.CATOSpecies", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CATOTE");
+
+                    b.Property<int>("Code");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CATOSpecies");
+                });
+
             modelBuilder.Entity("Pastures2019.Models.Camel", b =>
                 {
                     b.Property<int>("Id")
@@ -367,7 +405,7 @@ namespace Pastures2019.Data.Migrations
 
                     b.Property<string>("RangeRU");
 
-                    b.Property<decimal>("SlaughterYield");
+                    b.Property<string>("SlaughterYield");
 
                     b.Property<int>("TotalGoals");
 
@@ -380,6 +418,142 @@ namespace Pastures2019.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cattle");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.ChemicalComp", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ChemicalComp");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.DominantType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DominantType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Haying", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Haying");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Horse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BodyLengthEN");
+
+                    b.Property<string>("BodyLengthKK");
+
+                    b.Property<string>("BodyLengthRU");
+
+                    b.Property<string>("BredEN");
+
+                    b.Property<string>("BredKK");
+
+                    b.Property<string>("BredRU");
+
+                    b.Property<string>("BreedEN");
+
+                    b.Property<string>("BreedKK");
+
+                    b.Property<string>("BreedRU");
+
+                    b.Property<string>("BustEN");
+
+                    b.Property<string>("BustKK");
+
+                    b.Property<string>("BustRU");
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.Property<string>("DirectionEN");
+
+                    b.Property<string>("DirectionKK");
+
+                    b.Property<string>("DirectionRU");
+
+                    b.Property<string>("HeightEN");
+
+                    b.Property<string>("HeightKK");
+
+                    b.Property<string>("HeightRU");
+
+                    b.Property<string>("MetacarpusEN");
+
+                    b.Property<string>("MetacarpusKK");
+
+                    b.Property<string>("MetacarpusRU");
+
+                    b.Property<string>("MilkYieldEN");
+
+                    b.Property<string>("MilkYieldKK");
+
+                    b.Property<string>("MilkYieldRU");
+
+                    b.Property<byte[]>("Photo");
+
+                    b.Property<string>("RangeEN");
+
+                    b.Property<string>("RangeKK");
+
+                    b.Property<string>("RangeRU");
+
+                    b.Property<int>("TotalGoals");
+
+                    b.Property<string>("WeightEN");
+
+                    b.Property<string>("WeightKK");
+
+                    b.Property<string>("WeightRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Horse");
                 });
 
             modelBuilder.Entity("Pastures2019.Models.MODISDataSet", b =>
@@ -426,6 +600,356 @@ namespace Pastures2019.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MODISSource");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Otdel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Otdel");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.PSubType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PSubType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.PType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.RecomCattle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RecomCattle");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Recommend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recommend");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Relief", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Relief");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.SType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.SmallCattle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BredEN");
+
+                    b.Property<string>("BredKK");
+
+                    b.Property<string>("BredRU");
+
+                    b.Property<string>("BreedEN");
+
+                    b.Property<string>("BreedKK");
+
+                    b.Property<string>("BreedRU");
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.Property<string>("DirectionEN");
+
+                    b.Property<string>("DirectionKK");
+
+                    b.Property<string>("DirectionRU");
+
+                    b.Property<string>("FertilityEN");
+
+                    b.Property<string>("FertilityKK");
+
+                    b.Property<string>("FertilityRU");
+
+                    b.Property<byte[]>("Photo");
+
+                    b.Property<string>("RangeEN");
+
+                    b.Property<string>("RangeKK");
+
+                    b.Property<string>("RangeRU");
+
+                    b.Property<string>("ShearingsEN");
+
+                    b.Property<string>("ShearingsKK");
+
+                    b.Property<string>("ShearingsRU");
+
+                    b.Property<int>("TotalGoals");
+
+                    b.Property<string>("WashedWoolYieldEN");
+
+                    b.Property<string>("WashedWoolYieldKK");
+
+                    b.Property<string>("WashedWoolYieldRU");
+
+                    b.Property<string>("WeightEN");
+
+                    b.Property<string>("WeightKK");
+
+                    b.Property<string>("WeightRU");
+
+                    b.Property<string>("WoolLengthEN");
+
+                    b.Property<string>("WoolLengthKK");
+
+                    b.Property<string>("WoolLengthRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SmallCattle");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Soob", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionLat");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Soob");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.SupplyRecommend", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SupplyRecommend");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.WClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WClass");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.WSubType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WSubType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.WType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.ZSubType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZSubType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.ZType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("Color");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ZType");
+                });
+
+            modelBuilder.Entity("Pastures2019.Models.Zone", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Code");
+
+                    b.Property<string>("DescriptionEN");
+
+                    b.Property<string>("DescriptionKK");
+
+                    b.Property<string>("DescriptionRU");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Zone");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

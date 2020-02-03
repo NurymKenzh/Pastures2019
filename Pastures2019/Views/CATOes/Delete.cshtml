@@ -1,0 +1,60 @@
+﻿@model Pastures2019.Models.CATO
+@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Delete"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@SharedLocalizer["Delete"]</h1>
+
+<h3>@SharedLocalizer["Delete"]?</h3>
+<div>
+    <h4>@SharedLocalizer["CATO"]</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AB)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AB)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CD)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CD)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EF)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EF)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.HIJ)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HIJ)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.K)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.K)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
+        <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+    </form>
+</div>

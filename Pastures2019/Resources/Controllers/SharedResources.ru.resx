@@ -123,8 +123,14 @@
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
+  <data name="Anomaly" xml:space="preserve">
+    <value>Аномалия</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Обратно к списку</value>
+  </data>
+  <data name="BaseLayer" xml:space="preserve">
+    <value>Базовый слой</value>
   </data>
   <data name="BClass" xml:space="preserve">
     <value>Класс пастбищ (Нагрузка)</value>
@@ -210,6 +216,12 @@
   <data name="Camels" xml:space="preserve">
     <value>Верблюды</value>
   </data>
+  <data name="CATO" xml:space="preserve">
+    <value>КАТО</value>
+  </data>
+  <data name="CATOSpecies" xml:space="preserve">
+    <value>Породы по КАТО</value>
+  </data>
   <data name="Cattle" xml:space="preserve">
     <value>Крупный рогатый скот</value>
   </data>
@@ -222,11 +234,20 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Изменить настройки вашего аккаунта</value>
   </data>
+  <data name="ChemicalComp" xml:space="preserve">
+    <value>Химический состав воды</value>
+  </data>
+  <data name="ChemicalComps" xml:space="preserve">
+    <value>Химические составы воды</value>
+  </data>
   <data name="ClickingHere" xml:space="preserve">
     <value>нажав здесь</value>
   </data>
   <data name="Code" xml:space="preserve">
     <value>Код</value>
+  </data>
+  <data name="Color" xml:space="preserve">
+    <value>Цвет</value>
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Подтвердите новый пароль</value>
@@ -242,6 +263,12 @@
   </data>
   <data name="CurrentPassword" xml:space="preserve">
     <value>Текущий пароль</value>
+  </data>
+  <data name="Dataset" xml:space="preserve">
+    <value>Набор данных</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
   </data>
   <data name="DateTimeFinish" xml:space="preserve">
     <value>Конечная дата</value>
@@ -261,6 +288,9 @@
   <data name="DescriptionKK" xml:space="preserve">
     <value>Описание (казахский)</value>
   </data>
+  <data name="DescriptionLat" xml:space="preserve">
+    <value>Описание (латинский)</value>
+  </data>
   <data name="DescriptionRU" xml:space="preserve">
     <value>Описание (русский)</value>
   </data>
@@ -278,6 +308,12 @@
   </data>
   <data name="DirectionRU" xml:space="preserve">
     <value>Направление (русский)</value>
+  </data>
+  <data name="DominantType" xml:space="preserve">
+    <value>Тип доминирующего пастбища</value>
+  </data>
+  <data name="DominantTypes" xml:space="preserve">
+    <value>Типы доминирующих пастбищ</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Скачать</value>
@@ -336,6 +372,12 @@
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Забыли свой пароль?</value>
   </data>
+  <data name="Haying" xml:space="preserve">
+    <value>Сенокос</value>
+  </data>
+  <data name="Hayings" xml:space="preserve">
+    <value>Сенокосы</value>
+  </data>
   <data name="Height" xml:space="preserve">
     <value>Высота в холке</value>
   </data>
@@ -383,6 +425,9 @@
   </data>
   <data name="Maps" xml:space="preserve">
     <value>Карты</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Меню</value>
   </data>
   <data name="Metacarpus" xml:space="preserve">
     <value>Обхват пясти</value>
@@ -432,6 +477,15 @@
   <data name="Name" xml:space="preserve">
     <value>Название</value>
   </data>
+  <data name="NameEN" xml:space="preserve">
+    <value>Название (английский)</value>
+  </data>
+  <data name="NameKK" xml:space="preserve">
+    <value>Название (казахский)</value>
+  </data>
+  <data name="NameRU" xml:space="preserve">
+    <value>Название (русский)</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
   </data>
@@ -446,6 +500,12 @@
   </data>
   <data name="NoteRU" xml:space="preserve">
     <value>Примечание (русский)</value>
+  </data>
+  <data name="Otdel" xml:space="preserve">
+    <value>Отдел</value>
+  </data>
+  <data name="Otdels" xml:space="preserve">
+    <value>Отделы</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -462,6 +522,18 @@
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
   </data>
+  <data name="PSubType" xml:space="preserve">
+    <value>Подтип пастбищ</value>
+  </data>
+  <data name="PSubTypes" xml:space="preserve">
+    <value>Подтипы пастбищ</value>
+  </data>
+  <data name="PType" xml:space="preserve">
+    <value>Тип пастбищ</value>
+  </data>
+  <data name="PTypes" xml:space="preserve">
+    <value>Типы пастбищ</value>
+  </data>
   <data name="Range" xml:space="preserve">
     <value>Ареал разведения</value>
   </data>
@@ -474,8 +546,26 @@
   <data name="RangeRU" xml:space="preserve">
     <value>Ареал разведения (русский)</value>
   </data>
+  <data name="RecomCattle" xml:space="preserve">
+    <value>Рекомендация по виду скота</value>
+  </data>
+  <data name="RecomCattles" xml:space="preserve">
+    <value>Рекомендации по виду скота</value>
+  </data>
+  <data name="Recommend" xml:space="preserve">
+    <value>Рекомендация по сезонам</value>
+  </data>
+  <data name="Recommends" xml:space="preserve">
+    <value>Рекомендации по сезонам</value>
+  </data>
   <data name="Register" xml:space="preserve">
     <value>Регистрация</value>
+  </data>
+  <data name="Relief" xml:space="preserve">
+    <value>Рельеф</value>
+  </data>
+  <data name="Reliefs" xml:space="preserve">
+    <value>Рельефы</value>
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня?</value>
@@ -491,6 +581,9 @@
   </data>
   <data name="Roles" xml:space="preserve">
     <value>Роли</value>
+  </data>
+  <data name="Satellite" xml:space="preserve">
+    <value>Спутник</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -514,7 +607,25 @@
     <value>Мелкий рогатый скот</value>
   </data>
   <data name="SmallCattles" xml:space="preserve">
-    <value>Мелкие рогатый скот</value>
+    <value>Мелкий рогатый скот</value>
+  </data>
+  <data name="Soob" xml:space="preserve">
+    <value>Сообщество</value>
+  </data>
+  <data name="Soobs" xml:space="preserve">
+    <value>Сообщества</value>
+  </data>
+  <data name="SType" xml:space="preserve">
+    <value>Земельный фонд по категориям земель</value>
+  </data>
+  <data name="STypes" xml:space="preserve">
+    <value>Земельный фонд по категориям земель</value>
+  </data>
+  <data name="SupplyRecommend" xml:space="preserve">
+    <value>Рекомендация по сезонам (Земли запаса)</value>
+  </data>
+  <data name="SupplyRecommends" xml:space="preserve">
+    <value>Рекомендации по сезонам (Земли запаса)</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>
@@ -561,6 +672,12 @@
   <data name="WashedWoolYieldRU" xml:space="preserve">
     <value>Выход мытой шерсти (русский)</value>
   </data>
+  <data name="WClass" xml:space="preserve">
+    <value>Класс водоисточников</value>
+  </data>
+  <data name="WClasses" xml:space="preserve">
+    <value>Классы водоисточников</value>
+  </data>
   <data name="Weight" xml:space="preserve">
     <value>Живая масса</value>
   </data>
@@ -585,10 +702,43 @@
   <data name="WoolLengthRU" xml:space="preserve">
     <value>Длина шерсти (русский)</value>
   </data>
+  <data name="WSubType" xml:space="preserve">
+    <value>Тип водопроявления</value>
+  </data>
+  <data name="WSubTypes" xml:space="preserve">
+    <value>Типы водопроявления</value>
+  </data>
+  <data name="WType" xml:space="preserve">
+    <value>Тип водоисточников</value>
+  </data>
+  <data name="WTypes" xml:space="preserve">
+    <value>Типы водоисточников</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Год</value>
+  </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Ваш пароль был изменен.</value>
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Ваш пароль был сброшен</value>
+  </data>
+  <data name="Zone" xml:space="preserve">
+    <value>Зона</value>
+  </data>
+  <data name="Zones" xml:space="preserve">
+    <value>Зоны</value>
+  </data>
+  <data name="ZSubType" xml:space="preserve">
+    <value>Подкатегория земель</value>
+  </data>
+  <data name="ZSubTypes" xml:space="preserve">
+    <value>Подкатегории земель</value>
+  </data>
+  <data name="ZType" xml:space="preserve">
+    <value>Тип использования земель</value>
+  </data>
+  <data name="ZTypes" xml:space="preserve">
+    <value>Типы использования земель</value>
   </data>
 </root>

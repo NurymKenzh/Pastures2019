@@ -6,7 +6,8 @@
     ViewData["Title"] = SharedLocalizer["Edit"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 <h1>@SharedLocalizer["Edit"]</h1>
 
 <h4>@SharedLocalizer["Camel"]</h4>
@@ -128,8 +129,8 @@
 </div>
 
 @*@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}*@
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
 <script>
     $.validator.methods.range = function (value, element, param) {
         var globalizedValue = value.replace(",", ".");

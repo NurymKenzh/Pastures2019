@@ -92,9 +92,8 @@ namespace Pastures2019.Models
             }
         }
 
-        [Required(ErrorMessageResourceType = typeof(Resources.Controllers.SharedResources), ErrorMessageResourceName = "TheFieldIsRequired")]
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "SlaughterYield")]
-        public decimal SlaughterYield { get; set; }
+        public string SlaughterYield { get; set; }
 
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "EwesYieldRU")]
         public string EwesYieldRU { get; set; }

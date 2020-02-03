@@ -63,6 +63,12 @@
                     </label>
                     <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
 
+                    <input type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerhdrShow">
+                        @SharedLocalizer["hdrLayer"]
+                    </label>
+                    <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -282,6 +288,22 @@
         source: Source_adm3pol
     });
     Layer_adm3pol.set('name', 'admxpol');
+
+    var url_hdrlin = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_hdrlin = new ol.source.TileWMS({
+        url: url_hdrlin,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':hdrlin'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrlin = new ol.layer.Tile({
+        source: Source_hdrlin
+    });
+    Layer_hdrlin.set('name', 'hdr');
 </script>
 
 @* map *@
@@ -295,7 +317,8 @@
             Layer_Base,
             Layer_adm1pol,
             Layer_adm2pol,
-            Layer_adm3pol
+            Layer_adm3pol,
+            Layer_hdrlin
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([66.902, 48.714]),

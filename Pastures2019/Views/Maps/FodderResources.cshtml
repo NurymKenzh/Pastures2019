@@ -69,6 +69,23 @@
                     </label>
                     <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
 
+                    <input type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerpopShow">
+                        @SharedLocalizer["popLayer"]
+                    </label>
+                    <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerrdslinShow">
+                        @SharedLocalizer["rdslinLayer"]
+                    </label>
+                    <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerpasturepolShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerpasturepolShow">
+                        @SharedLocalizer["pasturepolLayer"]
+                    </label>
+                    <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -304,6 +321,86 @@
         source: Source_hdrlin
     });
     Layer_hdrlin.set('name', 'hdr');
+
+    var url_hdrpol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_hdrpol = new ol.source.TileWMS({
+        url: url_hdrpol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':hdrpol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrpol = new ol.layer.Tile({
+        source: Source_hdrpol
+    });
+    Layer_hdrpol.set('name', 'hdr');
+
+    var url_poppnt = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_poppnt = new ol.source.TileWMS({
+        url: url_poppnt,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':poppnt'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppnt = new ol.layer.Tile({
+        source: Source_poppnt
+    });
+    Layer_poppnt.set('name', 'pop');
+
+    var url_poppol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_poppol = new ol.source.TileWMS({
+        url: url_poppol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':poppol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppol = new ol.layer.Tile({
+        source: Source_poppol
+    });
+    Layer_poppol.set('name', 'hdr');
+
+    var url_rdslin = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_rdslin = new ol.source.TileWMS({
+        url: url_rdslin,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':rdslin'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_rdslin = new ol.layer.Tile({
+        source: Source_rdslin
+    });
+    Layer_rdslin.set('name', 'rdslin');
+
+    var url_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_pasturepol = new ol.source.TileWMS({
+        url: url_pasturepol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':pasturepol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_pasturepol = new ol.layer.Tile({
+        source: Source_pasturepol
+    });
+    Layer_pasturepol.set('name', 'pasturepol');
 </script>
 
 @* map *@
@@ -315,10 +412,15 @@
         ]),
         layers: [
             Layer_Base,
+            Layer_pasturepol,
+            Layer_hdrlin,
+            Layer_rdslin,
             Layer_adm1pol,
             Layer_adm2pol,
             Layer_adm3pol,
-            Layer_hdrlin
+            Layer_poppol,
+            Layer_poppnt,
+            Layer_hdrpol
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([66.902, 48.714]),
@@ -403,6 +505,22 @@
             if (layer.get('name') == 'admxpol') {
                 layer.setVisible(document.getElementById("layeradmxpolShow").checked);
                 layer.setOpacity($('#layeradmxpolOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'hdr') {
+                layer.setVisible(document.getElementById("layerhdrShow").checked);
+                layer.setOpacity($('#layerhdrOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'pop') {
+                layer.setVisible(document.getElementById("layerpopShow").checked);
+                layer.setOpacity($('#layerpopOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'rdslin') {
+                layer.setVisible(document.getElementById("layerrdslinShow").checked);
+                layer.setOpacity($('#layerrdslinOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'pasturepol') {
+                layer.setVisible(document.getElementById("layerpasturepolShow").checked);
+                layer.setOpacity($('#layerpasturepolOpacity').val() / 100);
             }
         })
     }

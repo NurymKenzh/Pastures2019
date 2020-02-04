@@ -122,8 +122,10 @@ namespace Modis
                 ModisDateStart = ModisDateStart2;
                 MODIS(DownloadDir2);
 
-                // 4 hour
-                Thread.Sleep(60 * 60 * 60 * 4);
+                // 4 hours
+                Log("Sleep 4 hours");
+                Thread.Sleep(1000 * 60 * 60 * 4);
+                Log("Awake");
             }
         }
 
@@ -246,7 +248,7 @@ namespace Modis
                     if (dateTimeFinish.AddDays(30) > DateTime.Now)
                     {
                         //// 3 hours
-                        //Thread.Sleep(60 * 60 * 60 * 3);
+                        //Thread.Sleep(1000 * 60 * 60 * 3);
                         break;
                     }
                 }
@@ -287,7 +289,7 @@ namespace Modis
                         catch { }
 
                         //// 3 hours
-                        //Thread.Sleep(60 * 60 * 60 * 3);
+                        //Thread.Sleep(1000 * 60 * 60 * 3);
                     }
                 }
                 if (empty)
@@ -297,7 +299,7 @@ namespace Modis
                 if (dateTimeFinish == DateTime.Today)
                 {
                     //// 1 hour
-                    //Thread.Sleep(60 * 60 * 60);
+                    //Thread.Sleep(1000 * 60 * 60);
                     break;
                 }
             }

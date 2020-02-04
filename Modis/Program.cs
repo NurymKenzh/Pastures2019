@@ -207,15 +207,16 @@ namespace Modis
                     Directory.Move(folderDownload, folderDownloadFinale);
 
                     // anomaly
-                    foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
-                    {
-                        if (file.Contains("Anomaly") || file.Contains("BASE"))
-                        {
-                            continue;
-                        }
-                        // calculate anomaly
-                        Anomaly(GeoServerModisDataDir, file);
-                    }
+                    //foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
+                    //{
+                    //    if (file.Contains("Anomaly") || file.Contains("BASE"))
+                    //    {
+                    //        continue;
+                    //    }
+                    //    // calculate anomaly
+                    //    Anomaly(GeoServerModisDataDir, file);
+                    //}
+                    Anomaly(GeoServerModisDataDir);
 
                     //// work with downloaded MODIS
                     //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
@@ -255,7 +256,7 @@ namespace Modis
                 {
                     // get last hdf date
                     DateTime dateTimeLastHDF = dateTimeStart;
-                    foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.hdf", SearchOption.TopDirectoryOnly))
+                    foreach (string file in Directory.EnumerateFiles(folderDownloadFinale, "*.hdf", SearchOption.TopDirectoryOnly))
                     {
                         string fileDate = Path.GetFileName(file).Split('.')[1].Remove(0, 1);
                         DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)));
@@ -410,107 +411,117 @@ namespace Modis
             }
         }
 
-        private static void Anomaly(string Folder,
+        private static void Anomaly(string Folder
             // File - full path
-            string FileCalc)
+            //string FileCalc
+            )
         {
-            string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileCalc),
+            foreach (string FileCalc in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
+            {
+                if (FileCalc.Contains("Anomaly") || FileCalc.Contains("BASE"))
+                {
+                    continue;
+                }
+
+                // calculate anomaly
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(FileCalc),
                 anomalyFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension + "_Anomaly", "tif")),
                 baseFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension($"ABASE{fileNameWithoutExtension.Substring(5)}", "tif")),
                 letters = "ABCDEFGHIJKLMNOPQRSTUVWXY";
 
-            // check if anomaly already exists
-            if (File.Exists(anomalyFile))
-            {
-                return;
-            }
-
-            // check if base layer for anomaly calculation already exists, if no then try to create it
-            string arguments = "--co COMPRESS=LZW";
-            if (!File.Exists(baseFile))
-            {
-                // check if base layers for base calculation already exist
-                bool baseExists = true;
-                for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
-                {
-                    string baseYearFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif"));
-                    if (!File.Exists(baseYearFile))
-                    {
-                        baseExists = false;
-                        break;
-                    }
-                }
-                if (!baseExists)
+                // check if anomaly already exists
+                if (File.Exists(anomalyFile))
                 {
                     return;
                 }
-                // create base file to day
-                for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+
+                // check if base layer for anomaly calculation already exists, if no then try to create it
+                string arguments = "--co COMPRESS=LZW";
+                if (!File.Exists(baseFile))
                 {
-                    int letterIndex = year - AnomalyStartYear;
-                    string baseYearFile = Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif");
-                    arguments += $" -{letters[letterIndex]} {Path.GetFileName(baseYearFile)}";
+                    // check if base layers for base calculation already exist
+                    bool baseExists = true;
+                    for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+                    {
+                        string baseYearFile = Path.Combine(GeoServerModisDataDir, Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif"));
+                        if (!File.Exists(baseYearFile))
+                        {
+                            baseExists = false;
+                            break;
+                        }
+                    }
+                    if (!baseExists)
+                    {
+                        return;
+                    }
+                    // create base file to day
+                    for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+                    {
+                        int letterIndex = year - AnomalyStartYear;
+                        string baseYearFile = Path.ChangeExtension(fileNameWithoutExtension.Remove(1, 4).Insert(1, year.ToString()), "tif");
+                        arguments += $" -{letters[letterIndex]} {Path.GetFileName(baseYearFile)}";
+                    }
+                    arguments += $" --outfile={Path.GetFileName(baseFile)}";
+                    arguments += $" --calc=\"((";
+                    for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
+                    {
+                        int letterIndex = year - AnomalyStartYear;
+                        arguments += $"{letters[letterIndex]}+";
+                    }
+                    arguments = arguments.Remove(arguments.Length - 1);
+                    arguments += $")/{(AnomalyFinishYear - AnomalyStartYear + 1).ToString()})\"";
+                    GDALExecute(
+                        CMDPath,
+                        "gdal_calc.py",
+                        Folder,
+                        arguments);
                 }
-                arguments += $" --outfile={Path.GetFileName(baseFile)}";
-                arguments += $" --calc=\"((";
-                for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)
-                {
-                    int letterIndex = year - AnomalyStartYear;
-                    arguments += $"{letters[letterIndex]}+";
-                }
-                arguments = arguments.Remove(arguments.Length - 1);
-                arguments += $")/{(AnomalyFinishYear - AnomalyStartYear + 1).ToString()})\"";
+
+                // calculate
+                arguments = "--co COMPRESS=LZW";
+                arguments += $" -{letters[0]} {Path.GetFileName(baseFile)}";
+                arguments += $" -{letters[1]} {Path.GetFileName(FileCalc)} ";
+                arguments += $"--outfile={Path.GetFileName(anomalyFile)} ";
+                arguments += $"--calc=\"(B-A)*0.01\"";
                 GDALExecute(
                     CMDPath,
                     "gdal_calc.py",
                     Folder,
                     arguments);
+
+                // publish
+                string layerName = Path.GetFileNameWithoutExtension(anomalyFile);
+                // store
+                string publishParameters = $" -v -u" +
+                    $" {GeoServerUser}:{GeoServerPassword}" +
+                    $" -POST -H \"Content-type: text/xml\"" +
+                    $" -d \"<coverageStore><name>{layerName}</name><type>GeoTIFF</type><enabled>true</enabled><workspace>{GeoServerWorkspace}</workspace><url>" +
+                    $"/data/{GeoServerWorkspace}/{layerName}.tif</url></coverageStore>\"" +
+                    $" {GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores?configure=all";
+                CurlExecute(
+                    CMDPath,
+                    publishParameters);
+                // layer
+                publishParameters = $" -v -u" +
+                    $" {GeoServerUser}:{GeoServerPassword}" +
+                    $" -PUT -H \"Content-type: text/xml\"" +
+                    $" -d \"<coverage><name>{layerName}</name><title>{layerName}</title><defaultInterpolationMethod><name>nearest neighbor</name></defaultInterpolationMethod></coverage>\"" +
+                    $" \"{GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores/{layerName}/coverages?recalculate=nativebbox\"";
+                CurlExecute(
+                    CMDPath,
+                    publishParameters);
+                // style
+                string index = ModisDataSetIndex.ToString().PadLeft(2, '0'),
+                    style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}_Anomaly";
+                publishParameters = $" -v -u" +
+                    $" {GeoServerUser}:{GeoServerPassword}" +
+                    $" -X PUT -H \"Content-type: text/xml\"" +
+                    $" -d \"<layer><defaultStyle><name>{style}</name></defaultStyle></layer>\"" +
+                    $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
+                CurlExecute(
+                    CMDPath,
+                    publishParameters);
             }
-
-            // calculate
-            arguments = "--co COMPRESS=LZW";
-            arguments += $" -{letters[0]} {Path.GetFileName(baseFile)}";
-            arguments += $" -{letters[1]} {Path.GetFileName(FileCalc)} ";
-            arguments += $"--outfile={Path.GetFileName(anomalyFile)} ";
-            arguments += $"--calc=\"(B-A)*0.01\"";
-            GDALExecute(
-                CMDPath,
-                "gdal_calc.py",
-                Folder,
-                arguments);
-
-            // publish
-            string layerName = Path.GetFileNameWithoutExtension(anomalyFile);
-            // store
-            string publishParameters = $" -v -u" +
-                $" {GeoServerUser}:{GeoServerPassword}" +
-                $" -POST -H \"Content-type: text/xml\"" +
-                $" -d \"<coverageStore><name>{layerName}</name><type>GeoTIFF</type><enabled>true</enabled><workspace>{GeoServerWorkspace}</workspace><url>" +
-                $"/data/{GeoServerWorkspace}/{layerName}.tif</url></coverageStore>\"" +
-                $" {GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores?configure=all";
-            CurlExecute(
-                CMDPath,
-                publishParameters);
-            // layer
-            publishParameters = $" -v -u" +
-                $" {GeoServerUser}:{GeoServerPassword}" +
-                $" -PUT -H \"Content-type: text/xml\"" +
-                $" -d \"<coverage><name>{layerName}</name><title>{layerName}</title><defaultInterpolationMethod><name>nearest neighbor</name></defaultInterpolationMethod></coverage>\"" +
-                $" \"{GeoServerURL}rest/workspaces/{GeoServerWorkspace}/coveragestores/{layerName}/coverages?recalculate=nativebbox\"";
-            CurlExecute(
-                CMDPath,
-                publishParameters);
-            // style
-            string index = ModisDataSetIndex.ToString().PadLeft(2, '0'),
-                style = $"{GeoServerWorkspace}:{ModisSource}_{ModisProduct.Replace(".", "")}_B{index}_{ModisDataSet}_Anomaly";
-            publishParameters = $" -v -u" +
-                $" {GeoServerUser}:{GeoServerPassword}" +
-                $" -X PUT -H \"Content-type: text/xml\"" +
-                $" -d \"<layer><defaultStyle><name>{style}</name></defaultStyle></layer>\"" +
-                $" {GeoServerURL}rest/layers/{GeoServerWorkspace}:{layerName}.xml";
-            CurlExecute(
-                CMDPath,
-                publishParameters);
         }
 
         private static void Log(string log)

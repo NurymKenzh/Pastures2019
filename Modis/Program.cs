@@ -259,7 +259,7 @@ namespace Modis
                     foreach (string file in Directory.EnumerateFiles(folderDownloadFinale, "*.hdf", SearchOption.TopDirectoryOnly))
                     {
                         string fileDate = Path.GetFileName(file).Split('.')[1].Remove(0, 1);
-                        DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)));
+                        DateTime dateTimeHDF = new DateTime(Convert.ToInt32(fileDate.Substring(0, 4)), 1, 1).AddDays(Convert.ToInt32(fileDate.Substring(4, 3)) - 1);
                         if (dateTimeHDF >= dateTimeLastHDF)
                         {
                             dateTimeLastHDF = dateTimeHDF;

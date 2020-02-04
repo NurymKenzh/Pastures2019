@@ -416,6 +416,40 @@
         })
     });
     Layer_select_pasturepol.set('name', 'pasturepol');
+
+    var url_adm1poltest = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm1poltest = new ol.source.TileWMS({
+        url: url_adm1poltest,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm1pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm1poltest = new ol.layer.Tile({
+        source: Source_adm1poltest
+    });
+    Layer_adm1pol.setVisible(false);
+    Layer_adm2pol.setVisible(false);
+    Layer_adm3pol.setVisible(false);
+    Layer_hdrlin.setVisible(false);
+    Layer_hdrpol.setVisible(false);
+    Layer_poppnt.setVisible(false);
+    Layer_poppol.setVisible(false);
+    Layer_rdslin.setVisible(false);
+    Layer_pasturepol.setVisible(false);
+    var filter = "kato_te = '350000000'";
+    var filterParams = {
+        'FILTER': null,
+        'CQL_FILTER': null,
+        'FEATUREID': null
+    };
+    if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+          filterParams["CQL_FILTER"] = filter;
+        }
+    Layer_adm1poltest.getSource().updateParams(filterParams);
 </script>
 
 @* map *@
@@ -432,6 +466,7 @@
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
+            Layer_adm1poltest,
             Layer_adm2pol,
             Layer_adm3pol,
             Layer_poppol,

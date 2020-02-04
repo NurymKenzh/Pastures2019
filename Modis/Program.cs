@@ -122,8 +122,8 @@ namespace Modis
                 ModisDateStart = ModisDateStart2;
                 MODIS(DownloadDir2);
 
-                // 1 hour
-                Thread.Sleep(60 * 60 * 60);
+                // 4 hour
+                Thread.Sleep(60 * 60 * 60 * 4);
             }
         }
 

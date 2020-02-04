@@ -123,8 +123,20 @@
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
+  <data name="admxpolLayer" xml:space="preserve">
+    <value>Области, районы, сельские округа</value>
+  </data>
+  <data name="AllocatedFeedResources" xml:space="preserve">
+    <value>Кормовые ресурсы выдела</value>
+  </data>
+  <data name="AllocationNumber" xml:space="preserve">
+    <value>Номер выдела</value>
+  </data>
   <data name="Anomaly" xml:space="preserve">
     <value>Аномалия</value>
+  </data>
+  <data name="Autumn" xml:space="preserve">
+    <value>Осень</value>
   </data>
   <data name="BackToList" xml:space="preserve">
     <value>Обратно к списку</value>
@@ -227,6 +239,9 @@
   </data>
   <data name="Cattles" xml:space="preserve">
     <value>Крупный рогатый скот</value>
+  </data>
+  <data name="cha" xml:space="preserve">
+    <value>ц/га</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Изменить пароль</value>
@@ -363,6 +378,9 @@
   <data name="Find" xml:space="preserve">
     <value>Найти</value>
   </data>
+  <data name="FodderResources" xml:space="preserve">
+    <value>Кормовые ресурсы</value>
+  </data>
   <data name="Folder" xml:space="preserve">
     <value>Папка</value>
   </data>
@@ -372,11 +390,23 @@
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Забыли свой пароль?</value>
   </data>
+  <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
+    <value>Валовая урожайность поедаемых растений на средний урожайный год, сухой массы</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Группа</value>
+  </data>
+  <data name="GroupLat" xml:space="preserve">
+    <value>Группа на латинском</value>
+  </data>
   <data name="Haying" xml:space="preserve">
     <value>Сенокос</value>
   </data>
   <data name="Hayings" xml:space="preserve">
     <value>Сенокосы</value>
+  </data>
+  <data name="hdrLayer" xml:space="preserve">
+    <value>Реки, озера</value>
   </data>
   <data name="Height" xml:space="preserve">
     <value>Высота в холке</value>
@@ -510,6 +540,12 @@
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
+  <data name="pasturepolLayer" xml:space="preserve">
+    <value>Кормовые ресурсы</value>
+  </data>
+  <data name="PClass" xml:space="preserve">
+    <value>Класс пастбища</value>
+  </data>
   <data name="Photo" xml:space="preserve">
     <value>Фото</value>
   </data>
@@ -518,6 +554,9 @@
   </data>
   <data name="PleaseResetYourPasswordBy" xml:space="preserve">
     <value>Пожалуйста, сбросьте свой пароль, </value>
+  </data>
+  <data name="popLayer" xml:space="preserve">
+    <value>Населенные пункты</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
@@ -546,6 +585,9 @@
   <data name="RangeRU" xml:space="preserve">
     <value>Ареал разведения (русский)</value>
   </data>
+  <data name="rdslinLayer" xml:space="preserve">
+    <value>Дороги</value>
+  </data>
   <data name="RecomCattle" xml:space="preserve">
     <value>Рекомендация по виду скота</value>
   </data>
@@ -554,6 +596,9 @@
   </data>
   <data name="Recommend" xml:space="preserve">
     <value>Рекомендация по сезонам</value>
+  </data>
+  <data name="RecommendationForUse" xml:space="preserve">
+    <value>Рекомендация по использованию</value>
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Рекомендации по сезонам</value>
@@ -615,11 +660,17 @@
   <data name="Soobs" xml:space="preserve">
     <value>Сообщества</value>
   </data>
+  <data name="Spring" xml:space="preserve">
+    <value>Весна</value>
+  </data>
   <data name="SType" xml:space="preserve">
     <value>Земельный фонд по категориям земель</value>
   </data>
   <data name="STypes" xml:space="preserve">
     <value>Земельный фонд по категориям земель</value>
+  </data>
+  <data name="Summer" xml:space="preserve">
+    <value>Лето</value>
   </data>
   <data name="SupplyRecommend" xml:space="preserve">
     <value>Рекомендация по сезонам (Земли запаса)</value>
@@ -690,6 +741,9 @@
   <data name="WeightRU" xml:space="preserve">
     <value>Живая масса (русский)</value>
   </data>
+  <data name="Winter" xml:space="preserve">
+    <value>Зима</value>
+  </data>
   <data name="WoolLength" xml:space="preserve">
     <value>Длина шерсти</value>
   </data>
@@ -740,5 +794,8 @@
   </data>
   <data name="ZTypes" xml:space="preserve">
     <value>Типы использования земель</value>
+  </data>
+  <data name="сhaFeedUnits" xml:space="preserve">
+    <value>ц/га кормовых единиц</value>
   </data>
 </root>

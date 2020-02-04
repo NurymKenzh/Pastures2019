@@ -123,7 +123,19 @@
   <data name="Administrator" xml:space="preserve">
     <value />
   </data>
+  <data name="admxpolLayer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllocatedFeedResources" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AllocationNumber" xml:space="preserve">
+    <value />
+  </data>
   <data name="Anomaly" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Autumn" xml:space="preserve">
     <value />
   </data>
   <data name="BackToList" xml:space="preserve">
@@ -226,6 +238,9 @@
     <value />
   </data>
   <data name="Cattles" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cha" xml:space="preserve">
     <value />
   </data>
   <data name="ChangePassword" xml:space="preserve">
@@ -363,6 +378,9 @@
   <data name="Find" xml:space="preserve">
     <value />
   </data>
+  <data name="FodderResources" xml:space="preserve">
+    <value />
+  </data>
   <data name="Folder" xml:space="preserve">
     <value />
   </data>
@@ -372,10 +390,22 @@
   <data name="ForgotYourPassword" xml:space="preserve">
     <value />
   </data>
+  <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value />
+  </data>
+  <data name="GroupLat" xml:space="preserve">
+    <value />
+  </data>
   <data name="Haying" xml:space="preserve">
     <value />
   </data>
   <data name="Hayings" xml:space="preserve">
+    <value />
+  </data>
+  <data name="hdrLayer" xml:space="preserve">
     <value />
   </data>
   <data name="Height" xml:space="preserve">
@@ -510,6 +540,12 @@
   <data name="Password" xml:space="preserve">
     <value />
   </data>
+  <data name="pasturepolLayer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PClass" xml:space="preserve">
+    <value />
+  </data>
   <data name="Photo" xml:space="preserve">
     <value />
   </data>
@@ -517,6 +553,9 @@
     <value />
   </data>
   <data name="PleaseResetYourPasswordBy" xml:space="preserve">
+    <value />
+  </data>
+  <data name="popLayer" xml:space="preserve">
     <value />
   </data>
   <data name="Profile" xml:space="preserve">
@@ -546,6 +585,9 @@
   <data name="RangeRU" xml:space="preserve">
     <value />
   </data>
+  <data name="rdslinLayer" xml:space="preserve">
+    <value />
+  </data>
   <data name="RecomCattle" xml:space="preserve">
     <value />
   </data>
@@ -553,6 +595,9 @@
     <value />
   </data>
   <data name="Recommend" xml:space="preserve">
+    <value />
+  </data>
+  <data name="RecommendationForUse" xml:space="preserve">
     <value />
   </data>
   <data name="Recommends" xml:space="preserve">
@@ -615,10 +660,16 @@
   <data name="Soobs" xml:space="preserve">
     <value />
   </data>
+  <data name="Spring" xml:space="preserve">
+    <value />
+  </data>
   <data name="SType" xml:space="preserve">
     <value />
   </data>
   <data name="STypes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Summer" xml:space="preserve">
     <value />
   </data>
   <data name="SupplyRecommend" xml:space="preserve">
@@ -690,6 +741,9 @@
   <data name="WeightRU" xml:space="preserve">
     <value />
   </data>
+  <data name="Winter" xml:space="preserve">
+    <value />
+  </data>
   <data name="WoolLength" xml:space="preserve">
     <value />
   </data>
@@ -739,6 +793,9 @@
     <value />
   </data>
   <data name="ZTypes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="сhaFeedUnits" xml:space="preserve">
     <value />
   </data>
 </root>

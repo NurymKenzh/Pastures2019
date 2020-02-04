@@ -401,6 +401,21 @@
         source: Source_pasturepol
     });
     Layer_pasturepol.set('name', 'pasturepol');
+
+    var Source_select_pasturepol = new ol.source.Vector({});
+    var Layer_select_pasturepol = new ol.layer.Vector({
+        source: Source_select_pasturepol,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 255, 1]
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })
+    });
+    Layer_select_pasturepol.set('name', 'pasturepol');
 </script>
 
 @* map *@
@@ -413,6 +428,7 @@
         layers: [
             Layer_Base,
             Layer_pasturepol,
+            Layer_select_pasturepol,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
@@ -523,6 +539,78 @@
                 layer.setOpacity($('#layerpasturepolOpacity').val() / 100);
             }
         })
+    }
+</script>
+
+@* map.on('singleclick') *@
+<script>
+    map.on('singleclick', function (evt) {
+        Source_select_pasturepol.clear();
+
+        var viewResolution = (map.getView().getResolution());
+        var url_pasturepol = Source_pasturepol.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {
+                'INFO_FORMAT': 'text/javascript'
+            });
+        if (url_pasturepol) {
+            jQuery.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_pasturepol + "&format_options=callback:getJson",
+                async: false,
+                dataType: 'jsonp',
+                error: function () {
+                }
+            }).then(function (data) {
+                if (Layer_pasturepol.getVisible() && data.features.length > 0) {
+                    // select pasture
+                    var polyFeature = new ol.Feature({
+                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+                    });
+                    Source_select_pasturepol.addFeature(polyFeature);
+                    // data from pasturepol
+                    var parser = new ol.format.GeoJSON();
+                    var features = parser.readFeatures(data);
+                    console.log(DecodeString('@SharedLocalizer["AllocationNumber"]: ') + features[0].get('group_id'));
+                    $.ajax({
+                        url: '@Url.Action("GetPastureInfo")',
+                        data: {
+                            objectid: features[0].get('objectid')
+                        },
+                        type: 'POST',
+                        success: function (dataDB) {
+                            console.log(DecodeString('@SharedLocalizer["Otdel"]: ') + dataDB.pasturepol.otdel);
+                            console.log(DecodeString('@SharedLocalizer["PClass"]: ') + dataDB.pasturepol.ptype);
+                            console.log(DecodeString('@SharedLocalizer["Group"]: ') + dataDB.pasturepol.group);
+                            console.log(DecodeString('@SharedLocalizer["GroupLat"]: ') + dataDB.pasturepol.group_lat);
+                            console.log(DecodeString('@SharedLocalizer["AllocatedFeedResources"]'));
+                            console.log(DecodeString('@SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"]'));
+                            console.log('\t' + DecodeString('@SharedLocalizer["cha"]') + '\t' + DecodeString('@SharedLocalizer["сhaFeedUnits"]'));
+                            console.log(DecodeString('@SharedLocalizer["Spring"]') + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
+                            console.log(DecodeString('@SharedLocalizer["Summer"]') + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
+                            console.log(DecodeString('@SharedLocalizer["Autumn"]') + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
+                            console.log(DecodeString('@SharedLocalizer["Winter"]') + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
+                            console.log(DecodeString('@SharedLocalizer["RecommendationForUse"]: ') + dataDB.pasturepol.recommend);
+                            console.log(DecodeString('@SharedLocalizer["RecomCattles"]: ') + dataDB.pasturepol.recomcatt);
+                            console.log('----------------------------------------------');
+                        },
+                        error: function () {
+                        }
+                    })
+                }
+            });
+        }
+    })
+</script>
+
+@* DecodeString *@
+<script>
+    function DecodeString(str) {
+        var txt = document.createElement("textarea");
+        txt.innerHTML = str;
+        return txt.value;
     }
 </script>
 

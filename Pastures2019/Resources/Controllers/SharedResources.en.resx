@@ -123,8 +123,20 @@
   <data name="Administrator" xml:space="preserve">
     <value>Administration</value>
   </data>
+  <data name="admxpolLayer" xml:space="preserve">
+    <value>Regions, districts, rural districts</value>
+  </data>
+  <data name="AllocatedFeedResources" xml:space="preserve">
+    <value>Allocated feed resources</value>
+  </data>
+  <data name="AllocationNumber" xml:space="preserve">
+    <value>Allocation Number</value>
+  </data>
   <data name="Anomaly" xml:space="preserve">
     <value>Anomaly</value>
+  </data>
+  <data name="Autumn" xml:space="preserve">
+    <value>Autumn</value>
   </data>
   <data name="BackToList" xml:space="preserve">
     <value>Back To List</value>
@@ -227,6 +239,9 @@
   </data>
   <data name="Cattles" xml:space="preserve">
     <value>Cattles</value>
+  </data>
+  <data name="cha" xml:space="preserve">
+    <value>c / ha</value>
   </data>
   <data name="ChangePassword" xml:space="preserve">
     <value>Change password</value>
@@ -363,6 +378,9 @@
   <data name="Find" xml:space="preserve">
     <value>Find</value>
   </data>
+  <data name="FodderResources" xml:space="preserve">
+    <value>Feed resources</value>
+  </data>
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
   </data>
@@ -372,11 +390,23 @@
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
   </data>
+  <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
+    <value>Gross yield of plants eaten on average crop year, dry weight</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="GroupLat" xml:space="preserve">
+    <value>Latin group</value>
+  </data>
   <data name="Haying" xml:space="preserve">
     <value>Haymaking</value>
   </data>
   <data name="Hayings" xml:space="preserve">
     <value>Hayfields</value>
+  </data>
+  <data name="hdrLayer" xml:space="preserve">
+    <value>Rivers, lakes</value>
   </data>
   <data name="Height" xml:space="preserve">
     <value>Height at the withers</value>
@@ -510,6 +540,12 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="pasturepolLayer" xml:space="preserve">
+    <value>Feed resources</value>
+  </data>
+  <data name="PClass" xml:space="preserve">
+    <value>Pasture class</value>
+  </data>
   <data name="Photo" xml:space="preserve">
     <value>A photo</value>
   </data>
@@ -518,6 +554,9 @@
   </data>
   <data name="PleaseResetYourPasswordBy" xml:space="preserve">
     <value>Please reset your password by</value>
+  </data>
+  <data name="popLayer" xml:space="preserve">
+    <value>Settlements</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
@@ -546,6 +585,9 @@
   <data name="RangeRU" xml:space="preserve">
     <value>Breeding range (Russian)</value>
   </data>
+  <data name="rdslinLayer" xml:space="preserve">
+    <value>Roads</value>
+  </data>
   <data name="RecomCattle" xml:space="preserve">
     <value>Cattle recommendation</value>
   </data>
@@ -554,6 +596,9 @@
   </data>
   <data name="Recommend" xml:space="preserve">
     <value>Seasonal recommendation</value>
+  </data>
+  <data name="RecommendationForUse" xml:space="preserve">
+    <value>Recommendation for use</value>
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Seasonal Recommendations</value>
@@ -615,11 +660,17 @@
   <data name="Soobs" xml:space="preserve">
     <value>Communities</value>
   </data>
+  <data name="Spring" xml:space="preserve">
+    <value>Spring</value>
+  </data>
   <data name="SType" xml:space="preserve">
     <value>Land Fund by Land Categories</value>
   </data>
   <data name="STypes" xml:space="preserve">
     <value>Land Fund by Land Categories</value>
+  </data>
+  <data name="Summer" xml:space="preserve">
+    <value>Summer</value>
   </data>
   <data name="SupplyRecommend" xml:space="preserve">
     <value>Seasonal Recommendation (Stock Lands)</value>
@@ -690,6 +741,9 @@
   <data name="WeightRU" xml:space="preserve">
     <value>Live weight (Russian)</value>
   </data>
+  <data name="Winter" xml:space="preserve">
+    <value>Winter</value>
+  </data>
   <data name="WoolLength" xml:space="preserve">
     <value>Wool length</value>
   </data>
@@ -740,5 +794,8 @@
   </data>
   <data name="ZTypes" xml:space="preserve">
     <value>Land use types</value>
+  </data>
+  <data name="сhaFeedUnits" xml:space="preserve">
+    <value>с / ha feed units</value>
   </data>
 </root>

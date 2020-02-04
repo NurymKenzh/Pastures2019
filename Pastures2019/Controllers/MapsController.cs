@@ -4,9 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Npgsql;
+using Pastures2019.Data;
+using Pastures2019.Models;
 
 namespace Pastures2019.Controllers
 {
@@ -19,6 +23,13 @@ namespace Pastures2019.Controllers
 
     public class MapsController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public MapsController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -124,6 +135,38 @@ namespace Pastures2019.Controllers
             }
 
             return layers.ToArray();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetPastureInfo(
+            string objectid)
+        {
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            pasturepol pasturepol = new pasturepol();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                var pasturepols = connection.Query<pasturepol>($"SELECT gid, objectid, class_id, otdely_id, " +
+                    $"subtype_id, group_id, ur_v, ur_l, ur_o, ur_z, korm_v, korm_l, korm_o, korm_z, " +
+                    $"recommend_, recom_catt, relief_id, zone_id, haying_id, shape_leng, shape_area " +
+                    $"FROM public.pasturepol " +
+                    $"WHERE objectid = {objectid};");
+                pasturepol = pasturepols.FirstOrDefault();
+            }
+            pasturepol.otdel = _context.Otdel.FirstOrDefault(o => o.Code == pasturepol.otdely_id)?.Description;
+            pasturepol.ptype = _context.PType.FirstOrDefault(p => p.Code == pasturepol.class_id)?.Description;
+            pasturepol.group = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.Description;
+            pasturepol.group_lat = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.DescriptionLat;
+            pasturepol.recommend = _context.Recommend.FirstOrDefault(r => r.Code == pasturepol.recommend_)?.Description;
+            pasturepol.recomcatt = _context.RecomCattle.FirstOrDefault(r => r.Code == pasturepol.recom_catt)?.Description;
+            return Json(new
+            {
+                pasturepol
+            });
         }
     }
 }

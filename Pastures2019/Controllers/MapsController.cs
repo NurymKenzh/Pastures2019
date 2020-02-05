@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Npgsql;
@@ -53,6 +54,7 @@ namespace Pastures2019.Controllers
         {
             ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
             ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
+            ViewBag.Otdel = new SelectList(_context.Otdel.ToList().OrderBy(o => o.Description), "Code", "Description");
             return View();
         }
 

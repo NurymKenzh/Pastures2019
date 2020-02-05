@@ -31,6 +31,9 @@
                 <div class="card-body">
                     @*<input type="button" name="Test" value="Test" onclick="Test()" />*@
 
+                    @Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })
+                    <input type="button" value="Find" onclick="FindPastures()" />
+
                     <select id="cato1" onchange="ChangeCATO1()"></select>
                     <select id="cato2" onchange="ChangeCATO2()"></select>
                     <select id="cato3" onchange="ChangeCATO3()"></select>
@@ -448,23 +451,24 @@
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             tiled: true,
-            'LAYERS': geoserver_workspace_name + ':pasturepol'
+            'LAYERS': geoserver_workspace_name + ':pasturepol',
+            'STYLES': 'pasturepolfind',
         },
         serverType: 'geoserver'
     });
     var Layer_found_pasturepol = new ol.layer.Tile({
         source: Source_found_pasturepol
     });
-    var filter_ = "class_id = '10'";
-    var filterParams_ = {
+    var filter_found = "otdely_id = '333333'";
+    var filterParams_found = {
         'FILTER': null,
         'CQL_FILTER': null,
         'FEATUREID': null
     };
-    if (filter_.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-          filterParams_["CQL_FILTER"] = filter_;
+    if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+          filterParams_found["CQL_FILTER"] = filter_found;
         }
-    Layer_found_pasturepol.getSource().updateParams(filterParams_);
+    Layer_found_pasturepol.getSource().updateParams(filterParams_found);
 </script>
 
 @* map *@
@@ -795,6 +799,26 @@
                 }
             }
         });
+    }
+</script>
+
+@* FindPastures *@
+<script>
+    function FindPastures() {
+        var otdely_id = $('#find_otdel').val();
+        if (otdely_id == null || otdely_id == '') {
+            otdely_id = '333333';
+        }
+        filter_found = "otdely_id = '" + otdely_id + "'";
+        filterParams_found = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+              filterParams_found["CQL_FILTER"] = filter_found;
+            }
+        Layer_found_pasturepol.getSource().updateParams(filterParams_found);
     }
 </script>
 

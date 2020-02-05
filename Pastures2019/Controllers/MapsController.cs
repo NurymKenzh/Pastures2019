@@ -51,6 +51,7 @@ namespace Pastures2019.Controllers
 
         public ActionResult FodderResources()
         {
+            ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
             ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
             return View();
         }

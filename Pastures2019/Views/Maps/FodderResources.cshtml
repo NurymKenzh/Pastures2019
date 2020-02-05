@@ -29,6 +29,12 @@
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
+                    @*<input type="button" name="Test" value="Test" onclick="Test()" />*@
+
+                    <select id="cato1" onchange="ChangeKATO1()"></select>
+                    <select id="cato2" onchange="ChangeKATO2()"></select>
+                    <select id="cato3" onchange="ChangeKATO3()"></select>
+
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
                         <option value="OSM">OpenStreetMap</option>
                         <option value="BingAerialWithLabels">Bing Aerial</option>
@@ -431,15 +437,15 @@
     var Layer_adm1poltest = new ol.layer.Tile({
         source: Source_adm1poltest
     });
-    Layer_adm1pol.setVisible(false);
-    Layer_adm2pol.setVisible(false);
-    Layer_adm3pol.setVisible(false);
-    Layer_hdrlin.setVisible(false);
-    Layer_hdrpol.setVisible(false);
-    Layer_poppnt.setVisible(false);
-    Layer_poppol.setVisible(false);
-    Layer_rdslin.setVisible(false);
-    Layer_pasturepol.setVisible(false);
+    //Layer_adm1pol.setVisible(false);
+    //Layer_adm2pol.setVisible(false);
+    //Layer_adm3pol.setVisible(false);
+    //Layer_hdrlin.setVisible(false);
+    //Layer_hdrpol.setVisible(false);
+    //Layer_poppnt.setVisible(false);
+    //Layer_poppol.setVisible(false);
+    //Layer_rdslin.setVisible(false);
+    //Layer_pasturepol.setVisible(false);
     var filter = "kato_te = '350000000'";
     var filterParams = {
         'FILTER': null,
@@ -450,7 +456,82 @@
           filterParams["CQL_FILTER"] = filter;
         }
     Layer_adm1poltest.getSource().updateParams(filterParams);
+
+
+    //var vectorSource = new ol.source.Vector({
+    //    loader: function (extent, resolution, projection) {
+    //        var urlvector = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm1pol&CQL_FILTER=" + filter + "&maxFeatures=50&outputFormat=application%2Fjson&format_options=callback:getJson";
+    //        $.ajax(urlvector).then(function (response) {
+    //            var features = geojsonFormat.readFeatures(response, {
+    //                featureProjection: projection
+    //            });
+    //            vectorSource.addFeatures(features);
+    //        });
+    //    }
+    //});
+    //var Layer_vector = new ol.layer.Vector({
+    //    source: vectorSource
+    //});
+
+    //var Layer_adm3pol_v = new ol.layer.Vector();
+    //var url_adm3pol_v = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm1pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+    //$.ajax({
+    //    jsonp: false,
+    //    jsonpCallback: 'getJson',
+    //    type: 'GET',
+    //    url: url_adm3pol_v,
+    //    async: false,
+    //    dataType: 'jsonp',
+    //    success: function (data_adm3pol_v) {
+    //        Layer_adm3pol_v = new ol.layer.Vector({
+    //            source: new ol.source.Vector({
+    //                features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
+    //                    featureProjection: 'EPSG:3857'
+    //                })
+    //            })
+    //        });
+    //        map.addLayer(Layer_adm3pol_v);
+    //        map.getView().fit(Layer_adm3pol_v.getSource().getExtent());
+    //    }
+    //});
 </script>
+
+
+@*<script>
+    function Test() {
+        filter = "kato_te = '110000000'";
+        url_adm3pol_v = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm1pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_adm3pol_v,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data_adm3pol_v) {
+                console.log(1);
+                Layer_adm3pol_v.getSource().clear();
+                var new_source = new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                });
+                //Layer_adm3pol_v = new ol.layer.Vector({
+                //    source: new ol.source.Vector({
+                //        features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
+                //            featureProjection: 'EPSG:3857'
+                //        })
+                //    })
+                //});
+                Layer_adm3pol_v.setSource(new_source);
+                console.log(2);
+                //map.addLayer(Layer_adm3pol_v);
+                map.getView().fit(Layer_adm3pol_v.getSource().getExtent());
+            }
+        });
+        console.log(3);
+    }
+</script>*@
 
 @* map *@
 <script>
@@ -466,7 +547,7 @@
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
-            Layer_adm1poltest,
+            //Layer_adm1poltest,
             Layer_adm2pol,
             Layer_adm3pol,
             Layer_poppol,
@@ -608,7 +689,7 @@
                     // data from pasturepol
                     var parser = new ol.format.GeoJSON();
                     var features = parser.readFeatures(data);
-                    console.log(DecodeString('@SharedLocalizer["AllocationNumber"]: ') + features[0].get('group_id'));
+                    console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
                     $.ajax({
                         url: '@Url.Action("GetPastureInfo")',
                         data: {
@@ -616,19 +697,19 @@
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                            console.log(DecodeString('@SharedLocalizer["Otdel"]: ') + dataDB.pasturepol.otdel);
-                            console.log(DecodeString('@SharedLocalizer["PClass"]: ') + dataDB.pasturepol.ptype);
-                            console.log(DecodeString('@SharedLocalizer["Group"]: ') + dataDB.pasturepol.group);
-                            console.log(DecodeString('@SharedLocalizer["GroupLat"]: ') + dataDB.pasturepol.group_lat);
-                            console.log(DecodeString('@SharedLocalizer["AllocatedFeedResources"]'));
-                            console.log(DecodeString('@SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"]'));
-                            console.log('\t' + DecodeString('@SharedLocalizer["cha"]') + '\t' + DecodeString('@SharedLocalizer["сhaFeedUnits"]'));
-                            console.log(DecodeString('@SharedLocalizer["Spring"]') + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
-                            console.log(DecodeString('@SharedLocalizer["Summer"]') + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
-                            console.log(DecodeString('@SharedLocalizer["Autumn"]') + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
-                            console.log(DecodeString('@SharedLocalizer["Winter"]') + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
-                            console.log(DecodeString('@SharedLocalizer["RecommendationForUse"]: ') + dataDB.pasturepol.recommend);
-                            console.log(DecodeString('@SharedLocalizer["RecomCattles"]: ') + dataDB.pasturepol.recomcatt);
+                            console.log('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.pasturepol.otdel);
+                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
+                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
+                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);
+                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
+                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
+                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
+                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
+                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
+                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
+                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
+                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.pasturepol.recommend);
+                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.pasturepol.recomcatt);
                             console.log('----------------------------------------------');
                         },
                         error: function () {
@@ -640,12 +721,54 @@
     })
 </script>
 
-@* DecodeString *@
+@* CATO *@
 <script>
-    function DecodeString(str) {
-        var txt = document.createElement("textarea");
-        txt.innerHTML = str;
-        return txt.value;
+    var cato = new Array();
+    @foreach (CATO cATO in ViewBag.CATO)
+    {
+        @:var cato_new = {};
+        @:cato_new["te"] = '@cATO.TE';
+        @:cato_new["ab"] = '@cATO.AB';
+        @:cato_new["cd"] = '@cATO.CD';
+        @:cato_new["ef"] = '@cATO.EF';
+        @:cato_new["hij"] = '@cATO.HIJ';
+        @:cato_new["name"] = '@Html.Raw(cATO.Name)';
+        @:cato.push(cato_new);
+    }
+    $('#cato1').append($("<option />"));
+    $.each(cato, function () {
+        if (this.cd == '00') {
+            $('#cato1').append($("<option />").val(this.te).text(this.name));
+        }
+    });
+
+    function ChangeKATO1() {
+        NavigateToCATO($('#cato1').val());
+        var ab = $('#cato1').val().substr(0, 2);
+        $('#cato2').empty();
+        $('#cato2').append($("<option />"));
+        $.each(cato, function () {
+            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
+                $('#cato2').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeKATO2() {
+        NavigateToCATO($('#cato2').val());
+        var ab = $('#cato2').val().substr(0, 2),
+            cd = $('#cato2').val().substr(2, 2);
+        $('#cato3').empty();
+        $('#cato3').append($("<option />"));
+        $.each(cato, function () {
+            if (this.hij == '000' && this.ab == ab && this.cd == cd && this.ef != '00') {
+                $('#cato3').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function NavigateToCATO(te) {
+
     }
 </script>
 

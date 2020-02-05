@@ -29,7 +29,7 @@
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
-                    @*<input type="button" name="Test" value="Test" onclick="Test()" />*@
+                    <input type="button" name="Test" value="Test" onclick="Test()" />
 
                     <select id="cato1" onchange="ChangeCATO1()"></select>
                     <select id="cato2" onchange="ChangeCATO2()"></select>
@@ -63,7 +63,7 @@
                     </label>
                     <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
 
-                    <input type="checkbox" id="layeradmxpolShow" checked="checked" onchange="ChangeLayers()">
+                    <input type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
                     <label class="form-check-label text-white" for="layeradmxpolShow">
                         @SharedLocalizer["admxpolLayer"]
                     </label>
@@ -128,6 +128,8 @@
     </div>
     <!-- End content -->
 </div>
+
+
 
 @* layers *@
 <script>
@@ -279,6 +281,7 @@
         source: Source_adm1pol
     });
     Layer_adm1pol.set('name', 'admxpol');
+    Layer_adm1pol.setVisible(false);
 
     var url_adm2pol = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_adm2pol = new ol.source.TileWMS({
@@ -295,6 +298,7 @@
         source: Source_adm2pol
     });
     Layer_adm2pol.set('name', 'admxpol');
+    Layer_adm2pol.setVisible(false);
 
     var url_adm3pol = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_adm3pol = new ol.source.TileWMS({
@@ -311,6 +315,7 @@
         source: Source_adm3pol
     });
     Layer_adm3pol.set('name', 'admxpol');
+    Layer_adm3pol.setVisible(false);
 
     var Layer_admXpol_Navigate = new ol.layer.Vector({
         style: new ol.style.Style({
@@ -323,7 +328,7 @@
             })
         })
     });
-    Layer_admXpol_Navigate.set('name', 'admxpol');
+    Layer_admXpol_Navigate.set('name', 'admxpolnavigate');
 
     var url_hdrlin = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_hdrlin = new ol.source.TileWMS({
@@ -337,7 +342,8 @@
         serverType: 'geoserver'
     });
     var Layer_hdrlin = new ol.layer.Tile({
-        source: Source_hdrlin
+        source: Source_hdrlin,
+        maxResolution: ol.tilegrid.createXYZ().getResolution(7)
     });
     Layer_hdrlin.set('name', 'hdr');
 
@@ -369,7 +375,8 @@
         serverType: 'geoserver'
     });
     var Layer_poppnt = new ol.layer.Tile({
-        source: Source_poppnt
+        source: Source_poppnt,
+        maxResolution: ol.tilegrid.createXYZ().getResolution(9)
     });
     Layer_poppnt.set('name', 'pop');
 

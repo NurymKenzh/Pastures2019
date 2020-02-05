@@ -31,9 +31,9 @@
                 <div class="card-body">
                     @*<input type="button" name="Test" value="Test" onclick="Test()" />*@
 
-                    <select id="cato1" onchange="ChangeKATO1()"></select>
-                    <select id="cato2" onchange="ChangeKATO2()"></select>
-                    <select id="cato3" onchange="ChangeKATO3()"></select>
+                    <select id="cato1" onchange="ChangeCATO1()"></select>
+                    <select id="cato2" onchange="ChangeCATO2()"></select>
+                    <select id="cato3" onchange="ChangeCATO3()"></select>
 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
                         <option value="OSM">OpenStreetMap</option>
@@ -312,6 +312,19 @@
     });
     Layer_adm3pol.set('name', 'admxpol');
 
+    var Layer_admXpol_Navigate = new ol.layer.Vector({
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'transparent'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 4
+            })
+        })
+    });
+    Layer_admXpol_Navigate.set('name', 'admxpol');
+
     var url_hdrlin = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_hdrlin = new ol.source.TileWMS({
         url: url_hdrlin,
@@ -423,115 +436,31 @@
     });
     Layer_select_pasturepol.set('name', 'pasturepol');
 
-    var url_adm1poltest = geoserver_url + geoserver_workspace_name + '/wms';
-    var Source_adm1poltest = new ol.source.TileWMS({
-        url: url_adm1poltest,
+    var url_found_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_found_pasturepol = new ol.source.TileWMS({
+        url: url_found_pasturepol,
         params: {
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             tiled: true,
-            'LAYERS': geoserver_workspace_name + ':adm1pol'
+            'LAYERS': geoserver_workspace_name + ':pasturepol'
         },
         serverType: 'geoserver'
     });
-    var Layer_adm1poltest = new ol.layer.Tile({
-        source: Source_adm1poltest
+    var Layer_found_pasturepol = new ol.layer.Tile({
+        source: Source_found_pasturepol
     });
-    //Layer_adm1pol.setVisible(false);
-    //Layer_adm2pol.setVisible(false);
-    //Layer_adm3pol.setVisible(false);
-    //Layer_hdrlin.setVisible(false);
-    //Layer_hdrpol.setVisible(false);
-    //Layer_poppnt.setVisible(false);
-    //Layer_poppol.setVisible(false);
-    //Layer_rdslin.setVisible(false);
-    //Layer_pasturepol.setVisible(false);
-    var filter = "kato_te = '350000000'";
-    var filterParams = {
+    var filter_ = "class_id = '10'";
+    var filterParams_ = {
         'FILTER': null,
         'CQL_FILTER': null,
         'FEATUREID': null
     };
-    if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-          filterParams["CQL_FILTER"] = filter;
+    if (filter_.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+          filterParams_["CQL_FILTER"] = filter_;
         }
-    Layer_adm1poltest.getSource().updateParams(filterParams);
-
-
-    //var vectorSource = new ol.source.Vector({
-    //    loader: function (extent, resolution, projection) {
-    //        var urlvector = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm1pol&CQL_FILTER=" + filter + "&maxFeatures=50&outputFormat=application%2Fjson&format_options=callback:getJson";
-    //        $.ajax(urlvector).then(function (response) {
-    //            var features = geojsonFormat.readFeatures(response, {
-    //                featureProjection: projection
-    //            });
-    //            vectorSource.addFeatures(features);
-    //        });
-    //    }
-    //});
-    //var Layer_vector = new ol.layer.Vector({
-    //    source: vectorSource
-    //});
-
-    //var Layer_adm3pol_v = new ol.layer.Vector();
-    //var url_adm3pol_v = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm1pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
-    //$.ajax({
-    //    jsonp: false,
-    //    jsonpCallback: 'getJson',
-    //    type: 'GET',
-    //    url: url_adm3pol_v,
-    //    async: false,
-    //    dataType: 'jsonp',
-    //    success: function (data_adm3pol_v) {
-    //        Layer_adm3pol_v = new ol.layer.Vector({
-    //            source: new ol.source.Vector({
-    //                features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
-    //                    featureProjection: 'EPSG:3857'
-    //                })
-    //            })
-    //        });
-    //        map.addLayer(Layer_adm3pol_v);
-    //        map.getView().fit(Layer_adm3pol_v.getSource().getExtent());
-    //    }
-    //});
+    Layer_found_pasturepol.getSource().updateParams(filterParams_);
 </script>
-
-
-@*<script>
-    function Test() {
-        filter = "kato_te = '110000000'";
-        url_adm3pol_v = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm1pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
-        $.ajax({
-            jsonp: false,
-            jsonpCallback: 'getJson',
-            type: 'GET',
-            url: url_adm3pol_v,
-            async: false,
-            dataType: 'jsonp',
-            success: function (data_adm3pol_v) {
-                console.log(1);
-                Layer_adm3pol_v.getSource().clear();
-                var new_source = new ol.source.Vector({
-                    features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
-                        featureProjection: 'EPSG:3857'
-                    })
-                });
-                //Layer_adm3pol_v = new ol.layer.Vector({
-                //    source: new ol.source.Vector({
-                //        features: (new ol.format.GeoJSON()).readFeatures(data_adm3pol_v, {
-                //            featureProjection: 'EPSG:3857'
-                //        })
-                //    })
-                //});
-                Layer_adm3pol_v.setSource(new_source);
-                console.log(2);
-                //map.addLayer(Layer_adm3pol_v);
-                map.getView().fit(Layer_adm3pol_v.getSource().getExtent());
-            }
-        });
-        console.log(3);
-    }
-</script>*@
 
 @* map *@
 <script>
@@ -543,11 +472,11 @@
         layers: [
             Layer_Base,
             Layer_pasturepol,
+            Layer_found_pasturepol,
             Layer_select_pasturepol,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
-            //Layer_adm1poltest,
             Layer_adm2pol,
             Layer_adm3pol,
             Layer_poppol,
@@ -742,10 +671,11 @@
         }
     });
 
-    function ChangeKATO1() {
-        NavigateToCATO($('#cato1').val());
+    function ChangeCATO1() {
+        NavigateToCATO($('#cato1').val(), 1);
         var ab = $('#cato1').val().substr(0, 2);
         $('#cato2').empty();
+        $('#cato3').empty();
         $('#cato2').append($("<option />"));
         $.each(cato, function () {
             if (this.ef == '00' && this.ab == ab && this.cd != '00') {
@@ -754,8 +684,8 @@
         });
     }
 
-    function ChangeKATO2() {
-        NavigateToCATO($('#cato2').val());
+    function ChangeCATO2() {
+        NavigateToCATO($('#cato2').val(), 2);
         var ab = $('#cato2').val().substr(0, 2),
             cd = $('#cato2').val().substr(2, 2);
         $('#cato3').empty();
@@ -767,8 +697,46 @@
         });
     }
 
-    function NavigateToCATO(te) {
+    function ChangeCATO3() {
+        NavigateToCATO($('#cato3').val(), 3);
+    }
 
+    var first_admXpol_Navigate = true;
+    function NavigateToCATO(te, layer) {
+        var filter = "kato_te = '" + te + "'";
+        var filterParams = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams["CQL_FILTER"] = filter;
+        }
+        url_admXpol_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm" + layer.toString() + "pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_admXpol_Navigate,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data_admXpol_Navigate) {
+                if (Layer_admXpol_Navigate.getSource() != null) {
+                    Layer_admXpol_Navigate.getSource().clear();
+                }
+                var new_source = new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                });
+                Layer_admXpol_Navigate.setSource(new_source);
+                map.getView().fit(Layer_admXpol_Navigate.getSource().getExtent());
+                if (first_admXpol_Navigate) {
+                    map.addLayer(Layer_admXpol_Navigate);
+                    first_admXpol_Navigate = false;
+                }
+            }
+        });
     }
 </script>
 

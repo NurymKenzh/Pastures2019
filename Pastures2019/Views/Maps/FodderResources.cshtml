@@ -32,6 +32,19 @@
                     @*<input type="button" name="Test" value="Test" onclick="Test()" />*@
 
                     @Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })
+                    @Html.DropDownList("PType", (IEnumerable<SelectListItem>)ViewBag.PType, "", htmlAttributes: new { @id = "find_ptype" })
+                    @Html.DropDownList("Soob", (IEnumerable<SelectListItem>)ViewBag.Soob, "", htmlAttributes: new { @id = "find_soob" })
+                    <input id="find_ur_v_from" type="text" />
+                    <input id="find_ur_v_to" type="text" />
+                    <input id="find_ur_l_from" type="text" />
+                    <input id="find_ur_l_to" type="text" />
+                    <input id="find_ur_o_from" type="text" />
+                    <input id="find_ur_o_to" type="text" />
+                    <input id="find_ur_z_from" type="text" />
+                    <input id="find_ur_z_to" type="text" />
+                    @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
+                    @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
+
                     <input type="button" value="Find" onclick="FindPastures()" />
 
                     <select id="cato1" onchange="ChangeCATO1()"></select>
@@ -459,7 +472,7 @@
     var Layer_found_pasturepol = new ol.layer.Tile({
         source: Source_found_pasturepol
     });
-    var filter_found = "otdely_id = '333333'";
+    var filter_found = "otdely_id = 'none'";
     var filterParams_found = {
         'FILTER': null,
         'CQL_FILTER': null,
@@ -805,11 +818,127 @@
 @* FindPastures *@
 <script>
     function FindPastures() {
-        var otdely_id = $('#find_otdel').val();
-        if (otdely_id == null || otdely_id == '') {
-            otdely_id = '333333';
+        var otdely_id = $('#find_otdel').val(),
+            class_id = $('#find_ptype').val(),
+            group_id = $('#find_soob').val(),
+            ur_v_from = $('#find_ur_v_from').val().replace(',', '.'),
+            ur_v_to = $('#find_ur_v_to').val().replace(',', '.'),
+            ur_l_from = $('#find_ur_l_from').val().replace(',', '.'),
+            ur_l_to = $('#find_ur_l_to').val().replace(',', '.'),
+            ur_o_from = $('#find_ur_o_from').val().replace(',', '.'),
+            ur_o_to = $('#find_ur_o_to').val().replace(',', '.'),
+            ur_z_from = $('#find_ur_z_from').val().replace(',', '.'),
+            ur_z_to = $('#find_ur_z_to').val().replace(',', '.'),
+            recommend = $('#find_recommend').val(),
+            recomcattle = $('#find_recomcattle').val();
+        filter_found = '';
+        if (otdely_id != '') {
+            if (filter_found.length == 0) {
+                filter_found = "otdely_id = '" + otdely_id + "'";
+            }
+            else {
+                filter_found += " && otdely_id = '" + otdely_id + "'";
+            }
         }
-        filter_found = "otdely_id = '" + otdely_id + "'";
+        if (class_id != '') {
+            if (filter_found.length == 0) {
+                filter_found = "class_id = '" + class_id + "'";
+            }
+            else {
+                filter_found += " && class_id = '" + class_id + "'";
+            }
+        }
+        if (group_id != '') {
+            if (filter_found.length == 0) {
+                filter_found = "group_id = '" + group_id + "'";
+            }
+            else {
+                filter_found += " && group_id = '" + group_id + "'";
+            }
+        }
+        if (ur_v_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_v >= " + ur_v_from + "";
+            }
+            else {
+                filter_found += " && ur_v >= " + ur_v_from + "";
+            }
+        }
+        if (ur_v_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_v <= " + ur_v_to + "";
+            }
+            else {
+                filter_found += " && ur_v <= " + ur_v_to + "";
+            }
+        }
+        if (ur_l_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_l >= " + ur_l_from + "";
+            }
+            else {
+                filter_found += " && ur_l >= " + ur_l_from + "";
+            }
+        }
+        if (ur_l_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_l <= " + ur_l_to + "";
+            }
+            else {
+                filter_found += " && ur_l <= " + ur_l_to + "";
+            }
+        }
+        if (ur_o_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_o >= " + ur_o_from + "";
+            }
+            else {
+                filter_found += " && ur_o >= " + ur_o_from + "";
+            }
+        }
+        if (ur_o_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_o <= " + ur_o_to + "";
+            }
+            else {
+                filter_found += " && ur_o <= " + ur_o_to + "";
+            }
+        }
+        if (ur_z_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_z >= " + ur_z_from + "";
+            }
+            else {
+                filter_found += " && ur_z >= " + ur_z_from + "";
+            }
+        }
+        if (ur_z_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_z <= " + ur_z_to + "";
+            }
+            else {
+                filter_found += " && ur_z <= " + ur_z_to + "";
+            }
+        }
+        if (recommend != '') {
+            if (filter_found.length == 0) {
+                filter_found = "recommend_ = '" + recommend + "'";
+            }
+            else {
+                filter_found += " && recommend_ = '" + recommend + "'";
+            }
+        }
+        if (recomcattle != '') {
+            if (filter_found.length == 0) {
+                filter_found = "recom_catt = '" + recomcattle + "'";
+            }
+            else {
+                filter_found += " && recom_catt = '" + recomcattle + "'";
+            }
+        }
+        if (filter_found.length == 0) {
+            filter_found = "otdely_id = 'none'";
+        }
         filterParams_found = {
             'FILTER': null,
             'CQL_FILTER': null,
@@ -819,6 +948,8 @@
               filterParams_found["CQL_FILTER"] = filter_found;
             }
         Layer_found_pasturepol.getSource().updateParams(filterParams_found);
+        //Layer_found_pasturepol.getSource().changed();
+        Layer_found_pasturepol.getSource().refresh();
     }
 </script>
 

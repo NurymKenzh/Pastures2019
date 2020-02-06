@@ -55,6 +55,10 @@ namespace Pastures2019.Controllers
             ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
             ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
             ViewBag.Otdel = new SelectList(_context.Otdel.ToList().OrderBy(o => o.Description), "Code", "Description");
+            ViewBag.PType = new SelectList(_context.PType.ToList().OrderBy(p => p.Description), "Code", "Description");
+            ViewBag.Soob = new SelectList(_context.Soob.ToList().OrderBy(s => s.Description), "Code", "Description");
+            ViewBag.Recommend = new SelectList(_context.Recommend.ToList().OrderBy(s => s.Description), "Code", "Description");
+            ViewBag.RecomCattle = new SelectList(_context.RecomCattle.ToList().OrderBy(s => s.Description), "Code", "Description");
             return View();
         }
 

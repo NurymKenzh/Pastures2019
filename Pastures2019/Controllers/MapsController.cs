@@ -175,5 +175,43 @@ namespace Pastures2019.Controllers
                 pasturepol
             });
         }
+
+        [HttpPost]
+        public ActionResult GetCATOPastureInfo(
+            string catote)
+        {
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            string ab = catote.Substring(0, 2),
+                cd = catote.Substring(2, 2),
+                ef = catote.Substring(4, 2),
+                te = ab;
+            if (cd != "00")
+            {
+                te += cd;
+            }
+            if (ef != "00")
+            {
+                te += ef;
+            }
+            List<pasturestat> pasturestats = new List<pasturestat>();
+
+            List<pasturepol> pasturepols = new List<pasturepol>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT otdely_id, SUM(shape_area) as shape_area FROM public.pasturestat WHERE kato_te LIKE '{te}%' GROUP BY otdely_id;";
+                var pasturepolsDB = connection.Query<pasturepol>(query);
+                pasturepols = pasturepolsDB.ToList();
+            }
+
+            return Json(new
+            {
+                pasturepols
+            });
+        }
     }
 }

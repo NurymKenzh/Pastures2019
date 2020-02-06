@@ -10,8 +10,13 @@
 <script src="~/lib/ol/ol.js"></script>
 <link href="~/lib/vendor/jBox/dist/jBox.all.css" rel="stylesheet" />
 <script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
+<link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
+<script src="~/lib/сhart.js/dist/Chart.js"></script>
 
 <div class="container-fluid sticky-top p-0">
+    <div style="width: 1000px; height: 400px;">
+        <canvas  id="chart" width="900" height="380"></canvas>
+    </div>
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -50,6 +55,7 @@
                     <select id="cato1" onchange="ChangeCATO1()"></select>
                     <select id="cato2" onchange="ChangeCATO2()"></select>
                     <select id="cato3" onchange="ChangeCATO3()"></select>
+                    <input type="button" value="CATO Info" onclick="InfoCATO()" />
 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
                         <option value="OSM">OpenStreetMap</option>
@@ -778,6 +784,12 @@
 
     var first_admXpol_Navigate = true;
     function NavigateToCATO(te, layer) {
+        if (Layer_admXpol_Navigate.getSource() != null) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+        if (te == '') {
+            return;
+        }
         var filter = "kato_te = '" + te + "'";
         var filterParams = {
             'FILTER': null,
@@ -796,9 +808,6 @@
             async: false,
             dataType: 'jsonp',
             success: function (data_admXpol_Navigate) {
-                if (Layer_admXpol_Navigate.getSource() != null) {
-                    Layer_admXpol_Navigate.getSource().clear();
-                }
                 var new_source = new ol.source.Vector({
                     features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
                         featureProjection: 'EPSG:3857'
@@ -945,11 +954,75 @@
             'FEATUREID': null
         };
         if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-              filterParams_found["CQL_FILTER"] = filter_found;
-            }
+            filterParams_found["CQL_FILTER"] = filter_found;
+        }
         Layer_found_pasturepol.getSource().updateParams(filterParams_found);
         //Layer_found_pasturepol.getSource().changed();
         Layer_found_pasturepol.getSource().refresh();
+    }
+</script>
+
+@* InfoCATO, ChartCATO *@
+<script>
+    var ctx = document.getElementById('chart').getContext('2d');
+    var chart = null; //new Chart(ctx, config);
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    }
+
+    function InfoCATO() {
+        var te = $('#cato3').val(),
+            te1 = $('#cato1').val(),
+            te2 = $('#cato2').val(),
+            te3 = $('#cato3').val();
+        if (te3 == '') {
+            te = te2;
+        }
+        if (te2 == '') {
+            te = te1;
+        }
+        if (te1 == '') {
+            return;
+        }
+        $.ajax({
+            url: '@Url.Action("GetCATOPastureInfo")',
+            data: { catote: te },
+            type: 'POST',
+            success: function (data) {
+                ChartCATO(data.pasturepols);
+            },
+            error: function () {
+            }
+        });
+    }
+
+    function ChartCATO(pasturepols) {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [],
+                    backgroundColor: [],
+                    label: 'Dataset 1'
+                }],
+                labels: []
+            },
+            options: {
+                responsive: true
+            }
+        };
+        for (var i = 0; i < pasturepols.length; ++i) {
+            config.data.datasets[0].data.push(pasturepols[i].shape_area);
+            config.data.datasets[0].backgroundColor.push(random_rgba());
+            config.data.labels.push(pasturepols[i].otdely_id);
+        }
+
+        if (chart != null) {
+            chart.destroy();
+        }
+        chart = new Chart(ctx, config);
     }
 </script>
 

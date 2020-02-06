@@ -15,8 +15,8 @@
 
 <div class="container-fluid sticky-top p-0">
     @*<div style="width: 1000px; height: 400px;">
-        <canvas id="chart" width="900" height="380"></canvas>
-    </div>*@
+            <canvas id="chart" width="900" height="380"></canvas>
+        </div>*@
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -90,6 +90,12 @@
                         @SharedLocalizer["rdslinLayer"]
                     </label>
                     <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerzemfondpolShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerzemfondpolShow">
+                        @SharedLocalizer["zemfondpolLayer"]
+                    </label>
+                    <input id="layerzemfondpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -404,6 +410,22 @@
         source: Source_rdslin
     });
     Layer_rdslin.set('name', 'rdslin');
+
+    var url_zemfondpol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_zemfondpol = new ol.source.TileWMS({
+        url: url_zemfondpol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':zemfondpol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_zemfondpol = new ol.layer.Tile({
+        source: Source_zemfondpol
+    });
+    Layer_zemfondpol.set('name', 'zemfondpol');
 </script>
 
 @* map *@
@@ -433,6 +455,7 @@
         ]),
         layers: [
             Layer_Base,
+            Layer_zemfondpol,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
@@ -573,8 +596,75 @@
                 layer.setVisible(document.getElementById("layerrdslinShow").checked);
                 layer.setOpacity($('#layerrdslinOpacity').val() / 100);
             }
+            if (layer.get('name') == 'zemfondpol') {
+                layer.setVisible(document.getElementById("layerzemfondpolShow").checked);
+                layer.setOpacity($('#layerzemfondpolOpacity').val() / 100);
+            }
         })
     }
+</script>
+
+@* map.on('singleclick') *@
+<script>
+    map.on('singleclick', function (evt) {
+        Source_select_zemfondpol.clear();
+
+        var viewResolution = (map.getView().getResolution());
+        var url_zemfondpol = Source_zemfondpol.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {
+                'INFO_FORMAT': 'text/javascript'
+            });
+        if (url_zemfondpol) {
+            jQuery.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_zemfondpol + "&format_options=callback:getJson",
+                async: false,
+                dataType: 'jsonp',
+                error: function () {
+                }
+            }).then(function (data) {
+                if (Layer_zemfondpol.getVisible() && data.features.length > 0) {
+                    // select pasture
+                    var polyFeature = new ol.Feature({
+                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+                    });
+                    Source_select_zemfondpol.addFeature(polyFeature);
+                    // data from zemfondpol
+                    var parser = new ol.format.GeoJSON();
+                    var features = parser.readFeatures(data);
+                    console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
+                    $.ajax({
+                        url: '@Url.Action("GetPastureInfo")',
+                        data: {
+                            objectid: features[0].get('objectid')
+                        },
+                        type: 'POST',
+                        success: function (dataDB) {
+                            console.log('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.zemfondpol.otdel);
+                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.zemfondpol.ptype);
+                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.zemfondpol.group);
+                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.zemfondpol.group_lat);
+                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
+                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
+                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
+                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
+                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
+                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
+                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
+                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.zemfondpol.recommend);
+                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.zemfondpol.recomcatt);
+                            console.log('----------------------------------------------');
+                        },
+                        error: function () {
+                        }
+                    })
+                }
+            });
+        }
+    })
 </script>
 
 @*Sidebar Menu*@

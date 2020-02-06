@@ -240,5 +240,33 @@ namespace Pastures2019.Controllers
                 pasturepols_classes
             });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetZemfondInfo(
+            string objectid)
+        {
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            zemfondpol zemfondpol = new zemfondpol();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                var zemfondpols = connection.Query<zemfondpol>($"SELECT gid, objectid, type_k, ur_avgyear, " +
+                    $"dominant_t, korm_avgye, area, s_recomend, subtype_k, kato_te_1, shape_leng, shape_area, geom " +
+                    $"FROM public.zemfondpol " +
+                    $"WHERE objectid = {objectid};");
+                zemfondpol = zemfondpols.FirstOrDefault();
+            }
+            zemfondpol.stype = _context.SType.FirstOrDefault(s => s.Code == zemfondpol.type_k)?.Description;
+            zemfondpol.dominanttype = _context.DominantType.FirstOrDefault(d => d.Code == zemfondpol.dominant_t)?.Description;
+            zemfondpol.supplyrecommend = _context.SupplyRecommend.FirstOrDefault(s => s.Code == zemfondpol.s_recomend)?.Description;
+            return Json(new
+            {
+                zemfondpol
+            });
+        }
     }
 }

@@ -983,9 +983,6 @@
         if (te2 == '') {
             te = te1;
         }
-        if (te1 == '') {
-            return;
-        }
         $.ajax({
             url: '@Url.Action("GetCATOPastureInfo")',
             data: { catote: te },

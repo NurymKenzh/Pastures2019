@@ -62,6 +62,18 @@ namespace Pastures2019.Controllers
             return View();
         }
 
+        public ActionResult LandSupply()
+        {
+            ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
+            ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
+            //ViewBag.Otdel = new SelectList(_context.Otdel.ToList().OrderBy(o => o.Description), "Code", "Description");
+            //ViewBag.PType = new SelectList(_context.PType.ToList().OrderBy(p => p.Description), "Code", "Description");
+            //ViewBag.Soob = new SelectList(_context.Soob.ToList().OrderBy(s => s.Description), "Code", "Description");
+            //ViewBag.Recommend = new SelectList(_context.Recommend.ToList().OrderBy(s => s.Description), "Code", "Description");
+            //ViewBag.RecomCattle = new SelectList(_context.RecomCattle.ToList().OrderBy(s => s.Description), "Code", "Description");
+            return View();
+        }
+
         private YearDay[] GetModisYearDays_MOLT_MOD13Q1006()
         {
             List<YearDay> yearDays = new List<YearDay>();
@@ -185,9 +197,9 @@ namespace Pastures2019.Controllers
                .Configuration
                .ConfigurationExtensions
                .GetConnectionString(Startup.Configuration, "DefaultConnection");
-            string ab = catote.Substring(0, 2),
-                cd = catote.Substring(2, 2),
-                ef = catote.Substring(4, 2),
+            string ab = catote?.Substring(0, 2),
+                cd = catote?.Substring(2, 2),
+                ef = catote?.Substring(4, 2),
                 te = ab;
             if (cd != "00")
             {

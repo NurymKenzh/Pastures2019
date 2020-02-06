@@ -199,18 +199,33 @@ namespace Pastures2019.Controllers
             }
             List<pasturestat> pasturestats = new List<pasturestat>();
 
-            List<pasturepol> pasturepols = new List<pasturepol>();
+            List<pasturestat> pasturepols_otdels = new List<pasturestat>();
             using (var connection = new NpgsqlConnection(DefaultConnection))
             {
                 connection.Open();
                 string query = $"SELECT otdely_id, SUM(shape_area) as shape_area FROM public.pasturestat WHERE kato_te LIKE '{te}%' GROUP BY otdely_id;";
-                var pasturepolsDB = connection.Query<pasturepol>(query);
-                pasturepols = pasturepolsDB.ToList();
+                var pasturepolsDB = connection.Query<pasturestat>(query);
+                pasturepols_otdels = pasturepolsDB.ToList();
+            }
+
+            List<pasturestat> pasturepols_classes = new List<pasturestat>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT class_id, SUM(shape_area) as shape_area FROM public.pasturestat WHERE kato_te LIKE '{te}%' GROUP BY class_id;";
+                var pasturepolsDB = connection.Query<pasturestat>(query);
+                pasturepols_classes = pasturepolsDB.ToList();
+                decimal sum = pasturepols_classes.Sum(p => p.shape_area);
+                for (int i = 0; i < pasturepols_classes.Count(); i++)
+                {
+                    pasturepols_classes[i].percent = pasturepols_classes[i].shape_area / sum * 100;
+                }
             }
 
             return Json(new
             {
-                pasturepols
+                pasturepols_otdels,
+                pasturepols_classes
             });
         }
     }

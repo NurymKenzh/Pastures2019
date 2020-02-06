@@ -962,7 +962,7 @@
     }
 </script>
 
-@* InfoCATO, ChartCATO *@
+@* InfoCATO, ChartCATO, TableCATO *@
 <script>
     var ctx = document.getElementById('chart').getContext('2d');
     var chart = null; //new Chart(ctx, config);
@@ -991,7 +991,8 @@
             data: { catote: te },
             type: 'POST',
             success: function (data) {
-                ChartCATO(data.pasturepols);
+                ChartCATO(data.pasturepols_otdels);
+                TableCATO(data.pasturepols_classes);
             },
             error: function () {
             }
@@ -1038,6 +1039,12 @@
             chart.destroy();
         }
         chart = new Chart(ctx, config);
+    }
+
+    function TableCATO(pasturepols) {
+        for (var i = 0; i < pasturepols.length; ++i) {
+            console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
+        }
     }
 </script>
 

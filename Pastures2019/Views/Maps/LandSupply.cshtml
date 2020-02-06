@@ -2,7 +2,7 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = SharedLocalizer["FodderResources"];
+    ViewData["Title"] = SharedLocalizer["LandSupply"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
@@ -14,9 +14,9 @@
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
 <div class="container-fluid sticky-top p-0">
-    <div style="width: 1000px; height: 400px;">
-        <canvas  id="chart" width="900" height="380"></canvas>
-    </div>
+    @*<div style="width: 1000px; height: 400px;">
+        <canvas id="chart" width="900" height="380"></canvas>
+    </div>*@
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -34,22 +34,6 @@
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
-                    @Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })
-                    @Html.DropDownList("PType", (IEnumerable<SelectListItem>)ViewBag.PType, "", htmlAttributes: new { @id = "find_ptype" })
-                    @Html.DropDownList("Soob", (IEnumerable<SelectListItem>)ViewBag.Soob, "", htmlAttributes: new { @id = "find_soob" })
-                    <input id="find_ur_v_from" type="text" />
-                    <input id="find_ur_v_to" type="text" />
-                    <input id="find_ur_l_from" type="text" />
-                    <input id="find_ur_l_to" type="text" />
-                    <input id="find_ur_o_from" type="text" />
-                    <input id="find_ur_o_to" type="text" />
-                    <input id="find_ur_z_from" type="text" />
-                    <input id="find_ur_z_to" type="text" />
-                    @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
-                    @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
-
-                    <input type="button" value="Find" onclick="FindPastures()" />
-
                     <select id="cato1" onchange="ChangeCATO1()"></select>
                     <select id="cato2" onchange="ChangeCATO2()"></select>
                     <select id="cato3" onchange="ChangeCATO3()"></select>
@@ -83,7 +67,7 @@
                     </label>
                     <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
 
-                    <input type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
+                    <input type="checkbox" id="layeradmxpolShow" checked="checked" onchange="ChangeLayers()">
                     <label class="form-check-label text-white" for="layeradmxpolShow">
                         @SharedLocalizer["admxpolLayer"]
                     </label>
@@ -106,12 +90,6 @@
                         @SharedLocalizer["rdslinLayer"]
                     </label>
                     <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerpasturepolShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerpasturepolShow">
-                        @SharedLocalizer["pasturepolLayer"]
-                    </label>
-                    <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -299,7 +277,6 @@
         source: Source_adm1pol
     });
     Layer_adm1pol.set('name', 'admxpol');
-    Layer_adm1pol.setVisible(false);
 
     var url_adm2pol = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_adm2pol = new ol.source.TileWMS({
@@ -316,7 +293,6 @@
         source: Source_adm2pol
     });
     Layer_adm2pol.set('name', 'admxpol');
-    Layer_adm2pol.setVisible(false);
 
     var url_adm3pol = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_adm3pol = new ol.source.TileWMS({
@@ -333,7 +309,6 @@
         source: Source_adm3pol
     });
     Layer_adm3pol.set('name', 'admxpol');
-    Layer_adm3pol.setVisible(false);
 
     var Layer_admXpol_Navigate = new ol.layer.Vector({
         style: new ol.style.Style({
@@ -429,63 +404,6 @@
         source: Source_rdslin
     });
     Layer_rdslin.set('name', 'rdslin');
-
-    var url_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
-    var Source_pasturepol = new ol.source.TileWMS({
-        url: url_pasturepol,
-        params: {
-            'FORMAT': 'image/png',
-            'VERSION': '1.1.1',
-            tiled: true,
-            'LAYERS': geoserver_workspace_name + ':pasturepol'
-        },
-        serverType: 'geoserver'
-    });
-    var Layer_pasturepol = new ol.layer.Tile({
-        source: Source_pasturepol
-    });
-    Layer_pasturepol.set('name', 'pasturepol');
-
-    var Source_select_pasturepol = new ol.source.Vector({});
-    var Layer_select_pasturepol = new ol.layer.Vector({
-        source: Source_select_pasturepol,
-        style: new ol.style.Style({
-            fill: new ol.style.Fill({
-                color: [0, 0, 255, 1]
-            }),
-            stroke: new ol.style.Stroke({
-                color: 'red',
-                width: 2
-            })
-        })
-    });
-    Layer_select_pasturepol.set('name', 'pasturepol');
-
-    var url_found_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
-    var Source_found_pasturepol = new ol.source.TileWMS({
-        url: url_found_pasturepol,
-        params: {
-            'FORMAT': 'image/png',
-            'VERSION': '1.1.1',
-            tiled: true,
-            'LAYERS': geoserver_workspace_name + ':pasturepol',
-            'STYLES': 'pasturepolfind',
-        },
-        serverType: 'geoserver'
-    });
-    var Layer_found_pasturepol = new ol.layer.Tile({
-        source: Source_found_pasturepol
-    });
-    var filter_found = "otdely_id = 'none'";
-    var filterParams_found = {
-        'FILTER': null,
-        'CQL_FILTER': null,
-        'FEATUREID': null
-    };
-    if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-          filterParams_found["CQL_FILTER"] = filter_found;
-        }
-    Layer_found_pasturepol.getSource().updateParams(filterParams_found);
 </script>
 
 @* map *@
@@ -515,9 +433,6 @@
         ]),
         layers: [
             Layer_Base,
-            Layer_pasturepol,
-            Layer_found_pasturepol,
-            Layer_select_pasturepol,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
@@ -658,388 +573,7 @@
                 layer.setVisible(document.getElementById("layerrdslinShow").checked);
                 layer.setOpacity($('#layerrdslinOpacity').val() / 100);
             }
-            if (layer.get('name') == 'pasturepol') {
-                layer.setVisible(document.getElementById("layerpasturepolShow").checked);
-                layer.setOpacity($('#layerpasturepolOpacity').val() / 100);
-            }
         })
-    }
-</script>
-
-@* map.on('singleclick') *@
-<script>
-    map.on('singleclick', function (evt) {
-        Source_select_pasturepol.clear();
-
-        var viewResolution = (map.getView().getResolution());
-        var url_pasturepol = Source_pasturepol.getGetFeatureInfoUrl(
-            evt.coordinate, viewResolution, 'EPSG:3857',
-            {
-                'INFO_FORMAT': 'text/javascript'
-            });
-        if (url_pasturepol) {
-            jQuery.ajax({
-                jsonp: false,
-                jsonpCallback: 'getJson',
-                type: 'GET',
-                url: url_pasturepol + "&format_options=callback:getJson",
-                async: false,
-                dataType: 'jsonp',
-                error: function () {
-                }
-            }).then(function (data) {
-                if (Layer_pasturepol.getVisible() && data.features.length > 0) {
-                    // select pasture
-                    var polyFeature = new ol.Feature({
-                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
-                    });
-                    Source_select_pasturepol.addFeature(polyFeature);
-                    // data from pasturepol
-                    var parser = new ol.format.GeoJSON();
-                    var features = parser.readFeatures(data);
-                    console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
-                    $.ajax({
-                        url: '@Url.Action("GetPastureInfo")',
-                        data: {
-                            objectid: features[0].get('objectid')
-                        },
-                        type: 'POST',
-                        success: function (dataDB) {
-                            console.log('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.pasturepol.otdel);
-                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
-                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
-                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);
-                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
-                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
-                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
-                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
-                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.pasturepol.recommend);
-                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.pasturepol.recomcatt);
-                            console.log('----------------------------------------------');
-                        },
-                        error: function () {
-                        }
-                    })
-                }
-            });
-        }
-    })
-</script>
-
-@* CATO *@
-<script>
-    var cato = new Array();
-    @foreach (CATO cATO in ViewBag.CATO)
-    {
-        @:var cato_new = {};
-        @:cato_new["te"] = '@cATO.TE';
-        @:cato_new["ab"] = '@cATO.AB';
-        @:cato_new["cd"] = '@cATO.CD';
-        @:cato_new["ef"] = '@cATO.EF';
-        @:cato_new["hij"] = '@cATO.HIJ';
-        @:cato_new["name"] = '@Html.Raw(cATO.Name)';
-        @:cato.push(cato_new);
-    }
-    $('#cato1').append($("<option />"));
-    $.each(cato, function () {
-        if (this.cd == '00') {
-            $('#cato1').append($("<option />").val(this.te).text(this.name));
-        }
-    });
-
-    function ChangeCATO1() {
-        NavigateToCATO($('#cato1').val(), 1);
-        var ab = $('#cato1').val().substr(0, 2);
-        $('#cato2').empty();
-        $('#cato3').empty();
-        $('#cato2').append($("<option />"));
-        $.each(cato, function () {
-            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
-                $('#cato2').append($("<option />").val(this.te).text(this.name));
-            }
-        });
-    }
-
-    function ChangeCATO2() {
-        NavigateToCATO($('#cato2').val(), 2);
-        var ab = $('#cato2').val().substr(0, 2),
-            cd = $('#cato2').val().substr(2, 2);
-        $('#cato3').empty();
-        $('#cato3').append($("<option />"));
-        $.each(cato, function () {
-            if (this.hij == '000' && this.ab == ab && this.cd == cd && this.ef != '00') {
-                $('#cato3').append($("<option />").val(this.te).text(this.name));
-            }
-        });
-    }
-
-    function ChangeCATO3() {
-        NavigateToCATO($('#cato3').val(), 3);
-    }
-
-    var first_admXpol_Navigate = true;
-    function NavigateToCATO(te, layer) {
-        if (Layer_admXpol_Navigate.getSource() != null) {
-            Layer_admXpol_Navigate.getSource().clear();
-        }
-        if (te == '') {
-            return;
-        }
-        var filter = "kato_te = '" + te + "'";
-        var filterParams = {
-            'FILTER': null,
-            'CQL_FILTER': null,
-            'FEATUREID': null
-        };
-        if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-            filterParams["CQL_FILTER"] = filter;
-        }
-        url_admXpol_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm" + layer.toString() + "pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
-        $.ajax({
-            jsonp: false,
-            jsonpCallback: 'getJson',
-            type: 'GET',
-            url: url_admXpol_Navigate,
-            async: false,
-            dataType: 'jsonp',
-            success: function (data_admXpol_Navigate) {
-                var new_source = new ol.source.Vector({
-                    features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
-                        featureProjection: 'EPSG:3857'
-                    })
-                });
-                Layer_admXpol_Navigate.setSource(new_source);
-                map.getView().fit(Layer_admXpol_Navigate.getSource().getExtent());
-                if (first_admXpol_Navigate) {
-                    map.addLayer(Layer_admXpol_Navigate);
-                    first_admXpol_Navigate = false;
-                }
-            }
-        });
-    }
-</script>
-
-@* FindPastures *@
-<script>
-    function FindPastures() {
-        var otdely_id = $('#find_otdel').val(),
-            class_id = $('#find_ptype').val(),
-            group_id = $('#find_soob').val(),
-            ur_v_from = $('#find_ur_v_from').val().replace(',', '.'),
-            ur_v_to = $('#find_ur_v_to').val().replace(',', '.'),
-            ur_l_from = $('#find_ur_l_from').val().replace(',', '.'),
-            ur_l_to = $('#find_ur_l_to').val().replace(',', '.'),
-            ur_o_from = $('#find_ur_o_from').val().replace(',', '.'),
-            ur_o_to = $('#find_ur_o_to').val().replace(',', '.'),
-            ur_z_from = $('#find_ur_z_from').val().replace(',', '.'),
-            ur_z_to = $('#find_ur_z_to').val().replace(',', '.'),
-            recommend = $('#find_recommend').val(),
-            recomcattle = $('#find_recomcattle').val();
-        filter_found = '';
-        if (otdely_id != '') {
-            if (filter_found.length == 0) {
-                filter_found = "otdely_id = '" + otdely_id + "'";
-            }
-            else {
-                filter_found += " && otdely_id = '" + otdely_id + "'";
-            }
-        }
-        if (class_id != '') {
-            if (filter_found.length == 0) {
-                filter_found = "class_id = '" + class_id + "'";
-            }
-            else {
-                filter_found += " && class_id = '" + class_id + "'";
-            }
-        }
-        if (group_id != '') {
-            if (filter_found.length == 0) {
-                filter_found = "group_id = '" + group_id + "'";
-            }
-            else {
-                filter_found += " && group_id = '" + group_id + "'";
-            }
-        }
-        if (ur_v_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_v >= " + ur_v_from + "";
-            }
-            else {
-                filter_found += " && ur_v >= " + ur_v_from + "";
-            }
-        }
-        if (ur_v_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_v <= " + ur_v_to + "";
-            }
-            else {
-                filter_found += " && ur_v <= " + ur_v_to + "";
-            }
-        }
-        if (ur_l_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_l >= " + ur_l_from + "";
-            }
-            else {
-                filter_found += " && ur_l >= " + ur_l_from + "";
-            }
-        }
-        if (ur_l_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_l <= " + ur_l_to + "";
-            }
-            else {
-                filter_found += " && ur_l <= " + ur_l_to + "";
-            }
-        }
-        if (ur_o_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_o >= " + ur_o_from + "";
-            }
-            else {
-                filter_found += " && ur_o >= " + ur_o_from + "";
-            }
-        }
-        if (ur_o_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_o <= " + ur_o_to + "";
-            }
-            else {
-                filter_found += " && ur_o <= " + ur_o_to + "";
-            }
-        }
-        if (ur_z_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_z >= " + ur_z_from + "";
-            }
-            else {
-                filter_found += " && ur_z >= " + ur_z_from + "";
-            }
-        }
-        if (ur_z_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_z <= " + ur_z_to + "";
-            }
-            else {
-                filter_found += " && ur_z <= " + ur_z_to + "";
-            }
-        }
-        if (recommend != '') {
-            if (filter_found.length == 0) {
-                filter_found = "recommend_ = '" + recommend + "'";
-            }
-            else {
-                filter_found += " && recommend_ = '" + recommend + "'";
-            }
-        }
-        if (recomcattle != '') {
-            if (filter_found.length == 0) {
-                filter_found = "recom_catt = '" + recomcattle + "'";
-            }
-            else {
-                filter_found += " && recom_catt = '" + recomcattle + "'";
-            }
-        }
-        if (filter_found.length == 0) {
-            filter_found = "otdely_id = 'none'";
-        }
-        filterParams_found = {
-            'FILTER': null,
-            'CQL_FILTER': null,
-            'FEATUREID': null
-        };
-        if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-            filterParams_found["CQL_FILTER"] = filter_found;
-        }
-        Layer_found_pasturepol.getSource().updateParams(filterParams_found);
-        //Layer_found_pasturepol.getSource().changed();
-        Layer_found_pasturepol.getSource().refresh();
-    }
-</script>
-
-@* InfoCATO, ChartCATO, TableCATO *@
-<script>
-    var ctx = document.getElementById('chart').getContext('2d');
-    var chart = null; //new Chart(ctx, config);
-
-    function random_rgba() {
-        var o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-    }
-
-    function InfoCATO() {
-        var te = $('#cato3').val(),
-            te1 = $('#cato1').val(),
-            te2 = $('#cato2').val(),
-            te3 = $('#cato3').val();
-        if (te3 == '') {
-            te = te2;
-        }
-        if (te2 == '') {
-            te = te1;
-        }
-        $.ajax({
-            url: '@Url.Action("GetCATOPastureInfo")',
-            data: { catote: te },
-            type: 'POST',
-            success: function (data) {
-                ChartCATO(data.pasturepols_otdels);
-                TableCATO(data.pasturepols_classes);
-            },
-            error: function () {
-            }
-        });
-    }
-
-    function ChartCATO(pasturepols) {
-        var config = {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: [],
-                    backgroundColor: [],
-                    label: 'Dataset 1'
-                }],
-                labels: []
-            },
-            options: {
-                responsive: true,
-                tooltips: {
-                    callbacks: {
-                        label: function (tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
-                            var total = meta.total;
-                            var currentValue = dataset.data[tooltipItem.index];
-                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
-                            return percentage + '%';
-                        },
-                        title: function (tooltipItem, data) {
-                            return data.labels[tooltipItem[0].index];
-                        }
-                    }
-                }
-            }
-        };
-        for (var i = 0; i < pasturepols.length; ++i) {
-            config.data.datasets[0].data.push(pasturepols[i].shape_area);
-            config.data.datasets[0].backgroundColor.push(random_rgba());
-            config.data.labels.push($("#find_otdel option[value=" + pasturepols[i].otdely_id + "]").text());
-        }
-
-        if (chart != null) {
-            chart.destroy();
-        }
-        chart = new Chart(ctx, config);
-    }
-
-    function TableCATO(pasturepols) {
-        for (var i = 0; i < pasturepols.length; ++i) {
-            console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
-        }
     }
 </script>
 

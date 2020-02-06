@@ -1010,13 +1010,28 @@
                 labels: []
             },
             options: {
-                responsive: true
+                responsive: true,
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                            return percentage + '%';
+                        },
+                        title: function (tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
             }
         };
         for (var i = 0; i < pasturepols.length; ++i) {
             config.data.datasets[0].data.push(pasturepols[i].shape_area);
             config.data.datasets[0].backgroundColor.push(random_rgba());
-            config.data.labels.push(pasturepols[i].otdely_id);
+            config.data.labels.push($("#find_otdel option[value=" + pasturepols[i].otdely_id + "]").text());
         }
 
         if (chart != null) {

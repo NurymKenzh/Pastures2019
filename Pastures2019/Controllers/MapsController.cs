@@ -66,11 +66,9 @@ namespace Pastures2019.Controllers
         {
             ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
             ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
-            //ViewBag.Otdel = new SelectList(_context.Otdel.ToList().OrderBy(o => o.Description), "Code", "Description");
-            //ViewBag.PType = new SelectList(_context.PType.ToList().OrderBy(p => p.Description), "Code", "Description");
-            //ViewBag.Soob = new SelectList(_context.Soob.ToList().OrderBy(s => s.Description), "Code", "Description");
-            //ViewBag.Recommend = new SelectList(_context.Recommend.ToList().OrderBy(s => s.Description), "Code", "Description");
-            //ViewBag.RecomCattle = new SelectList(_context.RecomCattle.ToList().OrderBy(s => s.Description), "Code", "Description");
+            ViewBag.SType = new SelectList(_context.SType.ToList().OrderBy(s => s.Description), "Code", "Description");
+            ViewBag.DominantType = new SelectList(_context.DominantType.ToList().OrderBy(s => s.Description), "Code", "Description");
+            ViewBag.SupplyRecommend = new SelectList(_context.SupplyRecommend.ToList().OrderBy(s => s.Description), "Code", "Description");
             return View();
         }
 
@@ -266,6 +264,67 @@ namespace Pastures2019.Controllers
             return Json(new
             {
                 zemfondpol
+            });
+        }
+
+        [HttpPost]
+        public ActionResult GetCATOZemfondInfo(
+            string catote)
+        {
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            string ab = catote?.Substring(0, 2),
+                cd = catote?.Substring(2, 2),
+                ef = catote?.Substring(4, 2),
+                te = ab;
+            if (cd != "00")
+            {
+                te += cd;
+            }
+            if (ef != "00")
+            {
+                te += ef;
+            }
+
+            List<zemfondpol> zemfondpols = new List<zemfondpol>();
+            zemfondpol zemfondpol = new zemfondpol();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT ur_avgyear, korm_avgye, area FROM public.zemfondpol WHERE kato_te_1 LIKE '{te}%';";
+                var zemfondpolsDB = connection.Query<zemfondpol>(query);
+                zemfondpols = zemfondpolsDB.ToList();
+                zemfondpol.area = zemfondpols.Where(z => z.ur_avgyear > 0).Sum(z => z.area);
+                zemfondpol.ur_avgyear = zemfondpols.Sum(z => z.area * z.ur_avgyear) / zemfondpol.area;
+                zemfondpol.korm_avgye = zemfondpols.Sum(z => z.korm_avgye);
+            }
+
+            List<zemfondpol> zemfondpols_stypes = new List<zemfondpol>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT type_k, SUM(area) as shape_area FROM public.zemfondpol WHERE kato_te_1 LIKE '{te}%' GROUP BY type_k;";
+                var zemfondpolsDB = connection.Query<zemfondpol>(query);
+                zemfondpols_stypes = zemfondpolsDB.ToList();
+            }
+
+            List<zemfondpol> zemfondpols_supplyrecommends = new List<zemfondpol>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT s_recomend, SUM(area) as shape_area FROM public.zemfondpol WHERE kato_te_1 LIKE '{te}%' GROUP BY s_recomend;";
+                var zemfondpolsDB = connection.Query<zemfondpol>(query);
+                zemfondpols_supplyrecommends = zemfondpolsDB.ToList();
+            }
+
+            return Json(new
+            {
+                zemfondpol,
+                zemfondpols_stypes,
+                zemfondpols_supplyrecommends
             });
         }
     }

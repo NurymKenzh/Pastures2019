@@ -138,6 +138,12 @@
   <data name="Autumn" xml:space="preserve">
     <value>Күз</value>
   </data>
+  <data name="AverageAnnualProductivitykgha" xml:space="preserve">
+    <value>Орташа жылдық өнімділік, кг/га</value>
+  </data>
+  <data name="AverageFeedStockc" xml:space="preserve">
+    <value>Орташа азық қоры, с</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Тізімге оралу</value>
   </data>
@@ -440,6 +446,9 @@
   </data>
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Кіру әрекеті жарамсыз.</value>
+  </data>
+  <data name="LandSupply" xml:space="preserve">
+    <value>Жер резерві</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Тіл</value>
@@ -776,6 +785,9 @@
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Құпия сөзіңіз қалпына келтірілді</value>
+  </data>
+  <data name="zemfondpolLayer" xml:space="preserve">
+    <value>Жер резерві</value>
   </data>
   <data name="Zone" xml:space="preserve">
     <value>Аймақ</value>

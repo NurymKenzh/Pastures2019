@@ -47,7 +47,6 @@
                     <input id="find_ur_z_to" type="text" />
                     @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
                     @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
-
                     <input type="button" value="Find" onclick="FindPastures()" />
 
                     <select id="cato1" onchange="ChangeCATO1()"></select>
@@ -955,7 +954,6 @@
             filterParams_found["CQL_FILTER"] = filter_found;
         }
         Layer_found_pasturepol.getSource().updateParams(filterParams_found);
-        //Layer_found_pasturepol.getSource().changed();
         Layer_found_pasturepol.getSource().refresh();
     }
 </script>
@@ -963,7 +961,7 @@
 @* InfoCATO, ChartCATO, TableCATO *@
 <script>
     var ctx = document.getElementById('chart').getContext('2d');
-    var chart = null; //new Chart(ctx, config);
+    var chart = null;
 
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;

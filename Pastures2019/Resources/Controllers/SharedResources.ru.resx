@@ -138,6 +138,12 @@
   <data name="Autumn" xml:space="preserve">
     <value>Осень</value>
   </data>
+  <data name="AverageAnnualProductivitykgha" xml:space="preserve">
+    <value>Среднегодовая урожайность, ц/га</value>
+  </data>
+  <data name="AverageFeedStockc" xml:space="preserve">
+    <value>Средний кормозапас, ц</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Обратно к списку</value>
   </data>
@@ -440,6 +446,9 @@
   </data>
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Неверная попытка входа.</value>
+  </data>
+  <data name="LandSupply" xml:space="preserve">
+    <value>Земельный запас</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
@@ -776,6 +785,9 @@
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Ваш пароль был сброшен</value>
+  </data>
+  <data name="zemfondpolLayer" xml:space="preserve">
+    <value>Земельный запас</value>
   </data>
   <data name="Zone" xml:space="preserve">
     <value>Зона</value>

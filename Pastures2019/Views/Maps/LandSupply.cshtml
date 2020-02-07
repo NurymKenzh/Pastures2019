@@ -14,9 +14,12 @@
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
 <div class="container-fluid sticky-top p-0">
-    @*<div style="width: 1000px; height: 400px;">
-            <canvas id="chart" width="900" height="380"></canvas>
-        </div>*@
+    <div style="width: 520px; height: 400px;">
+        <canvas id="chart1" width="900" height="380"></canvas>
+    </div>
+    <div style="width: 520px; height: 400px;">
+        <canvas id="chart2" width="900" height="380"></canvas>
+    </div>
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -34,9 +37,17 @@
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
+                    @Html.DropDownList("SType", (IEnumerable<SelectListItem>)ViewBag.SType, "", htmlAttributes: new { @id = "find_stype" })
+                    @Html.DropDownList("DominantType", (IEnumerable<SelectListItem>)ViewBag.DominantType, "", htmlAttributes: new { @id = "find_dominanttype" })
+                    <input id="find_ur_avgyear_from" type="text" />
+                    <input id="find_ur_avgyear_to" type="text" />
+                    <input id="find_korm_avgye_from" type="text" />
+                    <input id="find_korm_avgye_to" type="text" />
+                    @Html.DropDownList("SupplyRecommend", (IEnumerable<SelectListItem>)ViewBag.SupplyRecommend, "", htmlAttributes: new { @id = "find_supplyrecommend" })
+                    <input type="button" value="Find" onclick="FindPastures()" />
+
                     <select id="cato1" onchange="ChangeCATO1()"></select>
                     <select id="cato2" onchange="ChangeCATO2()"></select>
-                    <select id="cato3" onchange="ChangeCATO3()"></select>
                     <input type="button" value="CATO Info" onclick="InfoCATO()" />
 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
@@ -300,22 +311,6 @@
     });
     Layer_adm2pol.set('name', 'admxpol');
 
-    var url_adm3pol = geoserver_url + geoserver_workspace_name + '/wms';
-    var Source_adm3pol = new ol.source.TileWMS({
-        url: url_adm3pol,
-        params: {
-            'FORMAT': 'image/png',
-            'VERSION': '1.1.1',
-            tiled: true,
-            'LAYERS': geoserver_workspace_name + ':adm3pol'
-        },
-        serverType: 'geoserver'
-    });
-    var Layer_adm3pol = new ol.layer.Tile({
-        source: Source_adm3pol
-    });
-    Layer_adm3pol.set('name', 'admxpol');
-
     var Layer_admXpol_Navigate = new ol.layer.Vector({
         style: new ol.style.Style({
             fill: new ol.style.Fill({
@@ -426,6 +421,47 @@
         source: Source_zemfondpol
     });
     Layer_zemfondpol.set('name', 'zemfondpol');
+
+    var Source_select_zemfondpol = new ol.source.Vector({});
+    var Layer_select_zemfondpol = new ol.layer.Vector({
+        source: Source_select_zemfondpol,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 255, 1]
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })
+    });
+    Layer_select_zemfondpol.set('name', 'zemfondpol');
+
+    var url_found_zemfondpol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_found_zemfondpol = new ol.source.TileWMS({
+        url: url_found_zemfondpol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':zemfondpol',
+            'STYLES': 'zemfondpolfind',
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_found_zemfondpol = new ol.layer.Tile({
+        source: Source_found_zemfondpol
+    });
+    var filter_found = "type_k = 'none'";
+    var filterParams_found = {
+        'FILTER': null,
+        'CQL_FILTER': null,
+        'FEATUREID': null
+    };
+    if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+          filterParams_found["CQL_FILTER"] = filter_found;
+        }
+    Layer_found_zemfondpol.getSource().updateParams(filterParams_found);
 </script>
 
 @* map *@
@@ -456,11 +492,12 @@
         layers: [
             Layer_Base,
             Layer_zemfondpol,
+            Layer_found_zemfondpol,
+            Layer_select_zemfondpol,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
             Layer_adm2pol,
-            Layer_adm3pol,
             Layer_poppol,
             Layer_poppnt,
             Layer_hdrpol
@@ -635,27 +672,18 @@
                     // data from zemfondpol
                     var parser = new ol.format.GeoJSON();
                     var features = parser.readFeatures(data);
-                    console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
+                    console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + features[0].get('ur_avgyear').toFixed(2));
+                    console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + features[0].get('korm_avgye').toFixed(2));
                     $.ajax({
-                        url: '@Url.Action("GetPastureInfo")',
+                        url: '@Url.Action("GetZemfondInfo")',
                         data: {
                             objectid: features[0].get('objectid')
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                            console.log('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.zemfondpol.otdel);
-                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.zemfondpol.ptype);
-                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.zemfondpol.group);
-                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.zemfondpol.group_lat);
-                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
-                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
-                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
-                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
-                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.zemfondpol.recommend);
-                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.zemfondpol.recomcatt);
+                            console.log('@Html.Raw(SharedLocalizer["ZType"]): ' + dataDB.zemfondpol.stype);
+                            console.log('@Html.Raw(SharedLocalizer["DominantType"]): ' + dataDB.zemfondpol.dominanttype);
+                            console.log('@Html.Raw(SharedLocalizer["Recommend"]): ' + dataDB.zemfondpol.supplyrecommend);
                             console.log('----------------------------------------------');
                         },
                         error: function () {
@@ -665,6 +693,296 @@
             });
         }
     })
+</script>
+
+@* CATO *@
+<script>
+    var cato = new Array();
+    @foreach (CATO cATO in ViewBag.CATO)
+    {
+        @:var cato_new = {};
+        @:cato_new["te"] = '@cATO.TE';
+        @:cato_new["ab"] = '@cATO.AB';
+        @:cato_new["cd"] = '@cATO.CD';
+        @:cato_new["ef"] = '@cATO.EF';
+        @:cato_new["hij"] = '@cATO.HIJ';
+        @:cato_new["name"] = '@Html.Raw(cATO.Name)';
+        @:cato.push(cato_new);
+    }
+    $('#cato1').append($("<option />"));
+    $.each(cato, function () {
+        if (this.cd == '00') {
+            $('#cato1').append($("<option />").val(this.te).text(this.name));
+        }
+    });
+
+    function ChangeCATO1() {
+        NavigateToCATO($('#cato1').val(), 1);
+        var ab = $('#cato1').val().substr(0, 2);
+        $('#cato2').empty();
+        $('#cato3').empty();
+        $('#cato2').append($("<option />"));
+        $.each(cato, function () {
+            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
+                $('#cato2').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO2() {
+        NavigateToCATO($('#cato2').val(), 2);
+    }
+
+    var first_admXpol_Navigate = true;
+    function NavigateToCATO(te, layer) {
+        if (Layer_admXpol_Navigate.getSource() != null) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+        if (te == '') {
+            return;
+        }
+        var filter = "kato_te = '" + te + "'";
+        var filterParams = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams["CQL_FILTER"] = filter;
+        }
+        url_admXpol_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm" + layer.toString() + "pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_admXpol_Navigate,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data_admXpol_Navigate) {
+                var new_source = new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                });
+                Layer_admXpol_Navigate.setSource(new_source);
+                map.getView().fit(Layer_admXpol_Navigate.getSource().getExtent());
+                if (first_admXpol_Navigate) {
+                    map.addLayer(Layer_admXpol_Navigate);
+                    first_admXpol_Navigate = false;
+                }
+            }
+        });
+    }
+</script>
+
+@* FindPastures *@
+<script>
+    function FindPastures() {
+        var type_k = $('#find_stype').val(),
+            dominant_t = $('#find_dominanttype').val(),
+            s_recomend = $('#find_supplyrecommend').val(),
+            ur_avgyear_from = $('#find_ur_avgyear_from').val().replace(',', '.'),
+            ur_avgyear_to = $('#find_ur_avgyear_to').val().replace(',', '.'),
+            korm_avgye_from = $('#find_korm_avgye_from').val().replace(',', '.'),
+            korm_avgye_to = $('#find_korm_avgye_to').val().replace(',', '.');
+        filter_found = '';
+        if (type_k != '') {
+            if (filter_found.length == 0) {
+                filter_found = "type_k = '" + type_k + "'";
+            }
+            else {
+                filter_found += " && type_k = '" + type_k + "'";
+            }
+        }
+        if (dominant_t != '') {
+            if (filter_found.length == 0) {
+                filter_found = "dominant_t = '" + dominant_t + "'";
+            }
+            else {
+                filter_found += " && dominant_t = '" + dominant_t + "'";
+            }
+        }
+        if (s_recomend != '') {
+            if (filter_found.length == 0) {
+                filter_found = "s_recomend = '" + s_recomend + "'";
+            }
+            else {
+                filter_found += " && s_recomend = '" + s_recomend + "'";
+            }
+        }
+        if (ur_avgyear_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_avgyear >= " + ur_avgyear_from + "";
+            }
+            else {
+                filter_found += " && ur_avgyear >= " + ur_avgyear_from + "";
+            }
+        }
+        if (ur_avgyear_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "ur_avgyear <= " + ur_avgyear_to + "";
+            }
+            else {
+                filter_found += " && ur_avgyear <= " + ur_avgyear_to + "";
+            }
+        }
+        if (korm_avgye_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "korm_avgye >= " + korm_avgye_from + "";
+            }
+            else {
+                filter_found += " && korm_avgye >= " + korm_avgye_from + "";
+            }
+        }
+        if (korm_avgye_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "korm_avgye <= " + korm_avgye_to + "";
+            }
+            else {
+                filter_found += " && korm_avgye <= " + korm_avgye_to + "";
+            }
+        }
+        if (filter_found.length == 0) {
+            filter_found = "type_k = 'none'";
+        }
+        filterParams_found = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams_found["CQL_FILTER"] = filter_found;
+        }
+        Layer_found_zemfondpol.getSource().updateParams(filterParams_found);
+        Layer_found_zemfondpol.getSource().refresh();
+    }
+</script>
+
+@* InfoCATO, ChartCATO, TableCATO *@
+<script>
+    var ctx1 = document.getElementById('chart1').getContext('2d'),
+        ctx2 = document.getElementById('chart2').getContext('2d');
+    var chart1 = null,
+        chart2 = null;
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    }
+
+    function InfoCATO() {
+        var te = $('#cato3').val(),
+            te1 = $('#cato1').val(),
+            te2 = $('#cato2').val(),
+            te3 = $('#cato3').val();
+        if (te3 == '') {
+            te = te2;
+        }
+        if (te2 == '') {
+            te = te1;
+        }
+        $.ajax({
+            url: '@Url.Action("GetCATOZemfondInfo")',
+            data: { catote: te },
+            type: 'POST',
+            success: function (data) {
+                ChartCATO1(data.zemfondpols_stypes);
+                ChartCATO2(data.zemfondpols_supplyrecommends);
+                TableCATO(data.zemfondpol);
+            },
+            error: function () {
+            }
+        });
+    }
+
+    function ChartCATO1(zemfondpols) {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [],
+                    backgroundColor: [],
+                    label: 'Dataset 1'
+                }],
+                labels: []
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                            return percentage + '%';
+                        },
+                        title: function (tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        };
+        for (var i = 0; i < zemfondpols.length; ++i) {
+            config.data.datasets[0].data.push(zemfondpols[i].shape_area);
+            config.data.datasets[0].backgroundColor.push(random_rgba());
+            config.data.labels.push($("#find_stype option[value=" + zemfondpols[i].type_k + "]").text());
+        }
+
+        if (chart1 != null) {
+            chart1.destroy();
+        }
+        chart1 = new Chart(ctx1, config);
+    }
+
+    function ChartCATO2(zemfondpols) {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [],
+                    backgroundColor: [],
+                    label: 'Dataset 1'
+                }],
+                labels: []
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                            return percentage + '%';
+                        },
+                        title: function (tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        };
+        for (var i = 0; i < zemfondpols.length; ++i) {
+            config.data.datasets[0].data.push(zemfondpols[i].shape_area);
+            config.data.datasets[0].backgroundColor.push(random_rgba());
+            config.data.labels.push($("#find_supplyrecommend option[value=" + zemfondpols[i].s_recomend + "]").text());
+        }
+
+        if (chart2 != null) {
+            chart2.destroy();
+        }
+        chart2 = new Chart(ctx2, config);
+    }
+
+    function TableCATO(zemfondpol) {
+        console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + zemfondpol.ur_avgyear.toFixed(2));
+        console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + zemfondpol.korm_avgye.toFixed(2));
+    }
 </script>
 
 @*Sidebar Menu*@

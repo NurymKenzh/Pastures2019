@@ -138,6 +138,12 @@
   <data name="Autumn" xml:space="preserve">
     <value>Autumn</value>
   </data>
+  <data name="AverageAnnualProductivitykgha" xml:space="preserve">
+    <value>Average annual productivity, kg / ha</value>
+  </data>
+  <data name="AverageFeedStockc" xml:space="preserve">
+    <value>Average feed stock, c</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Back To List</value>
   </data>
@@ -440,6 +446,9 @@
   </data>
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Invalid login attempt.</value>
+  </data>
+  <data name="LandSupply" xml:space="preserve">
+    <value>Land reserve</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -776,6 +785,9 @@
   </data>
   <data name="YourPasswordHasBeenReset" xml:space="preserve">
     <value>Your password has been reset</value>
+  </data>
+  <data name="zemfondpolLayer" xml:space="preserve">
+    <value>Land reserve</value>
   </data>
   <data name="Zone" xml:space="preserve">
     <value>Zone</value>

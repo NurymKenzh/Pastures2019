@@ -126,6 +126,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string AverageAnnualProductivitykgha {
+            get {
+                return ResourceManager.GetString("AverageAnnualProductivitykgha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AverageFeedStockc {
+            get {
+                return ResourceManager.GetString("AverageFeedStockc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string BackToList {
             get {
                 return ResourceManager.GetString("BackToList", resourceCulture);
@@ -1029,6 +1047,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string InvalidLoginAttempt {
             get {
                 return ResourceManager.GetString("InvalidLoginAttempt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string LandSupply {
+            get {
+                return ResourceManager.GetString("LandSupply", resourceCulture);
             }
         }
         
@@ -2037,6 +2064,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string YourPasswordHasBeenReset {
             get {
                 return ResourceManager.GetString("YourPasswordHasBeenReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string zemfondpolLayer {
+            get {
+                return ResourceManager.GetString("zemfondpolLayer", resourceCulture);
             }
         }
         

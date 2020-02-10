@@ -67,6 +67,7 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
+                        @await Html.PartialAsync("_LoginPartial")
                         @if (User.IsInRole("Administrator"))
                         {
                             <li class="nav-item">

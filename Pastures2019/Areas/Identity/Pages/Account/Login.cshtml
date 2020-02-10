@@ -7,12 +7,45 @@
     ViewData["Title"] = SharedLocalizer["Register"];
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
+
+<div class="container">
+    <form class="form-signin mt-5">
+        <div class="text-center mb-4">
+            <img class="mb-4" src="~/images/About/image001.jpg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">@ViewData["Title"]</h1>
+            <p>Login or register from here to access</p>
+        </div>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-label-group">
+            <input asp-for="Input.Email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputEmail" asp-for="Input.Email"></label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-label-group">
+            <input asp-for="Input.Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <label asp-for="Input.Password" for="inputPassword"></label>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="checkbox mb-3">
+            <label asp-for="Input.RememberMe">
+                <input asp-for="Input.RememberMe" type="checkbox" value="remember-me"> @Html.DisplayNameFor(m => m.Input.RememberMe)
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">@SharedLocalizer["Login"]</button>
+        <div class="form-group">
+            <p>
+                <a id="forgot-password" asp-page="./ForgotPassword">@SharedLocalizer["ForgotYourPassword"]</a>
+            </p>
+            <p>
+                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@SharedLocalizer["Register"]</a>
+            </p>
+        </div>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; @DateTime.Now.Year.ToString() - Pastures</p>
+    </form>
+    @*<div class="col-md-4">
         <section>
             <form id="account" method="post">
-                @*<h4>Use a local account to log in.</h4>*@
+                <h4>Use a local account to log in.</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
@@ -46,7 +79,7 @@
                 </div>
             </form>
         </section>
-    </div>
+    </div>*@
     @*<div class="col-md-6 col-md-offset-2">
             <section>
                 <h4>Use another service to log in.</h4>

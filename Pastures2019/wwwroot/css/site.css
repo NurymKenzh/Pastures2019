@@ -59,11 +59,11 @@
 /***** Sidebar *****/
 
 .sidebar {
-    width: 250px;
-    height: 65%;
+    width: 270px;
+    height: 75%;
     position: fixed;
     top: 65px;
-    left: -255px;
+    left: -305px;
     z-index: 999;
     background: #47a3da;
     color: #fff;
@@ -117,9 +117,10 @@
 
 .sidebar ul li a {
     display: block;
-    padding: 10px 0px;
+    padding: 10px 15px;
     border: 0;
     color: #fff;
+    font-weight:600;
 }
 
     .sidebar ul li a:hover,
@@ -176,7 +177,7 @@
 .treeextent {
     position: relative;
     overflow-y: scroll;
-    height: 250px;
+    max-height: 240px;
 }
 
 .scrollbar-deep-purple::-webkit-scrollbar {

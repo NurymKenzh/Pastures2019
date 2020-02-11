@@ -9,7 +9,7 @@
 
 
 <div class="container">
-    <form class="form-signin mt-5">
+    <form class="form-signin mt-5" id="account" method="post">
         <div class="text-center mb-4">
             <img class="mb-4" src="~/images/About/image001.jpg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">@ViewData["Title"]</h1>
@@ -17,8 +17,8 @@
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-label-group">
-            <input asp-for="Input.Email" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <label for="inputEmail" asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <label asp-for="Input.Email"></label>
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="form-label-group">

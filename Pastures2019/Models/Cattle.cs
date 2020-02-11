@@ -182,6 +182,8 @@ namespace Pastures2019.Models
         [NotMapped]
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "Photo")]
         public IFormFile FormFile { get; set; }
+        [NotMapped]
+        public string Img { get; set; }
 
         [Display(ResourceType = typeof(Resources.Controllers.SharedResources), Name = "DescriptionRU")]
         public string DescriptionRU { get; set; }

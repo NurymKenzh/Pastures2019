@@ -79,6 +79,13 @@ namespace Pastures2019.Controllers
             return View();
         }
 
+        public ActionResult PasturesBurden()
+        {
+            ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
+            ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
+            return View();
+        }
+
         private YearDay[] GetModisYearDays_MOLT_MOD13Q1006()
         {
             List<YearDay> yearDays = new List<YearDay>();
@@ -333,6 +340,80 @@ namespace Pastures2019.Controllers
                 zemfondpols_stypes,
                 zemfondpols_supplyrecommends
             });
+        }
+
+        [HttpPost]
+        public ActionResult GetCATOSpeciesInfo(
+            string catote)
+        {
+            List<CATOSpecies> cATOSpecies = new List<CATOSpecies>();
+            if (!string.IsNullOrEmpty(catote))
+            {
+                // область
+                if (catote.Substring(2, 2) == "00")
+                {
+                    cATOSpecies = _context.CATOSpecies.Where(c => c.CATOTE.Substring(0, 2) == catote.Substring(0, 2)).ToList();
+                }
+                // район
+                else if (catote.Substring(4, 2) == "00")
+                {
+                    cATOSpecies = _context.CATOSpecies.Where(c => c.CATOTE.Substring(0, 4) == catote.Substring(0, 4)).ToList();
+                }
+            }
+            List<Camel> camels = _context.Camel.Where(c => cATOSpecies.Select(cs => cs.Code).Contains(c.Code)).Distinct().ToList();
+            List<Cattle> cattle = _context.Cattle.Where(c => cATOSpecies.Select(cs => cs.Code).Contains(c.Code)).Distinct().ToList();
+            List<Horse> horses = _context.Horse.Where(h => cATOSpecies.Select(cs => cs.Code).Contains(h.Code)).Distinct().ToList();
+            List<SmallCattle> smallcattle = _context.SmallCattle.Where(s => cATOSpecies.Select(cs => cs.Code).Contains(s.Code)).ToList();
+            return Json(new
+            {
+                camels,
+                cattle,
+                horses,
+                smallcattle
+            });
+        }
+
+        [HttpPost]
+        public ActionResult GetBreedInfo(
+            string Code)
+        {
+            int code = Convert.ToInt32(Code);
+            if (code > 400)
+            {
+                SmallCattle smallcattle = _context.SmallCattle.FirstOrDefault(s => s.Code == code);
+                smallcattle.Img = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(smallcattle.Photo));
+                return Json(new
+                {
+                    smallcattle
+                });
+            }
+            else if(code > 300)
+            {
+                Horse horse = _context.Horse.FirstOrDefault(h => h.Code == code);
+                horse.Img = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(horse.Photo));
+                return Json(new
+                {
+                    horse
+                });
+            }
+            else if (code > 200)
+            {
+                Cattle cattle = _context.Cattle.FirstOrDefault(c => c.Code == code);
+                cattle.Img = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(cattle.Photo));
+                return Json(new
+                {
+                    cattle
+                });
+            }
+            else
+            {
+                Camel camel = _context.Camel.FirstOrDefault(c => c.Code == code);
+                camel.Img = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(camel.Photo));
+                return Json(new
+                {
+                    camel
+                });
+            }
         }
     }
 }

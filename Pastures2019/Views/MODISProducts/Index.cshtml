@@ -8,122 +8,128 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@SharedLocalizer["MODISProducts"]</h1>
+<div class="container">
+    <div class="jumbotron p-2 mt-2">
+        <h1>@SharedLocalizer["MODISProducts"]</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-md-auto">
+            <a asp-action="Create">@SharedLocalizer["Create"]</a>
+            @using (Html.BeginForm("Index", "MODISProducts", new { SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter }, FormMethod.Get))
+            {
+                @Html.Editor("SortOrder", null, new { htmlAttributes = new { @hidden = "hidden" }, value = ViewBag.SortOrder })
+                @if (Model.Pager.EndPage > 1)
+                {
+                    <ul class="pagination">
+                        @if (Model.Pager.CurrentPage > 1)
+                        {
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&laquo;&laquo;"), "Index",
+                                    new { SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
+                                    new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                        }
 
-<p>
-    <a asp-action="Create">@SharedLocalizer["Create"]</a>
-</p>
-@using (Html.BeginForm("Index", "MODISProducts", new { SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter }, FormMethod.Get))
-{
-    @Html.Editor("SortOrder", null, new { htmlAttributes = new { @hidden = "hidden" }, value = ViewBag.SortOrder })
-    @if (Model.Pager.EndPage > 1)
-    {
-        <ul class="pagination">
-            @if (Model.Pager.CurrentPage > 1)
-            {
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;&laquo;"), "Index",
-                        new { SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
-                        new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
+                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                        {
+                            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                @Html.ActionLink(page.ToString(), "Index",
+                                    new { PageNumber = page, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                        }
+
+                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                        {
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
+                                    new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
+                                    new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                        }
+                    </ul>
+                }
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.ActionLink(Html.DisplayNameFor(t => t.Items.FirstOrDefault().MODISSource).ToString(), "Index",
+                                    new { SortOrder = ViewBag.MODISSourceNameSort, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                                <br />
+                                @Html.DropDownList("MODISSourceId", (IEnumerable<SelectListItem>)ViewBag.MODISSourceId, "", htmlAttributes: new { @class = "form-control" })
+                            </th>
+                            <th>
+                                @Html.ActionLink(Html.DisplayNameFor(t => t.Items.FirstOrDefault().Name).ToString(), "Index",
+                                    new { SortOrder = ViewBag.NameSort, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                                <br />
+                                @Html.Editor("NameFilter", null, new { htmlAttributes = new { @class = "form-control" }, value = "" })
+                            </th>
+                            <th>
+                                <br />
+                                <input type="submit" value="@SharedLocalizer["Find"]" class="btn btn-primary">
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MODISSource.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id" asp->@SharedLocalizer["Edit"]</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">@SharedLocalizer["Details"]</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["Delete"]</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                @if (Model.Pager.EndPage > 1)
+                {
+                    <ul class="pagination">
+                        @if (Model.Pager.CurrentPage > 1)
+                        {
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&laquo;&laquo;"), "Index",
+                                    new { SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
+                                    new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                        }
+
+                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                        {
+                            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                @Html.ActionLink(page.ToString(), "Index",
+                                    new { PageNumber = page, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                        }
+
+                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                        {
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
+                                    new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                            <li>
+                                @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
+                                    new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
+                            </li>
+                        }
+                    </ul>
+                }
             }
 
-            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-            {
-                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                    @Html.ActionLink(page.ToString(), "Index",
-                        new { PageNumber = page, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-            }
-
-            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-            {
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
-                        new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
-                        new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-            }
-        </ul>
-    }
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.ActionLink(Html.DisplayNameFor(t => t.Items.FirstOrDefault().MODISSource).ToString(), "Index",
-                        new { SortOrder = ViewBag.MODISSourceNameSort, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                    <br />
-                    @Html.DropDownList("MODISSourceId", (IEnumerable<SelectListItem>)ViewBag.MODISSourceId, "", htmlAttributes: new { @class = "form-control" })
-                </th>
-                <th>
-                    @Html.ActionLink(Html.DisplayNameFor(t => t.Items.FirstOrDefault().Name).ToString(), "Index",
-                        new { SortOrder = ViewBag.NameSort, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                    <br />
-                    @Html.Editor("NameFilter", null, new { htmlAttributes = new { @class = "form-control" }, value = "" })
-                </th>
-                <th>
-                    <br />
-                    <input type="submit" value="@SharedLocalizer["Find"]" class="btn btn-primary">
-                </th>
-            </tr>
-        </thead>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MODISSource.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" asp->@SharedLocalizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">@SharedLocalizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">@SharedLocalizer["Delete"]</a>
-                </td>
-            </tr>
-        }
-    </table>
-    @if (Model.Pager.EndPage > 1)
-    {
-        <ul class="pagination">
-            @if (Model.Pager.CurrentPage > 1)
-            {
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;&laquo;"), "Index",
-                        new { SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&laquo;"), "Index",
-                        new { PageNumber = Model.Pager.CurrentPage - 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-            }
-
-            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
-            {
-                <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
-                    @Html.ActionLink(page.ToString(), "Index",
-                        new { PageNumber = page, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-            }
-
-            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
-            {
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;"), "Index",
-                        new { PageNumber = Model.Pager.CurrentPage + 1, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-                <li>
-                    @Html.ActionLink(WebUtility.HtmlDecode("&raquo;&raquo;"), "Index",
-                        new { PageNumber = Model.Pager.TotalPages, SortOrder = ViewBag.SortOrdert, NameFilter = ViewBag.NameFilter, MODISSourceIdFilter = ViewBag.MODISSourceIdFilter })
-                </li>
-            }
-        </ul>
-    }
-}
+        </div>
+    </div>
+</div>

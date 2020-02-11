@@ -7,27 +7,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@SharedLocalizer["Details"]</h1>
+<div class="container">
+    <div class="jumbotron p-2 mt-2">
+        <h1>@SharedLocalizer["Details"]</h1>
+        <h4>@SharedLocalizer["MODISProduct"]</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-md-auto">
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MODISSource)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.MODISSource.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">@SharedLocalizer["Edit"]</a> |
+                <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+            </div>
+        </div>        
+    </div>
+</div>
 
-<div>
-    <h4>@SharedLocalizer["MODISProduct"]</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MODISSource)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MODISSource.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">@SharedLocalizer["Edit"]</a> |
-    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-</div>
+

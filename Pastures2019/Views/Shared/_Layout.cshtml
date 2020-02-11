@@ -61,35 +61,37 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Others</a>
                             <div class="dropdown-menu" aria-labelledby="somemenu">
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
                                 <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
-                        @await Html.PartialAsync("_LoginPartial")
                         @if (User.IsInRole("Administrator"))
                         {
-                            <li class="nav-item">
+                            <li class="nav-item ">
                                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
                             </li>
                         }
                     </ul>
+                    
+                    @await Html.PartialAsync("_LoginPartial")
+
                 </div>
             </div>
         </nav>
     </header>
-    <main role="main" class="flex-shrink-0 p-0">
+    <main role="main" class="flex-shrink-0">
         <partial name="_CookieConsentPartial" />
         @RenderBody()
         @RenderSection("Scripts", required: false)
     </main>
-    <footer class="footer fixed-bottom mt-auto">
+    <footer class="footer fixed-bottom bg-light pt-2">
         <div class="container">
             &copy; @DateTime.Now.Year.ToString() - Pastures @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
             @await Html.PartialAsync("_SelectLanguagePartial")
         </div>
-    </footer> 
+    </footer>
 </body>
 </html>

@@ -6,52 +6,56 @@
     ViewData["Title"] = SharedLocalizer["Details"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    
 
-<h1>@SharedLocalizer["Details"]</h1>
+    <div class="container">
+        <h1>@SharedLocalizer["Details"]</h1>
 
-<div>
-    <h4>@SharedLocalizer["CATO"]</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AB)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AB)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CD)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CD)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.EF)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.EF)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.HIJ)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.HIJ)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.K)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.K)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">@SharedLocalizer["Edit"]</a> |
-    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-</div>
+        <div>
+            <h4>@SharedLocalizer["CATO"]</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.AB)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.AB)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.CD)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.CD)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.EF)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.EF)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HIJ)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HIJ)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.K)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.K)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+        </div>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id">@SharedLocalizer["Edit"]</a> |
+            <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+        </div>
+    </div>
+

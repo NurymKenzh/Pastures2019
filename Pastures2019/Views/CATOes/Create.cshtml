@@ -6,60 +6,62 @@
     ViewData["Title"] = SharedLocalizer["Create"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="container">
+        <h1>@SharedLocalizer["Create"]</h1>
 
-<h1>@SharedLocalizer["Create"]</h1>
+        <h4>@SharedLocalizer["CATO"]</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="AB" class="control-label"></label>
+                        <input asp-for="AB" class="form-control" />
+                        <span asp-validation-for="AB" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CD" class="control-label"></label>
+                        <input asp-for="CD" class="form-control" />
+                        <span asp-validation-for="CD" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EF" class="control-label"></label>
+                        <input asp-for="EF" class="form-control" />
+                        <span asp-validation-for="EF" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HIJ" class="control-label"></label>
+                        <input asp-for="HIJ" class="form-control" />
+                        <span asp-validation-for="HIJ" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="K" class="control-label"></label>
+                        <input asp-for="K" class="form-control" />
+                        <span asp-validation-for="K" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NameRU" class="control-label"></label>
+                        <input asp-for="NameRU" class="form-control" />
+                        <span asp-validation-for="NameRU" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="NameKK" class="control-label"></label>
+                        <input asp-for="NameKK" class="form-control" />
+                        <span asp-validation-for="NameKK" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="@SharedLocalizer["Create"]" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<h4>@SharedLocalizer["CATO"]</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AB" class="control-label"></label>
-                <input asp-for="AB" class="form-control" />
-                <span asp-validation-for="AB" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CD" class="control-label"></label>
-                <input asp-for="CD" class="form-control" />
-                <span asp-validation-for="CD" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EF" class="control-label"></label>
-                <input asp-for="EF" class="form-control" />
-                <span asp-validation-for="EF" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HIJ" class="control-label"></label>
-                <input asp-for="HIJ" class="form-control" />
-                <span asp-validation-for="HIJ" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="K" class="control-label"></label>
-                <input asp-for="K" class="form-control" />
-                <span asp-validation-for="K" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameRU" class="control-label"></label>
-                <input asp-for="NameRU" class="form-control" />
-                <span asp-validation-for="NameRU" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NameKK" class="control-label"></label>
-                <input asp-for="NameKK" class="form-control" />
-                <span asp-validation-for="NameKK" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="@SharedLocalizer["Create"]" class="btn btn-primary" />
-            </div>
-        </form>
+        <div>
+            <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

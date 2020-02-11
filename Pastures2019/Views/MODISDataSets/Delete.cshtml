@@ -6,37 +6,39 @@
     ViewData["Title"] = SharedLocalizer["Delete"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="container">
+        <div class="jumbotron p-2 mt-2">
+            <h1>@SharedLocalizer["Delete"]</h1>
+            <h4>@SharedLocalizer["MODISDataSet"]</h4>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-md-auto">
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.MODISProduct)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.MODISProduct.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Name)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+                    <dt class="col-sm-2">
+                        @Html.DisplayNameFor(model => model.Index)
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Index)
+                    </dd>
+                </dl>
 
-<h1>@SharedLocalizer["Delete"]</h1>
-
-<h3>@SharedLocalizer["Delete"]?</h3>
-<div>
-    <h4>@SharedLocalizer["MODISDataSet"]</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MODISProduct)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MODISProduct.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Index)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Index)
-        </dd>
-    </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
-        <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-    </form>
-</div>
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
+                    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+                </form>
+            </div>
+        </div>
+    </div>

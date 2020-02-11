@@ -6,46 +6,48 @@
     ViewData["Title"] = SharedLocalizer["Edit"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="container">
+        <h1>@SharedLocalizer["Edit"]</h1>
 
-<h1>@SharedLocalizer["Edit"]</h1>
+        <h4>@SharedLocalizer["Zone"]</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group">
+                        <label asp-for="Code" class="control-label"></label>
+                        <input asp-for="Code" class="form-control" />
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DescriptionRU" class="control-label"></label>
+                        <input asp-for="DescriptionRU" class="form-control" />
+                        <span asp-validation-for="DescriptionRU" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DescriptionKK" class="control-label"></label>
+                        <input asp-for="DescriptionKK" class="form-control" />
+                        <span asp-validation-for="DescriptionKK" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DescriptionEN" class="control-label"></label>
+                        <input asp-for="DescriptionEN" class="form-control" />
+                        <span asp-validation-for="DescriptionEN" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="@SharedLocalizer["Save"]" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
-<h4>@SharedLocalizer["Zone"]</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Code" class="control-label"></label>
-                <input asp-for="Code" class="form-control" />
-                <span asp-validation-for="Code" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescriptionRU" class="control-label"></label>
-                <input asp-for="DescriptionRU" class="form-control" />
-                <span asp-validation-for="DescriptionRU" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescriptionKK" class="control-label"></label>
-                <input asp-for="DescriptionKK" class="form-control" />
-                <span asp-validation-for="DescriptionKK" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DescriptionEN" class="control-label"></label>
-                <input asp-for="DescriptionEN" class="form-control" />
-                <span asp-validation-for="DescriptionEN" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="@SharedLocalizer["Save"]" class="btn btn-primary" />
-            </div>
-        </form>
+        <div>
+            <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

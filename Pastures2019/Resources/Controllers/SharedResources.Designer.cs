@@ -117,6 +117,33 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string AreaOfPasturesha {
+            get {
+                return ResourceManager.GetString("AreaOfPasturesha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Areas {
+            get {
+                return ResourceManager.GetString("Areas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string AsOf {
+            get {
+                return ResourceManager.GetString("AsOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Autumn {
             get {
                 return ResourceManager.GetString("Autumn", resourceCulture);
@@ -414,6 +441,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string CamelsGoals {
+            get {
+                return ResourceManager.GetString("CamelsGoals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string CATO {
             get {
                 return ResourceManager.GetString("CATO", resourceCulture);
@@ -435,6 +471,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string Cattle {
             get {
                 return ResourceManager.GetString("Cattle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string CattleGoals {
+            get {
+                return ResourceManager.GetString("CattleGoals", resourceCulture);
             }
         }
         
@@ -696,6 +741,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string DirectionRU {
             get {
                 return ResourceManager.GetString("DirectionRU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Districts {
+            get {
+                return ResourceManager.GetString("Districts", resourceCulture);
             }
         }
         
@@ -1011,6 +1065,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string Horses {
             get {
                 return ResourceManager.GetString("Horses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string HorsesGoals {
+            get {
+                return ResourceManager.GetString("HorsesGoals", resourceCulture);
             }
         }
         
@@ -1413,6 +1476,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Population {
+            get {
+                return ResourceManager.GetString("Population", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
@@ -1620,6 +1692,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string RuralCounties {
+            get {
+                return ResourceManager.GetString("RuralCounties", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Satellite {
             get {
                 return ResourceManager.GetString("Satellite", resourceCulture);
@@ -1674,6 +1755,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string SheepGoals {
+            get {
+                return ResourceManager.GetString("SheepGoals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string SlaughterYield {
             get {
                 return ResourceManager.GetString("SlaughterYield", resourceCulture);
@@ -1713,6 +1803,24 @@ namespace Pastures2019.Resources.Controllers {
         public static string Soobs {
             get {
                 return ResourceManager.GetString("Soobs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Species {
+            get {
+                return ResourceManager.GetString("Species", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string speciesXLayer {
+            get {
+                return ResourceManager.GetString("speciesXLayer", resourceCulture);
             }
         }
         
@@ -1812,6 +1920,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string ThePasswordAndConfirmationPasswordDoNotMatch {
             get {
                 return ResourceManager.GetString("ThePasswordAndConfirmationPasswordDoNotMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string TotalConditionalGoalsInTermsOfSheep {
+            get {
+                return ResourceManager.GetString("TotalConditionalGoalsInTermsOfSheep", resourceCulture);
             }
         }
         

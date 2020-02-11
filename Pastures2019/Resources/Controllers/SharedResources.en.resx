@@ -135,6 +135,15 @@
   <data name="Anomaly" xml:space="preserve">
     <value>Anomaly</value>
   </data>
+  <data name="AreaOfPasturesha" xml:space="preserve">
+    <value>Area of pasture lands, ha</value>
+  </data>
+  <data name="Areas" xml:space="preserve">
+    <value>Areas</value>
+  </data>
+  <data name="AsOf" xml:space="preserve">
+    <value>As of</value>
+  </data>
   <data name="Autumn" xml:space="preserve">
     <value>Autumn</value>
   </data>
@@ -234,6 +243,9 @@
   <data name="Camels" xml:space="preserve">
     <value>Camels</value>
   </data>
+  <data name="CamelsGoals" xml:space="preserve">
+    <value>Camels, goals</value>
+  </data>
   <data name="CATO" xml:space="preserve">
     <value>CATO</value>
   </data>
@@ -242,6 +254,9 @@
   </data>
   <data name="Cattle" xml:space="preserve">
     <value>Cattle</value>
+  </data>
+  <data name="CattleGoals" xml:space="preserve">
+    <value>Cattle, goals</value>
   </data>
   <data name="Cattles" xml:space="preserve">
     <value>Cattles</value>
@@ -329,6 +344,9 @@
   </data>
   <data name="DirectionRU" xml:space="preserve">
     <value>Direction (Russian)</value>
+  </data>
+  <data name="Districts" xml:space="preserve">
+    <value>Districts</value>
   </data>
   <data name="DominantType" xml:space="preserve">
     <value>Type of dominant pasture</value>
@@ -434,6 +452,9 @@
   </data>
   <data name="Horses" xml:space="preserve">
     <value>Horses</value>
+  </data>
+  <data name="HorsesGoals" xml:space="preserve">
+    <value>Horses, goals</value>
   </data>
   <data name="IncorrectPassword" xml:space="preserve">
     <value>Incorrect password.</value>
@@ -567,6 +588,9 @@
   <data name="popLayer" xml:space="preserve">
     <value>Settlements</value>
   </data>
+  <data name="Population" xml:space="preserve">
+    <value>Population</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
@@ -636,6 +660,9 @@
   <data name="Roles" xml:space="preserve">
     <value>Roles</value>
   </data>
+  <data name="RuralCounties" xml:space="preserve">
+    <value>Rural counties</value>
+  </data>
   <data name="Satellite" xml:space="preserve">
     <value>Satellite</value>
   </data>
@@ -654,6 +681,9 @@
   <data name="ShearingsRU" xml:space="preserve">
     <value>Sheared wool (Russian)</value>
   </data>
+  <data name="SheepGoals" xml:space="preserve">
+    <value>Sheep, goals</value>
+  </data>
   <data name="SlaughterYield" xml:space="preserve">
     <value>Killer exit</value>
   </data>
@@ -668,6 +698,12 @@
   </data>
   <data name="Soobs" xml:space="preserve">
     <value>Communities</value>
+  </data>
+  <data name="Species" xml:space="preserve">
+    <value>Breeding zoning of farm animals</value>
+  </data>
+  <data name="speciesXLayer" xml:space="preserve">
+    <value>Breeding zoning of farm animals</value>
   </data>
   <data name="Spring" xml:space="preserve">
     <value>Spring</value>
@@ -701,6 +737,9 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="TotalConditionalGoalsInTermsOfSheep" xml:space="preserve">
+    <value>Total conditional goals (in terms of sheep)</value>
   </data>
   <data name="TotalGoals" xml:space="preserve">
     <value>Total Goals</value>

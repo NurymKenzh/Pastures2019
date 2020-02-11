@@ -14,6 +14,10 @@
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
 <div class="container-fluid sticky-top p-0">
+    <div style="width: 1000px; height: 400px; overflow: auto;">
+        <table id="table_info_species"></table>
+        <table id="table_info_breed"></table>
+    </div>
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -31,25 +35,10 @@
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
-                    @*@Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })
-        @Html.DropDownList("PType", (IEnumerable<SelectListItem>)ViewBag.PType, "", htmlAttributes: new { @id = "find_ptype" })
-        @Html.DropDownList("Soob", (IEnumerable<SelectListItem>)ViewBag.Soob, "", htmlAttributes: new { @id = "find_soob" })
-        <input id="find_ur_v_from" type="text" />
-        <input id="find_ur_v_to" type="text" />
-        <input id="find_ur_l_from" type="text" />
-        <input id="find_ur_l_to" type="text" />
-        <input id="find_ur_o_from" type="text" />
-        <input id="find_ur_o_to" type="text" />
-        <input id="find_ur_z_from" type="text" />
-        <input id="find_ur_z_to" type="text" />
-        @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
-        @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
-        <input type="button" value="Find" onclick="FindPastures()" />*@
-
-                    @*<select id="cato1" onchange="ChangeCATO1()"></select>
-        <select id="cato2" onchange="ChangeCATO2()"></select>
-        <select id="cato3" onchange="ChangeCATO3()"></select>
-        <input type="button" value="CATO Info" onclick="InfoCATO()" />*@
+                    <select id="cato1" onchange="ChangeCATO1()"></select>
+                    <select id="cato2" onchange="ChangeCATO2()"></select>
+                    <select id="cato3" onchange="ChangeCATO3()"></select>
+                    <input type="button" value="CATO Info" onclick="InfoCATO()" />
 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
                         <option value="OSM">OpenStreetMap</option>
@@ -482,6 +471,21 @@
     });
     Layer_species3.set('name', 'speciesX');
     Layer_species3.set('subname', 'species3');
+
+    var Source_select_species = new ol.source.Vector({});
+    var Layer_select_species = new ol.layer.Vector({
+        source: Source_select_species,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 255, 1]
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })
+    });
+    Layer_select_species.set('name', 'speciesX');
 </script>
 
 @* map *@
@@ -514,6 +518,7 @@
             Layer_species1,
             Layer_species2,
             Layer_species3,
+            Layer_select_species,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
@@ -657,12 +662,325 @@
             if (layer.get('name') == 'speciesX') {
                 layer.setOpacity($('#layerspecies1Opacity').val() / 100);
                 layer.setVisible(false);
-                if (layer.get('subname') == $('input[name="speciesX"]:checked').val()) {
+                if (layer.get('subname') == $('input[name="speciesX"]:checked').val() || layer.get('subname') == null) {
                     layer.setVisible(document.getElementById("layerspeciesXShow").checked);
                 }
             }
         })
     }
+</script>
+
+@* map.on('singleclick') *@
+<script>
+    map.on('singleclick', function (evt) {
+        Source_select_species.clear();
+        document.getElementById("table_info_species").innerHTML = "";
+
+        var viewResolution = (map.getView().getResolution());
+        var url_species = null;
+        if ($('input[name="speciesX"]:checked').val() == 'species1') {
+            url_species = Source_species1.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, 'EPSG:3857',
+                {
+                    'INFO_FORMAT': 'text/javascript'
+                });
+        }
+        if ($('input[name="speciesX"]:checked').val() == 'species2') {
+            url_species = Source_species2.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, 'EPSG:3857',
+                {
+                    'INFO_FORMAT': 'text/javascript'
+                });
+        }
+        if ($('input[name="speciesX"]:checked').val() == 'species3') {
+            url_species = Source_species3.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, 'EPSG:3857',
+                {
+                    'INFO_FORMAT': 'text/javascript'
+                });
+        }
+        if (url_species) {
+            jQuery.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_species + "&format_options=callback:getJson",
+                async: false,
+                dataType: 'jsonp',
+                error: function () {
+                }
+            }).then(function (data) {
+                if ((Layer_species1.getVisible() || Layer_species2.getVisible() || Layer_species3.getVisible()) && data.features.length > 0) {
+                    // select pasture
+                    var polyFeature = new ol.Feature({
+                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+                    });
+                    Source_select_species.addFeature(polyFeature);
+                    // data from species
+                    var parser = new ol.format.GeoJSON();
+                    var features = parser.readFeatures(data);
+                    console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + features[0].get('cattle'));
+                    console.log('@Html.Raw(SharedLocalizer["HorsesGoals"]): ' + features[0].get('horses'));
+                    console.log('@Html.Raw(SharedLocalizer["SheepGoals"]): ' + features[0].get('smallcattl'));
+                    console.log('@Html.Raw(SharedLocalizer["CamelsGoals"]): ' + features[0].get('camels'));
+                    console.log('@Html.Raw(SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]): ' + features[0].get('totalgoals'));
+                    console.log('@Html.Raw(SharedLocalizer["AsOf"]): ' + features[0].get('date'));
+                    console.log('@Html.Raw(SharedLocalizer["Population"]): ' + features[0].get('population'));
+                    console.log('@Html.Raw(SharedLocalizer["AreaOfPasturesha"]): ' + features[0].get('pastures'));
+                    GetCATOSpeciesInfo(features[0].get('kato_te'));
+                }
+            });
+        }
+    })
+</script>
+
+@* CATO *@
+<script>
+    var cato = new Array();
+    @foreach (CATO cATO in ViewBag.CATO)
+    {
+        @:var cato_new = {};
+        @:cato_new["te"] = '@cATO.TE';
+        @:cato_new["ab"] = '@cATO.AB';
+        @:cato_new["cd"] = '@cATO.CD';
+        @:cato_new["ef"] = '@cATO.EF';
+        @:cato_new["hij"] = '@cATO.HIJ';
+        @:cato_new["name"] = '@Html.Raw(cATO.Name)';
+        @:cato.push(cato_new);
+    }
+    $('#cato1').append($("<option />"));
+    $.each(cato, function () {
+        if (this.cd == '00') {
+            $('#cato1').append($("<option />").val(this.te).text(this.name));
+        }
+    });
+
+    function ChangeCATO1() {
+        NavigateToCATO($('#cato1').val(), 1);
+        var ab = $('#cato1').val().substr(0, 2);
+        $('#cato2').empty();
+        $('#cato3').empty();
+        $('#cato2').append($("<option />"));
+        $.each(cato, function () {
+            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
+                $('#cato2').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO2() {
+        NavigateToCATO($('#cato2').val(), 2);
+        var ab = $('#cato2').val().substr(0, 2),
+            cd = $('#cato2').val().substr(2, 2);
+        $('#cato3').empty();
+        $('#cato3').append($("<option />"));
+        $.each(cato, function () {
+            if (this.hij == '000' && this.ab == ab && this.cd == cd && this.ef != '00') {
+                $('#cato3').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO3() {
+        NavigateToCATO($('#cato3').val(), 3);
+    }
+
+    var first_admXpol_Navigate = true;
+    function NavigateToCATO(te, layer) {
+        if (Layer_admXpol_Navigate.getSource() != null) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+        if (te == '') {
+            return;
+        }
+        var filter = "kato_te = '" + te + "'";
+        var filterParams = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams["CQL_FILTER"] = filter;
+        }
+        url_admXpol_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm" + layer.toString() + "pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_admXpol_Navigate,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data_admXpol_Navigate) {
+                var new_source = new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                });
+                Layer_admXpol_Navigate.setSource(new_source);
+                map.getView().fit(Layer_admXpol_Navigate.getSource().getExtent());
+                if (first_admXpol_Navigate) {
+                    map.addLayer(Layer_admXpol_Navigate);
+                    first_admXpol_Navigate = false;
+                }
+            }
+        });
+    }
+</script>
+
+@* InfoCATO, GetCATOSpeciesInfo *@
+<script>
+    function InfoCATO() {
+        document.getElementById("table_info_species").innerHTML = "";
+        var te = $('#cato3').val(),
+            te1 = $('#cato1').val(),
+            te2 = $('#cato2').val(),
+            te3 = $('#cato3').val();
+        var filters = "kato_te = '" + te + "'";
+        var url_species_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":species3&CQL_FILTER=" + filters + "&outputFormat=text/javascript&format_options=callback:getJson";
+        if (te3 == '') {
+            te = te2;
+            filters = "kato = '" + te + "'";
+            url_species_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":species2&CQL_FILTER=" + filters + "&outputFormat=text/javascript&format_options=callback:getJson";
+        }
+        if (te2 == '') {
+            te = te1;
+            filters = "kato_te = '" + te + "'";
+            url_species_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":species1&CQL_FILTER=" + filters + "&outputFormat=text/javascript&format_options=callback:getJson";
+        }
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_species_Navigate,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data) {
+                if (data.features.length > 0) {
+                    console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + data.features[0].properties.cattle);
+                    console.log('@Html.Raw(SharedLocalizer["HorsesGoals"]): ' + data.features[0].properties.horses);
+                    console.log('@Html.Raw(SharedLocalizer["SheepGoals"]): ' + data.features[0].properties.smallcattl);
+                    console.log('@Html.Raw(SharedLocalizer["CamelsGoals"]): ' + data.features[0].properties.camels);
+                    console.log('@Html.Raw(SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]): ' + data.features[0].properties.totalgoals);
+                    console.log('@Html.Raw(SharedLocalizer["AsOf"]): ' + data.features[0].properties.date);
+                    console.log('@Html.Raw(SharedLocalizer["Population"]): ' + data.features[0].properties.population);
+                    console.log('@Html.Raw(SharedLocalizer["AreaOfPasturesha"]): ' + data.features[0].properties.pastures);
+                }
+                GetCATOSpeciesInfo(te);
+            }
+        });
+    }
+
+    function GetCATOSpeciesInfo(te) {
+        $.ajax({
+            url: '@Url.Action("GetCATOSpeciesInfo")',
+            data: {
+                catote: te,
+            },
+            type: 'POST',
+            success: function (dataDB) {
+                var content = "<table>"
+                for (i = 0; i < dataDB.camels.length; i++) {
+                    content += '<tr><td>@SharedLocalizer["Camel"]</td>'
+                        + '<td style="padding-left: 10px;">' + dataDB.camels[i].breed + '</td>'
+                        + '<td style="padding-left: 10px;">' + '<a href="" style="color: blue;" onClick="return More(' + dataDB.camels[i].code + ')"><i><font size="1">@SharedLocalizer["Details"]</font></i></a>' + '</td>' + '</tr>';
+                }
+                for (i = 0; i < dataDB.cattle.length; i++) {
+                    content += '<tr><td>@SharedLocalizer["Cattle"]</td>'
+                        + '<td style="padding-left: 10px;">' + dataDB.cattle[i].breed + '</td>'
+                        + '<td style="padding-left: 10px;">' + '<a href="" style="color: blue;" onClick="return More(' + dataDB.cattle[i].code + ')"><i><font size="1">@SharedLocalizer["Details"]</font></i></a>' + '</td>' + '</tr>';
+                }
+                for (i = 0; i < dataDB.horses.length; i++) {
+                    content += '<tr><td>@SharedLocalizer["Horses"]</td>'
+                        + '<td style="padding-left: 10px;">' + dataDB.horses[i].breed + '</td>'
+                        + '<td style="padding-left: 10px;">' + '<a href="" style="color: blue;" onClick="return More(' + dataDB.horses[i].code + ')"><i><font size="1">@SharedLocalizer["Details"]</font></i></a>' + '</td>' + '</tr>';
+                }
+                for (i = 0; i < dataDB.smallcattle.length; i++) {
+                    content += '<tr><td>@SharedLocalizer["SmallCattle"]</td>'
+                        + '<td style="padding-left: 10px;">' + dataDB.smallcattle[i].breed + '</td>'
+                        + '<td style="padding-left: 10px;">' + '<a href="" style="color: blue;" onClick="return More(' + dataDB.smallcattle[i].code + ')"><i><font size="1">@SharedLocalizer["Details"]</font></i></a>' + '</td>' + '</tr>';
+                }
+                content += "</table>"
+                $('#table_info_species').append(content);
+            },
+            error: function () {
+            }
+        })
+    }
+</script>
+
+@* More *@
+<script>
+    function More(Code) {
+        document.getElementById("table_info_breed").innerHTML = "";
+        $.ajax({
+            url: '@Url.Action("GetBreedInfo")',
+            data: {
+                Code: Code,
+            },
+            type: 'POST',
+            success: function (data) {
+                var content = "<table>";
+                if (Code > 400) {
+                    content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.breed + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Direction"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.direction + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Weight"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.weight + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Shearings"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.shearings + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["WashedWoolYield"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.washedWoolYield + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Fertility"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.fertility + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["WoolLength"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.woolLength + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["TotalGoals"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.totalGoals + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Bred"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.bred + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Range"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.range + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Description"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.description + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Photo"]</td>' + '<td style="padding-left: 10px;">' + '<img src="' + data.smallcattle.img + '" style="max-width: 350px;" />' + '</td></tr>';
+                }
+                else if (Code > 300) {
+                    content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.horse.breed + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Direction"]</td>' + '<td style="padding-left: 10px;">' + data.horse.direction + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Weight"]</td>' + '<td style="padding-left: 10px;">' + data.horse.weight + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Height"]</td>' + '<td style="padding-left: 10px;">' + data.horse.height + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["MilkYield"]</td>' + '<td style="padding-left: 10px;">' + data.horse.milkYield + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["BodyLength"]</td>' + '<td style="padding-left: 10px;">' + data.horse.bodyLength + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Bust"]</td>' + '<td style="padding-left: 10px;">' + data.horse.bust + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Metacarpus"]</td>' + '<td style="padding-left: 10px;">' + data.horse.metacarpus + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["TotalGoals"]</td>' + '<td style="padding-left: 10px;">' + data.horse.totalGoals + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Bred"]</td>' + '<td style="padding-left: 10px;">' + data.horse.bred + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Range"]</td>' + '<td style="padding-left: 10px;">' + data.horse.range + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Description"]</td>' + '<td style="padding-left: 10px;">' + data.horse.description + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Photo"]</td>' + '<td style="padding-left: 10px;">' + '<img src="' + data.horse.img + '" style="max-width: 350px;" />' + '</td></tr>';
+                }
+                else if (Code > 200) {
+                    content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.breed + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Direction"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.direction + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Weight"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.weight + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["SlaughterYield"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.slaughterYield + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["EwesYield"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.ewesYield + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["TotalGoals"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.totalGoals + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["MilkFatContent"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.milkFatContent + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Bred"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.bred + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Range"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.range + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Description"]</td>' + '<td style="padding-left: 10px;">' + data.cattle.description + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Photo"]</td>' + '<td style="padding-left: 10px;">' + '<img src="' + data.cattle.img + '" style="max-width: 350px;" />' + '</td></tr>';
+                }
+                else if (Code > 100) {
+                    content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.camel.breed + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Weight"]</td>' + '<td style="padding-left: 10px;">' + data.camel.weight + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["SlaughterYield"]</td>' + '<td style="padding-left: 10px;">' + data.camel.slaughterYield + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["EwesYield"]</td>' + '<td style="padding-left: 10px;">' + data.camel.ewesYield + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["TotalGoals"]</td>' + '<td style="padding-left: 10px;">' + data.camel.totalGoals + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["MilkFatContent"]</td>' + '<td style="padding-left: 10px;">' + data.camel.milkFatContent + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Range"]</td>' + '<td style="padding-left: 10px;">' + data.camel.range + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Description"]</td>' + '<td style="padding-left: 10px;">' + data.camel.description + '</td></tr>';
+                    content += '<tr><td>@SharedLocalizer["Photo"]</td>' + '<td style="padding-left: 10px;">' + '<img src="' + data.camel.img + '" style="max-width: 350px;" />' + '</td></tr>';
+                }
+                content += "</table>"
+                $('#table_info_breed').append(content);
+            },
+            error: function () {
+            }
+        });
+        return false;
+    };
 </script>
 
 @*Sidebar Menu*@

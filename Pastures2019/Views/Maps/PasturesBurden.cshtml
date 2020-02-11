@@ -1,0 +1,15 @@
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["PasturesBurden"];
+    Layout = "~/Views/Shared/_LayoutMap.cshtml";
+}
+<link href="~/lib/ol/ol.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+<script src="~/lib/ol/ol.js"></script>
+<link href="~/lib/vendor/jBox/dist/jBox.all.css" rel="stylesheet" />
+<script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
+<link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
+<script src="~/lib/сhart.js/dist/Chart.js"></script>
+

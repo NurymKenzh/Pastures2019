@@ -5,159 +5,288 @@
     ViewData["Title"] = SharedLocalizer["Administrator"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-10"><h1>@SharedLocalizer["Administrator"]</h1></div>
+            <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <!--left col-->
+                <div class="text-center">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                </div></hr><br>
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Users" asp-action="Index">@SharedLocalizer["Users"]</a>
+                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="MODIS" asp-action="Index">MODIS</a>
+                    <a class="list-group-item list-group-item-action">Others</a>
+                </div>  
+            </div>
+    <!--/col-3-->
+            <div class="col-md-9">
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="AdminTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="Modis-tab" data-toggle="tab" href="#Modis" role="tab" aria-controls="Modis" aria-selected="true">Modis</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Pasture-tab" data-toggle="tab" role="tab" aria-controls="Pasture" aria-selected="false" href="#Pasture">Pastures</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Landcover-tab" data-toggle="tab" role="tab" aria-controls="Landcover" aria-selected="false" href="#Landcover">Landcover</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Homeanimals-tab" data-toggle="tab" role="tab" aria-controls="Homeanimals" aria-selected="false" href="#Homeanimals">Breeding</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Watering-tab" data-toggle="tab" role="tab" aria-controls="Watering" aria-selected="false" href="#Watering">Watering</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Vegatation-tab" data-toggle="tab" role="tab" aria-controls="Vegatation" aria-selected="false" href="#Vegatation">Pasture Type</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="AdminTabContent">
+                            <div class="tab-pane fade show active" id="Modis" role="tabpanel" aria-labelledby="Modis-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="MODISSources" asp-action="Index">@SharedLocalizer["MODISSources"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="MODISProducts" asp-action="Index">@SharedLocalizer["MODISProducts"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="MODISDataSets" asp-action="Index">@SharedLocalizer["MODISDataSets"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">MODIS</strong>
+                                        MODIS (or Moderate Resolution Imaging Spectroradiometer) is a key instrument aboard the Terra (originally known as EOS AM-1) and Aqua (originally known as EOS PM-1) satellites. Terra's orbit around the Earth is timed so that it passes from north to south across the equator in the morning, while Aqua passes south to north over the equator in the afternoon.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Pasture" role="tabpanel" aria-labelledby="Pasture-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="CATOes" asp-action="Index">@SharedLocalizer["CATO"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="PTypes" asp-action="Index">@SharedLocalizer["PTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Reliefs" asp-action="Index">@SharedLocalizer["Reliefs"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Zones" asp-action="Index">@SharedLocalizer["Zones"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="PSubTypes" asp-action="Index">@SharedLocalizer["PSubTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Soobs" asp-action="Index">@SharedLocalizer["Soobs"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Recommends" asp-action="Index">@SharedLocalizer["Recommends"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="RecomCattles" asp-action="Index">@SharedLocalizer["RecomCattles"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Hayings" asp-action="Index">@SharedLocalizer["Hayings"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Otdels" asp-action="Index">@SharedLocalizer["Otdels"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">
+                                            @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                                            {
+                                                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                                {
+                                                    <h>
+                                                        Кормовые ресурсы Республики Казахстан
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                                {
+                                                    <h>
+                                                        Қазақстан Республикасының азық ресурстары
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                                {
+                                                    <h>
+                                                        Feed resources of the Republic of Kazakhstan
+                                                    </h>
+                                                }
+                                            }
 
-<h1>@SharedLocalizer["Administrator"]</h1>
+                                        </strong>
+                                        Some Text
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Landcover" role="tabpanel" aria-labelledby="Landcover-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="STypes" asp-action="Index">@SharedLocalizer["STypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="DominantTypes" asp-action="Index">@SharedLocalizer["DominantTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="ZSubTypes" asp-action="Index">@SharedLocalizer["ZSubTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="SupplyRecommends" asp-action="Index">@SharedLocalizer["SupplyRecommends"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">
+                                            @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                                            {
+                                                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                                {
+                                                    <h>
+                                                        Земельный запас Республики Казахстан
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                                {
+                                                    <h>
+                                                        Қазақстан Республикасының жер қоры
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                                {
+                                                    <h>
+                                                        Land reserve of the Republic of Kazakhstan
+                                                    </h>
+                                                }
+                                            }
+                                        </strong>
+                                        Some text
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Homeanimals" role="tabpanel" aria-labelledby="Homeanimals-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="ZTypes" asp-action="Index">@SharedLocalizer["ZTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Camels" asp-action="Index">@SharedLocalizer["Camels"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Cattle" asp-action="Index">@SharedLocalizer["Cattles"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="Horses" asp-action="Index">@SharedLocalizer["Horses"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="SmallCattles" asp-action="Index">@SharedLocalizer["SmallCattles"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="CATOSpecies" asp-action="Index">@SharedLocalizer["CATOSpecies"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">
+                                            @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                                            {
+                                                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                                {
+                                                    <h>
+                                                        Породное районирование сельскохозяйственных животных Республики Казахстан
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                                {
+                                                    <h>
+                                                        Қазақстан Республикасының ауыл шаруашылығы жануарларын асылдандыру
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                                {
+                                                    <h>
+                                                        Breeding zoning of farm animals of the Republic of Kazakhstan
+                                                    </h>
+                                                }
+                                            }
+                                        </strong>
+                                        Some text
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Watering" role="tabpanel" aria-labelledby="Watering-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="WTypes" asp-action="Index">@SharedLocalizer["WTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="WSubTypes" asp-action="Index">@SharedLocalizer["WSubTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="ChemicalComps" asp-action="Index">@SharedLocalizer["ChemicalComps"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="WClasses" asp-action="Index">@SharedLocalizer["WClasses"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">
+                                            @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                                            {
+                                                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                                {
+                                                    <h>
+                                                        Обводнение пастбищ Республики Казахстан
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                                {
+                                                    <h>
+                                                        Қазақстан Республикасының суармалы жайылымдары
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                                {
+                                                    <h>
+                                                        Watering pastures of the Republic of Kazakhstan
+                                                    </h>
+                                                }
+                                            }
+                                        </strong>
+                                        Some text
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="Vegatation" role="tabpanel" aria-labelledby="Vegatation-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="BurOtdels" asp-action="Index">@SharedLocalizer["BurOtdels"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="BTypes" asp-action="Index">@SharedLocalizer["BTypes"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="BurSubOtdels" asp-action="Index">@SharedLocalizer["BurSubOtdels"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="BClasses" asp-action="Index">@SharedLocalizer["BClasses"]</a>
+                                            <a class="nav-link" asp-area="" asp-controller="BGroups" asp-action="Index">@SharedLocalizer["BGroups"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">
+                                            @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                                            {
+                                                if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                                {
+                                                    <h>
+                                                        Нагрузка сельскохозяйственных животных на пастбища Республики Казахстан
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                                {
+                                                    <h>
+                                                        Қазақстан Республикасының жайылымдарына ауылшаруашылық жануарларының жүктемесі
+                                                    </h>
+                                                }
+                                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                                {
+                                                    <h>
+                                                        The load of farm animals on the pastures of the Republic of Kazakhstan
+                                                    </h>
+                                                }
+                                            }
+                                        </strong>
+                                        Some text
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div><!--/tab-content-->
 
-<a asp-area="" asp-controller="Users" asp-action="Index">@SharedLocalizer["Users"]</a>
+        </div>
+    <!--/col-9-->
+    </div>
+
+
+
+
+
+
+
+
 <br />
-<h>
-    <a asp-area="" asp-controller="MODIS" asp-action="Index">MODIS</a>
-</h>
+
 <br />
-<a asp-area="" asp-controller="MODISSources" asp-action="Index">@SharedLocalizer["MODISSources"]</a>
-<a asp-area="" asp-controller="MODISProducts" asp-action="Index">@SharedLocalizer["MODISProducts"]</a>
-<a asp-area="" asp-controller="MODISDataSets" asp-action="Index">@SharedLocalizer["MODISDataSets"]</a>
+
 <br />
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <h>
-            Кормовые ресурсы Республики Казахстан
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <h>
-            Қазақстан Республикасының азық ресурстары
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <h>
-            Feed resources of the Republic of Kazakhstan
-        </h>
-    }
-}
+
 <br />
-<a asp-area="" asp-controller="CATOes" asp-action="Index">@SharedLocalizer["CATO"]</a>
-<a asp-area="" asp-controller="PTypes" asp-action="Index">@SharedLocalizer["PTypes"]</a>
-<a asp-area="" asp-controller="Reliefs" asp-action="Index">@SharedLocalizer["Reliefs"]</a>
-<a asp-area="" asp-controller="Zones" asp-action="Index">@SharedLocalizer["Zones"]</a>
-<a asp-area="" asp-controller="PSubTypes" asp-action="Index">@SharedLocalizer["PSubTypes"]</a>
-<a asp-area="" asp-controller="Soobs" asp-action="Index">@SharedLocalizer["Soobs"]</a>
-<a asp-area="" asp-controller="Recommends" asp-action="Index">@SharedLocalizer["Recommends"]</a>
-<a asp-area="" asp-controller="RecomCattles" asp-action="Index">@SharedLocalizer["RecomCattles"]</a>
-<a asp-area="" asp-controller="Hayings" asp-action="Index">@SharedLocalizer["Hayings"]</a>
-<a asp-area="" asp-controller="Otdels" asp-action="Index">@SharedLocalizer["Otdels"]</a>
+
 <br />
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <h>
-            Земельный запас Республики Казахстан
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <h>
-            Қазақстан Республикасының жер қоры
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <h>
-            Land reserve of the Republic of Kazakhstan
-        </h>
-    }
-}
-<br />
-<a asp-area="" asp-controller="STypes" asp-action="Index">@SharedLocalizer["STypes"]</a>
-<a asp-area="" asp-controller="DominantTypes" asp-action="Index">@SharedLocalizer["DominantTypes"]</a>
-<a asp-area="" asp-controller="ZSubTypes" asp-action="Index">@SharedLocalizer["ZSubTypes"]</a>
-<a asp-area="" asp-controller="SupplyRecommends" asp-action="Index">@SharedLocalizer["SupplyRecommends"]</a>
-<br />
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <h>
-            Породное районирование сельскохозяйственных животных Республики Казахстан
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <h>
-            Қазақстан Республикасының ауыл шаруашылығы жануарларын асылдандыру
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <h>
-            Breeding zoning of farm animals of the Republic of Kazakhstan
-        </h>
-    }
-}
-<br />
-<a asp-area="" asp-controller="ZTypes" asp-action="Index">@SharedLocalizer["ZTypes"]</a>
-<a asp-area="" asp-controller="Camels" asp-action="Index">@SharedLocalizer["Camels"]</a>
-<a asp-area="" asp-controller="Cattle" asp-action="Index">@SharedLocalizer["Cattles"]</a>
-<a asp-area="" asp-controller="Horses" asp-action="Index">@SharedLocalizer["Horses"]</a>
-<a asp-area="" asp-controller="SmallCattles" asp-action="Index">@SharedLocalizer["SmallCattles"]</a>
-<a asp-area="" asp-controller="CATOSpecies" asp-action="Index">@SharedLocalizer["CATOSpecies"]</a>
-<br />
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <h>
-            Обводнение пастбищ Республики Казахстан
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <h>
-            Қазақстан Республикасының суармалы жайылымдары
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <h>
-            Watering pastures of the Republic of Kazakhstan
-        </h>
-    }
-}
-<br />
-<a asp-area="" asp-controller="WTypes" asp-action="Index">@SharedLocalizer["WTypes"]</a>
-<a asp-area="" asp-controller="WSubTypes" asp-action="Index">@SharedLocalizer["WSubTypes"]</a>
-<a asp-area="" asp-controller="ChemicalComps" asp-action="Index">@SharedLocalizer["ChemicalComps"]</a>
-<a asp-area="" asp-controller="WClasses" asp-action="Index">@SharedLocalizer["WClasses"]</a>
-<br />
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <h>
-            Нагрузка сельскохозяйственных животных на пастбища Республики Казахстан
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <h>
-            Қазақстан Республикасының жайылымдарына ауылшаруашылық жануарларының жүктемесі
-        </h>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <h>
-            The load of farm animals on the pastures of the Republic of Kazakhstan
-        </h>
-    }
-}
-<br />
-<a asp-area="" asp-controller="BurOtdels" asp-action="Index">@SharedLocalizer["BurOtdels"]</a>
-<a asp-area="" asp-controller="BTypes" asp-action="Index">@SharedLocalizer["BTypes"]</a>
-<a asp-area="" asp-controller="BurSubOtdels" asp-action="Index">@SharedLocalizer["BurSubOtdels"]</a>
-<a asp-area="" asp-controller="BClasses" asp-action="Index">@SharedLocalizer["BClasses"]</a>
-<a asp-area="" asp-controller="BGroups" asp-action="Index">@SharedLocalizer["BGroups"]</a>

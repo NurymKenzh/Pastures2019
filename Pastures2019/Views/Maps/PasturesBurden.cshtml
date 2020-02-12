@@ -441,20 +441,20 @@
     });
     Layer_burden_pasture.set('name', 'burden_pasture');
 
-    //var Source_select_burden_pasture = new ol.source.Vector({});
-    //var Layer_select_burden_pasture = new ol.layer.Vector({
-    //    source: Source_select_burden_pasture,
-    //    style: new ol.style.Style({
-    //        fill: new ol.style.Fill({
-    //            color: [0, 0, 255, 1]
-    //        }),
-    //        stroke: new ol.style.Stroke({
-    //            color: 'red',
-    //            width: 2
-    //        })
-    //    })
-    //});
-    //Layer_select_burden_pasture.set('name', 'burden_pasture');
+    var Source_select_burden_pasture = new ol.source.Vector({});
+    var Layer_select_burden_pasture = new ol.layer.Vector({
+        source: Source_select_burden_pasture,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 255, 1]
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })
+    });
+    Layer_select_burden_pasture.set('name', 'burden_pasture');
 
     var url_found_burden_pasture = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_found_burden_pasture = new ol.source.TileWMS({
@@ -661,6 +661,70 @@
     }
 </script>
 
+@* map.on('singleclick') *@
+<script>
+    map.on('singleclick', function (evt) {
+        Source_select_burden_pasture.clear();
+
+        var viewResolution = (map.getView().getResolution());
+        var url_burden_pasture = Source_burden_pasture.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {
+                'INFO_FORMAT': 'text/javascript'
+            });
+        if (url_burden_pasture) {
+            jQuery.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_burden_pasture + "&format_options=callback:getJson",
+                async: false,
+                dataType: 'jsonp',
+                error: function () {
+                }
+            }).then(function (data) {
+                if (Layer_burden_pasture.getVisible() && data.features.length > 0) {
+                    // select pasture
+                    var polyFeature = new ol.Feature({
+                        geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+                    });
+                    Source_select_burden_pasture.addFeature(polyFeature);
+                    // data from burden_pasture
+                    var parser = new ol.format.GeoJSON();
+                    var features = parser.readFeatures(data);
+
+                    //console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
+                    $.ajax({
+                        url: '@Url.Action("GetPastureBurdenInfo")',
+                        data: {
+                            objectid: features[0].get('objectid')
+                        },
+                        type: 'POST',
+                        success: function (dataDB) {
+                            @*console.log('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.burden_pasture.otdel);
+                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.burden_pasture.ptype);
+                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.burden_pasture.group);
+                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.burden_pasture.group_lat);
+                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
+                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
+                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
+                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
+                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
+                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
+                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
+                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.burden_pasture.recommend);
+                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.burden_pasture.recomcatt);
+                            console.log('----------------------------------------------');*@
+                        },
+                        error: function () {
+                        }
+                    })
+                }
+            });
+        }
+    })
+</script>
+
 @* CATO *@
 <script>
     var cato = new Array();
@@ -848,7 +912,7 @@
                 filter_found += " && burden_deg <= " + burden_deg_to + "";
             }
         }
-        
+
         if (filter_found.length == 0) {
             filter_found = "num_vydel = 'none'";
         }

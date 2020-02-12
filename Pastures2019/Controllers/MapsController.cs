@@ -422,5 +422,36 @@ namespace Pastures2019.Controllers
                 });
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetPastureBurdenInfo(
+            string objectid)
+        {
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            burden_pasture burden_pasture = new burden_pasture();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                var burden_pastures = connection.Query<burden_pasture>($"SELECT gid, objectid, num_vydel, rule_grazi, bur_otdel, " +
+                    $"bur_type_i, bur_subotd, bur_class_, bur_group_, average_yi, burden_gro, burden_deg, type_txt, shape_leng, shape_area " +
+                    $"FROM public.burden_pasture " +
+                    $"WHERE objectid = {objectid};");
+                burden_pasture = burden_pastures.FirstOrDefault();
+            }
+            //burden_pasture.otdel = _context.Otdel.FirstOrDefault(o => o.Code == pasturepol.otdely_id)?.Description;
+            //pasturepol.ptype = _context.PType.FirstOrDefault(p => p.Code == pasturepol.class_id)?.Description;
+            //pasturepol.group = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.Description;
+            //pasturepol.group_lat = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.DescriptionLat;
+            //pasturepol.recommend = _context.Recommend.FirstOrDefault(r => r.Code == pasturepol.recommend_)?.Description;
+            //pasturepol.recomcatt = _context.RecomCattle.FirstOrDefault(r => r.Code == pasturepol.recom_catt)?.Description;
+            return Json(new
+            {
+                burden_pasture
+            });
+        }
     }
 }

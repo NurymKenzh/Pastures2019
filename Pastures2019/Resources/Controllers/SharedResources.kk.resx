@@ -213,6 +213,9 @@
   <data name="BTypes" xml:space="preserve">
     <value>Жайылым түрлері (жүктеме)</value>
   </data>
+  <data name="burden_pastureLayer" xml:space="preserve">
+    <value>Жайылымдарға ауылшаруашылық жануарларының жүктемесі</value>
+  </data>
   <data name="BurOtdel" xml:space="preserve">
     <value>Жайылым бөлімі (жүктеме)</value>
   </data>
@@ -549,6 +552,12 @@
   <data name="NewPassword" xml:space="preserve">
     <value>Жаңа Құпия Сөз</value>
   </data>
+  <data name="NormOfPastureLoadOnBackgroundPasturesConvGoal100ha" xml:space="preserve">
+    <value>Алдыңғы жайылымдарға жайылымдық жүктеме нормасы, конв. мақсат / 100 га</value>
+  </data>
+  <data name="NormOfPastureLoadOnDegradedPasturesConvGoal100ha" xml:space="preserve">
+    <value>Тозған жайылымдарға жайылымдық жүктеме нормасы, конв. мақсат / 100 га</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Ескерту</value>
   </data>
@@ -572,6 +581,9 @@
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Азық-түлік ресурстары</value>
+  </data>
+  <data name="PasturesBurden" xml:space="preserve">
+    <value>Жайылымдарға ауылшаруашылық жануарларының жүктемесі</value>
   </data>
   <data name="PClass" xml:space="preserve">
     <value>Жайылым класы</value>

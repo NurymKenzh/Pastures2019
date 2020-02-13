@@ -213,6 +213,9 @@
   <data name="BTypes" xml:space="preserve">
     <value>Типы пастбищ (Нагрузка)</value>
   </data>
+  <data name="burden_pastureLayer" xml:space="preserve">
+    <value>Нагрузка сельскохозяйственных животных на пастбища</value>
+  </data>
   <data name="BurOtdel" xml:space="preserve">
     <value>Отдел пастбищ (Нагрузка)</value>
   </data>
@@ -549,6 +552,12 @@
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
   </data>
+  <data name="NormOfPastureLoadOnBackgroundPasturesConvGoal100ha" xml:space="preserve">
+    <value>Норма пастбищной нагрузки на фоновые пастбища, усл. гол. / 100 га</value>
+  </data>
+  <data name="NormOfPastureLoadOnDegradedPasturesConvGoal100ha" xml:space="preserve">
+    <value>Норма пастбищной нагрузки на деградированные пастбища, усл. гол. / 100 га</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Примечание</value>
   </data>
@@ -572,6 +581,9 @@
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Кормовые ресурсы</value>
+  </data>
+  <data name="PasturesBurden" xml:space="preserve">
+    <value>Нагрузка сельскохозяйственных животных на пастбища</value>
   </data>
   <data name="PClass" xml:space="preserve">
     <value>Класс пастбища</value>

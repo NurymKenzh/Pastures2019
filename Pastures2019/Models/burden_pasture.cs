@@ -21,5 +21,10 @@ namespace Pastures2019.Models
         public decimal burden_deg { get; set; }
         public decimal shape_leng { get; set; }
         public decimal shape_area { get; set; }
+        public string burotdel { get; set; }
+        public string btype { get; set; }
+        public string bursubotdel { get; set; }
+        public string bclass { get; set; }
+        public string bgroup { get; set; }
     }
 }

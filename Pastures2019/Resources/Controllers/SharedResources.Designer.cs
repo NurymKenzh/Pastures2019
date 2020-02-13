@@ -351,6 +351,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string burden_pastureLayer {
+            get {
+                return ResourceManager.GetString("burden_pastureLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string BurOtdel {
             get {
                 return ResourceManager.GetString("BurOtdel", resourceCulture);
@@ -1359,6 +1368,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string NormOfPastureLoadOnBackgroundPasturesConvGoal100ha {
+            get {
+                return ResourceManager.GetString("NormOfPastureLoadOnBackgroundPasturesConvGoal100ha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string NormOfPastureLoadOnDegradedPasturesConvGoal100ha {
+            get {
+                return ResourceManager.GetString("NormOfPastureLoadOnDegradedPasturesConvGoal100ha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Note {
             get {
                 return ResourceManager.GetString("Note", resourceCulture);
@@ -1425,6 +1452,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string pasturepolLayer {
             get {
                 return ResourceManager.GetString("pasturepolLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string PasturesBurden {
+            get {
+                return ResourceManager.GetString("PasturesBurden", resourceCulture);
             }
         }
         

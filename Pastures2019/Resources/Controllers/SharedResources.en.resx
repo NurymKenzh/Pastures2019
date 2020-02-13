@@ -213,6 +213,9 @@
   <data name="BTypes" xml:space="preserve">
     <value>Pasture Types (Load)</value>
   </data>
+  <data name="burden_pastureLayer" xml:space="preserve">
+    <value>The load of farm animals on pastures</value>
+  </data>
   <data name="BurOtdel" xml:space="preserve">
     <value>Pasture Department (Load)</value>
   </data>
@@ -549,6 +552,12 @@
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="NormOfPastureLoadOnBackgroundPasturesConvGoal100ha" xml:space="preserve">
+    <value>Norm of pasture load on background pastures, conv. Goal. / 100 ha</value>
+  </data>
+  <data name="NormOfPastureLoadOnDegradedPasturesConvGoal100ha" xml:space="preserve">
+    <value>Norm of pasture load on degraded pastures, conv. Goal. / 100 ha</value>
+  </data>
   <data name="Note" xml:space="preserve">
     <value>Note</value>
   </data>
@@ -572,6 +581,9 @@
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Feed resources</value>
+  </data>
+  <data name="PasturesBurden" xml:space="preserve">
+    <value>The load of farm animals on pastures</value>
   </data>
   <data name="PClass" xml:space="preserve">
     <value>Pasture class</value>

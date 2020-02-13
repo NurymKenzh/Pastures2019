@@ -213,6 +213,9 @@
   <data name="BTypes" xml:space="preserve">
     <value />
   </data>
+  <data name="burden_pastureLayer" xml:space="preserve">
+    <value />
+  </data>
   <data name="BurOtdel" xml:space="preserve">
     <value />
   </data>
@@ -549,6 +552,12 @@
   <data name="NewPassword" xml:space="preserve">
     <value />
   </data>
+  <data name="NormOfPastureLoadOnBackgroundPasturesConvGoal100ha" xml:space="preserve">
+    <value />
+  </data>
+  <data name="NormOfPastureLoadOnDegradedPasturesConvGoal100ha" xml:space="preserve">
+    <value />
+  </data>
   <data name="Note" xml:space="preserve">
     <value />
   </data>
@@ -571,6 +580,9 @@
     <value />
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PasturesBurden" xml:space="preserve">
     <value />
   </data>
   <data name="PClass" xml:space="preserve">

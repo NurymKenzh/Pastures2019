@@ -512,7 +512,7 @@
             Layer_Base,
             Layer_burden_pasture,
             Layer_found_burden_pasture,
-            //Layer_select_burden_pasture,
+            Layer_select_burden_pasture,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
@@ -692,8 +692,6 @@
                     // data from burden_pasture
                     var parser = new ol.format.GeoJSON();
                     var features = parser.readFeatures(data);
-
-                    //console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
                     $.ajax({
                         url: '@Url.Action("GetPastureBurdenInfo")',
                         data: {
@@ -701,20 +699,15 @@
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                            @*console.log('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.burden_pasture.otdel);
-                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.burden_pasture.ptype);
-                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.burden_pasture.group);
-                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.burden_pasture.group_lat);
-                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
-                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
-                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
-                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
-                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.burden_pasture.recommend);
-                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.burden_pasture.recomcatt);
-                            console.log('----------------------------------------------');*@
+                            console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + dataDB.burden_pasture.num_vydel);
+                            console.log('@Html.Raw(SharedLocalizer["BurOtdel"]): ' + dataDB.burden_pasture.burotdel);
+                            console.log('@Html.Raw(SharedLocalizer["BType"]): ' + dataDB.burden_pasture.btype);
+                            console.log('@Html.Raw(SharedLocalizer["BurSubOtdel"]): ' + dataDB.burden_pasture.bursubotdel);
+                            console.log('@Html.Raw(SharedLocalizer["BClass"]): ' + dataDB.burden_pasture.bclass);
+                            console.log('@Html.Raw(SharedLocalizer["BGroup"]): ' + dataDB.burden_pasture.bgroup);
+                            console.log('@Html.Raw(SharedLocalizer["NormOfPastureLoadOnBackgroundPasturesConvGoal100ha"]): ' + features[0].get('burden_gro'));
+                            console.log('@Html.Raw(SharedLocalizer["NormOfPastureLoadOnDegradedPasturesConvGoal100ha"]): ' + features[0].get('burden_deg'));
+                            console.log('----------------------------------------------');
                         },
                         error: function () {
                         }

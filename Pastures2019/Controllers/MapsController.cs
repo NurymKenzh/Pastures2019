@@ -442,12 +442,11 @@ namespace Pastures2019.Controllers
                     $"WHERE objectid = {objectid};");
                 burden_pasture = burden_pastures.FirstOrDefault();
             }
-            //burden_pasture.otdel = _context.Otdel.FirstOrDefault(o => o.Code == pasturepol.otdely_id)?.Description;
-            //pasturepol.ptype = _context.PType.FirstOrDefault(p => p.Code == pasturepol.class_id)?.Description;
-            //pasturepol.group = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.Description;
-            //pasturepol.group_lat = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.DescriptionLat;
-            //pasturepol.recommend = _context.Recommend.FirstOrDefault(r => r.Code == pasturepol.recommend_)?.Description;
-            //pasturepol.recomcatt = _context.RecomCattle.FirstOrDefault(r => r.Code == pasturepol.recom_catt)?.Description;
+            burden_pasture.burotdel = _context.BurOtdel.FirstOrDefault(b => b.Code == burden_pasture.bur_otdel)?.Description;
+            burden_pasture.btype = _context.BType.FirstOrDefault(b => b.Code == burden_pasture.bur_type_i)?.Description;
+            burden_pasture.bursubotdel = _context.BurSubOtdel.FirstOrDefault(b => b.Code == burden_pasture.bur_subotd)?.Description;
+            burden_pasture.bclass = _context.BClass.FirstOrDefault(b => b.Code == burden_pasture.bur_class_)?.Description;
+            burden_pasture.bgroup = _context.BGroup.FirstOrDefault(b => b.Code == burden_pasture.bur_group_)?.Description;
             return Json(new
             {
                 burden_pasture

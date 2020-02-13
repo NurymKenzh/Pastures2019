@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>О сайте</value>
   </data>
+  <data name="acting" xml:space="preserve">
+    <value>действующий</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
@@ -288,6 +291,9 @@
   <data name="Color" xml:space="preserve">
     <value>Цвет</value>
   </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Состояние</value>
+  </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Подтвердите новый пароль</value>
   </data>
@@ -315,8 +321,14 @@
   <data name="DateTimeStart" xml:space="preserve">
     <value>Начальная дата</value>
   </data>
+  <data name="Debitdms" xml:space="preserve">
+    <value>Дебит, дм³/с</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Удалить</value>
+  </data>
+  <data name="DepthToWaterm" xml:space="preserve">
+    <value>Глубина до воды, м</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Описание</value>
@@ -483,6 +495,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Выйти</value>
   </data>
+  <data name="Loweringm" xml:space="preserve">
+    <value>Понижение, м</value>
+  </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Управлять учетной записью</value>
   </data>
@@ -518,6 +533,9 @@
   </data>
   <data name="MilkYieldRU" xml:space="preserve">
     <value>Молочная продуктивность (русский)</value>
+  </data>
+  <data name="Mineralizationgdm" xml:space="preserve">
+    <value>Минерализация, г/дм³</value>
   </data>
   <data name="MODISDataSet" xml:space="preserve">
     <value>Набор данных MODIS</value>
@@ -569,6 +587,12 @@
   </data>
   <data name="NoteRU" xml:space="preserve">
     <value>Примечание (русский)</value>
+  </data>
+  <data name="notUsed" xml:space="preserve">
+    <value>не используется</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Номер</value>
   </data>
   <data name="Otdel" xml:space="preserve">
     <value>Отдел</value>
@@ -756,6 +780,9 @@
   <data name="TotalGoals" xml:space="preserve">
     <value>Всего голов</value>
   </data>
+  <data name="UnwateredTerritory" xml:space="preserve">
+    <value>Не обводненная территория</value>
+  </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value>Обновить пароль</value>
   </data>
@@ -800,6 +827,12 @@
   </data>
   <data name="WeightRU" xml:space="preserve">
     <value>Живая масса (русский)</value>
+  </data>
+  <data name="Wells" xml:space="preserve">
+    <value>Обводнение пастбищ</value>
+  </data>
+  <data name="wellsLayer" xml:space="preserve">
+    <value>Обводнение пастбищ</value>
   </data>
   <data name="Winter" xml:space="preserve">
     <value>Зима</value>

@@ -120,6 +120,9 @@
   <data name="About" xml:space="preserve">
     <value>Туралы</value>
   </data>
+  <data name="acting" xml:space="preserve">
+    <value>актерлік</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Әкімшілік</value>
   </data>
@@ -288,6 +291,9 @@
   <data name="Color" xml:space="preserve">
     <value>Түсі</value>
   </data>
+  <data name="Condition" xml:space="preserve">
+    <value>Шарты</value>
+  </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value>Жаңа құпиясөзді растаңыз</value>
   </data>
@@ -315,8 +321,14 @@
   <data name="DateTimeStart" xml:space="preserve">
     <value>Басталу күні</value>
   </data>
+  <data name="Debitdms" xml:space="preserve">
+    <value>Дебет, дм³ / с</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Жою</value>
+  </data>
+  <data name="DepthToWaterm" xml:space="preserve">
+    <value>Судың тереңдігі, м</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Сипаттамасы</value>
@@ -483,6 +495,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Шығу</value>
   </data>
+  <data name="Loweringm" xml:space="preserve">
+    <value>Төмен түсіру, м</value>
+  </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value>Есептік жазбаңызды басқарыңыз</value>
   </data>
@@ -518,6 +533,9 @@
   </data>
   <data name="MilkYieldRU" xml:space="preserve">
     <value>Сүт өндірісі (орыс)</value>
+  </data>
+  <data name="Mineralizationgdm" xml:space="preserve">
+    <value>Минералдану, г / дм³</value>
   </data>
   <data name="MODISDataSet" xml:space="preserve">
     <value>MODIS мәліметтер базасы</value>
@@ -569,6 +587,12 @@
   </data>
   <data name="NoteRU" xml:space="preserve">
     <value>Ескерту (орыс)</value>
+  </data>
+  <data name="notUsed" xml:space="preserve">
+    <value>қолданылмайды</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Сан</value>
   </data>
   <data name="Otdel" xml:space="preserve">
     <value>Бөлім</value>
@@ -756,6 +780,9 @@
   <data name="TotalGoals" xml:space="preserve">
     <value>Жалпы мақсаттар</value>
   </data>
+  <data name="UnwateredTerritory" xml:space="preserve">
+    <value>Суарылмайтын аумақ</value>
+  </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value>Парольді жаңартыңыз</value>
   </data>
@@ -800,6 +827,12 @@
   </data>
   <data name="WeightRU" xml:space="preserve">
     <value>Тірі салмақ (орыс)</value>
+  </data>
+  <data name="Wells" xml:space="preserve">
+    <value>Жайылымдарды суару</value>
+  </data>
+  <data name="wellsLayer" xml:space="preserve">
+    <value>Жайылымдарды суару</value>
   </data>
   <data name="Winter" xml:space="preserve">
     <value>Қыс</value>

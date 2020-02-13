@@ -34,12 +34,12 @@ namespace Pastures2019
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(
@@ -91,7 +91,11 @@ namespace Pastures2019
                     options => { options.ResourcesPath = "Resources"; });
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                var supportedCultures = new[] { new CultureInfo("ru"), new CultureInfo("kk"), new CultureInfo("en") };
+                var supportedCultures = new[] {
+                    new CultureInfo("ru"),
+                    new CultureInfo("kk"),
+                    new CultureInfo("en") 
+                };
                 options.DefaultRequestCulture = new RequestCulture("ru", "ru");
                 options.SupportedCultures = supportedCultures;
                 options.SupportedUICultures = supportedCultures;

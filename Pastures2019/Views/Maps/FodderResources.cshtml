@@ -48,12 +48,24 @@
                     @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
                     @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
                     <input type="button" value="Find" onclick="FindPastures()" />
-
-                    <select id="cato1" onchange="ChangeCATO1()"></select>
-                    <select id="cato2" onchange="ChangeCATO2()"></select>
-                    <select id="cato3" onchange="ChangeCATO3()"></select>
-                    <input type="button" value="CATO Info" onclick="InfoCATO()" />
-
+                    <a id="FindByKato" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Find by Adm link</a>
+                    <div  class="col-md-12" style="display: none" id="FilterKato">
+                        <form>
+                            <div class="form-group m-0">
+                                <label for="cato1" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
+                                <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                            </div>
+                            <div class="form-group m-0">
+                                <label for="cato2" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
+                                <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>                                
+                            </div>
+                            <div class="form-group m-0">
+                                <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
+                                <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                            </div>
+                            <input class="btn btn-primary btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()" />
+                        </form>                            
+                    </div> 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
                         <option value="OSM">OpenStreetMap</option>
                         <option value="BingAerialWithLabels">Bing Aerial</option>
@@ -1075,7 +1087,22 @@
 @*tooltips, modal windows*@
 <script>
     $(document).ready(function () {
-
+        // Find by Adm
+        new jBox('Modal', {
+            attach: '#FindByKato',
+            theme: 'TooltipBorderThick',
+            width: 300,
+            height: 280,
+            blockScroll: false,
+            animation: 'zoomIn',
+            draggable: 'title',
+            closeButton: true,
+            content: $('#FilterKato'),
+            title: 'Поиск по КАТО',
+            overlay: false,
+            reposition: false,
+            repositionOnOpen: false
+        });
         // Map Title
         new jBox('Modal', {
             attach: '#MapTitleBtn',

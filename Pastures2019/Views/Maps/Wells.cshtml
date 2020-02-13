@@ -1,0 +1,1117 @@
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Wells"];
+    Layout = "~/Views/Shared/_LayoutMap.cshtml";
+}
+<link href="~/lib/ol/ol.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
+<script src="~/lib/ol/ol.js"></script>
+<link href="~/lib/vendor/jBox/dist/jBox.all.css" rel="stylesheet" />
+<script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
+<link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
+<script src="~/lib/сhart.js/dist/Chart.js"></script>
+
+<div class="container-fluid sticky-top p-0">
+    @*<div style="width: 1000px; height: 400px;">
+            <canvas id="chart" width="900" height="380"></canvas>
+        </div>*@
+    <!-- Sidebar -->
+    <nav class="sidebar border border-light">
+        <div class="page-wrapper chiller-theme">
+            <!-- close sidebar menu -->
+            <div class="dismiss">
+                <i class="fa fa-arrow-left"></i>
+            </div>
+            <div class="logo">
+                <h3>Pasture</h3>
+            </div>
+            <div class="col">
+                <form>
+                </form>
+            </div>
+            <!-- Exaple 1 -->
+            <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
+                <div class="card-body">
+                    <input id="find_num" type="text" />
+                    @Html.DropDownList("WClass", (IEnumerable<SelectListItem>)ViewBag.WClass, "", htmlAttributes: new { @id = "find_WClass", @hidden = "hidden" })
+                    @Html.DropDownList("WType", (IEnumerable<SelectListItem>)ViewBag.WType, "", htmlAttributes: new { @id = "find_WType" })
+                    @Html.DropDownList("WSubType", (IEnumerable<SelectListItem>)ViewBag.WSubType, "", htmlAttributes: new { @id = "find_WSubType" })
+                    <input id="find_debit_from" type="text" />
+                    <input id="find_debit_to" type="text" />
+                    <input id="find_decrease_from" type="text" />
+                    <input id="find_decrease_to" type="text" />
+                    <input id="find_depth_from" type="text" />
+                    <input id="find_depth_to" type="text" />
+                    <input id="find_minerali_from" type="text" />
+                    <input id="find_minerali_to" type="text" />
+                    @Html.DropDownList("ChemicalComp", (IEnumerable<SelectListItem>)ViewBag.ChemicalComp, "", htmlAttributes: new { @id = "find_ChemicalComp" })
+                    <input type="button" value="Find" onclick="FindPastures()" />
+
+                    <select id="cato1" onchange="ChangeCATO1()"></select>
+                    <select id="cato2" onchange="ChangeCATO2()"></select>
+                    <select id="cato3" onchange="ChangeCATO3()"></select>
+
+                    <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
+                        <option value="OSM">OpenStreetMap</option>
+                        <option value="BingAerialWithLabels">Bing Aerial</option>
+                        <option value="BingRoadStatic">Bing Road (static)</option>
+                        <option value="BingRoadDynamic">Bing Road (dynamic)</option>
+                        <option value="HERENormalDay">HERE Normal Day</option>
+                        <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
+                        <option value="HERETerrainDay">HERE Terrain Day</option>
+                        <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
+                        <option value="StamenWatercolor">Stamen Watercolor</option>
+                        <option value="StamenTerrain">Stamen Terrain</option>
+                        <option value="StamenToner">Stamen Toner</option>
+                        <option value="ArcGIS">ArcGIS</option>
+                        <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
+                        <option value="ThunderforestTransport">Thunderforest Transport</option>
+                        <option value="ThunderforestLandscape">Thunderforest Landscape</option>
+                        <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
+                        <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
+                        <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
+                        <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
+                        <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
+                    </select>
+                    <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerBaseShow">
+                        @SharedLocalizer["BaseLayer"]
+                    </label>
+                    <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layeradmxpolShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layeradmxpolShow">
+                        @SharedLocalizer["admxpolLayer"]
+                    </label>
+                    <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerhdrShow">
+                        @SharedLocalizer["hdrLayer"]
+                    </label>
+                    <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerpopShow">
+                        @SharedLocalizer["popLayer"]
+                    </label>
+                    <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerrdslinShow">
+                        @SharedLocalizer["rdslinLayer"]
+                    </label>
+                    <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+
+                    <input type="checkbox" id="layerwellsShow" checked="checked" onchange="ChangeLayers()">
+                    <label class="form-check-label text-white" for="layerwellsShow">
+                        @SharedLocalizer["wellsLayer"]
+                    </label>
+                    <input id="layerwellsOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                </div>
+            </div>
+            <!-- Exaple 1 -->
+            <div class="dark-light-buttons">
+                <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
+                <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
+            </div>
+            <div class="sidebar-footer">
+                <a href="#">
+                    <i class="SomeInfo fa fa-file" InfoTitle="Tooltip on top"></i>
+                </a>
+                <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
+                    <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
+                    <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
+                </a>
+                <a href="#" id="LegendBtn" class="target-click">
+                    <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
+                </a>
+                <a href="#" id="MapTitleBtn" class="target-click">
+                    <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- End sidebar -->
+    <!-- Content -->
+    <div class="content">
+        <!-- open sidebar menu -->
+        <a class="btn btn-light btn-customized open-menu" href="#" role="button">
+            <i class="fa fa-align-left"></i> <span>@SharedLocalizer["Menu"]</span>
+        </a>
+        <!-- Map content -->
+        <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
+    </div>
+    <!-- End content -->
+</div>
+
+@* layers *@
+<script>
+    var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
+        geoserver_workspace_name = 'Pastures2019';
+    var HEREappId = 'SLdBasp4s1oq2oUbVGxy';
+    var HEREappCode = 'D9-h9iVhjgUB_9eUlFETXA';
+
+    var Source_OSM = new ol.source.OSM();
+    Source_BingAerialWithLabels = new ol.source.BingMaps({
+        key: 'AmYNYRGlIrw_kppWvrIhfzY1v046b4Ft5nopz6Av94XDvTTo8xTkHCEaZ_zMwCOJ',
+        imagerySet: 'AerialWithLabels',
+    });
+    Source_BingRoadStatic = new ol.source.BingMaps({
+        key: 'AmYNYRGlIrw_kppWvrIhfzY1v046b4Ft5nopz6Av94XDvTTo8xTkHCEaZ_zMwCOJ',
+        imagerySet: 'Road',
+    });
+    Source_BingRoadDynamic = new ol.source.BingMaps({
+        key: 'AmYNYRGlIrw_kppWvrIhfzY1v046b4Ft5nopz6Av94XDvTTo8xTkHCEaZ_zMwCOJ',
+        imagerySet: 'RoadOnDemand',
+    });
+    var urlTpl = 'https://{1-4}.{base}.maps.cit.api.here.com' +
+        '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
+        '?app_id={app_id}&app_code={app_code}';
+    function HEREcreateUrl(tpl, HERElayerDesc) {
+        return tpl
+            .replace('{base}', HERElayerDesc.base)
+            .replace('{type}', HERElayerDesc.type)
+            .replace('{scheme}', HERElayerDesc.scheme)
+            .replace('{app_id}', HERElayerDesc.app_id)
+            .replace('{app_code}', HERElayerDesc.app_code);
+    };
+    var HERElayerDescNormalDay = {
+        base: 'base',
+        type: 'maptile',
+        scheme: 'normal.day',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HERENormalDay = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescNormalDay),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+            '<a href="http://developer.here.com">HERE</a>'
+    });
+    var HERElayerDescNormalDayTransit = {
+        base: 'base',
+        type: 'maptile',
+        scheme: 'normal.day.transit',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HERENormalDayTransit = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescNormalDayTransit),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+            '<a href="http://developer.here.com">HERE</a>'
+    });
+    var HERElayerDescTerrainDay = {
+        base: 'aerial',
+        type: 'maptile',
+        scheme: 'terrain.day',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HERETerrainDay = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescTerrainDay),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
+            '<a href="http://developer.here.com">HERE</a>'
+    });
+    var HERElayerDescHybridDay = {
+        base: 'aerial',
+        type: 'maptile',
+        scheme: 'hybrid.day',
+        app_id: HEREappId,
+        app_code: HEREappCode
+    };
+    var Source_HEREHybridDay = new ol.source.XYZ({
+        url: HEREcreateUrl(urlTpl, HERElayerDescHybridDay),
+        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' + '<a href="http://developer.here.com">HERE</a>'
+    });
+    var Source_StamenWatercolor = new ol.source.Stamen({
+        layer: 'watercolor'
+    });
+    var Source_StamenTerrain = new ol.source.Stamen({
+        layer: 'terrain'
+    });
+    var Source_StamenToner = new ol.source.Stamen({
+        layer: 'toner'
+    });
+    var Source_ArcGIS = new ol.source.XYZ({
+        attributions: 'Tiles © <a href="https://services.arcgisonline.com/ArcGIS/' +
+            'rest/services/World_Topo_Map/MapServer">ArcGIS</a>',
+        url: 'https://server.arcgisonline.com/ArcGIS/rest/services/' +
+            'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+    });
+    var Source_ThunderforestOpenCycleMap = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestTransport = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/transport/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestLandscape = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/landscape/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestOutdoors = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestTransportDark = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestSpinalMap = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/spinal-map/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestPioneer = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/pioneer/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestMobileAtlas = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/mobile-atlas/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Source_ThunderforestNeighbourhood = new ol.source.XYZ({
+        url: 'https://{a-c}.tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png' +
+            '?apikey=6746f4299ea3479aba8726b09f049c1b'
+    });
+    var Layer_Base = new ol.layer.Tile({
+        source: Source_HEREHybridDay
+    });
+    Layer_Base.set('name', 'Base');
+    Layer_Base.setOpacity(1);
+
+    var url_adm1pol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm1pol = new ol.source.TileWMS({
+        url: url_adm1pol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm1pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm1pol = new ol.layer.Tile({
+        source: Source_adm1pol
+    });
+    Layer_adm1pol.set('name', 'admxpol');
+
+    var url_adm2pol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm2pol = new ol.source.TileWMS({
+        url: url_adm2pol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm2pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm2pol = new ol.layer.Tile({
+        source: Source_adm2pol
+    });
+    Layer_adm2pol.set('name', 'admxpol');
+
+    var url_adm3pol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm3pol = new ol.source.TileWMS({
+        url: url_adm3pol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm3pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm3pol = new ol.layer.Tile({
+        source: Source_adm3pol
+    });
+    Layer_adm3pol.set('name', 'admxpol');
+
+    var Layer_admXpol_Navigate = new ol.layer.Vector({
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'transparent'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 4
+            })
+        })
+    });
+    Layer_admXpol_Navigate.set('name', 'admxpolnavigate');
+
+    var url_hdrlin = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_hdrlin = new ol.source.TileWMS({
+        url: url_hdrlin,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':hdrlin'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrlin = new ol.layer.Tile({
+        source: Source_hdrlin,
+        maxResolution: ol.tilegrid.createXYZ().getResolution(7)
+    });
+    Layer_hdrlin.set('name', 'hdr');
+
+    var url_hdrpol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_hdrpol = new ol.source.TileWMS({
+        url: url_hdrpol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':hdrpol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrpol = new ol.layer.Tile({
+        source: Source_hdrpol
+    });
+    Layer_hdrpol.set('name', 'hdr');
+
+    var url_poppnt = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_poppnt = new ol.source.TileWMS({
+        url: url_poppnt,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':poppnt'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppnt = new ol.layer.Tile({
+        source: Source_poppnt,
+        maxResolution: ol.tilegrid.createXYZ().getResolution(9)
+    });
+    Layer_poppnt.set('name', 'pop');
+
+    var url_poppol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_poppol = new ol.source.TileWMS({
+        url: url_poppol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':poppol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppol = new ol.layer.Tile({
+        source: Source_poppol
+    });
+    Layer_poppol.set('name', 'pop');
+
+    var url_rdslin = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_rdslin = new ol.source.TileWMS({
+        url: url_rdslin,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':rdslin'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_rdslin = new ol.layer.Tile({
+        source: Source_rdslin
+    });
+    Layer_rdslin.set('name', 'rdslin');
+
+    var url_wellspol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_wellspol = new ol.source.TileWMS({
+        url: url_wellspol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':wellspol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_wellspol = new ol.layer.Tile({
+        source: Source_wellspol
+    });
+    Layer_wellspol.set('name', 'wells');
+
+    var url_wellspnt = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_wellspnt = new ol.source.TileWMS({
+        url: url_wellspnt,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':wellspnt'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_wellspnt = new ol.layer.Tile({
+        source: Source_wellspnt
+    });
+    Layer_wellspnt.set('name', 'wells');
+
+    var Source_select_wellspnt = new ol.source.Vector({});
+    var Layer_select_wellspnt = new ol.layer.Vector({
+        source: Source_select_wellspnt,
+        style: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                stroke: new ol.style.Stroke({
+                    color: 'red',
+                    width: 2
+                }),
+                fill: new ol.style.Fill({
+                    color: 'yellow'
+                })
+            })
+        })
+    });
+    Layer_select_wellspnt.set('name', 'wells');
+
+    var Source_select_wellspol = new ol.source.Vector({});
+    var Layer_select_wellspol = new ol.layer.Vector({
+        source: Source_select_wellspol,
+        style: new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 6,
+                stroke: new ol.style.Stroke({
+                    color: 'red',
+                    width: 2
+                }),
+                fill: new ol.style.Fill({
+                    color: 'yellow'
+                })
+            })
+        })
+    });
+    Layer_select_wellspol.set('name', 'wells');
+
+    var url_found_wellspnt = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_found_wellspnt = new ol.source.TileWMS({
+        url: url_found_wellspnt,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':wellspnt',
+            'STYLES': 'wellspntfind',
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_found_wellspnt = new ol.layer.Tile({
+        source: Source_found_wellspnt
+    });
+    var filter_found = "num = 'none'";
+    var filterParams_found = {
+        'FILTER': null,
+        'CQL_FILTER': null,
+        'FEATUREID': null
+    };
+    if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+          filterParams_found["CQL_FILTER"] = filter_found;
+        }
+    Layer_found_wellspnt.getSource().updateParams(filterParams_found);
+</script>
+
+@* map *@
+<script>
+    // permalink
+    var zoom = 5;
+    var center = ol.proj.fromLonLat([66.902, 48.714]);
+    var rotation = 0;
+    if (window.location.hash !== '') {
+        // try to restore center, zoom-level and rotation from the URL
+        var hash = window.location.hash.replace('#map=', '');
+        var parts = hash.split('/');
+        if (parts.length === 4) {
+            zoom = parseInt(parts[0], 10);
+            center = [
+                parseFloat(parts[1]),
+                parseFloat(parts[2])
+            ];
+            rotation = parseFloat(parts[3]);
+        }
+    }
+
+    var map = new ol.Map({
+        target: 'map',
+        controls: new ol.control.defaults({ attributionOptions: { collapsible: true } }).extend([
+            new ol.control.ScaleLine()
+        ]),
+        layers: [
+            Layer_Base,
+            Layer_wellspol,
+            Layer_select_wellspol,
+            Layer_wellspnt,
+            Layer_found_wellspnt,
+            Layer_select_wellspnt,
+            Layer_hdrlin,
+            Layer_rdslin,
+            Layer_adm1pol,
+            Layer_adm2pol,
+            Layer_adm3pol,
+            Layer_poppol,
+            Layer_poppnt,
+            Layer_hdrpol
+        ],
+        view: new ol.View({
+            center: center,
+            zoom: 5,
+            minZoom: 5,
+            extent: [5028944.964937042, 4754994.655562972, 10214432.963802021, 7494497.74930296]
+        })
+    });
+
+    // permalink
+    var shouldUpdate = true;
+    var view = map.getView();
+    var updatePermalink = function () {
+        if (!shouldUpdate) {
+            // do not update the URL when the view was changed in the 'popstate' handler
+            shouldUpdate = true;
+            return;
+        }
+        var center = view.getCenter();
+        var hash = '#map=' +
+            view.getZoom() + '/' +
+            Math.round(center[0] * 100) / 100 + '/' +
+            Math.round(center[1] * 100) / 100 + '/' +
+            view.getRotation();
+        var state = {
+            zoom: view.getZoom(),
+            center: view.getCenter(),
+            rotation: view.getRotation()
+        };
+        window.history.pushState(state, 'map', hash);
+    };
+
+    map.on('moveend', updatePermalink);
+
+    window.addEventListener('popstate', function (event) {
+        if (event.state === null) {
+            return;
+        }
+        map.getView().setCenter(event.state.center);
+        map.getView().setZoom(event.state.zoom);
+        map.getView().setRotation(event.state.rotation);
+        shouldUpdate = false;
+    });
+</script>
+
+@* ChangeLayers *@
+<script>
+    function ChangeLayers() {
+        map.getLayers().forEach(function (layer) {
+            if (layer.get('name') == 'Base') {
+                layer.setVisible(document.getElementById("layerBaseShow").checked);
+                layer.setOpacity($('#layerBaseOpacity').val() / 100)
+                if ($('#layerBaseType').val() == 'OSM') {
+                    layer.setSource(Source_OSM);
+                }
+                else if ($('#layerBaseType').val() == 'BingAerialWithLabels') {
+                    layer.setSource(Source_BingAerialWithLabels);
+                }
+                else if ($('#layerBaseType').val() == 'BingRoadStatic') {
+                    layer.setSource(Source_BingRoadStatic);
+                }
+                else if ($('#layerBaseType').val() == 'BingRoadDynamic') {
+                    layer.setSource(Source_BingRoadDynamic);
+                }
+                else if ($('#layerBaseType').val() == 'HERENormalDay') {
+                    layer.setSource(Source_HERENormalDay);
+                }
+                else if ($('#layerBaseType').val() == 'HERENormalDayTransit') {
+                    layer.setSource(Source_HERENormalDayTransit);
+                }
+                else if ($('#layerBaseType').val() == 'HERETerrainDay') {
+                    layer.setSource(Source_HERETerrainDay);
+                }
+                else if ($('#layerBaseType').val() == 'HEREHybridDay') {
+                    layer.setSource(Source_HEREHybridDay);
+                }
+                else if ($('#layerBaseType').val() == 'StamenWatercolor') {
+                    layer.setSource(Source_StamenWatercolor);
+                }
+                else if ($('#layerBaseType').val() == 'StamenTerrain') {
+                    layer.setSource(Source_StamenTerrain);
+                }
+                else if ($('#layerBaseType').val() == 'StamenToner') {
+                    layer.setSource(Source_StamenToner);
+                }
+                else if ($('#layerBaseType').val() == 'ArcGIS') {
+                    layer.setSource(Source_ArcGIS);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestOpenCycleMap') {
+                    layer.setSource(Source_ThunderforestOpenCycleMap);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestTransport') {
+                    layer.setSource(Source_ThunderforestTransport);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestLandscape') {
+                    layer.setSource(Source_ThunderforestLandscape);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestOutdoors') {
+                    layer.setSource(Source_ThunderforestOutdoors);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestTransportDark') {
+                    layer.setSource(Source_ThunderforestTransportDark);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestSpinalMap') {
+                    layer.setSource(Source_ThunderforestSpinalMap);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestPioneer') {
+                    layer.setSource(Source_ThunderforestPioneer);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestMobileAtlas') {
+                    layer.setSource(Source_ThunderforestMobileAtlas);
+                }
+                else if ($('#layerBaseType').val() == 'ThunderforestNeighbourhood') {
+                    layer.setSource(Source_ThunderforestNeighbourhood);
+                }
+            }
+            if (layer.get('name') == 'admxpol') {
+                layer.setVisible(document.getElementById("layeradmxpolShow").checked);
+                layer.setOpacity($('#layeradmxpolOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'hdr') {
+                layer.setVisible(document.getElementById("layerhdrShow").checked);
+                layer.setOpacity($('#layerhdrOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'pop') {
+                layer.setVisible(document.getElementById("layerpopShow").checked);
+                layer.setOpacity($('#layerpopOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'rdslin') {
+                layer.setVisible(document.getElementById("layerrdslinShow").checked);
+                layer.setOpacity($('#layerrdslinOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'wells') {
+                layer.setVisible(document.getElementById("layerwellsShow").checked);
+                layer.setOpacity($('#layerwellsOpacity').val() / 100);
+            }
+        })
+    }
+</script>
+
+@* map.on('singleclick') *@
+<script>
+    map.on('singleclick', function (evt) {
+        Source_select_wellspnt.clear();
+        Source_select_wellspol.clear();
+
+        var viewResolution = (map.getView().getResolution());
+        var url_wellspnt = Source_wellspnt.getGetFeatureInfoUrl(
+            evt.coordinate, viewResolution, 'EPSG:3857',
+            {
+                'INFO_FORMAT': 'text/javascript'
+            });
+        if (url_wellspnt && Layer_wellspnt.getVisible()) {
+            jQuery.ajax({
+                jsonp: false,
+                jsonpCallback: 'getJson',
+                type: 'GET',
+                url: url_wellspnt + "&format_options=callback:getJson",
+                async: false,
+                dataType: 'jsonp',
+                error: function () {
+                }
+            }).then(function (data) {
+                if (data.features.length > 0) {
+                    // select pasture
+                    var polyFeature = new ol.Feature({
+                        geometry: new ol.geom.Point(data.features[0].geometry.coordinates)
+                    });
+                    Source_select_wellspnt.addFeature(polyFeature);
+                    // data from wellspnt
+                    var parser = new ol.format.GeoJSON();
+                    var features = parser.readFeatures(data);
+                    $.ajax({
+                        url: '@Url.Action("GetWellPntInfo")',
+                        data: {
+                            objectid: features[0].get('objectid')
+                        },
+                        type: 'POST',
+                        success: function (dataDB) {
+                            console.log('@Html.Raw(SharedLocalizer["Number"]): ' + features[0].get('num'));
+                            console.log('@Html.Raw(SharedLocalizer["WType"]).: ' + dataDB.wellspnt.wtype);
+                            console.log('@Html.Raw(SharedLocalizer["WSubType"]): ' + dataDB.wellspnt.wsubtype);
+                            console.log('@Html.Raw(SharedLocalizer["Debitdms"]): ' + features[0].get('debit'));
+                            console.log('@Html.Raw(SharedLocalizer["Loweringm"]): ' + features[0].get('decrease'));
+                            console.log('@Html.Raw(SharedLocalizer["DepthToWaterm"]): ' + features[0].get('depth'));
+                            console.log('@Html.Raw(SharedLocalizer["Mineralizationgdm"]): ' + features[0].get('minerali'));
+                            if (features[0].get('sost') == 1) {
+                                console.log('@Html.Raw(SharedLocalizer["Condition"]): ' + '@SharedLocalizer["acting"]');
+                            }
+                            else if (features[0].get('sost') == 2) {
+                                console.log('@Html.Raw(SharedLocalizer["Condition"]): ' + '@SharedLocalizer["notUsed"]');
+                            }
+                            console.log('@Html.Raw(SharedLocalizer["ChemicalComp"]): ' + dataDB.wellspnt.chemicalcomp);
+                            console.log('----------------------------------------------');
+                        },
+                        error: function () {
+                        }
+                    })
+                }
+                else {
+                    var url_wellspol = Source_wellspol.getGetFeatureInfoUrl(
+                        evt.coordinate, viewResolution, 'EPSG:3857',
+                        {
+                            'INFO_FORMAT': 'text/javascript'
+                        });
+                    if (url_wellspol && Layer_wellspol.getVisible()) {
+                        jQuery.ajax({
+                            jsonp: false,
+                            jsonpCallback: 'getJson',
+                            type: 'GET',
+                            url: url_wellspol + "&format_options=callback:getJson",
+                            async: false,
+                            dataType: 'jsonp',
+                            error: function () {
+                            }
+                        }).then(function (datapol) {
+                            if (datapol.features.length > 0) {
+                                // select pasture
+                                var polyFeaturePol = new ol.Feature({
+                                    geometry: new ol.geom.MultiPolygon(datapol.features[0].geometry.coordinates)
+                                });
+                                Source_select_wellspol.addFeature(polyFeaturePol);
+
+                                // data from wellspol
+                                var parserpol = new ol.format.GeoJSON();
+                                var featurespol = parserpol.readFeatures(datapol);
+                                console.log('@Html.Raw(SharedLocalizer["WClass"]): ' + $("#find_WClass option[value='" + featurespol[0].get('class_id') + "']").text());
+                            }
+                            else {
+                                console.log('@Html.Raw(SharedLocalizer["WClass"]): ' + '@Html.Raw(SharedLocalizer["UnwateredTerritory"])');
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    })
+</script>
+
+@* CATO *@
+<script>
+    var cato = new Array();
+    @foreach (CATO cATO in ViewBag.CATO)
+    {
+        @:var cato_new = {};
+        @:cato_new["te"] = '@cATO.TE';
+        @:cato_new["ab"] = '@cATO.AB';
+        @:cato_new["cd"] = '@cATO.CD';
+        @:cato_new["ef"] = '@cATO.EF';
+        @:cato_new["hij"] = '@cATO.HIJ';
+        @:cato_new["name"] = '@Html.Raw(cATO.Name)';
+        @:cato.push(cato_new);
+    }
+    $('#cato1').append($("<option />"));
+    $.each(cato, function () {
+        if (this.cd == '00') {
+            $('#cato1').append($("<option />").val(this.te).text(this.name));
+        }
+    });
+
+    function ChangeCATO1() {
+        NavigateToCATO($('#cato1').val(), 1);
+        var ab = $('#cato1').val().substr(0, 2);
+        $('#cato2').empty();
+        $('#cato3').empty();
+        $('#cato2').append($("<option />"));
+        $.each(cato, function () {
+            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
+                $('#cato2').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO2() {
+        NavigateToCATO($('#cato2').val(), 2);
+        var ab = $('#cato2').val().substr(0, 2),
+            cd = $('#cato2').val().substr(2, 2);
+        $('#cato3').empty();
+        $('#cato3').append($("<option />"));
+        $.each(cato, function () {
+            if (this.hij == '000' && this.ab == ab && this.cd == cd && this.ef != '00') {
+                $('#cato3').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO3() {
+        NavigateToCATO($('#cato3').val(), 3);
+    }
+
+    var first_admXpol_Navigate = true;
+    function NavigateToCATO(te, layer) {
+        if (Layer_admXpol_Navigate.getSource() != null) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+        if (te == '') {
+            return;
+        }
+        var filter = "kato_te = '" + te + "'";
+        var filterParams = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams["CQL_FILTER"] = filter;
+        }
+        url_admXpol_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm" + layer.toString() + "pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_admXpol_Navigate,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data_admXpol_Navigate) {
+                var new_source = new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                });
+                Layer_admXpol_Navigate.setSource(new_source);
+                map.getView().fit(Layer_admXpol_Navigate.getSource().getExtent());
+                if (first_admXpol_Navigate) {
+                    map.addLayer(Layer_admXpol_Navigate);
+                    first_admXpol_Navigate = false;
+                }
+            }
+        });
+    }
+</script>
+
+@* FindPastures *@
+<script>
+    function FindPastures() {
+        var num = $('#find_num').val(),
+            usl = $('#find_WType').val(),
+            wat_seepag = $('#find_WSubType').val(),
+            chemical_c = $('#find_ChemicalComp').val(),
+            debit_from = $('#find_debit_from').val().replace(',', '.'),
+            debit_to = $('#find_debit_to').val().replace(',', '.'),
+            decrease_from = $('#find_decrease_from').val().replace(',', '.'),
+            decrease_to = $('#find_decrease_to').val().replace(',', '.'),
+            depth_from = $('#find_depth_from').val().replace(',', '.'),
+            depth_to = $('#find_depth_to').val().replace(',', '.'),
+            minerali_from = $('#find_minerali_from').val().replace(',', '.'),
+            minerali_to = $('#find_minerali_to').val().replace(',', '.');
+        filter_found = '';
+        if (num != '') {
+            if (filter_found.length == 0) {
+                filter_found = "num = '" + num + "'";
+            }
+            else {
+                filter_found += " && num = '" + num + "'";
+            }
+        }
+        if (usl != '') {
+            if (filter_found.length == 0) {
+                filter_found = "usl = '" + usl + "'";
+            }
+            else {
+                filter_found += " && usl = '" + usl + "'";
+            }
+        }
+        if (wat_seepag != '') {
+            if (filter_found.length == 0) {
+                filter_found = "wat_seepag = '" + wat_seepag + "'";
+            }
+            else {
+                filter_found += " && wat_seepag = '" + wat_seepag + "'";
+            }
+        }
+        if (chemical_c != '') {
+            if (filter_found.length == 0) {
+                filter_found = "chemical_c = '" + chemical_c + "'";
+            }
+            else {
+                filter_found += " && chemical_c = '" + chemical_c + "'";
+            }
+        }
+        if (debit_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "debit >= " + debit_from + "";
+            }
+            else {
+                filter_found += " && debit >= " + debit_from + "";
+            }
+        }
+        if (debit_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "debit <= " + debit_to + "";
+            }
+            else {
+                filter_found += " && debit <= " + debit_to + "";
+            }
+        }
+        if (decrease_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "decrease >= " + decrease_from + "";
+            }
+            else {
+                filter_found += " && decrease >= " + decrease_from + "";
+            }
+        }
+        if (decrease_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "decrease <= " + decrease_to + "";
+            }
+            else {
+                filter_found += " && decrease <= " + decrease_to + "";
+            }
+        }
+        if (depth_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "depth >= " + depth_from + "";
+            }
+            else {
+                filter_found += " && depth >= " + depth_from + "";
+            }
+        }
+        if (depth_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "depth <= " + depth_to + "";
+            }
+            else {
+                filter_found += " && depth <= " + depth_to + "";
+            }
+        }
+        if (minerali_from != '') {
+            if (filter_found.length == 0) {
+                filter_found = "minerali >= " + minerali_from + "";
+            }
+            else {
+                filter_found += " && minerali >= " + minerali_from + "";
+            }
+        }
+        if (minerali_to != '') {
+            if (filter_found.length == 0) {
+                filter_found = "minerali <= " + minerali_to + "";
+            }
+            else {
+                filter_found += " && minerali <= " + minerali_to + "";
+            }
+        }
+        if (filter_found.length == 0) {
+            filter_found = "num = 'none'";
+        }
+        filterParams_found = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams_found["CQL_FILTER"] = filter_found;
+        }
+        Layer_found_wellspnt.getSource().updateParams(filterParams_found);
+        Layer_found_wellspnt.getSource().refresh();
+    }
+</script>
+
+@*Sidebar Menu*@
+<script>
+    jQuery(document).ready(function () {
+        /*
+            Sidebar
+        */
+        $('.dismiss, .overlay').on('click', function () {
+            $('.sidebar').removeClass('active');
+        });
+
+        $('.open-menu').on('click', function (e) {
+            e.preventDefault();
+            $('.sidebar').addClass('active');
+            // close opened sub-menus
+            $('.collapse.show').toggleClass('show');
+            $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+        });
+        /* change sidebar style */
+        $('a.btn-customized-dark').on('click', function (e) {
+            e.preventDefault();
+            $('.sidebar').removeClass('light');
+        });
+        $('a.btn-customized-light').on('click', function (e) {
+            e.preventDefault();
+            $('.sidebar').addClass('light');
+        });
+
+
+    });
+</script>
+
+@*tooltips, modal windows*@
+<script>
+    $(document).ready(function () {
+
+        // Map Title
+        new jBox('Modal', {
+            attach: '#MapTitleBtn',
+            theme: 'TooltipBorder',
+            width: 260,
+            blockScroll: false,
+            animation: 'flip',
+            closeButton: false,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 70
+            },
+            content: (
+                '<h5 class="Card-title text-center text-white">Map title</h5>' +
+                '<p class="card-text text-center text-white">This content is a little bit longer.</p>'
+            ),
+            overlay: false,
+            reposition: true,
+            repositionOnOpen: false
+        }).open();
+        // Map Legend
+        new jBox('Modal', {
+            autoOpen: true,
+            attach: '#LegendBtn',
+            theme: 'TooltipBorder',
+            width: 250,
+            blockScroll: false,
+            animation: 'flip',
+            closeButton: true,
+            position: {
+                x: 'right',
+                y: 'bottom'
+            },
+            offset: {
+                x: -10,
+                y: -90
+            },
+            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
+            overlay: false,
+            reposition: true,
+            repositionOnOpen: false
+        }).open();
+        // Tooltip below to the right
+        new jBox('Tooltip', {
+            theme: 'TooltipDark',
+            attach: '.SomeInfo',
+            getTitle: 'InfoTitle',
+            closeOnMouseleave: true,
+            pointer: 'center:-20',
+            maxWidth: 400,
+            minWidth: 100,
+            adjustPosition: true,
+            adjustTracker: true
+        });
+    });
+</script>

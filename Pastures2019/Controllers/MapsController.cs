@@ -93,6 +93,18 @@ namespace Pastures2019.Controllers
             return View();
         }
 
+        public ActionResult Wells()
+        {
+            ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
+            ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
+
+            ViewBag.WType = new SelectList(_context.WType.ToList().OrderBy(o => o.Description), "Code", "Description");
+            ViewBag.WSubType = new SelectList(_context.WSubType.ToList().OrderBy(o => o.Description), "Code", "Description");
+            ViewBag.ChemicalComp = new SelectList(_context.ChemicalComp.ToList().OrderBy(o => o.Description), "Code", "Description");
+            ViewBag.WClass = new SelectList(_context.WClass.ToList().OrderBy(o => o.Description), "Code", "Description");
+            return View();
+        }
+
         private YearDay[] GetModisYearDays_MOLT_MOD13Q1006()
         {
             List<YearDay> yearDays = new List<YearDay>();
@@ -450,6 +462,35 @@ namespace Pastures2019.Controllers
             return Json(new
             {
                 burden_pasture
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetWellPntInfo(
+            string objectid)
+        {
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            wellspnt wellspnt = new wellspnt();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT objectid, id, num, usl, indeks, debit, " +
+                    $"decrease, depth, minerali, chemical_c, kato, wat_seepag, sost " +
+                    $"FROM public.wellspnt " +
+                    $"WHERE objectid = {objectid};";
+                var wellspnts = connection.Query<wellspnt>(query);
+                wellspnt = wellspnts.FirstOrDefault();
+            }
+            wellspnt.wtype = _context.WType.FirstOrDefault(b => b.Code == wellspnt.usl)?.Description;
+            wellspnt.wsubtype = _context.WSubType.FirstOrDefault(b => b.Code == wellspnt.wat_seepag)?.Description;
+            wellspnt.chemicalcomp = _context.ChemicalComp.FirstOrDefault(b => b.Code == wellspnt.chemical_c)?.Description;
+            return Json(new
+            {
+                wellspnt
             });
         }
     }

@@ -1032,12 +1032,15 @@
                             complete: function () {
                                 this.setTitle('<div class="ajax-complete">Сводная информация setTitle</div>');
                             },
+                            //beforeSend: function () {
+                            //    //this.setContent('');
+                            //    
+                            //},
                             success: function (data) {
                                 this.setContent('<div class="col"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>');
-                                console.log(1);
                                 ctx = document.getElementById('chart').getContext('2d');
                                 ChartCATO(data.pasturepols_otdels);
-                                //TableCATO(data.pasturepols_classes);
+                                TableCATO(data.pasturepols_classes);
                             },
                             error: function () {
                                 this.setContent('<div class="ajax-error">Oops, something went wrong</div>');

@@ -13,13 +13,7 @@
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
-<div class="container-fluid sticky-top p-0">
-    <div style="width: 1000px; height: 400px;">
-        <div class="col-md-12" style="display: none" id="ChartArea">
-            
-        </div>
-        @*<canvas id="chart" width="900" height="380"></canvas>*@
-    </div>
+<div class="container-fluid sticky-top p-0">    
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -31,6 +25,7 @@
                 <h3>Pasture</h3>
             </div>
             <div class="col">
+                <input id="DemoInception" class="btn btn-primary btn-block mt-3" type="button" value="Info"/>
                 <form>
                 </form>
             </div>
@@ -66,7 +61,7 @@
                                 <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
                                 <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
                             </div>
-                            <input id="ModalChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()" />
+                            <input id="ModalChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info"/>
                         </form>                            
                     </div> 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
@@ -982,6 +977,148 @@
         var o = Math.round, r = Math.random, s = 255;
         return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
     }
+    $(document).ready(function () {
+
+        $('#DemoInception').on('click', function () {
+            InfoCATO();
+        });
+    });
+
+    function InfoCATO() {
+        var te = $('#cato3').val(),
+            te1 = $('#cato1').val(),
+            te2 = $('#cato2').val(),
+            te3 = $('#cato3').val();
+        if (te3 == '') {
+            te = te2;
+        }
+        if (te2 == '') {
+            te = te1;
+        }
+        new jBox('Modal', {
+            width: 300,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            title: 'Сводная информация',
+            content: $('#FilterKato'),
+            overlay: false,
+            onCreated: function () {
+                // Add button event
+                this.content.find(ModalChart).on('click', function () {
+                   new jBox('Modal', {
+                       attach: '#ModalChart',
+                       width: 500,
+                       zIndex: 'auto',
+                       closeButton: 'title',
+                       animation: 'pulse',
+                       draggable: 'title',
+                       overlay: false,
+                       position: {
+                           x: 'right',
+                           y: 'top'
+                       },
+                       offset: {
+                           x: -10,
+                           y: 170
+                       },
+                       ajax: {
+                           url: '@Url.Action("GetCATOPastureInfo")',
+                           data: { catote: te },
+                           type: 'POST',
+                           reload: 'strict',
+                           setContent: false,
+                           complete: function () {
+                               this.setTitle('<div class="ajax-complete">Сводная информация setTitle</div>');
+                           },
+                           success: function (data) {
+                               this.setContent('<div class="col"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>');
+                               ctx = document.getElementById('chart').getContext('2d');
+                               ChartCATO(data.pasturepols_otdels);
+                               TableCATO(data.pasturepols_classes);
+                           },
+                           error: function () {
+                               this.setContent('<div class="ajax-error">Oops, something went wrong</div>');
+                           }
+                       },
+                       // Remove modal from DOM when it's closed
+                       onCloseComplete: function () {
+                           this.destroy();
+                       }
+                   }).open();
+                });
+            },
+            // Remove modal from DOM when it's closed
+            onCloseComplete: function () {
+                this.destroy();
+            }
+        }).open();
+    }
+    function ChartCATO(pasturepols) {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [],
+                    backgroundColor: [],
+                    label: 'Dataset 1'
+                }],
+                labels: []
+            },
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'bottom',
+                    align: 'start',
+                    display: true,
+                    labels: {
+                        fontColor: 'rgb(255, 255, 255)'
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                            return percentage + '%';
+                        },
+                        title: function (tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        };
+        for (var i = 0; i < pasturepols.length; ++i) {
+            config.data.datasets[0].data.push(pasturepols[i].shape_area);
+            config.data.datasets[0].backgroundColor.push(random_rgba());
+            config.data.labels.push($("#find_otdel option[value=" + pasturepols[i].otdely_id + "]").text());
+        }
+
+        if (chart != null) {
+            chart.destroy();
+        }
+        chart = new Chart(ctx, config);
+    }
+
+    function TableCATO(pasturepols) {
+        for (var i = 0; i < pasturepols.length; ++i) {
+            console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
+        }
+    }
+</script>
+@*<script>
+    var ctx = null;
+    var chart = null;
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    }
 
     function InfoCATO() {
         var te = $('#cato3').val(),
@@ -997,7 +1134,6 @@
         new jBox('Modal', {
             attach: '#ModalChart',
             width: 1000,
-            height: 400,
             closeButton: 'title',
             animation: false,
             draggable: 'title',
@@ -1010,7 +1146,7 @@
                 reload: 'strict',
                 setContent: false,
                 success: function (data) {
-                    this.setContent('<div style="width: 1000px; height: 400px;"><canvas id="chart" width="900" height="380"></canvas></div>');
+                    this.setContent('<div style="width: 1000px;"><canvas id="chart" width="900" height="380"></canvas></div>');
                     ctx = document.getElementById('chart').getContext('2d');
                     ChartCATO(data.pasturepols_otdels);
                     TableCATO(data.pasturepols_classes);
@@ -1021,9 +1157,9 @@
             },
             //content: $('#ChartArea'),
             // Remove modal from DOM when it's closed
-            //onCloseComplete: function () {
-            //    this.destroy();
-            //}
+            onCloseComplete: function () {
+                this.destroy();
+            }
             
         }).open();;
         
@@ -1075,7 +1211,7 @@
             console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
         }
     }
-</script>
+</script>*@
 
 
 @*Sidebar Menu*@
@@ -1112,22 +1248,6 @@
 @*tooltips, modal windows*@
 <script>
     $(document).ready(function () {
-        // Find by Adm
-        new jBox('Modal', {
-            attach: '#FindByKato',
-            theme: 'TooltipBorderThick',
-            width: 300,
-            height: 280,
-            blockScroll: false,
-            animation: 'zoomIn',
-            draggable: 'title',
-            closeButton: true,
-            content: $('#FilterKato'),
-            title: 'Поиск по КАТО',
-            overlay: false,
-            reposition: false,
-            repositionOnOpen: false
-        });
         // Map Title
         new jBox('Modal', {
             attach: '#MapTitleBtn',

@@ -18,7 +18,7 @@
         <div class="col-md-12" style="display: none" id="ChartArea">
             
         </div>
-        <canvas id="chart" width="900" height="380"></canvas>
+        @*<canvas id="chart" width="900" height="380"></canvas>*@
     </div>
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
@@ -975,7 +975,7 @@
 
 @* InfoCATO, ChartCATO, TableCATO *@
 <script>
-    var ctx = document.getElementById('chart').getContext('2d');
+    var ctx = null;
     var chart = null;
 
     function random_rgba() {
@@ -996,8 +996,8 @@
         }
         new jBox('Modal', {
             attach: '#ModalChart',
-            width: 600,
-            height: 250,
+            width: 1000,
+            height: 400,
             closeButton: 'title',
             animation: false,
             draggable: 'title',
@@ -1010,9 +1010,11 @@
                 reload: 'strict',
                 setContent: false,
                 success: function (data) {
+                    this.setContent('<div style="width: 1000px; height: 400px;"><canvas id="chart" width="900" height="380"></canvas></div>');
+                    ctx = document.getElementById('chart').getContext('2d');
                     ChartCATO(data.pasturepols_otdels);
                     TableCATO(data.pasturepols_classes);
-                    this.setContent('<div class="ajax-success">Response:</div>');
+                    //this.setContent('<div class="ajax-success">Response:</div>');
                 },
                 error: function () {
                 }

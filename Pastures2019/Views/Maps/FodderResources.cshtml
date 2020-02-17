@@ -25,7 +25,7 @@
                 <h3>Pasture</h3>
             </div>
             <div class="col">
-                <input id="DemoInception" class="btn btn-primary btn-block mt-3" type="button" value="Info" onclick="myModal1.open();"/>
+                <input id="FilterKATO" class="btn btn-primary btn-block mt-3" type="button" value="Info"/>
                 <form>
                 </form>
             </div>
@@ -61,7 +61,7 @@
                                 <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
                                 <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
                             </div>
-                            <input id="ModalChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info" onclick="myModal2.open();InfoCATO()"/>
+                            <input id="FilterChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()"/>
                         </form>                            
                     </div> 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
@@ -975,21 +975,30 @@
 
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
     }
 
-    var myModal1,
-        myModal2;
     $(document).ready(function () {
-        myModal1 = new jBox('Modal', {
+
+        $('#FilterKATO').on('click', function () {
+            FilterKATOModal();            
+        });
+        $('#FilterChart').on('click', function () {
+            myModal2.open()
+        });
+
+    });
+    function FilterKATOModal() {        
+        new jBox('Modal', {
             width: 220,
             title: 'jBox',
             overlay: false,
             content: $('#FilterKato'),
-            draggable: 'title',
-            repositionOnOpen: false,
-            repositionOnContent: false
-        });
+            draggable: 'title'
+        }).open();
+    }
+    var myModal2;
+    $(document).ready(function () {        
         myModal2 = new jBox('Modal', {
             width: 500,
             title: 'jBox',

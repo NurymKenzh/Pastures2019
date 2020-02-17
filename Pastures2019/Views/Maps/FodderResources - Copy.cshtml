@@ -47,7 +47,7 @@
                     @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
                     <input type="button" value="Find" onclick="FindPastures()" />
                     <a id="FindByKato" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Find by Adm link</a>
-                    <div class="col-md-12" style="display: none" id="FilterKato">
+                    <div  class="col-md-12" style="display: none" id="FilterKato">
                         <form>
                             <div class="form-group m-0">
                                 <label for="cato1" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
@@ -61,7 +61,7 @@
                                 <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
                                 <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
                             </div>
-                            <input id="ModalChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()"/>
+                            <input id="ModalChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info"/>
                         </form>                            
                     </div> 
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
@@ -978,54 +978,89 @@
         return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
     }
     $(document).ready(function () {
-        new jBox('Modal', {
-            attach: '#DemoInception',
-            width: 220,
-            title: 'jBox',
-            overlay: false,
-            content: $('#FilterKato'),
-            draggable: 'title',
-            repositionOnOpen: false,
-            repositionOnContent: false
-        });
-        new jBox('Modal', {
-            attach: '#ModalChart',
-            width: 500,
-            title: 'jBox',
-            overlay: false,
-            content: '<div class="col"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>',
-            draggable: 'title',
-            repositionOnOpen: false,
-            repositionOnContent: false
+
+        $('#DemoInception').on('click', function () {
+            InfoCATO();
         });
     });
 
     function InfoCATO() {
-        var te = $('#cato3').val(),
-            te1 = $('#cato1').val(),
-            te2 = $('#cato2').val(),
-            te3 = $('#cato3').val();
-        if (te3 == '') {
-            te = te2;
-        }
-        if (te2 == '') {
-            te = te1;
-        }
-        $.ajax({
-            url: '@Url.Action("GetCATOPastureInfo")',
-            data: { catote: te },
-            type: 'POST',
-            success: function (data) {
-                ChartCATO(data.pasturepols_otdels);
-                TableCATO(data.pasturepols_classes);
+        new jBox('Modal', {
+            width: 300,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            title: 'Сводная информация',
+            content: $('#FilterKato'),
+            overlay: false,
+            onCreated: function () {
+                // Add button event
+                this.content.find(ModalChart).on('click', function () {
+                    var te = $('#cato3').val(),
+                        te1 = $('#cato1').val(),
+                        te2 = $('#cato2').val(),
+                        te3 = $('#cato3').val();
+                    if (te3 == '') {
+                        te = te2;
+                    }
+                    if (te2 == '') {
+                        te = te1;
+                    }
+                    new jBox('Modal', {
+                        attach: '#ModalChart',
+                        width: 500,
+                        zIndex: 'auto',
+                        closeButton: 'title',
+                        animation: 'pulse',
+                        draggable: 'title',
+                        overlay: false,
+                        position: {
+                            x: 'right',
+                            y: 'top'
+                        },
+                        offset: {
+                            x: -10,
+                            y: 170
+                        },
+                        ajax: {
+                            url: '@Url.Action("GetCATOPastureInfo")',
+                            data: { catote: te },
+                            type: 'POST',
+                            reload: 'strict',
+                            setContent: false,
+                            complete: function () {
+                                this.setTitle('<div class="ajax-complete">Сводная информация setTitle</div>');
+                            },
+                            //beforeSend: function () {
+                            //    //this.setContent('');
+                            //    
+                            //},
+                            success: function (data) {
+                                this.setContent('<div class="col"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>');
+                                ctx = document.getElementById('chart').getContext('2d');
+                                ChartCATO(data.pasturepols_otdels);
+                                TableCATO(data.pasturepols_classes);
+                            },
+                            error: function () {
+                                this.setContent('<div class="ajax-error">Oops, something went wrong</div>');
+                            }
+                        },
+                        // Remove modal from DOM when it's closed
+                        onCloseComplete: function () {
+                            this.destroy();
+                        }
+                    }).open();
+                });
             },
-            error: function () {
+            // Remove modal from DOM when it's closed
+            onCloseComplete: function () {
+                this.destroy();
             }
-        });
+        }).open();
     }
 
     function ChartCATO(pasturepols) {
-        ctx = document.getElementById('chart').getContext('2d');
         var config = {
             type: 'pie',
             data: {
@@ -1081,6 +1116,108 @@
         }
     }
 </script>
+@*<script>
+    var ctx = null;
+    var chart = null;
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+    }
+
+    function InfoCATO() {
+        var te = $('#cato3').val(),
+            te1 = $('#cato1').val(),
+            te2 = $('#cato2').val(),
+            te3 = $('#cato3').val();
+        if (te3 == '') {
+            te = te2;
+        }
+        if (te2 == '') {
+            te = te1;
+        }
+        new jBox('Modal', {
+            attach: '#ModalChart',
+            width: 1000,
+            closeButton: 'title',
+            animation: false,
+            draggable: 'title',
+            title: 'AJAX request',
+            overlay: false,
+            ajax: {
+                url: '@Url.Action("GetCATOPastureInfo")',
+                data: { catote: te },
+                type: 'POST',
+                reload: 'strict',
+                setContent: false,
+                success: function (data) {
+                    this.setContent('<div style="width: 1000px;"><canvas id="chart" width="900" height="380"></canvas></div>');
+                    ctx = document.getElementById('chart').getContext('2d');
+                    ChartCATO(data.pasturepols_otdels);
+                    TableCATO(data.pasturepols_classes);
+                    //this.setContent('<div class="ajax-success">Response:</div>');
+                },
+                error: function () {
+                }
+            },
+            //content: $('#ChartArea'),
+            // Remove modal from DOM when it's closed
+            onCloseComplete: function () {
+                this.destroy();
+            }
+            
+        }).open();;
+        
+    }
+    function ChartCATO(pasturepols) {
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: [],
+                    backgroundColor: [],
+                    label: 'Dataset 1'
+                }],
+                labels: []
+            },
+            options: {
+                responsive: true,
+                tooltips: {
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+                            var total = meta.total;
+                            var currentValue = dataset.data[tooltipItem.index];
+                            var percentage = parseFloat((currentValue / total * 100).toFixed(1));
+                            return percentage + '%';
+                        },
+                        title: function (tooltipItem, data) {
+                            return data.labels[tooltipItem[0].index];
+                        }
+                    }
+                }
+            }
+        };
+        for (var i = 0; i < pasturepols.length; ++i) {
+            config.data.datasets[0].data.push(pasturepols[i].shape_area);
+            config.data.datasets[0].backgroundColor.push(random_rgba());
+            config.data.labels.push($("#find_otdel option[value=" + pasturepols[i].otdely_id + "]").text());
+        }
+
+        if (chart != null) {
+            chart.destroy();
+        }
+        chart = new Chart(ctx, config);
+    }
+
+    function TableCATO(pasturepols) {
+        for (var i = 0; i < pasturepols.length; ++i) {
+            console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
+        }
+    }
+</script>*@
+
 
 @*Sidebar Menu*@
 <script>

@@ -224,7 +224,6 @@ namespace Pastures2019.Controllers
         public ActionResult GetCATOPastureInfo(
             string catote)
         {
-            Thread.Sleep(500);
             string DefaultConnection = Microsoft
                .Extensions
                .Configuration

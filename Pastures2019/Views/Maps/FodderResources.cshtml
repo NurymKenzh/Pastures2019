@@ -24,108 +24,166 @@
             <div class="logo">
                 <h3>Pasture</h3>
             </div>
-            <div class="col">
-                
-                <form>
-                </form>
-            </div>
+            <!-- Other sections -->
+            <ul class="list-unstyled menu-elements">
+                <li>
+                    <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
+                        <i class="fa fa-list"></i>Базовые слои
+                    </a>
+                    <div id="TematicLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#TematicLayerSections">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label text-white" for="layerpopShow">
+                                    @SharedLocalizer["popLayer"]
+                                </label>
+                                <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
+                                <label class="form-check-label text-white" for="layeradmxpolShow">
+                                    @SharedLocalizer["admxpolLayer"]
+                                </label>
+                                <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label text-white" for="layerhdrShow">
+                                    @SharedLocalizer["hdrLayer"]
+                                </label>
+                                <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>                            
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label text-white" for="layerrdslinShow">
+                                    @SharedLocalizer["rdslinLayer"]
+                                </label>
+                                <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerpasturepolShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label text-white" for="layerpasturepolShow">
+                                    @SharedLocalizer["pasturepolLayer"]
+                                </label>
+                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                        </div>
+                    </div>                    
+                </li>
+                <li>
+                    <a href="#BaseLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="BaseLayerSections">
+                        <i class="fa fa-refresh"></i>Фоновые слои
+                    </a>
+                    <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
+                        <div class="card-body">
+                            <label class="form-check-label text-white" for="layerBaseShow">
+                                @SharedLocalizer["BaseLayer"]
+                            </label>
+                            <div class="input-group input-group-sm">
+                                <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
+                                    <option value="OSM">OpenStreetMap</option>
+                                    <option value="BingAerialWithLabels">Bing Aerial</option>
+                                    <option value="BingRoadStatic">Bing Road (static)</option>
+                                    <option value="BingRoadDynamic">Bing Road (dynamic)</option>
+                                    <option value="HERENormalDay">HERE Normal Day</option>
+                                    <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
+                                    <option value="HERETerrainDay">HERE Terrain Day</option>
+                                    <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
+                                    <option value="StamenWatercolor">Stamen Watercolor</option>
+                                    <option value="StamenTerrain">Stamen Terrain</option>
+                                    <option value="StamenToner">Stamen Toner</option>
+                                    <option value="ArcGIS">ArcGIS</option>
+                                    <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
+                                    <option value="ThunderforestTransport">Thunderforest Transport</option>
+                                    <option value="ThunderforestLandscape">Thunderforest Landscape</option>
+                                    <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
+                                    <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
+                                    <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
+                                    <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
+                                    <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
             <!-- Exaple 1 -->
-            <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
-                <div class="card-body">
-                    <div class="col-md-12" style="display: none" id="FilterPasture">
-                        <form>
-                            
-                        </form>
-                    </div>
-                    @*@Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })*@
-                    <select asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value="" id="find_otdel"><option value=""></option></select>
-                    @Html.DropDownList("PType", (IEnumerable<SelectListItem>)ViewBag.PType, "", htmlAttributes: new { @id = "find_ptype" })
-                    @Html.DropDownList("Soob", (IEnumerable<SelectListItem>)ViewBag.Soob, "", htmlAttributes: new { @id = "find_soob" })
-                    <input id="find_ur_v_from" type="text" />
-                    <input id="find_ur_v_to" type="text" />
-                    <input id="find_ur_l_from" type="text" />
-                    <input id="find_ur_l_to" type="text" />
-                    <input id="find_ur_o_from" type="text" />
-                    <input id="find_ur_o_to" type="text" />
-                    <input id="find_ur_z_from" type="text" />
-                    <input id="find_ur_z_to" type="text" />
-                    @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
-                    @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
-                    <input type="button" value="Find" onclick="FindPastures()" />
-                    <div class="col-md-12" style="display: none" id="FilterKato">
-                        <form>
-                            <div class="form-group m-0">
-                                <label for="cato1" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
-                                <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
-                            </div>
-                            <div class="form-group m-0">
-                                <label for="cato2" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
-                                <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
-                            </div>
-                            <div class="form-group m-0">
-                                <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
-                                <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
-                            </div>
-                            <input id="FilterChart" class="btn btn-warning btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()" />
-                        </form>
-                    </div>
-                    <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
-                        <option value="OSM">OpenStreetMap</option>
-                        <option value="BingAerialWithLabels">Bing Aerial</option>
-                        <option value="BingRoadStatic">Bing Road (static)</option>
-                        <option value="BingRoadDynamic">Bing Road (dynamic)</option>
-                        <option value="HERENormalDay">HERE Normal Day</option>
-                        <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
-                        <option value="HERETerrainDay">HERE Terrain Day</option>
-                        <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
-                        <option value="StamenWatercolor">Stamen Watercolor</option>
-                        <option value="StamenTerrain">Stamen Terrain</option>
-                        <option value="StamenToner">Stamen Toner</option>
-                        <option value="ArcGIS">ArcGIS</option>
-                        <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
-                        <option value="ThunderforestTransport">Thunderforest Transport</option>
-                        <option value="ThunderforestLandscape">Thunderforest Landscape</option>
-                        <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
-                        <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
-                        <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
-                        <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
-                        <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
-                    </select>
-                    <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerBaseShow">
-                        @SharedLocalizer["BaseLayer"]
-                    </label>
-                    <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layeradmxpolShow">
-                        @SharedLocalizer["admxpolLayer"]
-                    </label>
-                    <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerhdrShow">
-                        @SharedLocalizer["hdrLayer"]
-                    </label>
-                    <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerpopShow">
-                        @SharedLocalizer["popLayer"]
-                    </label>
-                    <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerrdslinShow">
-                        @SharedLocalizer["rdslinLayer"]
-                    </label>
-                    <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerpasturepolShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerpasturepolShow">
-                        @SharedLocalizer["pasturepolLayer"]
-                    </label>
-                    <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+            <div class="card-body">
+                <div class="col-md-12" style="display: none" id="FilterPasture">
+                    <form>
+                        <div class="form-group m-0">
+                            <label for="Otdel">Otdel</label>
+                            <select class="form-control form-control-sm" id="find_otdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value=""><option value=""></option></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="PType">PType</label>
+                            <select class="form-control form-control-sm" id="find_ptype" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="PType" value=""><option value=""></option></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="Soob">Soob</label>
+                            <select class="form-control form-control-sm" id="find_soob" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="Soob" value=""><option value=""></option></select>
+                        </div>
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">Весна</th>
+                                    <td><input class="form-control form-control-sm" id="find_ur_v_from" type="text" /></td>
+                                    <td>-</td>
+                                    <td><input class="form-control form-control-sm" id="find_ur_v_to" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Лето</th>
+                                    <td><input class="form-control form-control-sm" id="find_ur_l_from" type="text" /></td>
+                                    <td>-</td>
+                                    <td><input class="form-control form-control-sm" id="find_ur_l_to" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Осень</th>
+                                    <td><input class="form-control form-control-sm" id="find_ur_o_from" type="text" /></td>
+                                    <td>-</td>
+                                    <td><input class="form-control form-control-sm" id="find_ur_o_to" type="text" /></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Зима</th>
+                                    <td><input class="form-control form-control-sm" id="find_ur_z_from" type="text" /></td>
+                                    <td>-</td>
+                                    <td><input class="form-control form-control-sm" id="find_ur_z_to" type="text" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="form-group m-0">
+                            <label for="Recommend">Recommend</label>
+                            <select class="form-control form-control-sm" id="find_recommend" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Recommend)" name="Recommend" value=""><option value=""></option></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="RecomCattle">RecomCattle</label>
+                            <select class="form-control form-control-sm" id="find_recomcattle" asp-items="@((IEnumerable<SelectListItem>)ViewBag.RecomCattle)" name="RecomCattle" value=""><option value=""></option></select>
+                        </div>
+                        <input class="btn btn-warning btn-block mt-3" type="button" value="Find" onclick="FindPastures()" />
+                    </form>
+                </div>
+                <div class="col-md-12" style="display: none" id="FilterKato">
+                    <form>
+                        <div class="form-group m-0">
+                            <label for="cato1" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
+                            <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato2" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
+                            <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
+                            <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                        </div>
+                        <input id="FilterChart" class="btn btn-warning btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()" />
+                    </form>
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -134,12 +192,11 @@
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
             </div>
             <div class="sidebar-footer">
-                <a href="#">
-                    <i class="SomeInfo fa fa-file" InfoTitle="Tooltip on top"></i>
+                <a href="#" id="FilterKATOBtn">
+                    <i class="SomeInfo fa fa-pie-chart" InfoTitle="Сводная информация"></i>
                 </a>
-                <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
-                    <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
-                    <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
+                <a href="#" id="FilterPastureBtn">
+                    <i class="SomeInfo fa fa-binoculars" InfoTitle="Поиск пастбищ"></i>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">
                     <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
@@ -158,27 +215,10 @@
             <i class="fa fa-align-left"></i> <span>@SharedLocalizer["Menu"]</span>
         </a>
         <!-- Map content -->
-        <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
+        <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 90px);"></div>
     </div>
     <!-- End content -->
-    <footer class="footer-classic fixed-bottom border-top border-light" style="background: #16344e;">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-2">
-                    <div class="col">
-                        <button class="btn btn-outline-light btn-sm m-1" id="FilterKATO" value="Info"><i class="SomeInfo fa  fa-bar-chart" InfoTitle="Сводная информация"></i></button>
-                    </div>
-                </div>
-                <div class="col-8">
-                    
-                </div>
-                <div class="col-2">
-                   
-                </div>
-            </div>
-
-        </div>
-    </footer>
+    
 </div>
 
 @* layers *@
@@ -856,6 +896,24 @@
 
 @* FindPastures *@
 <script>
+    $(document).ready(function () {
+        $('#FilterPastureBtn').on('click', function () {
+            FindPasturesModal();            
+        });
+    });
+    function FindPasturesModal() {        
+        new jBox('Modal', {
+            width: 400,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: {open: 'move:left', close: 'slide:top'},
+            title: 'Поиск пастбищ',
+            content: $('#FilterPasture'),
+            overlay: false
+        }).open();
+    }    
     function FindPastures() {
         var otdely_id = $('#find_otdel').val(),
             class_id = $('#find_ptype').val(),
@@ -1003,7 +1061,7 @@
 
     $(document).ready(function () {
 
-        $('#FilterKATO').on('click', function () {
+        $('#FilterKATOBtn').on('click', function () {
             FilterKATOModal();            
         });
         $('#FilterChart').on('click', function () {

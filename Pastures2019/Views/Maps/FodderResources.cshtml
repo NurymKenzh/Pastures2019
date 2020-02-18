@@ -13,7 +13,7 @@
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
-<div class="container-fluid sticky-top p-0">    
+<div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -25,13 +25,18 @@
                 <h3>Pasture</h3>
             </div>
             <div class="col">
-                <input id="FilterKATO" class="btn btn-primary btn-block mt-3" type="button" value="Info"/>
+                
                 <form>
                 </form>
             </div>
             <!-- Exaple 1 -->
             <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
                 <div class="card-body">
+                    <div class="col-md-12" style="display: none" id="FilterPasture">
+                        <form>
+                            
+                        </form>
+                    </div>
                     @Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })
                     @Html.DropDownList("PType", (IEnumerable<SelectListItem>)ViewBag.PType, "", htmlAttributes: new { @id = "find_ptype" })
                     @Html.DropDownList("Soob", (IEnumerable<SelectListItem>)ViewBag.Soob, "", htmlAttributes: new { @id = "find_soob" })
@@ -46,7 +51,6 @@
                     @Html.DropDownList("Recommend", (IEnumerable<SelectListItem>)ViewBag.Recommend, "", htmlAttributes: new { @id = "find_recommend" })
                     @Html.DropDownList("RecomCattle", (IEnumerable<SelectListItem>)ViewBag.RecomCattle, "", htmlAttributes: new { @id = "find_recomcattle" })
                     <input type="button" value="Find" onclick="FindPastures()" />
-                    <a id="FindByKato" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Find by Adm link</a>
                     <div class="col-md-12" style="display: none" id="FilterKato">
                         <form>
                             <div class="form-group m-0">
@@ -61,9 +65,9 @@
                                 <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">Adm1</label>
                                 <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
                             </div>
-                            <input id="FilterChart" class="btn btn-primary btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()"/>
-                        </form>                            
-                    </div> 
+                            <input id="FilterChart" class="btn btn-warning btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()" />
+                        </form>
+                    </div>
                     <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
                         <option value="OSM">OpenStreetMap</option>
                         <option value="BingAerialWithLabels">Bing Aerial</option>
@@ -156,6 +160,24 @@
         <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
     </div>
     <!-- End content -->
+    <footer class="footer-classic fixed-bottom border-top border-light" style="background: #16344e;">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-2">
+                    <div class="col">
+                        <button class="btn btn-outline-light btn-sm m-1" id="FilterKATO" value="Info"><i class="SomeInfo fa  fa-bar-chart" InfoTitle="Сводная информация"></i></button>
+                    </div>
+                </div>
+                <div class="col-8">
+                    
+                </div>
+                <div class="col-2">
+                   
+                </div>
+            </div>
+
+        </div>
+    </footer>
 </div>
 
 @* layers *@
@@ -972,7 +994,7 @@
 <script>
     var ctx = null;
     var chart = null;
-
+    var InfoChartModal;
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
         return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
@@ -984,29 +1006,47 @@
             FilterKATOModal();            
         });
         $('#FilterChart').on('click', function () {
-            myModal2.open()
+            InfoChartModal.open()
         });
 
     });
     function FilterKATOModal() {        
         new jBox('Modal', {
-            width: 220,
-            title: 'jBox',
-            overlay: false,
-            content: $('#FilterKato'),
-            draggable: 'title'
-        }).open();
-    }
-    var myModal2;
-    $(document).ready(function () {        
-        myModal2 = new jBox('Modal', {
-            width: 500,
-            title: 'jBox',
-            overlay: false,
-            content: '<div class="col"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>',
+            width: 300,
+            zIndex: 'auto',
             draggable: 'title',
-            repositionOnOpen: false,
-            repositionOnContent: false
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: {open: 'move:left', close: 'slide:top'},
+            title: 'Сводная информация',
+            content: $('#FilterKato'),
+            overlay: false
+        }).open();
+    }    
+    $(document).ready(function () {        
+        InfoChartModal = new jBox('Modal', {
+            responsiveWidth: true,
+            responsiveHeight: true,
+            width: 500,
+            zIndex: 'auto',
+            closeButton: 'title',
+            animation: 'pulse',
+            draggable: 'title',
+            overlay: false,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 170
+            },
+            content: '<div class="col"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>',
+            repositionOnOpen: true,
+            onOpen: function () {
+                // Add t
+                this.setTitle('<div class="ajax-complete">setTitle</div>');
+            },
         });
     });
 
@@ -1033,13 +1073,6 @@
             }
         });
     }
-
-    //function CloseChart() {
-    //    if (myModal.open) {
-    //        myModal.close();
-    //    }
-    //}
-
     function ChartCATO(pasturepols) {
         ctx = document.getElementById('chart').getContext('2d');
         var config = {
@@ -1090,7 +1123,6 @@
         }
         chart = new Chart(ctx, config);
     }
-
     function TableCATO(pasturepols) {
         for (var i = 0; i < pasturepols.length; ++i) {
             console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
@@ -1158,7 +1190,6 @@
         }).open();
         // Map Legend
         new jBox('Modal', {
-            autoOpen: true,
             attach: '#LegendBtn',
             theme: 'TooltipBorder',
             width: 250,
@@ -1176,7 +1207,7 @@
             content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
             overlay: false,
             reposition: true,
-            repositionOnOpen: false
+            repositionOnOpen: true
         }).open();
         // Tooltip below to the right
         new jBox('Tooltip', {

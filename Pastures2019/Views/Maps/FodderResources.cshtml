@@ -37,7 +37,8 @@
                             
                         </form>
                     </div>
-                    @Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })
+                    @*@Html.DropDownList("Otdel", (IEnumerable<SelectListItem>)ViewBag.Otdel, "", htmlAttributes: new { @id = "find_otdel" })*@
+                    <select asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value="" id="find_otdel"><option value=""></option></select>
                     @Html.DropDownList("PType", (IEnumerable<SelectListItem>)ViewBag.PType, "", htmlAttributes: new { @id = "find_ptype" })
                     @Html.DropDownList("Soob", (IEnumerable<SelectListItem>)ViewBag.Soob, "", htmlAttributes: new { @id = "find_soob" })
                     <input id="find_ur_v_from" type="text" />

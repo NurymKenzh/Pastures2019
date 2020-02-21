@@ -52,39 +52,139 @@
         </a>
     </div>
     <div class="container marketing">
-
-        <!-- Three columns of text below the carousel -->
+        <h1 class="text-center py-3">Get started</h1>
         <div class="row">
-            <div class="col-lg-4">
-                <img src="http://placehold.it/140x140/34495e/2c3e50" background="#777" color="#777" class="rounded-circle">
-                <h2>Heading</h2>
-                <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-                <img src="http://placehold.it/140x140/34495e/2c3e50" background="#777" color="#777" class="rounded-circle">
-                <h2>Heading</h2>
-                <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-                <img src="http://placehold.it/140x140/34495e/2c3e50" background="#777" color="#777" class="rounded-circle">
-                <h2>Heading</h2>
-                <p>Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor.</p>
-                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-        </div><!-- /.row -->
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="mr-4" style="height:64px;width:64px;">
+                                <i class="fa fa-globe card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="mt-0 tex-dark">Modis</h4>
+                                <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <nav class="marketing-pagination">
+                                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Maps" asp-action="Modis">Go to</a>
+                                    <a class="btn btn-outline-info" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="mr-4" style="height:64px;width:64px;">
+                                <i class="fa fa-leaf card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="mt-0 tex-dark">@SharedLocalizer["FodderResources"]</h4>
+                                <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <nav class="marketing-pagination">
+                                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Maps" asp-action="FodderResources">Go to</a>
+                                    <a class="btn btn-outline-info" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row py-4">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="mr-4" style="height:64px;width:64px;">
+                                <i class="fa fa-object-group card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="mt-0 tex-dark">@SharedLocalizer["PasturesBurden"]</h4>
+                                <p class=" text-secondary">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                    <nav class="marketing-pagination">
+                                        <a class="btn btn-outline-primary" asp-area="" asp-controller="Maps" asp-action="PasturesBurden">Go to</a>
+                                        <a class="btn btn-outline-info" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                    </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="mr-4" style="height:64px;width:64px;">
+                                <i class="fa fa-map card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="mt-0 tex-dark">@SharedLocalizer["Species"]</h4>
+                                <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <nav class="marketing-pagination">
+                                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Maps" asp-action="Species">Go to</a>
+                                    <a class="btn btn-outline-info" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="mr-4" style="height:64px;width:64px;">
+                                <i class="fa fa-map-signs card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="mt-0 tex-dark">@SharedLocalizer["LandSupply"]</h4>
+                                <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <nav class="marketing-pagination">
+                                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Maps" asp-action="LandSupply">Go to</a>
+                                    <a class="btn btn-outline-info" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="mr-4" style="height:64px;width:64px;">
+                                <i class="fa fa-book card-img-top fa-4x text-primary" aria-hidden="true"></i>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="mt-0 tex-dark">@SharedLocalizer["About"]</h4>
+                                <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <nav class="marketing-pagination">
+                                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Maps" asp-action="About">Go to</a>
+                                    <a class="btn btn-outline-info" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- START THE FEATURETTES -->
 
         <hr class="featurette-divider">
 
         <div class="row featurette">
             <div class="col-md-7">
-                <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-                <p class="lead">Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor.</p>
+                <h2 class="featurette-heading">@SharedLocalizer["FodderResources"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+                <p class="lead font-italic">Кормовые угодья Республики Казахстан занимают 191,6 млн. га или 70,3% территории, из них 186,5 млн. га приходится на пастбища и 5,1 млн. га на сенокосы. Естественные кормовые угодья являются главным источником пастбищных кормов и значительной части заготовляемого сена. 77% пастбищ республики расположены в условиях равнинного рельефа, <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
             </div>
             <div class="col-md-5">
-                <img src="http://placehold.it/500x500/9b59b6/8e44ad" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+                <img src="~/images/Main/foto_001.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
             </div>
         </div>
 
@@ -92,11 +192,11 @@
 
         <div class="row featurette">
             <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-                <p class="lead">Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor.</p>
+                <h2 class="featurette-heading">@SharedLocalizer["PasturesBurden"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+                <p class="lead font-italic">Аккумулятивные равнины лесостепной зоны в пределах Костанайской, Северо-Казахстанской, Павлодарской и Акмолинской областей и приподнятые денудационные равнины Акмолинской области в настоящее время в основном распаханы. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
             </div>
             <div class="col-md-5 order-md-1">
-                <img src="http://placehold.it/500x500/34495e/2c3e50" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+                <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
             </div>
         </div>
 
@@ -104,16 +204,18 @@
 
         <div class="row featurette">
             <div class="col-md-7">
-                <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                <p class="lead">Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, adipiscing. Lorem ipsum dolor sit amet, consectetuer adipiscing. Lorem ipsum dolor.</p>
+                <h2 class="featurette-heading">@SharedLocalizer["Species"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+                <p class="lead font-italic">Породное районирование имеет целью наиболее эффективное использование потенциала сельскохозяйственных животных в конкретных природно-климатических условиях. Для лесостепной и степной зон республики  характерно развитие молочно-мясного скотоводства, <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
             </div>
             <div class="col-md-5">
-                <img src="http://placehold.it/500x500/34495e/2c3e50" background="#eee" color="#aaa" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+                <img src="~/images/Main/foto_003.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
             </div>
         </div>
 
-        <hr class="featurette-divider">
-
+        <hr class="featurette-divider">        
+        <div class="row float-right mb-5  mr-5">
+            <a href="" class="btn btn-outline-primary btn-circle d-inline float-right">View all</a>
+        </div>
         <!-- /END THE FEATURETTES -->
 
     </div>

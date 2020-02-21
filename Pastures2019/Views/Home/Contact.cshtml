@@ -6,60 +6,75 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>@ViewBag.Title.</h2>
-            <h3>Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</h3>
+    <div class="container mt-5">
+        <div class="row" style="height:550px;">
+            <div class="col-md-5 maps">
+                <div class="embed-responsive embed-responsive-4by3 border border-info">
+                    <div class="embed-responsive-item"><iframe id="gmap_canvas" src="https://maps.google.com/maps?q=%D1%83%D0%BB%D0%B8%D1%86%D0%B0%20%D0%96%D0%B0%D0%BD%D0%B4%D0%BE%D1%81%D0%BE%D0%B2%D0%B0%20%D0%B4.%2051%2C%20Almaty%2C%20Kazakhstan&t=&z=17&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.whatismyip-address.com"></a></div>                
+                </div>
+            </div>
+            <div class="col-md-7">
+                @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                {
+                    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                    {
+                        <div class="card-body text-center">
+                            <h2 class="text-uppercase mt-3 font-weight-bold text-dark">@ViewBag.Title.</h2>
+                            <h4 class="card-title">Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</h4>
 
-            <address>
-                Казахстан, Алматы, 050035, ул. Жандосова, д. 51<br />
-                <abbr>Телефон:</abbr>
-                8 (727) 303-63-33
-            </address>
+                            <address>
+                                Казахстан, Алматы, 050035, ул. Жандосова, д. 51<br />
+                                <abbr>Телефон:</abbr>
+                                8 (727) 303-63-33
+                            </address>
 
-            <address>
-                <strong>Email:</strong>   <a href="mailto:bibliotekajik@mail.ru">bibliotekajik@mail.ru</a>,
-                <a href="mailto:givotnovodstvo@mail.ru">givotnovodstvo@mail.ru</a><br />
-            </address>
+                            <address>
+                                <strong>Email:</strong>   <a href="mailto:bibliotekajik@mail.ru">bibliotekajik@mail.ru</a>,
+                                <a href="mailto:givotnovodstvo@mail.ru">givotnovodstvo@mail.ru</a><br />
+                            </address>
+                        </div>
+                    }
+                    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                    {
+                        <div class="card-body">
+                            <h2 class="text-uppercase mt-3 font-weight-bold text-dark">@ViewBag.Title.</h2>
+                            <h4 class="card-title">Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</h4>
+
+                            <address>
+                                Казахстан, Алматы, 050035, ул. Жандосова, д. 51<br />
+                                <abbr>Телефон:</abbr>
+                                8 (727) 303-63-33
+                            </address>
+
+                            <address>
+                                <strong>Email:</strong>   <a href="mailto:bibliotekajik@mail.ru">bibliotekajik@mail.ru</a>,
+                                <a href="mailto:givotnovodstvo@mail.ru">givotnovodstvo@mail.ru</a><br />
+                            </address>
+                        </div>
+                    }
+                    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                    {
+                        <div class="card-body">
+                            <h2 class="text-uppercase mt-3 font-weight-bold text-dark">@ViewBag.Title.</h2>
+                            <h4 class="card-title">Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</h4>
+
+                            <address>
+                                Казахстан, Алматы, 050035, ул. Жандосова, д. 51<br />
+                                <abbr>Телефон:</abbr>
+                                8 (727) 303-63-33
+                            </address>
+
+                            <address>
+                                <strong>Email:</strong>   <a href="mailto:bibliotekajik@mail.ru">bibliotekajik@mail.ru</a>,
+                                <a href="mailto:givotnovodstvo@mail.ru">givotnovodstvo@mail.ru</a><br />
+                            </address>
+                        </div>
+                    }
+                }
+
+
+            </div>
+
         </div>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>@ViewBag.Title.</h2>
-            <h3>Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</h3>
+    </div>
 
-            <address>
-                Казахстан, Алматы, 050035, ул. Жандосова, д. 51<br />
-                <abbr>Телефон:</abbr>
-                8 (727) 303-63-33
-            </address>
-
-            <address>
-                <strong>Email:</strong>   <a href="mailto:bibliotekajik@mail.ru">bibliotekajik@mail.ru</a>,
-                <a href="mailto:givotnovodstvo@mail.ru">givotnovodstvo@mail.ru</a><br />
-            </address>
-        </div>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>@ViewBag.Title.</h2>
-            <h3>Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</h3>
-
-            <address>
-                Казахстан, Алматы, 050035, ул. Жандосова, д. 51<br />
-                <abbr>Телефон:</abbr>
-                8 (727) 303-63-33
-            </address>
-
-            <address>
-                <strong>Email:</strong>   <a href="mailto:bibliotekajik@mail.ru">bibliotekajik@mail.ru</a>,
-                <a href="mailto:givotnovodstvo@mail.ru">givotnovodstvo@mail.ru</a><br />
-            </address>
-        </div>
-    }
-}

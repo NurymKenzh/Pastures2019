@@ -45,7 +45,7 @@
 
 /* Carousel base class */
 .carousel {
-    margin-bottom: 4rem;
+    margin-bottom: 1rem;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
@@ -83,6 +83,14 @@
     margin-left: .75rem;
 }
 
+/* Pagination */
+.marketing-pagination {
+    margin-bottom: 0rem;
+}
+
+    .marketing-pagination > .btn {
+        border-radius: 2rem;
+    }
 
 /* Featurettes
 ------------------------- */
@@ -501,7 +509,7 @@
 
     .sidebar.light .dismiss {
         background: #ddd;
-        color: #888;
+        color: #0d77b6;
     }
 
         .sidebar.light .dismiss:hover,

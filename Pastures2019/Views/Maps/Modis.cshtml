@@ -180,9 +180,9 @@
                                     </div>
                                     <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                                 </div>
-                                
+
                             </div>
-                            
+
                         </li>
                     </ul>
                 </li>
@@ -193,12 +193,11 @@
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
             </div>
             <div class="sidebar-footer">
-                <a href="#">
-                    <i class="SomeInfo fa fa-file" InfoTitle="Tooltip on top"></i>
+                <a asp-area="" asp-controller="Home" asp-action="About">
+                    <i class="SomeInfo fa fa-file" InfoTitle="About"></i>
                 </a>
-                <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
-                    <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
-                    <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
+                <a asp-area="" asp-controller="Home" asp-action="Instruction">
+                    <i class="SomeInfo fa fa-film" InfoTitle="Instruction"></i>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">
                     <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
@@ -220,6 +219,34 @@
         <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
     </div>
     <!-- End content -->
+    <footer class="footer-classic fixed-bottom border-top border-light">
+        <div class="container-fluid">
+            <div class="row align-items-center m-1">
+                <div class="col">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button  OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (выдел)"></i></button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Third group">
+                            <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="Домой"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="float-right">
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                    </div>
+                </div>
+                <div class="col col-lg-2">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+
+        </div>
+    </footer>
 </div>
 
 @* layers *@

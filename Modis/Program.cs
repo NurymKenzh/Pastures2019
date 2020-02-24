@@ -191,6 +191,18 @@ namespace Modis
 
                 try
                 {
+                    foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "*", SearchOption.TopDirectoryOnly))
+                    {
+                        if (Directory.EnumerateFiles(folder, "*hdf*").Count() == 0)
+                        {
+                            try
+                            {
+                                Directory.Delete(folder, true);
+                            }
+                            catch { }
+                        }
+                    }
+
                     // create subfolder                        
                     Directory.CreateDirectory(folderDownload);
 
@@ -235,7 +247,7 @@ namespace Modis
                     //    Publish(folder);
                     //}
                 }
-                catch
+                catch(Exception ex)
                 {
                     // delete folders which names start with "!" 
                     foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
@@ -528,11 +540,7 @@ namespace Modis
         {
             foreach (string raster in Directory.GetFiles(Folder, "*.tif"))
             {
-                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                pyfile = Directory.GetFiles(path, "*.py").FirstOrDefault(),
-                parameters = $"python \"{pyfile}\" \"{PasturepolShpPath}\" \"{raster}\"";
-                string result = PythonExecute(CMDPath, parameters);
-                var connection = new NpgsqlConnection("Host=localhost;Database=Pastures2019;Username=postgres;Password=postgres;Port=5432");
+                var connection = new NpgsqlConnection("Host=localhost;Database=Pastures2019;Username=postgres;Password=postgresprod;Port=5432");
                 connection.Open();
                 string query = $"SELECT raster" +
                     $" FROM public.analytics" +
@@ -544,6 +552,11 @@ namespace Modis
                     connection.Close();
                     continue;
                 }
+
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                pyfile = Directory.GetFiles(path, "*.py").FirstOrDefault(),
+                parameters = $"python \"{pyfile}\" \"{PasturepolShpPath}\" \"{raster}\"";
+                string result = PythonExecute(CMDPath, parameters);
                 foreach (string line in result.Split("@data$"))
                 {
                     if (line.Contains("OrderedDict"))
@@ -555,13 +568,13 @@ namespace Modis
                             .Replace("'((", "")
                             .Replace("))'", "")
                             .Replace(" ", "");
-                        decimal objectid = -1,
-                            min = -1,
-                            max = -1,
-                            mean = -1,
-                            median = -1,
-                            majority = -1,
-                            nodata = -1;
+                        decimal? objectid = null,
+                            min = null,
+                            max = null,
+                            mean = null,
+                            median = null,
+                            majority = null,
+                            nodata = null;
                         foreach (string valueS in lineNew.Split("),("))
                         {
                             string valueSNew = valueS
@@ -569,39 +582,57 @@ namespace Modis
                                 .Replace(")]", ""),
                                 name = valueSNew.Split(',')[0].Replace("'", ""),
                                 value = valueSNew.Split(',')[1].Replace("'", "");
-                            switch (name)
+                            try
                             {
-                                case "objectid":
-                                    objectid = Convert.ToDecimal(value);
-                                    break;
-                                case "min":
-                                    min = Convert.ToDecimal(value) / 10000;
-                                    break;
-                                case "max":
-                                    max = Convert.ToDecimal(value) / 10000;
-                                    break;
-                                case "mean":
-                                    mean = Convert.ToDecimal(value) / 10000;
-                                    break;
-                                case "median":
-                                    median = Convert.ToDecimal(value) / 10000;
-                                    break;
-                                case "majority":
-                                    majority = Convert.ToDecimal(value) / 10000;
-                                    break;
-                                case "nodata":
-                                    nodata = Convert.ToDecimal(value) / 10000;
-                                    break;
+                                switch (name)
+                                {
+                                    case "objectid":
+                                        objectid = Convert.ToDecimal(value);
+                                        break;
+                                    case "min":
+                                        min = Convert.ToDecimal(value) / 10000;
+                                        break;
+                                    case "max":
+                                        max = Convert.ToDecimal(value) / 10000;
+                                        break;
+                                    case "mean":
+                                        mean = Convert.ToDecimal(value) / 10000;
+                                        break;
+                                    case "median":
+                                        median = Convert.ToDecimal(value) / 10000;
+                                        break;
+                                    case "majority":
+                                        majority = Convert.ToDecimal(value) / 10000;
+                                        break;
+                                    case "nodata":
+                                        nodata = Convert.ToDecimal(value) / 10000;
+                                        break;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
                             }
                         }
                         if (objectid >= 0)
                         {
+                            try
+                            {
+                                string minS = min == null ? "NULL" : min.ToString(),
+                                    maxS = max == null ? "NULL" : max.ToString(),
+                                    medianS = median == null ? "NULL" : median.ToString(),
+                                    majorityS = majority == null ? "NULL" : majority.ToString(),
+                                    meanS = mean == null ? "NULL" : mean.ToString();
+                                string execute = $"INSERT" +
+                                    $" INTO public.analytics(raster, objectid, min, max, median, majority, mean)" +
+                                    $" VALUES ('{Path.GetFileName(raster)}', {objectid.ToString()}, {minS}, {maxS}, {medianS}, {majorityS}, {meanS});";
+                                connection.Execute(execute);
+                                connection.Close();
+                            }
+                            catch(Exception ex)
+                            {
 
-                            string execute = $"INSERT" +
-                                $" INTO public.analytics(raster, objectid, min, max, median, majority, mean)" +
-                                $" VALUES ({Path.GetFileName(raster)}, {objectid.ToString()}, {min.ToString()}, {max.ToString()}, {median.ToString()}, {majority.ToString()}, {mean.ToString()});";
-                            connection.Execute(execute);
-                            connection.Close();
+                            }
                         }
                     }
                 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using Dapper;
+using System.Collections.Generic;
 
 namespace Modis
 {
@@ -190,29 +191,29 @@ namespace Modis
 
                 try
                 {
-                    //// create subfolder                        
-                    //Directory.CreateDirectory(folderDownload);
+                    // create subfolder                        
+                    Directory.CreateDirectory(folderDownload);
 
-                    //// download modis
-                    //ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
+                    // download modis
+                    ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
 
-                    //// mosaic
-                    //ModisMosaic(folderDownload);
+                    // mosaic
+                    ModisMosaic(folderDownload);
 
-                    //// convert
-                    //ModisConvert(folderDownload);
+                    // convert
+                    ModisConvert(folderDownload);
 
-                    //// clip
-                    //TifClip(folderDownload);
+                    // clip
+                    TifClip(folderDownload);
 
-                    //// move to GeoServer
-                    //// publish
-                    //Publish(folderDownload);
+                    // move to GeoServer
+                    // publish
+                    Publish(folderDownload);
 
-                    //// rename folder (remove "!")
-                    //Directory.Move(folderDownload, folderDownloadFinale);
+                    // rename folder (remove "!")
+                    Directory.Move(folderDownload, folderDownloadFinale);
 
-                    //Anomaly(GeoServerModisDataDir);
+                    Anomaly(GeoServerModisDataDir);
 
 
                     Fiona(GeoServerModisDataDir);
@@ -525,71 +526,83 @@ namespace Modis
 
         private static void Fiona(string Folder)
         {
-            string raster = "E:\\Documents\\Google Drive\\New\\fiona\\layers\\A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif";
-            //foreach(string )
-            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+            foreach (string raster in Directory.GetFiles(Folder, "*.tif"))
+            {
+                string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 pyfile = Directory.GetFiles(path, "*.py").FirstOrDefault(),
                 parameters = $"python \"{pyfile}\" \"{PasturepolShpPath}\" \"{raster}\"";
-            string result = PythonExecute(CMDPath, parameters);
-            var connection = new NpgsqlConnection("Host=localhost;Database=Pastures2019;Username=postgres;Password=postgres;Port=5432");
-            foreach (string line in result.Split("@data$"))
-            {
-                if (line.Contains("OrderedDict"))
+                string result = PythonExecute(CMDPath, parameters);
+                var connection = new NpgsqlConnection("Host=localhost;Database=Pastures2019;Username=postgres;Password=postgres;Port=5432");
+                connection.Open();
+                string query = $"SELECT raster" +
+                    $" FROM public.analytics" +
+                    $" WHERE raster = '{Path.GetFileName(raster)}'" +
+                    $" LIMIT 1;";
+                List<string> existDB = connection.Query<string>(query).ToList();
+                if (existDB.Count() > 0)
                 {
-                    string lineNew = line
-                        .Replace("\r\n", "")
-                        .Replace("\"", "")
-                        .Replace("OrderedDict", "")
-                        .Replace("'((", "")
-                        .Replace("))'", "")
-                        .Replace(" ", "");
-                    decimal objectid = -1,
-                        min = -1,
-                        max = -1,
-                        mean = -1,
-                        median = -1,
-                        majority = -1,
-                        nodata = -1;
-                    foreach (string valueS in lineNew.Split("),("))
+                    connection.Close();
+                    continue;
+                }
+                foreach (string line in result.Split("@data$"))
+                {
+                    if (line.Contains("OrderedDict"))
                     {
-                        string valueSNew = valueS
-                            .Replace("[(", "")
-                            .Replace(")]", ""),
-                            name = valueSNew.Split(',')[0].Replace("'", ""),
-                            value = valueSNew.Split(',')[1].Replace("'", "");
-                        switch (name)
+                        string lineNew = line
+                            .Replace("\r\n", "")
+                            .Replace("\"", "")
+                            .Replace("OrderedDict", "")
+                            .Replace("'((", "")
+                            .Replace("))'", "")
+                            .Replace(" ", "");
+                        decimal objectid = -1,
+                            min = -1,
+                            max = -1,
+                            mean = -1,
+                            median = -1,
+                            majority = -1,
+                            nodata = -1;
+                        foreach (string valueS in lineNew.Split("),("))
                         {
-                            case "objectid":
-                                objectid = Convert.ToDecimal(value);
-                                break;
-                            case "min":
-                                min = Convert.ToDecimal(value) / 10000;
-                                break;
-                            case "max":
-                                max = Convert.ToDecimal(value) / 10000;
-                                break;
-                            case "mean":
-                                mean = Convert.ToDecimal(value) / 10000;
-                                break;
-                            case "median":
-                                median = Convert.ToDecimal(value) / 10000;
-                                break;
-                            case "majority":
-                                majority = Convert.ToDecimal(value) / 10000;
-                                break;
-                            case "nodata":
-                                nodata = Convert.ToDecimal(value) / 10000;
-                                break;
+                            string valueSNew = valueS
+                                .Replace("[(", "")
+                                .Replace(")]", ""),
+                                name = valueSNew.Split(',')[0].Replace("'", ""),
+                                value = valueSNew.Split(',')[1].Replace("'", "");
+                            switch (name)
+                            {
+                                case "objectid":
+                                    objectid = Convert.ToDecimal(value);
+                                    break;
+                                case "min":
+                                    min = Convert.ToDecimal(value) / 10000;
+                                    break;
+                                case "max":
+                                    max = Convert.ToDecimal(value) / 10000;
+                                    break;
+                                case "mean":
+                                    mean = Convert.ToDecimal(value) / 10000;
+                                    break;
+                                case "median":
+                                    median = Convert.ToDecimal(value) / 10000;
+                                    break;
+                                case "majority":
+                                    majority = Convert.ToDecimal(value) / 10000;
+                                    break;
+                                case "nodata":
+                                    nodata = Convert.ToDecimal(value) / 10000;
+                                    break;
+                            }
                         }
-                    }
-                    if (objectid >= 0)
-                    {
-                        connection.Open();
-                        string execute = $"INSERT" +
-                            $" INTO public.analytics(raster, objectid, min, max, median, majority, mean)" +
-                            $" VALUES ({raster}, {objectid.ToString()}, {min.ToString()}, {max.ToString()}, {median.ToString()}, {majority.ToString()}, {mean.ToString()});";
-                        connection.Execute(execute);
-                        connection.Close();
+                        if (objectid >= 0)
+                        {
+
+                            string execute = $"INSERT" +
+                                $" INTO public.analytics(raster, objectid, min, max, median, majority, mean)" +
+                                $" VALUES ({Path.GetFileName(raster)}, {objectid.ToString()}, {min.ToString()}, {max.ToString()}, {median.ToString()}, {majority.ToString()}, {mean.ToString()});";
+                            connection.Execute(execute);
+                            connection.Close();
+                        }
                     }
                 }
             }

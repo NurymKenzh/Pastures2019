@@ -629,7 +629,7 @@
         }
 
             .sidebar.light .chiller-theme .sidebar-footer > a:hover i {
-                color: #fff;
+                color: #777;
             }
 /***** Content *****/
 
@@ -660,7 +660,7 @@
 /*--------------------------side-footer------------------------------*/
 
 .sidebar-footer {    
-    flex-shrink: 0;
+    position: absolute;
     width: 100%;
     bottom: 0;
     display: flex;
@@ -698,7 +698,7 @@
     }
 
         .chiller-theme .sidebar-footer > a:hover i {
-            color: #0d77b6;
+            color: #FFCC00;
         }
 
 

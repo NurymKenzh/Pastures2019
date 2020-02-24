@@ -3,12 +3,12 @@ import pprint
 from rasterstats import zonal_stats
 from shapely.geometry import shape
 import numpy as np
-polys = "D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp"
-raster = "D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif"
+polys = "E:/Documents/Google Drive/New/fiona/layers/adm1pol.shp"
+raster = "E:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif"
 
-import sys
-polys = sys.argv[1]
-raster = sys.argv[2]
+##import sys
+##polys = sys.argv[1]
+##raster = sys.argv[2]
 
 ######################## Option №1 **************
 ##with fiona.open(polys) as src:
@@ -28,6 +28,9 @@ with fiona.open(polys) as src:
     for feat in src:
          stats = zonal_stats(feat, raster, all_touched=True, categorical=False, geojson_out=True, stats= ['mean', 'min', 'max', 'median', 'majority', 'nodata'])
          pprint.pprint(stats[0]['properties'])
+
+         with open("D:/file_out.txt", "a") as fout:
+              fout.write(str(stats[0]['properties']) + '\n')
 
 ########################## Option №3 ************** 
 ##cmap = {0: 'Missing data', 1: 'No decision', 11: 'Night', 25: 'No snow', 37: 'Lake', 39: 'Sea', 50: 'Cloud', 100: 'Lake ice', 200: 'Snow', 254: 'Detector saturated', 255: 'Fill'}

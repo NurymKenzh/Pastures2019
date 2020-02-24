@@ -624,7 +624,9 @@ namespace Modis
                 process.StartInfo.FileName = CMDPath;
                 process.Start();
 
-                process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster_v20200217v01.py\" \"D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp\" \"D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif\"");
+                //process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster_v20200217v01.py\" \"D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp\" \"D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif\"");
+                process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster.py\"");
+                process.StandardInput.WriteLine("exit()");
 
                 string output = process.StandardOutput.ReadToEnd();
                 Log(output);

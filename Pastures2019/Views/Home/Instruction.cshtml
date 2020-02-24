@@ -5,46 +5,43 @@
     ViewData["Title"] = SharedLocalizer["Instruction"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="container mt-5">
+        @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+        {
+            if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+                <div class="alert alert-info">
+                    <button href="#" type="button" class="close"><i class="fa fa-info-circle text-info"></i></button>
+                    <h4>Текстовая инструкция</h4>
+                    <p>Action requires additional information. Additional information <a class="alert-link" href="~/Pdf/Manual.pdf" target="_blank">Click Here</a> to read</p>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                </div>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+                <div class="alert alert-info">
+                    <button href="#" type="button" class="close"><i class="glyphicon glyphicon-remove-circle text-info"></i></button>
+                    <h4>Текстовая инструкция</h4>
+                    <p>Action requires additional information. Additional information <a class="alert-link" href="~/Pdf/Manual.pdf" target="_blank">Click Here</a> to read</p>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                </div>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+                <div class="alert alert-info">
+                    <button href="#" type="button" class="close"><i class="glyphicon glyphicon-remove-circle text-info"></i></button>
+                    <h4>Текстовая инструкция</h4>
+                    <p>Action requires additional information. Additional information <a class="alert-link" href="~/Pdf/Manual.pdf" target="_blank">Click Here</a> to read</p>
+                </div>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+                </div>
+            }
+        }
 
-@if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
-{
-    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
-    {
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>Текстовая инструкция</h2>
-            <a href="~/Pdf/Manual.pdf" target="_blank">Открыть</a>
-        </div>
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>Пример по работе с картами</h2>
-            <video controls="controls" style="width: 100%;">
-                @*<source src="~/Video/Help.mp4" type="video/mp4" />*@
-            </video>
-        </div>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
-    {
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>Текстовая инструкция</h2>
-            <a href="~/Pdf/Manual.pdf" target="_blank">Открыть</a>
-        </div>
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>Пример по работе с картами</h2>
-            <video controls="controls" style="width: 100%;">
-                @*<source src="~/Video/Help.mp4" type="video/mp4" />*@
-            </video>
-        </div>
-    }
-    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
-    {
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>Текстовая инструкция</h2>
-            <a href="~/Pdf/Manual.pdf" target="_blank">Открыть</a>
-        </div>
-        <div class="contcentr" style="background:inherit;border:1px solid #fff;padding:5px 10px; margin-right:100px; margin-left:100px;">
-            <h2>Пример по работе с картами</h2>
-            <video controls="controls" style="width: 100%;">
-                @*<source src="~/Video/Help.mp4" type="video/mp4" />*@
-            </video>
-        </div>
-    }
-}
+    </div>
+      

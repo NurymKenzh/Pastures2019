@@ -30,8 +30,8 @@ with fiona.open(polys) as src:
          pprint.pprint("@data$")
          pprint.pprint(str(stats[0]['properties']))
 
-         with open("D:/file_out.txt", "a") as fout:
-              fout.write(str(stats[0]['properties']) + '\n')
+##         with open("D:/file_out.txt", "a") as fout:
+##              fout.write(str(stats[0]['properties']) + '\n')
 pprint.pprint("@data$")
 ########################## Option №3 ************** 
 ##cmap = {0: 'Missing data', 1: 'No decision', 11: 'Night', 25: 'No snow', 37: 'Lake', 39: 'Sea', 50: 'Cloud', 100: 'Lake ice', 200: 'Snow', 254: 'Detector saturated', 255: 'Fill'}

@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
+using Npgsql;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading;
+using Dapper;
 
 namespace Modis
 {
@@ -27,7 +29,6 @@ namespace Modis
         static string ModisSource = "",
             ModisProduct = "";
 
-
         static string ModisUser = "",
             ModisPassword = "",
             CMDPath = "",
@@ -35,7 +36,8 @@ namespace Modis
             GeoServerUser = "",
             GeoServerPassword = "",
             GeoServerURL = "",
-            ClipShape = "";
+            ClipShape = "",
+            PasturepolShpPath = "";
 
         static int AnomalyStartYear = 0,
             AnomalyFinishYear = 0;
@@ -112,6 +114,7 @@ namespace Modis
                 GeoServerUser = JObject.Parse(settingsJObject.ToString())["GeoServerUser"];
                 GeoServerPassword = JObject.Parse(settingsJObject.ToString())["GeoServerPassword"];
                 GeoServerURL = JObject.Parse(settingsJObject.ToString())["GeoServerURL"];
+                PasturepolShpPath = JObject.Parse(settingsJObject.ToString())["PasturepolShpPath"];
 
                 ModisSource = ModisSource1;
                 ModisProduct = ModisProduct1;
@@ -522,9 +525,74 @@ namespace Modis
 
         private static void Fiona(string Folder)
         {
+            string raster = "E:\\Documents\\Google Drive\\New\\fiona\\layers\\A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif";
+            //foreach(string )
             string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                pyfile = Directory.GetFiles(path, "*.py").FirstOrDefault();
-            PythonExecute(CMDPath, "");
+                pyfile = Directory.GetFiles(path, "*.py").FirstOrDefault(),
+                parameters = $"python \"{pyfile}\" \"{PasturepolShpPath}\" \"{raster}\"";
+            string result = PythonExecute(CMDPath, parameters);
+            var connection = new NpgsqlConnection("Host=localhost;Database=Pastures2019;Username=postgres;Password=postgres;Port=5432");
+            foreach (string line in result.Split("@data$"))
+            {
+                if (line.Contains("OrderedDict"))
+                {
+                    string lineNew = line
+                        .Replace("\r\n", "")
+                        .Replace("\"", "")
+                        .Replace("OrderedDict", "")
+                        .Replace("'((", "")
+                        .Replace("))'", "")
+                        .Replace(" ", "");
+                    decimal objectid = -1,
+                        min = -1,
+                        max = -1,
+                        mean = -1,
+                        median = -1,
+                        majority = -1,
+                        nodata = -1;
+                    foreach (string valueS in lineNew.Split("),("))
+                    {
+                        string valueSNew = valueS
+                            .Replace("[(", "")
+                            .Replace(")]", ""),
+                            name = valueSNew.Split(',')[0].Replace("'", ""),
+                            value = valueSNew.Split(',')[1].Replace("'", "");
+                        switch (name)
+                        {
+                            case "objectid":
+                                objectid = Convert.ToDecimal(value);
+                                break;
+                            case "min":
+                                min = Convert.ToDecimal(value) / 10000;
+                                break;
+                            case "max":
+                                max = Convert.ToDecimal(value) / 10000;
+                                break;
+                            case "mean":
+                                mean = Convert.ToDecimal(value) / 10000;
+                                break;
+                            case "median":
+                                median = Convert.ToDecimal(value) / 10000;
+                                break;
+                            case "majority":
+                                majority = Convert.ToDecimal(value) / 10000;
+                                break;
+                            case "nodata":
+                                nodata = Convert.ToDecimal(value) / 10000;
+                                break;
+                        }
+                    }
+                    if (objectid >= 0)
+                    {
+                        connection.Open();
+                        string execute = $"INSERT" +
+                            $" INTO public.analytics(raster, objectid, min, max, median, majority, mean)" +
+                            $" VALUES ({raster}, {objectid.ToString()}, {min.ToString()}, {max.ToString()}, {median.ToString()}, {majority.ToString()}, {mean.ToString()});";
+                        connection.Execute(execute);
+                        connection.Close();
+                    }
+                }
+            }
         }
 
         private static void Log(string log)
@@ -610,7 +678,7 @@ namespace Modis
             }
         }
 
-        private static void PythonExecute(
+        private static string PythonExecute(
             string CMDPath,
             string Parameters)
         {
@@ -624,8 +692,9 @@ namespace Modis
                 process.StartInfo.FileName = CMDPath;
                 process.Start();
 
-                //process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster_v20200217v01.py\" \"D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp\" \"D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif\"");
-                process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster.py\"");
+                //process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster.py\" \"D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp\" \"D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif\"");
+                process.StandardInput.WriteLine(Parameters);
+                //process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster.py\"");
                 process.StandardInput.WriteLine("exit()");
 
                 string output = process.StandardOutput.ReadToEnd();
@@ -637,6 +706,7 @@ namespace Modis
                 {
                     throw new Exception(error);
                 }
+                return output;
             }
             catch (Exception exception)
             {

@@ -199,6 +199,7 @@
                             <tr>
                                 <th scope="col">1</th>
                                 <td id="infoOtdel"></td>
+                                <td id="valueOtdel"></td>
                             </tr>
                         </thead>
                         
@@ -848,7 +849,8 @@
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                            $('infoOtdel').val('@Html.Raw(SharedLocalizer["Otdel"]).: ' + dataDB.pasturepol.otdel);
+                            $('#infoOtdel').text('@Html.Raw(SharedLocalizer["Otdel"])');
+                            $('#valueOtdel').text(dataDB.pasturepol.otdel);
                             console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
                             console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
                             console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);

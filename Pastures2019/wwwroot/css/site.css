@@ -363,12 +363,21 @@
     transition: all .3s;
     box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.5);
     text-align: left;
+    flex: 1 0 auto;
+    overflow-y: auto;
 }
 
     .sidebar.active {
         left: 0;
+        display: flex;
+        flex-direction: column;
     }
-
+.page-wrapper {
+    max-height: calc(100% - 30px);
+    height: calc(100% - 30px);
+    overflow-y: auto;
+    position: relative;
+}
 .dismiss {
     width: 35px;
     height: 35px;
@@ -650,8 +659,8 @@
 
 /*--------------------------side-footer------------------------------*/
 
-.sidebar-footer {
-    position: absolute;
+.sidebar-footer {    
+    flex-shrink: 0;
     width: 100%;
     bottom: 0;
     display: flex;

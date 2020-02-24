@@ -15,8 +15,8 @@
 
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
-    <nav class="sidebar border border-light overflow-auto">
-        <div class="page-wrapper chiller-theme">
+    <nav class="sidebar chiller-theme border border-light overflow-auto">
+        <div class="page-wrapper">
             <!-- close sidebar menu -->
             <div class="dismiss">
                 <i class="fa fa-arrow-left"></i>
@@ -198,21 +198,22 @@
             <div class="dark-light-buttons">
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-            </div>
-            <div class="sidebar-footer">
-                <a asp-area="" asp-controller="Home" asp-action="About">
-                    <i class="SomeInfo fa fa-file" InfoTitle="About"></i>
-                </a>
-                <a asp-area="" asp-controller="Home" asp-action="Instruction">
-                    <i class="SomeInfo fa fa-film" InfoTitle="Instruction"></i>
-                </a>
-                <a href="#" id="LegendBtn" class="target-click">
-                    <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
-                </a>
-                <a href="#" id="MapTitleBtn" class="target-click">
-                    <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
-                </a>
-            </div>
+            </div>    
+            
+        </div>
+        <div class="sidebar-footer">
+            <a asp-area="" asp-controller="Home" asp-action="About">
+                <i class="SomeInfo fa fa-file" InfoTitle="About"></i>
+            </a>
+            <a asp-area="" asp-controller="Home" asp-action="Instruction">
+                <i class="SomeInfo fa fa-film" InfoTitle="Instruction"></i>
+            </a>
+            <a href="#" id="LegendBtn" class="target-click">
+                <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
+            </a>
+            <a href="#" id="MapTitleBtn" class="target-click">
+                <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
+            </a>
         </div>
     </nav>
     <!-- End sidebar -->

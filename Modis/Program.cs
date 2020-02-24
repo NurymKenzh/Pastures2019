@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 
 namespace Modis
@@ -186,39 +187,32 @@ namespace Modis
 
                 try
                 {
-                    // create subfolder                        
-                    Directory.CreateDirectory(folderDownload);
+                    //// create subfolder                        
+                    //Directory.CreateDirectory(folderDownload);
 
-                    // download modis
-                    ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
+                    //// download modis
+                    //ModisDownload(dateTimeStart, dateTimeFinish, folderDownload);
 
-                    // mosaic
-                    ModisMosaic(folderDownload);
+                    //// mosaic
+                    //ModisMosaic(folderDownload);
 
-                    // convert
-                    ModisConvert(folderDownload);
+                    //// convert
+                    //ModisConvert(folderDownload);
 
-                    // clip
-                    TifClip(folderDownload);
+                    //// clip
+                    //TifClip(folderDownload);
 
-                    // move to GeoServer
-                    // publish
-                    Publish(folderDownload);
+                    //// move to GeoServer
+                    //// publish
+                    //Publish(folderDownload);
 
-                    // rename folder (remove "!")
-                    Directory.Move(folderDownload, folderDownloadFinale);
+                    //// rename folder (remove "!")
+                    //Directory.Move(folderDownload, folderDownloadFinale);
 
-                    // anomaly
-                    //foreach (string file in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
-                    //{
-                    //    if (file.Contains("Anomaly") || file.Contains("BASE"))
-                    //    {
-                    //        continue;
-                    //    }
-                    //    // calculate anomaly
-                    //    Anomaly(GeoServerModisDataDir, file);
-                    //}
-                    Anomaly(GeoServerModisDataDir);
+                    //Anomaly(GeoServerModisDataDir);
+
+
+                    Fiona(GeoServerModisDataDir);
 
                     //// work with downloaded MODIS
                     //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
@@ -526,6 +520,13 @@ namespace Modis
             }
         }
 
+        private static void Fiona(string Folder)
+        {
+            string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                pyfile = Directory.GetFiles(path, "*.py").FirstOrDefault();
+            PythonExecute(CMDPath, "");
+        }
+
         private static void Log(string log)
         {
             foreach(string line in log.Split("\r\n"))
@@ -592,6 +593,38 @@ namespace Modis
 
                 process.StandardInput.WriteLine($"curl {Parameters}");
                 process.StandardInput.WriteLine("exit");
+
+                string output = process.StandardOutput.ReadToEnd();
+                Log(output);
+                string error = process.StandardError.ReadToEnd();
+                Log(error);
+                process.WaitForExit();
+                if (error.ToLower().Contains("error"))
+                {
+                    throw new Exception(error);
+                }
+            }
+            catch (Exception exception)
+            {
+                throw new Exception(exception.ToString(), exception?.InnerException);
+            }
+        }
+
+        private static void PythonExecute(
+            string CMDPath,
+            string Parameters)
+        {
+            Process process = new Process();
+            try
+            {
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardInput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.FileName = CMDPath;
+                process.Start();
+
+                process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster_v20200217v01.py\" \"D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp\" \"D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif\"");
 
                 string output = process.StandardOutput.ReadToEnd();
                 Log(output);

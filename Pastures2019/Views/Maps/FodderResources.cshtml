@@ -193,17 +193,61 @@
                         <input id="FilterChart" class="btn btn-warning btn-block mt-3" type="button" value="CATO Info" onclick="InfoCATO()" />
                     </form>
                 </div>
-                <div class="col-md-12" style="display: none" id="InfoMap">
-                    <table class="table table-sm">
-                        <thead>
+                <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
+                    <table class="table table-hover table-sm small">
+                        <tbody>
                             <tr>
-                                <th scope="col">1</th>
-                                <td id="infoOtdel"></td>
-                                <td id="valueOtdel"></td>
+                                <th class="modal-white" scope="row" id="infoOtdel"></thclass="modal-white>
+                                <td class="font-italic" colspan="2" id="valueOtdel"></td>
                             </tr>
-                        </thead>
-                        
+                            <tr>
+                                <th scope="row" id="infoPClass"></th>
+                                <td class="font-italic" colspan="2" id="valuePClass"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoGroup"></th>
+                                <td class="font-italic" colspan="2" id="valueGroup"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoGroupLat"></th>
+                                <td class="font-italic" colspan="2" id="valueGroupLat"></td>
+                            </tr>
+                            <tr class="table-active">
+                                <th scope="row" id="infoAllocatedFeedResources"></th>
+                                <td id="infocha"></td>
+                                <td id="infoсhaFeedUnits"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoSpring"></th>
+                                <td class="font-italic" id="valueUr_v"></td>
+                                <td class="font-italic" id="valueKorm_v"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoSummer"></th>
+                                <td class="font-italic" id="valueUr_l"></td>
+                                <td class="font-italic" id="valueKorm_l"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoAutumn"></th>
+                                <td class="font-italic" id="valueUr_o"></td>
+                                <td class="font-italic" id="valueKorm_o"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoWinter"></th>
+                                <td class="font-italic" id="valueUr_z"></td>
+                                <td class="font-italic" id="valueKorm_z"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoRecommendationForUse"></th>
+                                <td class="font-italic" colspan="2" id="valueRecommendationForUse"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoRecomCattles"></th>
+                                <td class="font-italic" colspan="2" id="valueRecomCattles"></td>
+                            </tr>
+                        </tbody>
                     </table>
+                    
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -795,19 +839,22 @@
 <script>
     var InfoMapModal;
     $(document).ready(function () {
-
         InfoMapModal = new jBox('Modal', {
+            id: 'modal-white',
+            maxWidth: 500,
+            maxHeight: 400,
+            adjustTracker: 'scroll',
             title: 'My Modal',
             zIndex: 'auto',
             draggable: 'title',
             closeOnClick: false,
             closeButton: 'title',
             animation: 'zoomIn',
-            title: 'Сводная информация',
             overlay: false,
             onOpen: function () {
                 // Add t
                 this.setContent($('#InfoMap'));
+                this.setTitle('<div class="text-white font-weight-bold">Информация</div>');
             },
         });
     });
@@ -851,7 +898,33 @@
                         success: function (dataDB) {
                             $('#infoOtdel').text('@Html.Raw(SharedLocalizer["Otdel"])');
                             $('#valueOtdel').text(dataDB.pasturepol.otdel);
-                            console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
+                            $('#infoPClass').text('@Html.Raw(SharedLocalizer["PClass"])');
+                            $('#valuePClass').text(dataDB.pasturepol.ptype);
+                            $('#infoGroup').text('@Html.Raw(SharedLocalizer["Group"])');
+                            $('#valueGroup').text(dataDB.pasturepol.group);
+                            $('#infoGroupLat').text('@Html.Raw(SharedLocalizer["GroupLat"])');
+                            $('#valueGroupLat').text(dataDB.pasturepol.group_lat);
+                            $('#infoAllocatedFeedResources').text('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
+                            $('#infoGrossYieldOfPlantsEatenOnAverageCropYearDryWeight').text('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
+                            $('#infocha').text('@Html.Raw(SharedLocalizer["cha"])');
+                            $('#infoсhaFeedUnits').text('@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
+                            $('#infoSpring').text('@Html.Raw(SharedLocalizer["Spring"])');
+                            $('#valueUr_v').text(features[0].get('ur_v'));
+                            $('#valueKorm_v').text(features[0].get('korm_v'));
+                            $('#infoSummer').text('@Html.Raw(SharedLocalizer["Summer"])');
+                            $('#valueUr_l').text(features[0].get('ur_l'));
+                            $('#valueKorm_l').text(features[0].get('korm_l'));
+                            $('#infoAutumn').text('@Html.Raw(SharedLocalizer["Autumn"])');
+                            $('#valueUr_o').text(features[0].get('ur_o'));
+                            $('#valueKorm_o').text(features[0].get('korm_o'));
+                            $('#infoWinter').text('@Html.Raw(SharedLocalizer["Winter"])');
+                            $('#valueUr_z').text(features[0].get('ur_z'));
+                            $('#valueKorm_z').text(features[0].get('korm_z'));
+                            $('#infoRecommendationForUse').text('@Html.Raw(SharedLocalizer["RecommendationForUse"])');
+                            $('#valueRecommendationForUse').text(dataDB.pasturepol.recommend);
+                            $('#infoRecomCattles').text('@Html.Raw(SharedLocalizer["RecommendationForUse"])');
+                            $('#valueRecomCattles').text(dataDB.pasturepol.recomcatt);
+                            @*console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
                             console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
                             console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);
                             console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
@@ -863,7 +936,7 @@
                             console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
                             console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.pasturepol.recommend);
                             console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.pasturepol.recomcatt);
-                            console.log('----------------------------------------------');
+                            console.log('----------------------------------------------');*@
                         },
                         error: function () {
                         }

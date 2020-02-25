@@ -28,9 +28,9 @@
                 <i class="fa fa-arrow-left"></i>
             </div>
             <div class="logo">
-                <h3>Pasture</h3>
+                <h3><a href="#">Pasture</a></h3>
             </div>
-            <div class="card-body">
+            <div class="col">
                 <form>
                     <label class="m-0" for="SourceProduct">@SharedLocalizer["Satellite"]</label>
                     <div class="input-group input-group-sm">
@@ -134,13 +134,20 @@
                 </form>
             </div>
             <!-- Other sections -->
-            <ul class="list-unstyled menu-elements">
+            <ul class="list-unstyled menu-elements mt-lg-2">
                 <li>
                     <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
                         <i class="fa fa-list"></i>Базовые слои
                     </a>
                     <div id="TematicLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#TematicLayerSections">
                         <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerpasturepolShow" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerpasturepolShow">
+                                    @SharedLocalizer["pasturepolLayer"]
+                                </label>
+                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="50" oninput="ChangeLayers()" />
+                            </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerpopShow">
@@ -156,25 +163,18 @@
                                 <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
+                                <input class="form-check-input" type="checkbox" id="layerhdrShow" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerhdrShow">
                                     @SharedLocalizer["hdrLayer"]
                                 </label>
                                 <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
+                                <input class="form-check-input" type="checkbox" id="layerrdslinShow" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerrdslinShow">
                                     @SharedLocalizer["rdslinLayer"]
                                 </label>
                                 <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="layerpasturepolShow" checked="checked" onchange="ChangeLayers()">
-                                <label class="form-check-label" for="layerpasturepolShow">
-                                    @SharedLocalizer["pasturepolLayer"]
-                                </label>
-                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="50" oninput="ChangeLayers()" />
                             </div>
                         </div>
                     </div>

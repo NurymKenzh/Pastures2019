@@ -14,7 +14,10 @@
 .jBox-container {
   background: #258ecd;
 }
-
+#modal-white .jBox-container {
+    border: 1px solid #fff;
+    background: #fafafa;
+}
 .jBox-content {
   padding: 5px 5px;
   overflow-x: hidden;
@@ -130,6 +133,13 @@
   padding: 15px 20px;
   background: #fafafa;
   border-bottom: 1px solid #eee;
+}
+
+#modal-white .jBox-title {
+    border-radius: 0 0 0 0;
+    padding: 10px 20px;
+    background: #40aae9;
+    border-bottom: 1px solid #eee;
 }
 
 .jBox-Modal.jBox-closeButton-title .jBox-title {

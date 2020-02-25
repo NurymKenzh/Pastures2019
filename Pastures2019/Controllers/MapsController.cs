@@ -560,19 +560,56 @@ namespace Pastures2019.Controllers
             analytics = analytics.OrderBy(a => a.date).ToList();
 
             // years average
+            List<string> labels_ = new List<string>();
+            List<decimal?> years_min_ = new List<decimal?>(),
+                years_max_ = new List<decimal?>(),
+                years_median_ = new List<decimal?>();
+            foreach (int d in analytics.Select(a => a.day).Distinct().OrderBy(v => v))
+            {
+                labels_.Add((new DateTime(2001, 1, 1).AddDays(d - 1).ToString("MM.dd")));
+                years_min_.Add(analytics.Where(a => a.day == d).Min(a => a.min));
+                years_max_.Add(analytics.Where(a => a.day == d).Max(a => a.max));
+                years_median_.Add(analytics.Where(a => a.day == d).Average(a => a.median));
+            }
+
+            // years
+            List<int> days = analytics.Select(a => a.day).Distinct().OrderBy(v => v).ToList();
+            List<year_dataset> year_min_datasets_ = new List<year_dataset>(),
+                year_max_datasets_ = new List<year_dataset>(),
+                year_median_datasets_ = new List<year_dataset>();
+            foreach (int y in years)
+            {
+                year_dataset year_min_dataset_new = new year_dataset()
+                {
+                    year = y,
+                    data = new List<decimal?>()
+                },
+                year_max_dataset_new = new year_dataset()
+                {
+                    year = y,
+                    data = new List<decimal?>()
+                },
+                year_median_dataset_new = new year_dataset()
+                {
+                    year = y,
+                    data = new List<decimal?>()
+                };
+                foreach (int d in days)
+                {
+                    year_min_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.min);
+                    year_max_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.max);
+                    year_median_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.median);
+                }
+                year_min_datasets_.Add(year_min_dataset_new);
+                year_max_datasets_.Add(year_max_dataset_new);
+                year_median_datasets_.Add(year_median_dataset_new);
+            }
+
+            // shift by months
             List<string> labels = new List<string>();
             List<decimal?> years_min = new List<decimal?>(),
                 years_max = new List<decimal?>(),
                 years_median = new List<decimal?>();
-            foreach (int d in analytics.Select(a => a.day).Distinct().OrderBy(v => v))
-            {
-                labels.Add((new DateTime(2001, 1, 1).AddDays(d - 1).ToString("MM.dd")));
-                years_min.Add(analytics.Where(a => a.day == d).Min(a => a.min));
-                years_max.Add(analytics.Where(a => a.day == d).Max(a => a.max));
-                years_median.Add(analytics.Where(a => a.day == d).Average(a => a.median));
-            }
-
-            // years
             List<year_dataset> year_min_datasets = new List<year_dataset>(),
                 year_max_datasets = new List<year_dataset>(),
                 year_median_datasets = new List<year_dataset>();
@@ -593,16 +630,33 @@ namespace Pastures2019.Controllers
                     year = y,
                     data = new List<decimal?>()
                 };
-                List<int> days = analytics.Select(a => a.day).Distinct().OrderBy(v => v).ToList();
-                foreach(int d in days)
-                {
-                    year_min_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.min);
-                    year_max_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.max);
-                    year_median_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.median);
-                }
                 year_min_datasets.Add(year_min_dataset_new);
                 year_max_datasets.Add(year_max_dataset_new);
                 year_median_datasets.Add(year_median_dataset_new);
+            }
+            for (int m = monthstart; m < monthstart + monthscount; m++)
+            {
+                int month = m;
+                if (month > 12)
+                {
+                    month -= 12;
+                }
+                for (int d = 0; d < days.Count(); d++)
+                {
+                    if ((new DateTime(2001, 1, 1).AddDays(days[d] - 1)).Month == month)
+                    {
+                        labels.Add(labels_[d]);
+                        years_min.Add(years_min_[d]);
+                        years_max.Add(years_max_[d]);
+                        years_median.Add(years_median_[d]);
+                        for (int y = 0; y < years.Count(); y++)
+                        {
+                            year_min_datasets[y].data.Add(year_min_datasets_[y].data[d]);
+                            year_max_datasets[y].data.Add(year_max_datasets_[y].data[d]);
+                            year_median_datasets[y].data.Add(year_median_datasets_[y].data[d]);
+                        }
+                    }
+                }
             }
 
             return Json(new

@@ -276,6 +276,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Тіркелгі параметрлерін өзгертіңіз</value>
   </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Графиктер</value>
+  </data>
   <data name="ChemicalComp" xml:space="preserve">
     <value>Судың химиялық құрамы</value>
   </data>
@@ -504,6 +507,12 @@
   <data name="Maps" xml:space="preserve">
     <value>Карталар</value>
   </data>
+  <data name="maximum" xml:space="preserve">
+    <value>максимум</value>
+  </data>
+  <data name="median" xml:space="preserve">
+    <value>медианалық</value>
+  </data>
   <data name="Menu" xml:space="preserve">
     <value>Мәзір</value>
   </data>
@@ -536,6 +545,9 @@
   </data>
   <data name="Mineralizationgdm" xml:space="preserve">
     <value>Минералдану, г / дм³</value>
+  </data>
+  <data name="minimum" xml:space="preserve">
+    <value>минимум</value>
   </data>
   <data name="MODISDataSet" xml:space="preserve">
     <value>MODIS мәліметтер базасы</value>
@@ -671,6 +683,9 @@
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Маусымдық ұсыныстар</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Сергіту</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Тіркелу</value>

@@ -121,7 +121,7 @@
     <value />
   </data>
   <data name="acting" xml:space="preserve">
-    <value>acting</value>
+    <value />
   </data>
   <data name="Administrator" xml:space="preserve">
     <value />
@@ -276,6 +276,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value />
   </data>
+  <data name="Charts" xml:space="preserve">
+    <value />
+  </data>
   <data name="ChemicalComp" xml:space="preserve">
     <value />
   </data>
@@ -292,7 +295,7 @@
     <value />
   </data>
   <data name="Condition" xml:space="preserve">
-    <value>Condition</value>
+    <value />
   </data>
   <data name="ConfirmNewPassword" xml:space="preserve">
     <value />
@@ -322,13 +325,13 @@
     <value />
   </data>
   <data name="Debitdms" xml:space="preserve">
-    <value>Debit, dm³ / s</value>
+    <value />
   </data>
   <data name="Delete" xml:space="preserve">
     <value />
   </data>
   <data name="DepthToWaterm" xml:space="preserve">
-    <value>Depth to water, m</value>
+    <value />
   </data>
   <data name="Description" xml:space="preserve">
     <value />
@@ -496,12 +499,18 @@
     <value />
   </data>
   <data name="Loweringm" xml:space="preserve">
-    <value>Lowering, m</value>
+    <value />
   </data>
   <data name="ManageYourAccount" xml:space="preserve">
     <value />
   </data>
   <data name="Maps" xml:space="preserve">
+    <value />
+  </data>
+  <data name="maximum" xml:space="preserve">
+    <value />
+  </data>
+  <data name="median" xml:space="preserve">
     <value />
   </data>
   <data name="Menu" xml:space="preserve">
@@ -535,7 +544,10 @@
     <value />
   </data>
   <data name="Mineralizationgdm" xml:space="preserve">
-    <value>Mineralization, g / dm³</value>
+    <value />
+  </data>
+  <data name="minimum" xml:space="preserve">
+    <value />
   </data>
   <data name="MODISDataSet" xml:space="preserve">
     <value />
@@ -559,13 +571,13 @@
     <value />
   </data>
   <data name="NameEN" xml:space="preserve">
-    <value>Название (английский)</value>
+    <value />
   </data>
   <data name="NameKK" xml:space="preserve">
-    <value>Название (казахский)</value>
+    <value />
   </data>
   <data name="NameRU" xml:space="preserve">
-    <value>Название (русский)</value>
+    <value />
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value />
@@ -589,10 +601,10 @@
     <value />
   </data>
   <data name="notUsed" xml:space="preserve">
-    <value>not used</value>
+    <value />
   </data>
   <data name="Number" xml:space="preserve">
-    <value>Number</value>
+    <value />
   </data>
   <data name="Otdel" xml:space="preserve">
     <value />
@@ -670,6 +682,9 @@
     <value />
   </data>
   <data name="Recommends" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Refresh" xml:space="preserve">
     <value />
   </data>
   <data name="Register" xml:space="preserve">
@@ -781,7 +796,7 @@
     <value />
   </data>
   <data name="UnwateredTerritory" xml:space="preserve">
-    <value>Unwatered territory</value>
+    <value />
   </data>
   <data name="UpdatePassword" xml:space="preserve">
     <value />
@@ -829,10 +844,10 @@
     <value />
   </data>
   <data name="Wells" xml:space="preserve">
-    <value>Pasture watering</value>
+    <value />
   </data>
   <data name="wellsLayer" xml:space="preserve">
-    <value>Pasture watering</value>
+    <value />
   </data>
   <data name="Winter" xml:space="preserve">
     <value />

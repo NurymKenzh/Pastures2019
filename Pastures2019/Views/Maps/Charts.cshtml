@@ -2,7 +2,7 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = "Charts";
+    ViewData["Title"] = SharedLocalizer["Charts"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
@@ -30,7 +30,7 @@
     <option value="9">9</option>
     <option value="10">10</option>
     <option value="11">11</option>
-    <option value="12">11</option>
+    <option value="12">12</option>
 </select>
 <select id="monthscount">
     <option value="1">1</option>
@@ -44,7 +44,7 @@
     <option value="9">9</option>
     <option value="10">10</option>
     <option value="11">11</option>
-    <option value="12" selected>11</option>
+    <option value="12" selected>12</option>
 </select>
 @for (int y = 2000; y <= DateTime.Today.Year; y++)
 {
@@ -59,7 +59,7 @@
     }
     <label for="@checkboxid">@y.ToString()</label>
 }
-<input type="button" onclick="Chart1()" value="Refresh" />
+<input type="button" onclick="Chart1()" value="@SharedLocalizer["Refresh"]" />
 <canvas class="my-1 w-100 chartjs-render-monitor" id="chart1Canvas" width="900" height="380"></canvas>
 
 <script>
@@ -85,53 +85,53 @@
                     labels: data.labels,
                     datasets: [
                         {
-                            label: 'Avg min',
+                            label: '@Html.Raw(SharedLocalizer["minimum"])',
                             backgroundColor: 'rgba(195, 195, 195, 1)',
                             borderColor: 'rgba(215, 215, 215, 1)',
-                            borderWidth: 1,
                             data: data.years_min,
                             fill: false
                         },
                         {
-                            label: 'Avg max',
+                            label: '@Html.Raw(SharedLocalizer["maximum"])',
                             backgroundColor: 'rgba(195, 195, 195, 1)',
                             borderColor: 'rgba(215, 215, 215, 1)',
-                            borderWidth: 1,
                             data: data.years_max,
                             fill: false
                         },
                         {
-                            label: 'Avg median',
+                            label: '@Html.Raw(SharedLocalizer["median"])',
                             backgroundColor: 'rgba(0, 128, 128, 1)',
                             borderColor: 'rgba(20, 148, 148, 1)',
-                            borderWidth: 1,
                             data: data.years_median,
                             fill: false
                         }]
                 };
                 for (var i = 0; i < data.year_min_datasets.length; ++i) {
+                    var color = random_rgba();
                     chart1Data.datasets.push({
-                        label: data.year_min_datasets[i].year + ' min',
-                        backgroundColor: random_rgba(),
-                        borderColor: random_rgba(),
+                        label: data.year_min_datasets[i].year + ' @Html.Raw(SharedLocalizer["minimum"])',
+                        backgroundColor: color,
+                        borderColor: color,
                         data: data.year_min_datasets[i].data,
                         fill: false
                     });
                 }
                 for (var i = 0; i < data.year_max_datasets.length; ++i) {
+                    var color = random_rgba();
                     chart1Data.datasets.push({
-                        label: data.year_max_datasets[i].year + ' max',
-                        backgroundColor: random_rgba(),
-                        borderColor: random_rgba(),
+                        label: data.year_max_datasets[i].year + ' @Html.Raw(SharedLocalizer["maximum"])',
+                        backgroundColor: color,
+                        borderColor: color,
                         data: data.year_max_datasets[i].data,
                         fill: false
                     });
                 }
                 for (var i = 0; i < data.year_median_datasets.length; ++i) {
+                    var color = random_rgba();
                     chart1Data.datasets.push({
-                        label: data.year_median_datasets[i].year + ' median',
-                        backgroundColor: random_rgba(),
-                        borderColor: random_rgba(),
+                        label: data.year_median_datasets[i].year + ' @Html.Raw(SharedLocalizer["median"])',
+                        backgroundColor: color,
+                        borderColor: color,
                         data: data.year_median_datasets[i].data,
                         fill: false
                     });
@@ -158,4 +158,10 @@
         var o = Math.round, r = Math.random, s = 255;
         return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
     }
+</script>
+
+<script>
+    $(document).ready(function () {
+        Chart1();
+    });
 </script>

@@ -276,6 +276,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Изменить настройки вашего аккаунта</value>
   </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Графики</value>
+  </data>
   <data name="ChemicalComp" xml:space="preserve">
     <value>Химический состав воды</value>
   </data>
@@ -504,6 +507,12 @@
   <data name="Maps" xml:space="preserve">
     <value>Карты</value>
   </data>
+  <data name="maximum" xml:space="preserve">
+    <value>максимум</value>
+  </data>
+  <data name="median" xml:space="preserve">
+    <value>медиана</value>
+  </data>
   <data name="Menu" xml:space="preserve">
     <value>Меню</value>
   </data>
@@ -536,6 +545,9 @@
   </data>
   <data name="Mineralizationgdm" xml:space="preserve">
     <value>Минерализация, г/дм³</value>
+  </data>
+  <data name="minimum" xml:space="preserve">
+    <value>минимум</value>
   </data>
   <data name="MODISDataSet" xml:space="preserve">
     <value>Набор данных MODIS</value>
@@ -671,6 +683,9 @@
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Рекомендации по сезонам</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Регистрация</value>

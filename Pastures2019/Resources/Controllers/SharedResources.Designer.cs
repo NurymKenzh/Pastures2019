@@ -70,7 +70,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to acting.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string acting {
             get {
@@ -540,6 +540,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Charts {
+            get {
+                return ResourceManager.GetString("Charts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string ChemicalComp {
             get {
                 return ResourceManager.GetString("ChemicalComp", resourceCulture);
@@ -583,7 +592,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Condition.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Condition {
             get {
@@ -673,7 +682,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Debit, dm³ / s.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Debitdms {
             get {
@@ -691,7 +700,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Depth to water, m.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string DepthToWaterm {
             get {
@@ -1195,7 +1204,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lowering, m.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Loweringm {
             get {
@@ -1218,6 +1227,24 @@ namespace Pastures2019.Resources.Controllers {
         public static string Maps {
             get {
                 return ResourceManager.GetString("Maps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string maximum {
+            get {
+                return ResourceManager.GetString("maximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string median {
+            get {
+                return ResourceManager.GetString("median", resourceCulture);
             }
         }
         
@@ -1312,11 +1339,20 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mineralization, g / dm³.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Mineralizationgdm {
             get {
                 return ResourceManager.GetString("Mineralizationgdm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string minimum {
+            get {
+                return ResourceManager.GetString("minimum", resourceCulture);
             }
         }
         
@@ -1384,7 +1420,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Название (английский).
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string NameEN {
             get {
@@ -1393,7 +1429,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Название (казахский).
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string NameKK {
             get {
@@ -1402,7 +1438,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Название (русский).
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string NameRU {
             get {
@@ -1474,7 +1510,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to not used.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string notUsed {
             get {
@@ -1483,7 +1519,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Number {
             get {
@@ -1722,6 +1758,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string Recommends {
             get {
                 return ResourceManager.GetString("Recommends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
             }
         }
         
@@ -2050,7 +2095,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unwatered territory.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string UnwateredTerritory {
             get {
@@ -2194,7 +2239,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pasture watering.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string Wells {
             get {
@@ -2203,7 +2248,7 @@ namespace Pastures2019.Resources.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pasture watering.
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string wellsLayer {
             get {

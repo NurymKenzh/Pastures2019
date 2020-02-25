@@ -276,6 +276,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Change your account settings</value>
   </data>
+  <data name="Charts" xml:space="preserve">
+    <value>Charts</value>
+  </data>
   <data name="ChemicalComp" xml:space="preserve">
     <value>Chemical composition of water</value>
   </data>
@@ -504,6 +507,12 @@
   <data name="Maps" xml:space="preserve">
     <value>Maps</value>
   </data>
+  <data name="maximum" xml:space="preserve">
+    <value>maximum</value>
+  </data>
+  <data name="median" xml:space="preserve">
+    <value>median</value>
+  </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
   </data>
@@ -536,6 +545,9 @@
   </data>
   <data name="Mineralizationgdm" xml:space="preserve">
     <value>Mineralization, g / dm³</value>
+  </data>
+  <data name="minimum" xml:space="preserve">
+    <value>minimum</value>
   </data>
   <data name="MODISDataSet" xml:space="preserve">
     <value>MODIS Dataset</value>
@@ -671,6 +683,9 @@
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Seasonal Recommendations</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>

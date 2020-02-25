@@ -398,16 +398,16 @@
     }
 
 .sidebar .logo {
-    padding: 10px 10px;
+    padding: 10px 20px;
     border-bottom: 1px solid #0d77b6;
     transition: all .3s;
 }
 
     .sidebar .logo a {
         display: inline-block;
-        width: 172px;
+        width: 192px;
         height: 34px;
-        background: url(../img/logo.png) left top no-repeat;
+        background: url(../images/logoKaz.png) left bottom no-repeat;
         border: 0;
         text-indent: -999999px;
     }

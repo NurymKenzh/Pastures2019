@@ -174,7 +174,7 @@
                                 <label class="form-check-label" for="layerpasturepolShow">
                                     @SharedLocalizer["pasturepolLayer"]
                                 </label>
-                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="50" oninput="ChangeLayers()" />
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,21 @@
             <div class="dark-light-buttons">
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-            </div>            
+            </div>
+            <div class="card-body">
+                <div class="col-md-12" style="display: none" id="InfoMap">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">1</th>
+                                <td id="infoOtdel"></td>
+                                <td id="valueOtdel"></td>
+                            </tr>
+                        </thead>
+
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="chiller-theme">
             <div class="sidebar-footer">
@@ -265,7 +279,10 @@
                             <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button  OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (выдел)"></i></button>
+                            <button id="SelectPasturesBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="ChangeTool()"><i class="SomeInfo fa fa-arrow-up " InfoTitle="Выделение пастбищ"></i></button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (выдел)"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
                             <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="Домой"></i></button>
@@ -281,15 +298,17 @@
                     @await Html.PartialAsync("_SelectLanguagePartial")
                 </div>
             </div>
-
         </div>
     </footer>
 </div>
 
+<input id="objectid" type="hidden"/>
+
 @* layers *@
 <script>
     var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
-        geoserver_workspace_name = '@ViewBag.ModisWorkspace', //'MODIS',
+        geoserver_MODIS_workspace_name = '@ViewBag.ModisWorkspace', //'MODIS',
+        geoserver_workspace_name = 'Pastures2019',
         layerModisTemplate1 = '@ViewBag.ModisLayerTemplate1', //'A',
         layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI = '@ViewBag.ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI',
         layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly = '@ViewBag.ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly',
@@ -450,14 +469,14 @@
     Layer_Base.set('name', 'Base');
     Layer_Base.setOpacity(1);
 
-    var url_NDVI = geoserver_url + geoserver_workspace_name + '/wms';
+    var url_NDVI = geoserver_url + geoserver_MODIS_workspace_name + '/wms';
     var Source_NDVI = new ol.source.TileWMS({
         url: url_NDVI,
         params: {
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             tiled: true,
-            'LAYERS': geoserver_workspace_name + ':' + layerNDVI
+            'LAYERS': geoserver_MODIS_workspace_name + ':' + layerNDVI
         },
         serverType: 'geoserver'
     });
@@ -467,14 +486,14 @@
     Layer_NDVI.set('name', 'NDVI');
     Layer_NDVI.setOpacity(0.80);
 
-    var url_Anomaly = geoserver_url + geoserver_workspace_name + '/wms';
+    var url_Anomaly = geoserver_url + geoserver_MODIS_workspace_name + '/wms';
     var Source_Anomaly = new ol.source.TileWMS({
         url: url_Anomaly,
         params: {
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             tiled: true,
-            'LAYERS': geoserver_workspace_name + ':' + layerAnomaly
+            'LAYERS': geoserver_MODIS_workspace_name + ':' + layerAnomaly
         },
         serverType: 'geoserver'
     });
@@ -484,10 +503,194 @@
     Layer_Anomaly.set('name', 'Anomaly');
     Layer_Anomaly.setVisible(false);
     Layer_Anomaly.setOpacity(0.80);
+
+    var url_adm1pol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm1pol = new ol.source.TileWMS({
+        url: url_adm1pol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm1pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm1pol = new ol.layer.Tile({
+        source: Source_adm1pol
+    });
+    Layer_adm1pol.set('name', 'admxpol');
+    Layer_adm1pol.setVisible(false);
+
+    var url_adm2pol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm2pol = new ol.source.TileWMS({
+        url: url_adm2pol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm2pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm2pol = new ol.layer.Tile({
+        source: Source_adm2pol
+    });
+    Layer_adm2pol.set('name', 'admxpol');
+    Layer_adm2pol.setVisible(false);
+
+    var url_adm3pol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_adm3pol = new ol.source.TileWMS({
+        url: url_adm3pol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':adm3pol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_adm3pol = new ol.layer.Tile({
+        source: Source_adm3pol
+    });
+    Layer_adm3pol.set('name', 'admxpol');
+    Layer_adm3pol.setVisible(false);
+
+    var url_hdrlin = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_hdrlin = new ol.source.TileWMS({
+        url: url_hdrlin,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':hdrlin'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrlin = new ol.layer.Tile({
+        source: Source_hdrlin,
+        maxResolution: ol.tilegrid.createXYZ().getResolution(7)
+    });
+    Layer_hdrlin.set('name', 'hdr');
+
+    var url_hdrpol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_hdrpol = new ol.source.TileWMS({
+        url: url_hdrpol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':hdrpol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_hdrpol = new ol.layer.Tile({
+        source: Source_hdrpol
+    });
+    Layer_hdrpol.set('name', 'hdr');
+
+    var url_poppnt = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_poppnt = new ol.source.TileWMS({
+        url: url_poppnt,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':poppnt'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppnt = new ol.layer.Tile({
+        source: Source_poppnt,
+        maxResolution: ol.tilegrid.createXYZ().getResolution(9)
+    });
+    Layer_poppnt.set('name', 'pop');
+
+    var url_poppol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_poppol = new ol.source.TileWMS({
+        url: url_poppol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':poppol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_poppol = new ol.layer.Tile({
+        source: Source_poppol
+    });
+    Layer_poppol.set('name', 'pop');
+
+    var url_rdslin = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_rdslin = new ol.source.TileWMS({
+        url: url_rdslin,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':rdslin'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_rdslin = new ol.layer.Tile({
+        source: Source_rdslin
+    });
+    Layer_rdslin.set('name', 'rdslin');
+
+    var url_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_pasturepol = new ol.source.TileWMS({
+        url: url_pasturepol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':pasturepol'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_pasturepol = new ol.layer.Tile({
+        source: Source_pasturepol
+    });
+    Layer_pasturepol.set('name', 'pasturepol');
+    Layer_pasturepol.setOpacity(0.5);
+
+    var Source_select_pasturepol = new ol.source.Vector({});
+    var Layer_select_pasturepol = new ol.layer.Vector({
+        source: Source_select_pasturepol,
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: [0, 0, 255, 1]
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 2
+            })
+        })
+    });
+    Layer_select_pasturepol.set('name', 'pasturepol');
+    Layer_select_pasturepol.setOpacity(0.5);
 </script>
 
 @* map *@
 <script>
+    // permalink
+    var zoom = 5;
+    var center = ol.proj.fromLonLat([66.902, 48.714]);
+    var rotation = 0;
+    if (window.location.hash !== '') {
+        // try to restore center, zoom-level and rotation from the URL
+        var hash = window.location.hash.replace('#map=', '');
+        var parts = hash.split('/');
+        if (parts.length === 4) {
+            zoom = parseInt(parts[0], 10);
+            center = [
+                parseFloat(parts[1]),
+                parseFloat(parts[2])
+            ];
+            rotation = parseFloat(parts[3]);
+        }
+    }
+
     var map = new ol.Map({
         target: 'map',
         controls: new ol.control.defaults({ attributionOptions: { collapsible: true } }).extend([
@@ -496,7 +699,17 @@
         layers: [
             Layer_Base,
             Layer_NDVI,
-            Layer_Anomaly
+            Layer_Anomaly,
+            Layer_pasturepol,
+            Layer_select_pasturepol,
+            Layer_hdrlin,
+            Layer_rdslin,
+            Layer_adm1pol,
+            Layer_adm2pol,
+            Layer_adm3pol,
+            Layer_poppol,
+            Layer_poppnt,
+            Layer_hdrpol
         ],
         view: new ol.View({
             center: ol.proj.fromLonLat([66.902, 48.714]),
@@ -505,8 +718,44 @@
             extent: [5028944.964937042, 4754994.655562972, 10214432.963802021, 7494497.74930296]
         })
     });
+
+    // permalink
+    var shouldUpdate = true;
+    var view = map.getView();
+    var updatePermalink = function () {
+        if (!shouldUpdate) {
+            // do not update the URL when the view was changed in the 'popstate' handler
+            shouldUpdate = true;
+            return;
+        }
+        var center = view.getCenter();
+        var hash = '#map=' +
+            view.getZoom() + '/' +
+            Math.round(center[0] * 100) / 100 + '/' +
+            Math.round(center[1] * 100) / 100 + '/' +
+            view.getRotation();
+        var state = {
+            zoom: view.getZoom(),
+            center: view.getCenter(),
+            rotation: view.getRotation()
+        };
+        window.history.pushState(state, 'map', hash);
+    };
+
+    map.on('moveend', updatePermalink);
+
+    window.addEventListener('popstate', function (event) {
+        if (event.state === null) {
+            return;
+        }
+        map.getView().setCenter(event.state.center);
+        map.getView().setZoom(event.state.zoom);
+        map.getView().setRotation(event.state.rotation);
+        shouldUpdate = false;
+    });
 </script>
 
+@* ChangeSourceProduct, ChangeDataSet, ChangeYear, ChangeModis *@
 <script>
     function ChangeSourceProduct() {
         if ($('#SourceProduct').val() == 'MOLT_MOD13Q1006') {
@@ -580,12 +829,12 @@
         if ($('#SourceProduct').val() == 'MOLT_MOD13Q1006') {
             layerNDVI = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006').val() + $('#DayOfYear_MOLT_MOD13Q1006').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI;
             Source_NDVI = new ol.source.TileWMS({
-                url: geoserver_url + geoserver_workspace_name + '/wms',
+                url: geoserver_url + geoserver_MODIS_workspace_name + '/wms',
                 params: {
                     'FORMAT': 'image/png',
                     'VERSION': '1.1.1',
                     tiled: true,
-                    'LAYERS': geoserver_workspace_name + ':' + layerNDVI
+                    'LAYERS': geoserver_MODIS_workspace_name + ':' + layerNDVI
                 },
                 serverType: 'geoserver'
             });
@@ -593,12 +842,12 @@
 
             layerAnomaly = layerModisTemplate1 + $('#Year_MOLT_MOD13Q1006').val() + $('#DayOfYear_MOLT_MOD13Q1006').val() + layerModisTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly;
             Source_Anomaly = new ol.source.TileWMS({
-                url: geoserver_url + geoserver_workspace_name + '/wms',
+                url: geoserver_url + geoserver_MODIS_workspace_name + '/wms',
                 params: {
                     'FORMAT': 'image/png',
                     'VERSION': '1.1.1',
                     tiled: true,
-                    'LAYERS': geoserver_workspace_name + ':' + layerAnomaly
+                    'LAYERS': geoserver_MODIS_workspace_name + ':' + layerAnomaly
                 },
                 serverType: 'geoserver'
             });
@@ -607,12 +856,12 @@
         if ($('#SourceProduct').val() == 'MOLA_MYD13Q1006') {
             layerNDVI = layerModisTemplate1 + $('#Year_MOLA_MYD13Q1006').val() + $('#DayOfYear_MOLA_MYD13Q1006').val() + layerModisTemplate_MOLA_MYD13Q1006_B01_NDVI;
             Source_NDVI = new ol.source.TileWMS({
-                url: geoserver_url + geoserver_workspace_name + '/wms',
+                url: geoserver_url + geoserver_MODIS_workspace_name + '/wms',
                 params: {
                     'FORMAT': 'image/png',
                     'VERSION': '1.1.1',
                     tiled: true,
-                    'LAYERS': geoserver_workspace_name + ':' + layerNDVI
+                    'LAYERS': geoserver_MODIS_workspace_name + ':' + layerNDVI
                 },
                 serverType: 'geoserver'
             });
@@ -620,12 +869,12 @@
 
             layerAnomaly = layerModisTemplate1 + $('#Year_MOLA_MYD13Q1006').val() + $('#DayOfYear_MOLA_MYD13Q1006').val() + layerModisTemplate_MOLA_MYD13Q1006_B01_NDVI_Anomaly;
             Source_Anomaly = new ol.source.TileWMS({
-                url: geoserver_url + geoserver_workspace_name + '/wms',
+                url: geoserver_url + geoserver_MODIS_workspace_name + '/wms',
                 params: {
                     'FORMAT': 'image/png',
                     'VERSION': '1.1.1',
                     tiled: true,
-                    'LAYERS': geoserver_workspace_name + ':' + layerAnomaly
+                    'LAYERS': geoserver_MODIS_workspace_name + ':' + layerAnomaly
                 },
                 serverType: 'geoserver'
             });
@@ -768,8 +1017,142 @@
                 }
                 layer.setOpacity($('#layerMODISOpacity').val() / 100);
             }
-
+            if (layer.get('name') == 'admxpol') {
+                layer.setVisible(document.getElementById("layeradmxpolShow").checked);
+                layer.setOpacity($('#layeradmxpolOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'hdr') {
+                layer.setVisible(document.getElementById("layerhdrShow").checked);
+                layer.setOpacity($('#layerhdrOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'pop') {
+                layer.setVisible(document.getElementById("layerpopShow").checked);
+                layer.setOpacity($('#layerpopOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'rdslin') {
+                layer.setVisible(document.getElementById("layerrdslinShow").checked);
+                layer.setOpacity($('#layerrdslinOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'pasturepol') {
+                layer.setVisible(document.getElementById("layerpasturepolShow").checked);
+                layer.setOpacity($('#layerpasturepolOpacity').val() / 100);
+            }
         })
+    }
+</script>
+
+@* ChangeTool *@
+<script>
+    var tool = 'select_raster';
+    function ChangeTool() {
+        if (tool == 'select_raster') {
+            tool = 'select_pasture';
+            $('#SelectPasturesBtn').addClass('btn-danger');
+        }
+        else if (tool == 'select_pasture') {
+            tool = 'select_raster';
+            $('#SelectPasturesBtn').removeClass('btn-danger');
+        }
+    }
+</script>
+
+@* map.on('singleclick') *@
+<script>
+    var InfoMapModal;
+    $(document).ready(function () {
+        InfoMapModal = new jBox('Modal', {
+            title: 'My Modal',
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'zoomIn',
+            title: 'Сводная информация',
+            overlay: false,
+            onOpen: function () {
+                // Add t
+                this.setContent($('#InfoMap'));
+            },
+        });
+    });
+    map.on('singleclick', function (evt) {
+        if (tool == 'select_pasture') {
+            $('#objectid').val(null);
+            InfoMapModal.open();
+            Source_select_pasturepol.clear();
+            var viewResolution = (map.getView().getResolution());
+            var url_pasturepol = Source_pasturepol.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, 'EPSG:3857',
+                {
+                    'INFO_FORMAT': 'text/javascript'
+                });
+            if (url_pasturepol) {
+                jQuery.ajax({
+                    jsonp: false,
+                    jsonpCallback: 'getJson',
+                    type: 'GET',
+                    url: url_pasturepol + "&format_options=callback:getJson",
+                    async: false,
+                    dataType: 'jsonp',
+                    error: function () {
+                    }
+                }).then(function (data) {
+                    if (Layer_pasturepol.getVisible() && data.features.length > 0) {
+                        // select pasture
+                        var polyFeature = new ol.Feature({
+                            geometry: new ol.geom.MultiPolygon(data.features[0].geometry.coordinates)
+                        });
+                        Source_select_pasturepol.addFeature(polyFeature);
+                        // data from pasturepol
+                        var parser = new ol.format.GeoJSON();
+                        var features = parser.readFeatures(data);
+                        $('#objectid').val(features[0].get('objectid'));
+                        console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
+                        $.ajax({
+                            url: '@Url.Action("GetPastureInfo")',
+                            data: {
+                                objectid: features[0].get('objectid')
+                            },
+                            type: 'POST',
+                            success: function (dataDB) {
+                                $('#infoOtdel').text('@Html.Raw(SharedLocalizer["Otdel"])');
+                                $('#valueOtdel').text(dataDB.pasturepol.otdel);
+                                console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
+                                console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
+                                console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);
+                                console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
+                                console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
+                                console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
+                                console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
+                                console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
+                                console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
+                                console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
+                                console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.pasturepol.recommend);
+                                console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.pasturepol.recomcatt);
+                                console.log('----------------------------------------------');
+                            },
+                            error: function () {
+                            }
+                        })
+                    }
+                });
+            }
+        }
+        else if (tool == 'select_raster') {
+
+        }
+    })
+</script>
+
+@* Charts *@
+<script>
+    function Charts() {
+        if ($('#objectid').val()) {
+            var urlC = '@Url.Action("Charts")';
+            var urlC = '/Maps/Charts?objectid=' + $('#objectid').val();
+            var win = window.open(urlC, '_blank');
+            win.focus();
+        }
     }
 </script>
 
@@ -893,5 +1276,3 @@
         });
     });
 </script>
-
-

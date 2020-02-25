@@ -106,6 +106,12 @@ namespace Pastures2019.Controllers
             return View();
         }
 
+        public ActionResult Charts(decimal objectid)
+        {
+            ViewBag.objectid = objectid;
+            return View();
+        }
+
         private YearDay[] GetModisYearDays_MOLT_MOD13Q1006()
         {
             List<YearDay> yearDays = new List<YearDay>();

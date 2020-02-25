@@ -1,9 +1,161 @@
-﻿
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
     ViewData["Title"] = "Charts";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
+<script src="~/lib/сhart.js/dist/Chart.js"></script>
 
-@*<h1>@ViewBag.objectid</h1>*@
+<input id="objectid" type="hidden" value="@ViewBag.objectid" />
 
-<h1>Charts</h1>
+<select id="sourceproduct">
+    <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
+    <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
+</select>
+<select id="dataset">
+    <option value="NDVI">NDVI</option>
+    <option value="Anomaly">@SharedLocalizer["Anomaly"]</option>
+</select>
+<select id="monthstart">
+    <option value="1" selected>1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">11</option>
+</select>
+<select id="monthscount">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12" selected>11</option>
+</select>
+@for (int y = 2000; y <= DateTime.Today.Year; y++)
+{
+    string checkboxid = "year" + y.ToString();
+    if (y != DateTime.Today.Year)
+    {
+        <input type="checkbox" id="@checkboxid" name="chart1years" value="@y.ToString()">
+    }
+    else
+    {
+        <input type="checkbox" id="@checkboxid" name="chart1years" value="@y.ToString()" checked>
+    }
+    <label for="@checkboxid">@y.ToString()</label>
+}
+<input type="button" onclick="Chart1()" value="Refresh" />
+<canvas class="my-1 w-100 chartjs-render-monitor" id="chart1Canvas" width="900" height="380"></canvas>
+
+<script>
+    var chart1 = null;
+    function Chart1() {
+        var chart1years = [];
+        $("input:checkbox[name=chart1years]:checked").each(function(){
+            chart1years.push($(this).val());
+        });
+        $.ajax({
+            url: '@Url.Action("GetChart1Data")',
+            data: {
+                objectid: $('#objectid').val(),
+                sourceproduct: $('#sourceproduct').val(),
+                dataset: $('#dataset').val(),
+                monthstart: $('#monthstart').val(),
+                monthscount: $('#monthscount').val(),
+                years: chart1years
+            },
+            type: 'POST',
+            success: function (data) {
+                var chart1Data = {
+                    labels: data.labels,
+                    datasets: [
+                        {
+                            label: 'Avg min',
+                            backgroundColor: 'rgba(195, 195, 195, 1)',
+                            borderColor: 'rgba(215, 215, 215, 1)',
+                            borderWidth: 1,
+                            data: data.years_min,
+                            fill: false
+                        },
+                        {
+                            label: 'Avg max',
+                            backgroundColor: 'rgba(195, 195, 195, 1)',
+                            borderColor: 'rgba(215, 215, 215, 1)',
+                            borderWidth: 1,
+                            data: data.years_max,
+                            fill: false
+                        },
+                        {
+                            label: 'Avg median',
+                            backgroundColor: 'rgba(0, 128, 128, 1)',
+                            borderColor: 'rgba(20, 148, 148, 1)',
+                            borderWidth: 1,
+                            data: data.years_median,
+                            fill: false
+                        }]
+                };
+                for (var i = 0; i < data.year_min_datasets.length; ++i) {
+                    chart1Data.datasets.push({
+                        label: data.year_min_datasets[i].year + ' min',
+                        backgroundColor: random_rgba(),
+                        borderColor: random_rgba(),
+                        data: data.year_min_datasets[i].data,
+                        fill: false
+                    });
+                }
+                for (var i = 0; i < data.year_max_datasets.length; ++i) {
+                    chart1Data.datasets.push({
+                        label: data.year_max_datasets[i].year + ' max',
+                        backgroundColor: random_rgba(),
+                        borderColor: random_rgba(),
+                        data: data.year_max_datasets[i].data,
+                        fill: false
+                    });
+                }
+                for (var i = 0; i < data.year_median_datasets.length; ++i) {
+                    chart1Data.datasets.push({
+                        label: data.year_median_datasets[i].year + ' median',
+                        backgroundColor: random_rgba(),
+                        borderColor: random_rgba(),
+                        data: data.year_median_datasets[i].data,
+                        fill: false
+                    });
+                }
+                var ctx1 = document.getElementById('chart1Canvas').getContext('2d');
+                if (chart1 != null) {
+                    chart1.destroy();
+                }
+                chart1 = new Chart(ctx1, {
+                    type: 'line',
+                    data: chart1Data,
+                    options: {
+                        responsive: true
+                    }
+                });
+            },
+            error: function () {
+                console.log('Error 1');
+            }
+        });
+    }
+
+    function random_rgba() {
+        var o = Math.round, r = Math.random, s = 255;
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+    }
+</script>

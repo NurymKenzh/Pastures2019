@@ -23,6 +23,25 @@ namespace Pastures2019.Controllers
         public string monthday;
     }
 
+    public class analytic
+    {
+        public string raster;
+        public decimal min;
+        public decimal max;
+        public decimal median;
+        public decimal majority;
+        public decimal mean;
+        public decimal objectid;
+        public DateTime date;
+        public int day;
+    }
+
+    public class year_dataset
+    {
+        public int year;
+        public List<decimal?> data;
+    }
+
     public class MapsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -121,7 +140,7 @@ namespace Pastures2019.Controllers
                 layers[i] = layers[i]
                     .Replace(Startup.Configuration["ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI"].ToString(), "")
                     .Replace(Startup.Configuration["ModisLayerTemplate1"].ToString(), "");
-                if(layers[i].Length == 7)
+                if (layers[i].Length == 7)
                 {
                     yearDays.Add(new YearDay()
                     {
@@ -146,7 +165,7 @@ namespace Pastures2019.Controllers
                 layers[i] = layers[i]
                     .Replace(Startup.Configuration["ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI"].ToString(), "")
                     .Replace(Startup.Configuration["ModisLayerTemplate1"].ToString(), "");
-                if(layers[i].Length == 7)
+                if (layers[i].Length == 7)
                 {
                     yearDays.Add(new YearDay()
                     {
@@ -413,7 +432,7 @@ namespace Pastures2019.Controllers
                     smallcattle
                 });
             }
-            else if(code > 300)
+            else if (code > 300)
             {
                 Horse horse = _context.Horse.FirstOrDefault(h => h.Code == code);
                 horse.Img = String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(horse.Photo));
@@ -498,6 +517,103 @@ namespace Pastures2019.Controllers
             return Json(new
             {
                 wellspnt
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetChart1Data(
+            decimal objectid,
+            string sourceproduct,
+            string dataset,
+            int monthstart,
+            int monthscount,
+            int[] years)
+        {
+            string raster = sourceproduct + "_B01_NDVI_3857_KZ";
+            if (dataset == "Anomaly")
+            {
+                raster += "_Anomaly";
+            }
+            raster += ".tif";
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            List<analytic> analytics = new List<analytic>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                    $" FROM public.analytics" +
+                    $" WHERE objectid = {objectid.ToString()}" +
+                    $" AND raster LIKE '%{raster}%';";
+                var analyticsDB = connection.Query<analytic>(query);
+                analytics = analyticsDB.ToList();
+            }
+            for (int i = 0; i < analytics.Count(); i++)
+            {
+                analytics[i].day = Convert.ToInt32(analytics[i].raster.Substring(5, 3));
+                analytics[i].date = new DateTime(Convert.ToInt32(analytics[i].raster.Substring(1, 4)), 1, 1);
+                analytics[i].date = analytics[i].date.AddDays(analytics[i].day - 1);
+            }
+            analytics = analytics.OrderBy(a => a.date).ToList();
+
+            // years average
+            List<string> labels = new List<string>();
+            List<decimal?> years_min = new List<decimal?>(),
+                years_max = new List<decimal?>(),
+                years_median = new List<decimal?>();
+            foreach (int d in analytics.Select(a => a.day).Distinct().OrderBy(v => v))
+            {
+                labels.Add((new DateTime(2001, 1, 1).AddDays(d - 1).ToString("MM.dd")));
+                years_min.Add(analytics.Where(a => a.day == d).Min(a => a.min));
+                years_max.Add(analytics.Where(a => a.day == d).Max(a => a.max));
+                years_median.Add(analytics.Where(a => a.day == d).Average(a => a.median));
+            }
+
+            // years
+            List<year_dataset> year_min_datasets = new List<year_dataset>(),
+                year_max_datasets = new List<year_dataset>(),
+                year_median_datasets = new List<year_dataset>();
+            foreach (int y in years)
+            {
+                year_dataset year_min_dataset_new = new year_dataset()
+                {
+                    year = y,
+                    data = new List<decimal?>()
+                },
+                year_max_dataset_new = new year_dataset()
+                {
+                    year = y,
+                    data = new List<decimal?>()
+                },
+                year_median_dataset_new = new year_dataset()
+                {
+                    year = y,
+                    data = new List<decimal?>()
+                };
+                List<int> days = analytics.Select(a => a.day).Distinct().OrderBy(v => v).ToList();
+                foreach(int d in days)
+                {
+                    year_min_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.min);
+                    year_max_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.max);
+                    year_median_dataset_new.data.Add(analytics.FirstOrDefault(a => a.day == d && a.date.Year == y)?.median);
+                }
+                year_min_datasets.Add(year_min_dataset_new);
+                year_max_datasets.Add(year_max_dataset_new);
+                year_median_datasets.Add(year_median_dataset_new);
+            }
+
+            return Json(new
+            {
+                labels,
+                years_min,
+                years_max,
+                years_median,
+                year_min_datasets,
+                year_max_datasets,
+                year_median_datasets
             });
         }
     }

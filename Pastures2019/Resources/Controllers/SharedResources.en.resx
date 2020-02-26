@@ -156,11 +156,17 @@
   <data name="AverageFeedStockc" xml:space="preserve">
     <value>Average feed stock, c</value>
   </data>
+  <data name="BackgroundLayers" xml:space="preserve">
+    <value>Background Layers</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Back To List</value>
   </data>
   <data name="BaseLayer" xml:space="preserve">
     <value>Base Layer</value>
+  </data>
+  <data name="BaseLayers" xml:space="preserve">
+    <value>Base Layers</value>
   </data>
   <data name="BClass" xml:space="preserve">
     <value>Pasture Class (Load)</value>
@@ -426,11 +432,20 @@
   <data name="Folder" xml:space="preserve">
     <value>Folder</value>
   </data>
+  <data name="ForageLandsOfTheRepublicOfKazakhstan" xml:space="preserve">
+    <value>Forage lands of the Republic of Kazakhstan</value>
+  </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Forgot password confirmation</value>
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Forgot your password?</value>
+  </data>
+  <data name="FreeInformation" xml:space="preserve">
+    <value>Free information</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Go</value>
   </data>
   <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
     <value>Gross yield of plants eaten on average crop year, dry weight</value>
@@ -480,6 +495,9 @@
   <data name="Index" xml:space="preserve">
     <value>Index</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Instruction</value>
   </data>
@@ -491,6 +509,12 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="LayerInfo" xml:space="preserve">
+    <value>Layer info</value>
+  </data>
+  <data name="Legend" xml:space="preserve">
+    <value>Legend</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -612,6 +636,9 @@
   <data name="Otdels" xml:space="preserve">
     <value>Departments</value>
   </data>
+  <data name="Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
@@ -620,6 +647,9 @@
   </data>
   <data name="PasturesBurden" xml:space="preserve">
     <value>The load of farm animals on pastures</value>
+  </data>
+  <data name="PastureSearch" xml:space="preserve">
+    <value>Pasture search</value>
   </data>
   <data name="PClass" xml:space="preserve">
     <value>Pasture class</value>
@@ -638,6 +668,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Population</value>
+  </data>
+  <data name="Productivityhha" xml:space="preserve">
+    <value>Productivity, h / ha</value>
+  </data>
+  <data name="ProductivityhhaOfFeedUnits" xml:space="preserve">
+    <value>Productivity, h / ha of feed units</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
@@ -788,6 +824,9 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
+  </data>
+  <data name="ToHome" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="TotalConditionalGoalsInTermsOfSheep" xml:space="preserve">
     <value>Total conditional goals (in terms of sheep)</value>

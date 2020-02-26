@@ -156,11 +156,17 @@
   <data name="AverageFeedStockc" xml:space="preserve">
     <value>Средний кормозапас, ц</value>
   </data>
+  <data name="BackgroundLayers" xml:space="preserve">
+    <value>Фоновые слои</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Обратно к списку</value>
   </data>
   <data name="BaseLayer" xml:space="preserve">
     <value>Базовый слой</value>
+  </data>
+  <data name="BaseLayers" xml:space="preserve">
+    <value>Базовые слои</value>
   </data>
   <data name="BClass" xml:space="preserve">
     <value>Класс пастбищ (Нагрузка)</value>
@@ -426,11 +432,20 @@
   <data name="Folder" xml:space="preserve">
     <value>Папка</value>
   </data>
+  <data name="ForageLandsOfTheRepublicOfKazakhstan" xml:space="preserve">
+    <value>Кормовые угодья Республики Казахстан</value>
+  </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Забыли пароль</value>
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Забыли свой пароль?</value>
+  </data>
+  <data name="FreeInformation" xml:space="preserve">
+    <value>Сводная информация</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Перейти</value>
   </data>
   <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
     <value>Валовая урожайность поедаемых растений на средний урожайный год, сухой массы</value>
@@ -480,6 +495,9 @@
   <data name="Index" xml:space="preserve">
     <value>Индекс</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Инструкция</value>
   </data>
@@ -491,6 +509,12 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>
+  </data>
+  <data name="LayerInfo" xml:space="preserve">
+    <value>Информация о слое</value>
+  </data>
+  <data name="Legend" xml:space="preserve">
+    <value>Легенда</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Войти</value>
@@ -612,6 +636,9 @@
   <data name="Otdels" xml:space="preserve">
     <value>Отделы</value>
   </data>
+  <data name="Others" xml:space="preserve">
+    <value>Другое</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
@@ -620,6 +647,9 @@
   </data>
   <data name="PasturesBurden" xml:space="preserve">
     <value>Нагрузка сельскохозяйственных животных на пастбища</value>
+  </data>
+  <data name="PastureSearch" xml:space="preserve">
+    <value>Поиск пастбищ</value>
   </data>
   <data name="PClass" xml:space="preserve">
     <value>Класс пастбища</value>
@@ -638,6 +668,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Численность населения, чел.</value>
+  </data>
+  <data name="Productivityhha" xml:space="preserve">
+    <value>Урожайность, ц/га</value>
+  </data>
+  <data name="ProductivityhhaOfFeedUnits" xml:space="preserve">
+    <value>Урожайность, ц/га кормовых единиц</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
@@ -788,6 +824,9 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="ToHome" xml:space="preserve">
+    <value>Домой</value>
   </data>
   <data name="TotalConditionalGoalsInTermsOfSheep" xml:space="preserve">
     <value>Всего условных голов (в пересчете на овец)</value>

@@ -156,10 +156,16 @@
   <data name="AverageFeedStockc" xml:space="preserve">
     <value />
   </data>
+  <data name="BackgroundLayers" xml:space="preserve">
+    <value />
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value />
   </data>
   <data name="BaseLayer" xml:space="preserve">
+    <value />
+  </data>
+  <data name="BaseLayers" xml:space="preserve">
     <value />
   </data>
   <data name="BClass" xml:space="preserve">
@@ -426,10 +432,19 @@
   <data name="Folder" xml:space="preserve">
     <value />
   </data>
+  <data name="ForageLandsOfTheRepublicOfKazakhstan" xml:space="preserve">
+    <value />
+  </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value />
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FreeInformation" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Go" xml:space="preserve">
     <value />
   </data>
   <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
@@ -480,6 +495,9 @@
   <data name="Index" xml:space="preserve">
     <value />
   </data>
+  <data name="Information" xml:space="preserve">
+    <value />
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value />
   </data>
@@ -490,6 +508,12 @@
     <value />
   </data>
   <data name="Language" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LayerInfo" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Legend" xml:space="preserve">
     <value />
   </data>
   <data name="Login" xml:space="preserve">
@@ -612,6 +636,9 @@
   <data name="Otdels" xml:space="preserve">
     <value />
   </data>
+  <data name="Others" xml:space="preserve">
+    <value />
+  </data>
   <data name="Password" xml:space="preserve">
     <value />
   </data>
@@ -619,6 +646,9 @@
     <value />
   </data>
   <data name="PasturesBurden" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PastureSearch" xml:space="preserve">
     <value />
   </data>
   <data name="PClass" xml:space="preserve">
@@ -637,6 +667,12 @@
     <value />
   </data>
   <data name="Population" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Productivityhha" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProductivityhhaOfFeedUnits" xml:space="preserve">
     <value />
   </data>
   <data name="Profile" xml:space="preserve">
@@ -787,6 +823,9 @@
     <value />
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToHome" xml:space="preserve">
     <value />
   </data>
   <data name="TotalConditionalGoalsInTermsOfSheep" xml:space="preserve">

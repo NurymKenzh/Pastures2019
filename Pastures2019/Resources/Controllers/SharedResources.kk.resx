@@ -156,11 +156,17 @@
   <data name="AverageFeedStockc" xml:space="preserve">
     <value>Орташа азық қоры, с</value>
   </data>
+  <data name="BackgroundLayers" xml:space="preserve">
+    <value>Фон қабаттары</value>
+  </data>
   <data name="BackToList" xml:space="preserve">
     <value>Тізімге оралу</value>
   </data>
   <data name="BaseLayer" xml:space="preserve">
     <value>Негізгі қабат</value>
+  </data>
+  <data name="BaseLayers" xml:space="preserve">
+    <value>Негізгі қабаттар</value>
   </data>
   <data name="BClass" xml:space="preserve">
     <value>Жайылым класы (жүктеме)</value>
@@ -426,11 +432,20 @@
   <data name="Folder" xml:space="preserve">
     <value>Қалта</value>
   </data>
+  <data name="ForageLandsOfTheRepublicOfKazakhstan" xml:space="preserve">
+    <value>Қазақстан Республикасының жемшөп алқаптары</value>
+  </data>
   <data name="ForgotPasswordConfirmation" xml:space="preserve">
     <value>Құпия сөзді растауды ұмыттыңыз</value>
   </data>
   <data name="ForgotYourPassword" xml:space="preserve">
     <value>Құпия сөзіңізді ұмыттыңыз ба?</value>
+  </data>
+  <data name="FreeInformation" xml:space="preserve">
+    <value>Қысқаша ақпарат</value>
+  </data>
+  <data name="Go" xml:space="preserve">
+    <value>Өту</value>
   </data>
   <data name="GrossYieldOfPlantsEatenOnAverageCropYearDryWeight" xml:space="preserve">
     <value>Орташа дақылдық жылы жейтін өсімдіктердің жалпы өнімі, құрғақ салмағы</value>
@@ -480,6 +495,9 @@
   <data name="Index" xml:space="preserve">
     <value>Индекс</value>
   </data>
+  <data name="Information" xml:space="preserve">
+    <value>Ақпарат</value>
+  </data>
   <data name="Instruction" xml:space="preserve">
     <value>Нұсқаулық</value>
   </data>
@@ -491,6 +509,12 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Тіл</value>
+  </data>
+  <data name="LayerInfo" xml:space="preserve">
+    <value>Қабат туралы ақпарат</value>
+  </data>
+  <data name="Legend" xml:space="preserve">
+    <value>Аңыз</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Кіру</value>
@@ -612,6 +636,9 @@
   <data name="Otdels" xml:space="preserve">
     <value>Бөлімдер</value>
   </data>
+  <data name="Others" xml:space="preserve">
+    <value>Басқа</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
@@ -620,6 +647,9 @@
   </data>
   <data name="PasturesBurden" xml:space="preserve">
     <value>Жайылымдарға ауылшаруашылық жануарларының жүктемесі</value>
+  </data>
+  <data name="PastureSearch" xml:space="preserve">
+    <value>Жайылымдарды іздеу</value>
   </data>
   <data name="PClass" xml:space="preserve">
     <value>Жайылым класы</value>
@@ -638,6 +668,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Халық саны</value>
+  </data>
+  <data name="Productivityhha" xml:space="preserve">
+    <value>Өнімділік, т / га</value>
+  </data>
+  <data name="ProductivityhhaOfFeedUnits" xml:space="preserve">
+    <value>Өнімділік, азықтандыру қондырғыларының кг / га</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
@@ -788,6 +824,9 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Құпия сөз және растау паролі сәйкес келмейді.</value>
+  </data>
+  <data name="ToHome" xml:space="preserve">
+    <value>Үйге</value>
   </data>
   <data name="TotalConditionalGoalsInTermsOfSheep" xml:space="preserve">
     <value>Жалпы шартты мақсаттар (қойға қатысты)</value>

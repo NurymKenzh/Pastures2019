@@ -142,7 +142,7 @@
                     <div id="TematicLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#TematicLayerSections">
                         <div class="card-body">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="layerpasturepolShow" onchange="ChangeLayers()">
+                                <input class="form-check-input" type="checkbox" id="layerpasturepolShow" checked="checked" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerpasturepolShow">
                                     @SharedLocalizer["pasturepolLayer"]
                                 </label>
@@ -289,16 +289,16 @@
         <div class="chiller-theme">
             <div class="sidebar-footer">
                 <a asp-area="" asp-controller="Home" asp-action="About">
-                    <i class="SomeInfo fa fa-file" InfoTitle="About"></i>
+                    <i class="SomeInfo fa fa-file" InfoTitle="@SharedLocalizer["About"]"></i>
                 </a>
                 <a asp-area="" asp-controller="Home" asp-action="Instruction">
-                    <i class="SomeInfo fa fa-film" InfoTitle="Instruction"></i>
+                    <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">
-                    <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
+                    <i class="SomeInfo fa fa-list-alt" InfoTitle="@SharedLocalizer["Legend"]"></i>
                 </a>
                 <a href="#" id="MapTitleBtn" class="target-click">
-                    <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
+                    <i class="SomeInfo fa fa-bookmark" InfoTitle="@SharedLocalizer["LayerInfo"]"></i>
                 </a>
             </div>
         </div>
@@ -319,14 +319,16 @@
             <div class="row align-items-center m-1">
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                        @*<div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["SearchForAnAreaDistrictRuralCounties"]"></i></button>
-                        </div>
-                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                        </div>*@
+                        @*<div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="SelectPasturesBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="ChangeTool()"><i class="SomeInfo fa fa-arrow-up " InfoTitle="@SharedLocalizer["SelectPastures"]"></i></button>
-                        </div>
+                        </div>*@
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (выдел)"></i></button>
+                            <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm">
+                            <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="@SharedLocalizer["Charts"]"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
+                            </button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
                             <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
@@ -699,7 +701,6 @@
     });
     Layer_pasturepol.set('name', 'pasturepol');
     Layer_pasturepol.setOpacity(0.5);
-    Layer_pasturepol.setVisible(false);
 
     var Source_select_pasturepol = new ol.source.Vector({});
     var Layer_select_pasturepol = new ol.layer.Vector({
@@ -823,6 +824,7 @@
             $('.MOLT_MOD13Q1006').hide();
         }
         ChangeModis();
+        ChangeMapTitle();
     }
 
     function ChangeDataSet() {
@@ -834,6 +836,7 @@
             Layer_NDVI.setVisible(false);
             Layer_Anomaly.setVisible(true);
         }
+        ChangeMapTitle();
     }
 
     function ChangeYear() {
@@ -879,6 +882,7 @@
             }
         }
         ChangeModis();
+        ChangeMapTitle();
     }
 
     function ChangeModis() {
@@ -936,6 +940,22 @@
             });
             Layer_Anomaly.setSource(Source_Anomaly);
         }
+        ChangeMapTitle();
+    }
+
+    function ChangeMapTitle() {
+        $('#MapTitle').text($("#SourceProduct option:selected").text() + ' ' + $("#DataSet option:selected").text());
+        if ($("#DataSet").val() == 'NDVI') {
+            $('#MapTitleLong').text(
+                $("#Year_MOLT_MOD13Q1006 option:selected").text() + '. ' + $("#DayOfYear_MOLT_MOD13Q1006 option:selected").text()
+            );
+        }
+        else if ($("#DataSet").val() == 'Anomaly') {
+            $('#MapTitleLong').text(
+                $("#Year_MOLA_MYD13Q1006 option:selected").text() + '. ' + $("#DayOfYear_MOLT_MOD13Q1006 option:selected").text()
+            );
+        }
+        
     }
 </script>
 
@@ -1098,7 +1118,7 @@
 </script>
 
 @* ChangeTool *@
-<script>
+@*<script>
     var tool = 'select_raster';
     function ChangeTool() {
         if (tool == 'select_raster') {
@@ -1110,7 +1130,7 @@
             $('#SelectPasturesBtn').removeClass('btn-danger');
         }
     }
-</script>
+</script>*@
 
 @* map.on('singleclick') *@
 <script>
@@ -1136,8 +1156,9 @@
         });
     });
     map.on('singleclick', function (evt) {
-        if (tool == 'select_pasture' && Layer_pasturepol.getVisible()) {
+        if (/*tool == 'select_pasture' && */Layer_pasturepol.getVisible()) {
             $('#objectid').val(null);
+            $('#chartspan').text('0');
             InfoMapModal.open();
             Source_select_pasturepol.clear();
             var viewResolution = (map.getView().getResolution());
@@ -1167,6 +1188,7 @@
                         var parser = new ol.format.GeoJSON();
                         var features = parser.readFeatures(data);
                         $('#objectid').val(features[0].get('objectid'));
+                        $('#chartspan').text('1');
                         //console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
                         $.ajax({
                             url: '@Url.Action("GetPastureInfo")',
@@ -1301,7 +1323,6 @@
 @*tooltips, modal windows*@
 <script>
     $(document).ready(function () {
-
         // Map Title
         new jBox('Modal', {
             attach: '#MapTitleBtn',
@@ -1319,8 +1340,8 @@
                 y: 70
             },
             content: (
-                '<h5 class="Card-title text-center text-white">Map title</h5>' +
-                '<p class="card-text text-center text-white">This content is a little bit longer.</p>'
+                '<h5 id="MapTitle" class="Card-title text-center text-white">Map title</h5>' +
+                '<p id="MapTitleLong" class="card-text text-center text-white">This content is a little bit longer.</p>'
             ),
             overlay: false,
             reposition: true,
@@ -1360,5 +1381,6 @@
             adjustPosition: true,
             adjustTracker: true
         });
+        ChangeMapTitle();
     });
 </script>

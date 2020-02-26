@@ -137,7 +137,7 @@
             <ul class="list-unstyled menu-elements mt-lg-2">
                 <li>
                     <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
-                        <i class="fa fa-list"></i>Базовые слои
+                        <i class="fa fa-list"></i>@SharedLocalizer["BaseLayers"]
                     </a>
                     <div id="TematicLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#TematicLayerSections">
                         <div class="card-body">
@@ -163,7 +163,7 @@
                                 <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="layerhdrShow" onchange="ChangeLayers()">
+                                <input class="form-check-input" type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerhdrShow">
                                     @SharedLocalizer["hdrLayer"]
                                 </label>
@@ -181,13 +181,13 @@
                 </li>
                 <li>
                     <a href="#BaseLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="BaseLayerSections">
-                        <i class="fa fa-refresh"></i>Фоновые слои
+                        <i class="fa fa-refresh"></i>@SharedLocalizer["BackgroundLayers"]
                     </a>
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
-                            <label class="form-check-label" for="layerBaseShow">
+                            @*<label class="form-check-label" for="layerBaseShow">
                                 @SharedLocalizer["BaseLayer"]
-                            </label>
+                            </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -320,16 +320,16 @@
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
+                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["SearchForAnAreaDistrictRuralCounties"]"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="SelectPasturesBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="ChangeTool()"><i class="SomeInfo fa fa-arrow-up " InfoTitle="Выделение пастбищ"></i></button>
+                            <button id="SelectPasturesBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="ChangeTool()"><i class="SomeInfo fa fa-arrow-up " InfoTitle="@SharedLocalizer["SelectPastures"]"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (выдел)"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
-                            <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="Домой"></i></button>
+                            <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
                         </div>
                     </div>
                 </div>
@@ -680,6 +680,7 @@
         source: Source_rdslin
     });
     Layer_rdslin.set('name', 'rdslin');
+    Layer_rdslin.setVisible(false);
 
     var url_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_pasturepol = new ol.source.TileWMS({
@@ -688,7 +689,8 @@
             'FORMAT': 'image/png',
             'VERSION': '1.1.1',
             tiled: true,
-            'LAYERS': geoserver_workspace_name + ':pasturepol'
+            'LAYERS': geoserver_workspace_name + ':pasturepol',
+            'STYLES': 'pasturepolmodis',
         },
         serverType: 'geoserver'
     });
@@ -697,6 +699,7 @@
     });
     Layer_pasturepol.set('name', 'pasturepol');
     Layer_pasturepol.setOpacity(0.5);
+    Layer_pasturepol.setVisible(false);
 
     var Source_select_pasturepol = new ol.source.Vector({});
     var Layer_select_pasturepol = new ol.layer.Vector({
@@ -797,6 +800,15 @@
         map.getView().setRotation(event.state.rotation);
         shouldUpdate = false;
     });
+
+    function ToHome() {
+        map.getView().fit([5028944.964937042, 4754994.655562972, 10214432.963802021, 7494497.74930296], map.getSize());
+
+        Layer_select_pasturepol.getSource().clear();
+        if (Layer_admXpol_Navigate.getSource()) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+    };
 </script>
 
 @* ChangeSourceProduct, ChangeDataSet, ChangeYear, ChangeModis *@
@@ -1105,13 +1117,16 @@
     var InfoMapModal;
     $(document).ready(function () {
         InfoMapModal = new jBox('Modal', {
+            id: 'modal-white',
+            maxWidth: 500,
+            maxHeight: 400,
+            adjustTracker: 'scroll',
             title: 'My Modal',
             zIndex: 'auto',
             draggable: 'title',
             closeOnClick: false,
             closeButton: 'title',
             animation: 'zoomIn',
-            title: 'Сводная информация',
             overlay: false,
             onOpen: function () {
                 // Add t
@@ -1121,7 +1136,7 @@
         });
     });
     map.on('singleclick', function (evt) {
-        if (tool == 'select_pasture') {
+        if (tool == 'select_pasture' && Layer_pasturepol.getVisible()) {
             $('#objectid').val(null);
             InfoMapModal.open();
             Source_select_pasturepol.clear();

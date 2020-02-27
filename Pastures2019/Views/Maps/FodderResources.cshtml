@@ -197,52 +197,52 @@
                     <table class="table table-striped table-hover table-sm small">
                         <tbody>
                             <tr>
-                                <th class="modal-white" scope="row" id="infoOtdel"></th>
+                                <th class="modal-white" scope="row" id="infoOtdel">@SharedLocalizer["Otdel"]</th>
                                 <td class="font-italic" colspan="2" id="valueOtdel"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoPClass"></th>
+                                <th scope="row" id="infoPClass">@SharedLocalizer["PClass"]</th>
                                 <td class="font-italic" colspan="2" id="valuePClass"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoGroup"></th>
+                                <th scope="row" id="infoGroup">@SharedLocalizer["Group"]</th>
                                 <td class="font-italic" colspan="2" id="valueGroup"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoGroupLat"></th>
+                                <th scope="row" id="infoGroupLat">@SharedLocalizer["GroupLat"]</th>
                                 <td class="font-italic" colspan="2" id="valueGroupLat"></td>
                             </tr>
                             <tr class="table-active">
-                                <th scope="row" id="infoAllocatedFeedResources"></th>
-                                <td id="infocha"></td>
-                                <td id="infoсhaFeedUnits"></td>
+                                <th scope="row" id="infoAllocatedFeedResources">@SharedLocalizer["AllocatedFeedResources"]</th>
+                                <td id="infocha">@SharedLocalizer["cha"]</td>
+                                <td id="infoсhaFeedUnits">@SharedLocalizer["сhaFeedUnits"]</td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoSpring"></th>
+                                <th scope="row" id="infoSpring">@SharedLocalizer["Spring"]</th>
                                 <td class="font-italic" id="valueUr_v"></td>
                                 <td class="font-italic" id="valueKorm_v"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoSummer"></th>
+                                <th scope="row" id="infoSummer">@SharedLocalizer["Summer"]</th>
                                 <td class="font-italic" id="valueUr_l"></td>
                                 <td class="font-italic" id="valueKorm_l"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoAutumn"></th>
+                                <th scope="row" id="infoAutumn">@SharedLocalizer["Autumn"]</th>
                                 <td class="font-italic" id="valueUr_o"></td>
                                 <td class="font-italic" id="valueKorm_o"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoWinter"></th>
+                                <th scope="row" id="infoWinter">@SharedLocalizer["Winter"]</th>
                                 <td class="font-italic" id="valueUr_z"></td>
                                 <td class="font-italic" id="valueKorm_z"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoRecommendationForUse"></th>
+                                <th scope="row" id="infoRecommendationForUse">@SharedLocalizer["RecommendationForUse"]</th>
                                 <td class="font-italic" colspan="2" id="valueRecommendationForUse"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoRecomCattles"></th>
+                                <th scope="row" id="infoRecomCattles">@SharedLocalizer["RecomCattles"]</th>
                                 <td class="font-italic" colspan="2" id="valueRecomCattles"></td>
                             </tr>
                         </tbody>
@@ -880,8 +880,21 @@
         });
     });
     map.on('singleclick', function (evt) {
-        InfoMapModal.open();
         Source_select_pasturepol.clear();
+        $('#valueOtdel').text('');
+        $('#valuePClass').text('');
+        $('#valueGroup').text('');
+        $('#valueGroupLat').text('');
+        $('#valueUr_v').text('');
+        $('#valueKorm_v').text('');
+        $('#valueUr_l').text('');
+        $('#valueKorm_l').text('');
+        $('#valueUr_o').text('');
+        $('#valueKorm_o').text('');
+        $('#valueUr_z').text('');
+        $('#valueKorm_z').text('');
+        $('#valueRecommendationForUse').text('');
+        $('#valueRecomCattles').text('');
 
         var viewResolution = (map.getView().getResolution());
         var url_pasturepol = Source_pasturepol.getGetFeatureInfoUrl(
@@ -916,47 +929,21 @@
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                            $('#infoOtdel').text('@Html.Raw(SharedLocalizer["Otdel"])');
+                            InfoMapModal.open();
                             $('#valueOtdel').text(dataDB.pasturepol.otdel);
-                            $('#infoPClass').text('@Html.Raw(SharedLocalizer["PClass"])');
                             $('#valuePClass').text(dataDB.pasturepol.ptype);
-                            $('#infoGroup').text('@Html.Raw(SharedLocalizer["Group"])');
                             $('#valueGroup').text(dataDB.pasturepol.group);
-                            $('#infoGroupLat').text('@Html.Raw(SharedLocalizer["GroupLat"])');
                             $('#valueGroupLat').text(dataDB.pasturepol.group_lat);
-                            $('#infoAllocatedFeedResources').text('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                            $('#infoGrossYieldOfPlantsEatenOnAverageCropYearDryWeight').text('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                            $('#infocha').text('@Html.Raw(SharedLocalizer["cha"])');
-                            $('#infoсhaFeedUnits').text('@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                            $('#infoSpring').text('@Html.Raw(SharedLocalizer["Spring"])');
                             $('#valueUr_v').text(features[0].get('ur_v'));
                             $('#valueKorm_v').text(features[0].get('korm_v'));
-                            $('#infoSummer').text('@Html.Raw(SharedLocalizer["Summer"])');
                             $('#valueUr_l').text(features[0].get('ur_l'));
                             $('#valueKorm_l').text(features[0].get('korm_l'));
-                            $('#infoAutumn').text('@Html.Raw(SharedLocalizer["Autumn"])');
                             $('#valueUr_o').text(features[0].get('ur_o'));
                             $('#valueKorm_o').text(features[0].get('korm_o'));
-                            $('#infoWinter').text('@Html.Raw(SharedLocalizer["Winter"])');
                             $('#valueUr_z').text(features[0].get('ur_z'));
                             $('#valueKorm_z').text(features[0].get('korm_z'));
-                            $('#infoRecommendationForUse').text('@Html.Raw(SharedLocalizer["RecommendationForUse"])');
                             $('#valueRecommendationForUse').text(dataDB.pasturepol.recommend);
-                            $('#infoRecomCattles').text('@Html.Raw(SharedLocalizer["RecommendationForUse"])');
                             $('#valueRecomCattles').text(dataDB.pasturepol.recomcatt);
-                            @*console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
-                            console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
-                            console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);
-                            console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                            console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                            console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                            console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
-                            console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
-                            console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
-                            console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
-                            console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.pasturepol.recommend);
-                            console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.pasturepol.recomcatt);
-                            console.log('----------------------------------------------');*@
                         },
                         error: function () {
                         }

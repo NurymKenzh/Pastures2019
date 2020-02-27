@@ -1064,12 +1064,8 @@
 @* FindPastures *@
 <script>
     $(document).ready(function () {
-        $('#FilterPastureBtn').on('click', function () {
-            FindPasturesModal();            
-        });
-    });
-    function FindPasturesModal() {        
         new jBox('Modal', {
+            attach: '#FilterPastureBtn',
             width: 400,
             responsiveHeight: true,
             zIndex: 'auto',
@@ -1080,8 +1076,9 @@
             title: 'Поиск пастбищ',
             content: $('#FilterPasture'),
             overlay: false
-        }).open();
-    }    
+        }); 
+    });
+       
     function FindPastures() {
         var otdely_id = $('#find_otdel').val(),
             class_id = $('#find_ptype').val(),
@@ -1228,17 +1225,8 @@
     }
 
     $(document).ready(function () {
-
-        $('#FilterKATOBtn').on('click', function () {
-            FilterKATOModal();            
-        });
-        $('#FilterChart').on('click', function () {
-            InfoChartModal.open()
-        });
-
-    });
-    function FilterKATOModal() {        
         new jBox('Modal', {
+            attach: '#FilterKATOBtn',
             width: 300,
             zIndex: 'auto',
             draggable: 'title',
@@ -1248,8 +1236,11 @@
             title: 'Сводная информация',
             content: $('#FilterKato'),
             overlay: false
-        }).open();
-    }    
+        });
+        $('#FilterChart').on('click', function () {
+            InfoChartModal.open()
+        });
+    });       
     $(document).ready(function () {        
         InfoChartModal = new jBox('Modal', {
             responsiveWidth: true,

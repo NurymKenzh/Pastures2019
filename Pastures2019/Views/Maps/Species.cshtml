@@ -13,11 +13,7 @@
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
-<div class="container-fluid sticky-top p-0">
-    <div style="width: 1000px; height: 400px; overflow: auto;">
-        <table id="table_info_species"></table>
-        <table id="table_info_breed"></table>
-    </div>
+<div class="container-fluid sticky-top p-0">    
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -28,79 +24,158 @@
             <div class="logo">
                 <h3>Pasture</h3>
             </div>
-            <div class="col">
-                <form>
-                </form>
-            </div>
+            <!-- Other sections -->
+            <ul class="list-unstyled menu-elements">
+                <li>
+                    <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
+                        <i class="fa fa-list"></i>@SharedLocalizer["BaseLayers"]
+                    </a>
+                    <div id="TematicLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#TematicLayerSections">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerpopShow">
+                                    @SharedLocalizer["popLayer"]
+                                </label>
+                                <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layeradmxpolShow">
+                                    @SharedLocalizer["admxpolLayer"]
+                                </label>
+                                <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerhdrShow">
+                                    @SharedLocalizer["hdrLayer"]
+                                </label>
+                                <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerrdslinShow">
+                                    @SharedLocalizer["rdslinLayer"]
+                                </label>
+                                <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerspeciesXShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerspeciesXShow">
+                                    @SharedLocalizer["speciesXLayer"]
+                                </label>
+                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <br />
+                            <input id="radiosok" type="radio" name="speciesX" value="species3" checked onclick="ChangeLayers()">@SharedLocalizer["RuralCounties"]<br>
+                            <input id="radioray" type="radio" name="speciesX" value="species2" onclick="ChangeLayers()">@SharedLocalizer["Districts"]<br>
+                            <input id="radioobl" type="radio" name="speciesX" value="species1" onclick="ChangeLayers()">@SharedLocalizer["Areas"]<br>
+                            <input id="layerspeciesXOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#BaseLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="BaseLayerSections">
+                        <i class="fa fa-refresh"></i>@SharedLocalizer["BackgroundLayers"]
+                    </a>
+                    <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
+                        <div class="card-body">
+                            @*<label class="form-check-label" for="layerBaseShow">
+                                    @SharedLocalizer["BaseLayer"]
+                                </label>*@
+                            <div class="input-group input-group-sm">
+                                <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
+                                    <option value="OSM">OpenStreetMap</option>
+                                    <option value="BingAerialWithLabels">Bing Aerial</option>
+                                    <option value="BingRoadStatic">Bing Road (static)</option>
+                                    <option value="BingRoadDynamic">Bing Road (dynamic)</option>
+                                    <option value="HERENormalDay">HERE Normal Day</option>
+                                    <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
+                                    <option value="HERETerrainDay">HERE Terrain Day</option>
+                                    <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
+                                    <option value="StamenWatercolor">Stamen Watercolor</option>
+                                    <option value="StamenTerrain">Stamen Terrain</option>
+                                    <option value="StamenToner">Stamen Toner</option>
+                                    <option value="ArcGIS">ArcGIS</option>
+                                    <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
+                                    <option value="ThunderforestTransport">Thunderforest Transport</option>
+                                    <option value="ThunderforestLandscape">Thunderforest Landscape</option>
+                                    <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
+                                    <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
+                                    <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
+                                    <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
+                                    <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
             <!-- Exaple 1 -->
-            <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
-                <div class="card-body">
-                    <select id="cato1" onchange="ChangeCATO1()"></select>
-                    <select id="cato2" onchange="ChangeCATO2()"></select>
-                    <select id="cato3" onchange="ChangeCATO3()"></select>
-                    <input type="button" value="CATO Info" onclick="InfoCATO()" />
-
-                    <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
-                        <option value="OSM">OpenStreetMap</option>
-                        <option value="BingAerialWithLabels">Bing Aerial</option>
-                        <option value="BingRoadStatic">Bing Road (static)</option>
-                        <option value="BingRoadDynamic">Bing Road (dynamic)</option>
-                        <option value="HERENormalDay">HERE Normal Day</option>
-                        <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
-                        <option value="HERETerrainDay">HERE Terrain Day</option>
-                        <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
-                        <option value="StamenWatercolor">Stamen Watercolor</option>
-                        <option value="StamenTerrain">Stamen Terrain</option>
-                        <option value="StamenToner">Stamen Toner</option>
-                        <option value="ArcGIS">ArcGIS</option>
-                        <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
-                        <option value="ThunderforestTransport">Thunderforest Transport</option>
-                        <option value="ThunderforestLandscape">Thunderforest Landscape</option>
-                        <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
-                        <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
-                        <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
-                        <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
-                        <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
-                    </select>
-                    <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerBaseShow">
-                        @SharedLocalizer["BaseLayer"]
-                    </label>
-                    <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layeradmxpolShow">
-                        @SharedLocalizer["admxpolLayer"]
-                    </label>
-                    <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerhdrShow">
-                        @SharedLocalizer["hdrLayer"]
-                    </label>
-                    <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerpopShow">
-                        @SharedLocalizer["popLayer"]
-                    </label>
-                    <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerrdslinShow">
-                        @SharedLocalizer["rdslinLayer"]
-                    </label>
-                    <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerspeciesXShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerspeciesXShow">
-                        @SharedLocalizer["speciesXLayer"]
-                    </label>
-                    <br />
-                    <input id="radiosok" type="radio" name="speciesX" value="species3" checked onclick="ChangeLayers()">@SharedLocalizer["RuralCounties"]<br>
-                    <input id="radioray" type="radio" name="speciesX" value="species2" onclick="ChangeLayers()">@SharedLocalizer["Districts"]<br>
-                    <input id="radioobl" type="radio" name="speciesX" value="species1" onclick="ChangeLayers()">@SharedLocalizer["Areas"]<br>
-                    <input id="layerspeciesXOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+            <div class="card-body">
+                <div class="col-md-12" style="display: none" id="FilterKatoCont">
+                    <form>
+                        <div class="form-group m-0">
+                            <label for="cato1" class="col-sm-2 col-form-label col-form-label-sm">@SharedLocalizer["Areas"]</label>
+                            <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato2" class="col-sm-2 col-form-label col-form-label-sm">@SharedLocalizer["Districts"]</label>
+                            <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">@SharedLocalizer["RuralCounties"]</label>
+                            <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                        </div>
+                        <input id="InfoSpeciesBtn" class="btn btn-warning btn-block mt-3" type="button" value="@SharedLocalizer["Information"]" onclick="InfoCATO()" />
+                    </form>
+                </div>
+                <div class="modal-white table-responsive-sm" style="display: none" id="InfoSpeciesCont">
+                    <table class="table table-striped table-hover table-sm small">
+                        <tbody>
+                            <tr>
+                                <th class="modal-white" scope="row" id="infoOtdel">@SharedLocalizer["CattleGoals"]</th>
+                                <td class="font-italic" colspan="2" id="valueCattleGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["HorsesGoals"]</th>
+                                <td class="font-italic" colspan="2" id="valueHorsesGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["SheepGoals"]</th>
+                                <td class="font-italic" colspan="2" id="valueSheepGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["CamelsGoals"]</th>
+                                <td class="font-italic" colspan="2" id="valueCamelsGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]</th>
+                                <td class="font-italic" colspan="2" id="valueTotalConditionalGoalsInTermsOfSheep"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["AsOf"]</th>
+                                <td class="font-italic" colspan="2" id="valueAsOf"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["Population"]</th>
+                                <td class="font-italic" colspan="2" id="valuePopulation"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["AreaOfPasturesha"]</th>
+                                <td class="font-italic" colspan="2" id="valueAreaOfPasturesha"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-hover table-sm small" id="table_info_species"></table>
+                    <table class="table table-hover table-sm small" id="table_info_breed"></table>
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -108,19 +183,20 @@
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
             </div>
+        </div>
+        <div class="chiller-theme">
             <div class="sidebar-footer">
-                <a href="#">
-                    <i class="SomeInfo fa fa-file" InfoTitle="Tooltip on top"></i>
+                <a asp-area="" asp-controller="Home" asp-action="About">
+                    <i class="SomeInfo fa fa-file" InfoTitle="@SharedLocalizer["About"]"></i>
                 </a>
-                <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
-                    <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
-                    <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
+                <a asp-area="" asp-controller="Home" asp-action="Instruction">
+                    <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">
-                    <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
+                    <i class="SomeInfo fa fa-list-alt" InfoTitle="@SharedLocalizer["Legend"]"></i>
                 </a>
                 <a href="#" id="MapTitleBtn" class="target-click">
-                    <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
+                    <i class="SomeInfo fa fa-bookmark" InfoTitle="@SharedLocalizer["LayerInfo"]"></i>
                 </a>
             </div>
         </div>
@@ -136,6 +212,31 @@
         <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
     </div>
     <!-- End content -->
+    <footer class="footer-classic fixed-bottom border-top border-light">
+        <div class="container-fluid">
+            <div class="row align-items-center m-1">
+                <div class="col">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        @*<div class="btn-group mr-2" role="group" aria-label="First group">
+                                <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
+                            </div>*@
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button id="FilterKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-pie-chart" InfoTitle="@SharedLocalizer["FreeInformation"]"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-auto">
+                    <div class="float-right">
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                    </div>
+                </div>
+                <div class="col col-lg-2">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+
+        </div>
+    </footer>
 </div>
 
 @* layers *@
@@ -829,6 +930,53 @@
 
 @* InfoCATO, GetCATOSpeciesInfo *@
 <script>
+    var InfoSpeciesModal;
+    $(document).ready(function () {
+        new jBox('Modal', {
+            attach: '#FilterKATOBtn',
+            width: 300,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'slide',
+            title: 'Сводная информация',
+            content: $('#FilterKatoCont'),
+            overlay: false
+        });
+        $('#InfoSpeciesBtn').on('click', function () {
+            InfoSpeciesModal.open()
+        });
+    });
+    $(document).ready(function () {
+        InfoSpeciesModal = new jBox('Modal', {
+            id: 'modal-white',
+            responsiveWidth: true,
+            maxWidth: 460,
+            maxHeight: 600,
+            blockScroll: false,
+            zIndex: 'auto',
+            closeButton: 'title',
+            animation: 'pulse',
+            draggable: 'title',
+            overlay: false,
+            reload: 'strict',
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 170
+            },
+            repositionOnOpen: true,
+            onOpen: function () {
+                // Add t
+                this.setTitle('<div class="ajax-complete">@SharedLocalizer["FreeInformation"]</div>');
+                this.setContent($('#InfoSpeciesCont'));
+            },
+        });
+    });
     function InfoCATO() {
         document.getElementById("table_info_species").innerHTML = "";
         var te = $('#cato3').val(),
@@ -856,6 +1004,14 @@
             dataType: 'jsonp',
             success: function (data) {
                 if (data.features.length > 0) {
+                    $('#valueCattleGoals').text(data.features[0].properties.cattle);
+                    $('#valueHorsesGoals').text(data.features[0].properties.horses);
+                    $('#valueSheepGoals').text(data.features[0].properties.smallcattl);
+                    $('#valueCamelsGoals').text(data.features[0].properties.camels);
+                    $('#valueTotalConditionalGoalsInTermsOfSheep').text(data.features[0].properties.totalgoals);
+                    $('#valueAsOf').text(data.features[0].properties.date);
+                    $('#valuePopulation').text(data.features[0].properties.population);
+                    $('#valueAreaOfPasturesha').text(data.features[0].properties.pastures);
                     console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + data.features[0].properties.cattle);
                     console.log('@Html.Raw(SharedLocalizer["HorsesGoals"]): ' + data.features[0].properties.horses);
                     console.log('@Html.Raw(SharedLocalizer["SheepGoals"]): ' + data.features[0].properties.smallcattl);
@@ -1017,7 +1173,6 @@
 @*tooltips, modal windows*@
 <script>
     $(document).ready(function () {
-
         // Map Title
         new jBox('Modal', {
             attach: '#MapTitleBtn',
@@ -1035,8 +1190,8 @@
                 y: 70
             },
             content: (
-                '<h5 class="Card-title text-center text-white">Map title</h5>' +
-                '<p class="card-text text-center text-white">This content is a little bit longer.</p>'
+                '<h5 class="Card-title text-center text-white">@SharedLocalizer["FodderResources"]</h5>' +
+                '<p class="card-text text-center text-white">@SharedLocalizer["ForageLandsOfTheRepublicOfKazakhstan"]</p>'
             ),
             overlay: false,
             reposition: true,
@@ -1044,26 +1199,26 @@
         }).open();
         // Map Legend
         new jBox('Modal', {
-            autoOpen: true,
             attach: '#LegendBtn',
             theme: 'TooltipBorder',
-            width: 250,
+            width: 500,
+            maxHeight: 600,
+            responsiveHeight: true,
             blockScroll: false,
             animation: 'flip',
-            closeButton: true,
+            closeButton: 'box',
             position: {
                 x: 'right',
                 y: 'bottom'
             },
             offset: {
                 x: -10,
-                y: -90
+                y: -60
             },
-            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
+            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
             overlay: false,
             reposition: true,
-            repositionOnOpen: false
-        }).open();
+        });
         // Tooltip below to the right
         new jBox('Tooltip', {
             theme: 'TooltipDark',

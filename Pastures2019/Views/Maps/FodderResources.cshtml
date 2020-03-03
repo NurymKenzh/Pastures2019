@@ -12,7 +12,13 @@
 <script src="~/lib/vendor/jBox/dist/jBox.all.js"></script>
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
-
+<link href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF/jspdf.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.16.0/dist/extensions/print/bootstrap-table-print.min.js"></script>
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar border border-light overflow-auto">
@@ -52,7 +58,7 @@
                                     @SharedLocalizer["hdrLayer"]
                                 </label>
                                 <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-                            </div>                            
+                            </div>
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerrdslinShow">
@@ -68,7 +74,7 @@
                                 <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                 </li>
                 <li>
                     <a href="#BaseLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="BaseLayerSections">
@@ -77,8 +83,8 @@
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
                             @*<label class="form-check-label" for="layerBaseShow">
-                                @SharedLocalizer["BaseLayer"]
-                            </label>*@
+                                    @SharedLocalizer["BaseLayer"]
+                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -194,7 +200,7 @@
                     </form>
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
-                    <table class="table table-striped table-hover table-sm small">
+                    <table class="table table-striped table-hover table-sm small" id="TableContent">
                         <tbody>
                             <tr>
                                 <th class="modal-white" scope="row" id="infoOtdel">@SharedLocalizer["Otdel"]</th>
@@ -247,15 +253,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    
+                    <button id="exportpdf" type="button" class="btn btn-primary btn-sm float-right">Download PDF</button>
                 </div>
             </div>
             <!-- Exaple 1 -->
             <div class="dark-light-buttons">
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-            </div>    
-            
+            </div>
+
         </div>
         <div class="chiller-theme">
             <div class="sidebar-footer">
@@ -291,8 +297,8 @@
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         @*<div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
-                        </div>*@
+                                <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
+                            </div>*@
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="FilterKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-pie-chart" InfoTitle="@SharedLocalizer["FreeInformation"]"></i></button>
                         </div>
@@ -309,7 +315,7 @@
                         &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
                     </div>
                 </div>
-                <div class="col col-lg-2">                   
+                <div class="col col-lg-2">
                     @await Html.PartialAsync("_SelectLanguagePartial")
                 </div>
             </div>
@@ -317,6 +323,38 @@
         </div>
     </footer>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#exportpdf").click(function () {
+            var pdf = new jsPDF('p', 'pt', 'a4');
+            source = $('#TableContent')[0];
+            specialElementHandlers = {
+                '#bypassme': function (element, renderer) {
+                    return true
+                }
+            };
+            margins = {
+                top: 10,
+                bottom: 10,
+                left: 10,
+                width: 500
+            };
+            pdf.fromHTML(source, // HTML string or DOM elem ref.
+                margins.left, // x coord
+                margins.top, { // y coord
+                'width': margins.width, // max width of content on PDF
+                'elementHandlers': specialElementHandlers
+            },
+                function (dispose) {
+                    // dispose: object with X, Y of the last line add to the PDF
+                    //          this allow the insertion of new lines after html
+                    pdf.save('IdSource.pdf');
+                }, margins);
+        });
+
+    });
+</script>
 
 @* layers *@
 <script>
@@ -951,7 +989,7 @@
                 }
             });
         }
-        
+
     })
 </script>
 
@@ -1063,9 +1101,9 @@
             title: 'Поиск пастбищ',
             content: $('#FilterPasture'),
             overlay: false
-        }); 
+        });
     });
-       
+
     function FindPastures() {
         var otdely_id = $('#find_otdel').val(),
             class_id = $('#find_ptype').val(),
@@ -1227,8 +1265,8 @@
         $('#FilterChart').on('click', function () {
             InfoChartModal.open()
         });
-    });       
-    $(document).ready(function () {        
+    });
+    $(document).ready(function () {
         InfoChartModal = new jBox('Modal', {
             responsiveWidth: true,
             responsiveHeight: true,

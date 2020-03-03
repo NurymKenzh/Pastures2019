@@ -18,95 +18,174 @@
             <canvas id="chart" width="900" height="380"></canvas>
         </div>*@
     <!-- Sidebar -->
-    <nav class="sidebar border border-light">
-        <div class="page-wrapper chiller-theme">
+    <nav class="sidebar border border-light overflow-auto">
+        <div class="page-wrapper">
             <!-- close sidebar menu -->
             <div class="dismiss">
                 <i class="fa fa-arrow-left"></i>
             </div>
             <div class="logo">
-                <h3>Pasture</h3>
+                <h3><a href="#">Pasture</a></h3>
             </div>
-            <div class="col">
-                <form>
-                </form>
-            </div>
+            <!-- Other sections -->
+            <ul class="list-unstyled menu-elements">
+                <li>
+                    <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
+                        <i class="fa fa-list"></i>@SharedLocalizer["BaseLayers"]
+                    </a>
+                    <div id="TematicLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#TematicLayerSections">
+                        <div class="card-body">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerpopShow">
+                                    @SharedLocalizer["popLayer"]
+                                </label>
+                                <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layeradmxpolShow">
+                                    @SharedLocalizer["admxpolLayer"]
+                                </label>
+                                <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerhdrShow">
+                                    @SharedLocalizer["hdrLayer"]
+                                </label>
+                                <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerrdslinShow">
+                                    @SharedLocalizer["rdslinLayer"]
+                                </label>
+                                <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerburden_pastureShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerburden_pastureShow">
+                                    @SharedLocalizer["burden_pastureLayer"]
+                                </label>
+                                <input id="layerburden_pastureOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#BaseLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="BaseLayerSections">
+                        <i class="fa fa-refresh"></i>@SharedLocalizer["BackgroundLayers"]
+                    </a>
+                    <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
+                        <div class="card-body">
+                            @*<label class="form-check-label" for="layerBaseShow">
+                                    @SharedLocalizer["BaseLayer"]
+                                </label>*@
+                            <div class="input-group input-group-sm">
+                                <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
+                                    <option value="OSM">OpenStreetMap</option>
+                                    <option value="BingAerialWithLabels">Bing Aerial</option>
+                                    <option value="BingRoadStatic">Bing Road (static)</option>
+                                    <option value="BingRoadDynamic">Bing Road (dynamic)</option>
+                                    <option value="HERENormalDay">HERE Normal Day</option>
+                                    <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
+                                    <option value="HERETerrainDay">HERE Terrain Day</option>
+                                    <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
+                                    <option value="StamenWatercolor">Stamen Watercolor</option>
+                                    <option value="StamenTerrain">Stamen Terrain</option>
+                                    <option value="StamenToner">Stamen Toner</option>
+                                    <option value="ArcGIS">ArcGIS</option>
+                                    <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
+                                    <option value="ThunderforestTransport">Thunderforest Transport</option>
+                                    <option value="ThunderforestLandscape">Thunderforest Landscape</option>
+                                    <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
+                                    <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
+                                    <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
+                                    <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
+                                    <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
+                                </select>
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
             <!-- Exaple 1 -->
-            <div class="treeextent scrollbar-deep-purple bordered-deep-purple thin">
-                <div class="card-body">
-                    <input id="find_num_vydel" type="text" />
-                    @Html.DropDownList("BurOtdel", (IEnumerable<SelectListItem>)ViewBag.BurOtdel, "", htmlAttributes: new { @id = "find_BurOtdel" })
-                    @Html.DropDownList("BType", (IEnumerable<SelectListItem>)ViewBag.BType, "", htmlAttributes: new { @id = "find_BType" })
-                    @Html.DropDownList("BurSubOtdel", (IEnumerable<SelectListItem>)ViewBag.BurSubOtdel, "", htmlAttributes: new { @id = "find_BurSubOtdel" })
-                    @Html.DropDownList("BClass", (IEnumerable<SelectListItem>)ViewBag.BClass, "", htmlAttributes: new { @id = "find_BClass" })
-                    @Html.DropDownList("BGroup", (IEnumerable<SelectListItem>)ViewBag.BGroup, "", htmlAttributes: new { @id = "find_BGroup" })
-                    <input id="find_burden_gro_from" type="text" />
-                    <input id="find_burden_gro_to" type="text" />
-                    <input id="find_burden_deg_from" type="text" />
-                    <input id="find_burden_deg_to" type="text" />
-                    <input type="button" value="Find" onclick="FindPastures()" />
-
-                    <select id="cato1" onchange="ChangeCATO1()"></select>
-                    <select id="cato2" onchange="ChangeCATO2()"></select>
-                    <select id="cato3" onchange="ChangeCATO3()"></select>
-
-                    <select id="layerBaseType" class="form-control form-control-sm" onchange="ChangeLayers()">
-                        <option value="OSM">OpenStreetMap</option>
-                        <option value="BingAerialWithLabels">Bing Aerial</option>
-                        <option value="BingRoadStatic">Bing Road (static)</option>
-                        <option value="BingRoadDynamic">Bing Road (dynamic)</option>
-                        <option value="HERENormalDay">HERE Normal Day</option>
-                        <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
-                        <option value="HERETerrainDay">HERE Terrain Day</option>
-                        <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
-                        <option value="StamenWatercolor">Stamen Watercolor</option>
-                        <option value="StamenTerrain">Stamen Terrain</option>
-                        <option value="StamenToner">Stamen Toner</option>
-                        <option value="ArcGIS">ArcGIS</option>
-                        <option value="ThunderforestOpenCycleMap">Thunderforest OpenCycleMap</option>
-                        <option value="ThunderforestTransport">Thunderforest Transport</option>
-                        <option value="ThunderforestLandscape">Thunderforest Landscape</option>
-                        <option value="ThunderforestOutdoors">Thunderforest Outdoors</option>
-                        <option value="ThunderforestSpinalMap">Thunderforest Spinal Map</option>
-                        <option value="ThunderforestPioneer">Thunderforest Pioneer</option>
-                        <option value="ThunderforestMobileAtlas">Thunderforest Mobile Atlas</option>
-                        <option value="ThunderforestNeighbourhood">Thunderforest Neighbourhood</option>
-                    </select>
-                    <input type="checkbox" id="layerBaseShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerBaseShow">
-                        @SharedLocalizer["BaseLayer"]
-                    </label>
-                    <input id="layerBaseOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layeradmxpolShow" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layeradmxpolShow">
-                        @SharedLocalizer["admxpolLayer"]
-                    </label>
-                    <input id="layeradmxpolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerhdrShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerhdrShow">
-                        @SharedLocalizer["hdrLayer"]
-                    </label>
-                    <input id="layerhdrOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerpopShow">
-                        @SharedLocalizer["popLayer"]
-                    </label>
-                    <input id="layerpopOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerrdslinShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerrdslinShow">
-                        @SharedLocalizer["rdslinLayer"]
-                    </label>
-                    <input id="layerrdslinOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
-
-                    <input type="checkbox" id="layerburden_pastureShow" checked="checked" onchange="ChangeLayers()">
-                    <label class="form-check-label text-white" for="layerburden_pastureShow">
-                        @SharedLocalizer["burden_pastureLayer"]
-                    </label>
-                    <input id="layerburden_pastureOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+            <div class="card-body">
+                <div class="col-md-12" style="display: none" id="FindKATO">
+                    <form>
+                        <div class="form-group m-0">
+                            <label for="cato1" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Areas"]</label>
+                            <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato2" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Districts"]</label>
+                            <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato3" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["RuralCounties"]</label>
+                            <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="table-responsive-sm" style="display: none" id="FilterPasture">
+                    <table class="table table-borderless table-sm small">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Id</th>
+                                <td colspan="3"><input class="form-control form-control-sm" id="find_num_vydel" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" for="BurOtdel">@SharedLocalizer["BurOtdel"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_BurOtdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.BurOtdel)" name="BurOtdel" value=""><option value=""></option></select></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" for="BType">@SharedLocalizer["BType"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_BType" asp-items="@((IEnumerable<SelectListItem>)ViewBag.BType)" name="BType" value=""><option value=""></option></select></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" for="BurSubOtdel">@SharedLocalizer["BurSubOtdel"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_BurSubOtdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.BurSubOtdel)" name="BurSubOtdel" value=""><option value=""></option></select></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" for="BClass">@SharedLocalizer["BClass"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_BClass" asp-items="@((IEnumerable<SelectListItem>)ViewBag.BClass)" name="BClass" value=""><option value=""></option></select></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" for="BGroup">@SharedLocalizer["BGroup"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_BGroup" asp-items="@((IEnumerable<SelectListItem>)ViewBag.BGroup)" name="BGroup" value=""><option value=""></option></select></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pasture norm 1</th>
+                                <td><input class="form-control form-control-sm" id="find_burden_gro_from" type="text" /></td>
+                                <td>-</td>
+                                <td><input class="form-control form-control-sm" id="find_burden_gro_to" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Pasture norm 2</th>
+                                <td><input class="form-control form-control-sm" id="find_burden_deg_from" type="text" /></td>
+                                <td>-</td>
+                                <td><input class="form-control form-control-sm" id="find_burden_deg_to" type="text" /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <input class="btn btn-warning btn-block mt-3" type="button" value="@SharedLocalizer["Find"]" onclick="FindPastures()" />
+                </div>
+                <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
+                    <table class="table table-striped table-hover table-sm small">
+                        <tbody>
+                            <tr>
+                                <th class="modal-white" scope="row" id="infoOtdel"></th>
+                                <td class="font-italic" id="valueOtdel"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -114,19 +193,21 @@
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
             </div>
+
+        </div>
+        <div class="chiller-theme">
             <div class="sidebar-footer">
-                <a href="#">
-                    <i class="SomeInfo fa fa-file" InfoTitle="Tooltip on top"></i>
+                <a asp-area="" asp-controller="Home" asp-action="About">
+                    <i class="SomeInfo fa fa-file" InfoTitle="@SharedLocalizer["About"]"></i>
                 </a>
-                <a href="#" OnClick="Charts()" id="ChartsButton" value="Выделять" onclick="Charts()">
-                    <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте (ВХБ или БХУ)"></i>
-                    <span id="chartSpan" class="badge badge-pill badge-warning notification">0</span>
+                <a asp-area="" asp-controller="Home" asp-action="Instruction">
+                    <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">
-                    <i class="SomeInfo fa fa-list-alt" InfoTitle="Легенда"></i>
+                    <i class="SomeInfo fa fa-list-alt" InfoTitle="@SharedLocalizer["Legend"]"></i>
                 </a>
                 <a href="#" id="MapTitleBtn" class="target-click">
-                    <i class="SomeInfo fa fa-bookmark" InfoTitle="Информация о слое"></i>
+                    <i class="SomeInfo fa fa-bookmark" InfoTitle="@SharedLocalizer["LayerInfo"]"></i>
                 </a>
             </div>
         </div>
@@ -142,6 +223,33 @@
         <div id="map" class="position-fixed col-md-12 ml-sm-auto col-lg-12 p-0" style="height: calc(100% - 100px);"></div>
     </div>
     <!-- End content -->
+    <footer class="footer-classic fixed-bottom border-top border-light">
+        <div class="container-fluid">
+            <div class="row align-items-center m-1">
+                <div class="col">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            <button id="FilterPastureBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-binoculars" InfoTitle="@SharedLocalizer["PastureSearch"]"></i></button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Third group">
+                            <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="col-md-auto">
+                    <div class="float-right">
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                    </div>
+                </div>
+                <div class="col col-lg-2">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+        </div>
+    </footer>
 </div>
 
 @* layers *@
@@ -564,6 +672,26 @@
         map.getView().setRotation(event.state.rotation);
         shouldUpdate = false;
     });
+    function ToHome() {
+        map.getView().fit([5028944.964937042, 4754994.655562972, 10214432.963802021, 7494497.74930296], map.getSize());
+
+        filter_found = "otdely_id = 'none'";
+        filterParams_found = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams_found["CQL_FILTER"] = filter_found;
+        }
+        Layer_found_pasturepol.getSource().updateParams(filterParams_found);
+        Layer_found_pasturepol.getSource().refresh();
+
+        Layer_select_pasturepol.getSource().clear();
+        if (Layer_admXpol_Navigate.getSource()) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+    };
 </script>
 
 @* ChangeLayers *@
@@ -720,6 +848,26 @@
 
 @* CATO *@
 <script>
+    $(document).ready(function () {
+
+        $('#FindKATOBtn').on('click', function () {
+            FindKATOModal();
+        });
+
+    });
+    function FindKATOModal() {
+        new jBox('Modal', {
+            width: 300,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'slide',
+            title: 'Поиск',
+            content: $('#FindKATO'),
+            overlay: false
+        }).open();
+    }  
     var cato = new Array();
     @foreach (CATO cATO in ViewBag.CATO)
     {
@@ -813,6 +961,25 @@
 
 @* FindPastures *@
 <script>
+    $(document).ready(function () {
+        $('#FilterPastureBtn').on('click', function () {
+            FindPasturesModal();
+        });
+    });
+    function FindPasturesModal() {
+        new jBox('Modal', {
+            width: 500,
+            responsiveHeight: true,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'slide',
+            title: 'Поиск пастбищ',
+            content: $('#FilterPasture'),
+            overlay: false
+        }).open();
+    } 
     function FindPastures() {
         var num_vydel = $('#find_num_vydel').val(),
             bur_otdel = $('#find_BurOtdel').val(),
@@ -956,7 +1123,6 @@
 @*tooltips, modal windows*@
 <script>
     $(document).ready(function () {
-
         // Map Title
         new jBox('Modal', {
             attach: '#MapTitleBtn',
@@ -974,8 +1140,7 @@
                 y: 70
             },
             content: (
-                '<h5 class="Card-title text-center text-white">Map title</h5>' +
-                '<p class="card-text text-center text-white">This content is a little bit longer.</p>'
+                '<h5 class="Card-title text-center text-white">@SharedLocalizer["PasturesBurden"]</h5>'
             ),
             overlay: false,
             reposition: true,
@@ -983,26 +1148,26 @@
         }).open();
         // Map Legend
         new jBox('Modal', {
-            autoOpen: true,
             attach: '#LegendBtn',
             theme: 'TooltipBorder',
-            width: 250,
+            width: 500,
+            maxHeight: 600,
+            responsiveHeight: true,
             blockScroll: false,
             animation: 'flip',
-            closeButton: true,
+            closeButton: 'box',
             position: {
                 x: 'right',
                 y: 'bottom'
             },
             offset: {
                 x: -10,
-                y: -90
+                y: -60
             },
-            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>',
+            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
             overlay: false,
             reposition: true,
-            repositionOnOpen: false
-        }).open();
+        });
         // Tooltip below to the right
         new jBox('Tooltip', {
             theme: 'TooltipDark',

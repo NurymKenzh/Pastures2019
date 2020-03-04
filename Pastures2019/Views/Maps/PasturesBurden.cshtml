@@ -14,9 +14,6 @@
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
 <div class="container-fluid sticky-top p-0">
-    @*<div style="width: 1000px; height: 400px;">
-            <canvas id="chart" width="900" height="380"></canvas>
-        </div>*@
     <!-- Sidebar -->
     <nav class="sidebar border border-light overflow-auto">
         <div class="page-wrapper">
@@ -118,7 +115,7 @@
             </ul>
             <!-- Exaple 1 -->
             <div class="card-body">
-                <div class="col-md-12" style="display: none" id="FindKATO">
+                <div class="col-md-12" style="display: none" id="FindKATOContent">
                     <form>
                         <div class="form-group m-0">
                             <label for="cato1" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Areas"]</label>
@@ -182,7 +179,7 @@
                         <thead>
                             <tr>
                                 <th scope="col">@SharedLocalizer["AllocationNumber"]</th>
-                                <th scope="col" id="valueAllocationNumber">First</th>
+                                <th scope="col" id="valueAllocationNumber"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -921,7 +918,7 @@
             closeButton: 'title',
             animation: 'slide',
             title: 'Поиск',
-            content: $('#FindKATO'),
+            content: $('#FindKATOContent'),
             overlay: false
         }).open();
     }  

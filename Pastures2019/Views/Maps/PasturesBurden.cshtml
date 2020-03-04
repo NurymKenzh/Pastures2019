@@ -179,10 +179,40 @@
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
                     <table class="table table-striped table-hover table-sm small">
+                        <thead>
+                            <tr>
+                                <th scope="col">@SharedLocalizer["AllocationNumber"]</th>
+                                <th scope="col" id="valueAllocationNumber">First</th>
+                            </tr>
+                        </thead>
                         <tbody>
                             <tr>
-                                <th class="modal-white" scope="row" id="infoOtdel"></th>
-                                <td class="font-italic" id="valueOtdel"></td>
+                                <th scope="row" id="infoBurOtdel">@SharedLocalizer["BurOtdel"]</th>
+                                <td class="font-italic" id="valueBurOtdel"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoBType">@SharedLocalizer["BType"]</th>
+                                <td class="font-italic" id="valueBType"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoBurSubOtdel">@SharedLocalizer["BurSubOtdel"]</th>
+                                <td class="font-italic" id="valueBurSubOtdel"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoBClass">@SharedLocalizer["BClass"]</th>
+                                <td class="font-italic" id="valueBClass"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoBGroup">@SharedLocalizer["BGroup"]</th>
+                                <td class="font-italic" id="valueBGroup"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoNormOfPastureLoadOnBackgroundPasturesConvGoal100ha">@SharedLocalizer["NormOfPastureLoadOnBackgroundPasturesConvGoal100ha"]</th>
+                                <td class="font-italic" id="valueNormOfPastureLoadOnBackgroundPasturesConvGoal100ha"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" id="infoNormOfPastureLoadOnDegradedPasturesConvGoal100ha">@SharedLocalizer["NormOfPastureLoadOnDegradedPasturesConvGoal100ha"]</th>
+                                <td class="font-italic" id="valueNormOfPastureLoadOnDegradedPasturesConvGoal100ha"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -791,9 +821,36 @@
 
 @* map.on('singleclick') *@
 <script>
+    var InfoMapModal;
+    $(document).ready(function () {
+        InfoMapModal = new jBox('Modal', {
+            id: 'modal-white',
+            maxWidth: 500,
+            maxHeight: 400,
+            adjustTracker: 'scroll',
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'zoomIn',
+            overlay: false,
+            onOpen: function () {
+                // Add t
+                this.setContent($('#InfoMap'));
+                this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
+            },
+        });
+    })
     map.on('singleclick', function (evt) {
         Source_select_burden_pasture.clear();
-
+        $('#valueAllocationNumber').text('');
+        $('#valueBurOtdel').text('');
+        $('#valueBType').text('');
+        $('#valueBurSubOtdel').text('');
+        $('#valueBClass').text('');
+        $('#valueBGroup').text('');
+        $('#valueNormOfPastureLoadOnBackgroundPasturesConvGoal100ha').text('');
+        $('#valueNormOfPastureLoadOnDegradedPasturesConvGoal100ha').text('');
         var viewResolution = (map.getView().getResolution());
         var url_burden_pasture = Source_burden_pasture.getGetFeatureInfoUrl(
             evt.coordinate, viewResolution, 'EPSG:3857',
@@ -827,15 +884,15 @@
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                            console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + dataDB.burden_pasture.num_vydel);
-                            console.log('@Html.Raw(SharedLocalizer["BurOtdel"]): ' + dataDB.burden_pasture.burotdel);
-                            console.log('@Html.Raw(SharedLocalizer["BType"]): ' + dataDB.burden_pasture.btype);
-                            console.log('@Html.Raw(SharedLocalizer["BurSubOtdel"]): ' + dataDB.burden_pasture.bursubotdel);
-                            console.log('@Html.Raw(SharedLocalizer["BClass"]): ' + dataDB.burden_pasture.bclass);
-                            console.log('@Html.Raw(SharedLocalizer["BGroup"]): ' + dataDB.burden_pasture.bgroup);
-                            console.log('@Html.Raw(SharedLocalizer["NormOfPastureLoadOnBackgroundPasturesConvGoal100ha"]): ' + features[0].get('burden_gro'));
-                            console.log('@Html.Raw(SharedLocalizer["NormOfPastureLoadOnDegradedPasturesConvGoal100ha"]): ' + features[0].get('burden_deg'));
-                            console.log('----------------------------------------------');
+                             InfoMapModal.open();
+                            $('#valueAllocationNumber').text(dataDB.burden_pasture.num_vydel);
+                            $('#valueBurOtdel').text(dataDB.burden_pasture.burotdel);
+                            $('#valueBType').text(dataDB.burden_pasture.btype);
+                            $('#valueBurSubOtdel').text(dataDB.burden_pasture.bursubotdel);
+                            $('#valueBClass').text(dataDB.burden_pasture.bclass);
+                            $('#valueBGroup').text(dataDB.burden_pasture.bgroup);
+                            $('#valueNormOfPastureLoadOnBackgroundPasturesConvGoal100ha').text(features[0].get('burden_gro'));
+                            $('#valueNormOfPastureLoadOnDegradedPasturesConvGoal100ha').text(features[0].get('burden_deg'));
                         },
                         error: function () {
                         }
@@ -1164,7 +1221,7 @@
                 x: -10,
                 y: -60
             },
-            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
+            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/burden_pasture2018.png"></div>',
             overlay: false,
             reposition: true,
         });

@@ -125,7 +125,7 @@
 
 @media (min-width: 62em) {
     .featurette-heading {
-        margin-top: 7rem;
+        margin-top: 3rem;
     }
 }
 /* Login start
@@ -405,9 +405,9 @@
 
     .sidebar .logo a {
         display: inline-block;
-        width: 192px;
+        width: 190px;
         height: 34px;
-        background: url(../images/logoKaz.png) left bottom no-repeat;
+        background: url(../images/logo.svg) left bottom no-repeat;
         border: 0;
         text-indent: -999999px;
     }
@@ -532,7 +532,7 @@
     }
 
         .sidebar.light .logo a {
-            background-image: url(../img/logo-dark.png);
+            background-image: url(../images/logo-dark.svg);
         }
 
     .sidebar.light ul.menu-elements {
@@ -849,6 +849,11 @@ a.btn-customized-4 {
     }
 
 
-th.modal-white {
-    min-width: 150px;
+/***** Section 2 *****/
+
+
+.section-2-box img {
+    border-radius: 6px;
 }
+
+

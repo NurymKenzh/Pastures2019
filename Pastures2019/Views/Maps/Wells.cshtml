@@ -5,6 +5,7 @@
     ViewData["Title"] = SharedLocalizer["Wells"];
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
+@await Html.PartialAsync("_StylesTabAndShart")
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
 <script src="~/lib/ol/ol.js"></script>
@@ -115,7 +116,6 @@
             </ul>
             <!-- Exaple 1 -->
             <div class="card-body">
-
                 <div class="col-md-12" style="display: none" id="FindKATOContent">
                     <form>
                         <div class="form-group m-0">
@@ -136,7 +136,7 @@
                     <table class="table table-borderless table-sm small">
                         <tbody>
                             <tr>
-                                <th scope="row">Id</th>
+                                <th scope="row" style="width: 40%">Id</th>
                                 <td colspan="3"><input class="form-control form-control-sm" id="find_num" type="text" /></td>
                             </tr>
                             <tr>
@@ -180,7 +180,7 @@
                     <input class="btn btn-warning btn-block mt-3" type="button" value="Find" onclick="FindPastures()" />
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoWellsCont">
-                    <table class="table table-striped table-hover table-sm small">
+                    <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <thead>
                             <tr>
                                 <th scope="col">@SharedLocalizer["Number"]</th>
@@ -222,6 +222,15 @@
                             </tr>
                         </tbody>
                     </table>
+                    <div class="btn-group float-right" role="group">
+                        <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Download
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoWellsPolCont">
                     <table class="table table-striped table-hover table-sm small">
@@ -235,7 +244,7 @@
                             <tr>
                                 <th scope="row" id="infoWClass"></th>
                                 <td class="font-italic" id="valueWClass"></td>
-                            </tr>                            
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -956,7 +965,7 @@
                             $('#valueDebitdms').text(features[0].get('debit'));
                             $('#valueLoweringm').text(features[0].get('decrease'));
                             $('#valueDepthToWaterm').text(features[0].get('depth'));
-                            $('#valueMineralizationgdm').text(features[0].get('minerali'));                            
+                            $('#valueMineralizationgdm').text(features[0].get('minerali'));
                             console.log('@Html.Raw(SharedLocalizer["Number"]): ' + features[0].get('num'));
                             console.log('@Html.Raw(SharedLocalizer["WType"]): ' + dataDB.wellspnt.wtype);
                             console.log('@Html.Raw(SharedLocalizer["WSubType"]): ' + dataDB.wellspnt.wsubtype);
@@ -1010,7 +1019,7 @@
                                 // data from wellspol
                                 var parserpol = new ol.format.GeoJSON();
                                 var featurespol = parserpol.readFeatures(datapol);
-                                
+
                                 $('#infoWClass').text('@Html.Raw(SharedLocalizer["WClass"])');
                                 $('#valueWClass').text($("#find_WClass option[value='" + featurespol[0].get('class_id') + "']").text());
                                 console.log('@Html.Raw(SharedLocalizer["WClass"]): ' + $("#find_WClass option[value='" + featurespol[0].get('class_id') + "']").text());
@@ -1026,30 +1035,52 @@
             });
         }
     })
+    // function for export table
+    var $table = $('#InfoTableContent')
+    var $excelbutton = $('#excelbutton')
+    var $pdfbutton = $('#pdfbutton')
+    $(function () {
+        $excelbutton.click(function () {
+            $('#InfoTableContent').tableExport({type:'excel'});
+        })
+        $pdfbutton.click(function () {
+            $('#InfoTableContent').tableExport({
+                type: 'pdf',
+                jspdf: {
+                    orientation: 'p',
+                    format: 'a4',
+                    margins: { left: 10, right: 10, top: 20, bottom: 20 },
+                    autotable: {
+                        styles: {
+                            fillColor: 'inherit',
+                            textColor: 'inherit'
+                        },
+                        tableWidth: 'wrap',
+                    }
+                }
+            });
+        })
+
+    })
 </script>
 
 @* CATO *@
 <script>
     $(document).ready(function () {
-
-        $('#FindKATOBtn').on('click', function () {
-            FindKATOModal();
-        });
-
-    });
-    function FindKATOModal() {
         new jBox('Modal', {
+            attach: '#FindKATOBtn',
             width: 300,
+            responsiveHeight: true,
             zIndex: 'auto',
             draggable: 'title',
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Поиск',
+            title: 'Сводная информация',
             content: $('#FindKATOContent'),
             overlay: false
-        }).open();
-    }
+        });
+    });
     var cato = new Array();
     @foreach (CATO cATO in ViewBag.CATO)
     {
@@ -1144,12 +1175,8 @@
 @* FindPastures *@
 <script>
     $(document).ready(function () {
-        $('#FindWaterSourseContentBtn').on('click', function () {
-            FindPasturesModal();
-        });
-    });
-    function FindPasturesModal() {
         new jBox('Modal', {
+            attach: '#FindWaterSourseContentBtn',
             width: 500,
             responsiveHeight: true,
             zIndex: 'auto',
@@ -1160,8 +1187,8 @@
             title: 'Поиск водоисточников',
             content: $('#FindWaterSourseContent'),
             overlay: false
-        }).open();
-    } 
+        });
+    });
     function FindPastures() {
         var num = $('#find_num').val(),
             usl = $('#find_WType').val(),

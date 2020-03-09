@@ -225,11 +225,14 @@
     <hr class="featurette-divider">
 </div>
 <div class="container marketing">
-    <!-- START THE FEATURETTES --> 
+    <!-- START THE FEATURETTES -->
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">@SharedLocalizer["FodderResources"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-            <p class="lead font-italic">Кормовые угодья Республики Казахстан занимают 191,6 млн. га или 70,3% территории, из них 186,5 млн. га приходится на пастбища и 5,1 млн. га на сенокосы. Естественные кормовые угодья являются главным источником пастбищных кормов и значительной части заготовляемого сена. 77% пастбищ республики расположены в условиях равнинного рельефа, <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+            <p class="lead font-italic">
+                Картографирование кормовых угодий в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.1 путем экспертного дешифрирования космических снимков Landsat и MODIS 2014-2015 гг. Все выделенные кормовые ресурсы Казахстана систематизированы по составу растительности и экологическим уровням. Группы пастбищ определены по совокупности растительных сообществ (или их комплексов) близких по флористическому составу, условиям местообитания.
+                Группы пастбищ объединяются в классы на основании преобладания определенных экобиоморф. Классы, в свою очередь, объединены в отделы – по крупным формам рельефа с определенными гидрогеологическими условиями. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a>
+            </p>
         </div>
         <div class="col-md-5">
             <img src="~/images/Main/foto_001.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
@@ -240,26 +243,65 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">@SharedLocalizer["PasturesBurden"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-            <p class="lead font-italic">Аккумулятивные равнины лесостепной зоны в пределах Костанайской, Северо-Казахстанской, Павлодарской и Акмолинской областей и приподнятые денудационные равнины Акмолинской области в настоящее время в основном распаханы. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+            <h2 class="featurette-heading">@SharedLocalizer["LandSupply"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <p class="lead font-italic">
+                При составлении карты земельного запаса для перспектив развития отгонного животноводства Казахстана в масштабе 1:1 500 000, был использован значительный объем разновременных космических снимков, картографической и фондовой информации, дающей разнообразные сведения о земельном запасе Казахстана. Использование статистического и фондового материала районных и областных акиматов, Министерства сельского хозяйства РК и Агентства Республики
+                Казахстан по статистике за 2005-2015 годы, позволило проанализировать динамику изменения пастбищ земельного запаса. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a>
+            </p>
         </div>
         <div class="col-md-5 order-md-1">
             <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
         </div>
     </div>
-
     <hr class="featurette-divider">
-
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">@SharedLocalizer["Species"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-            <p class="lead font-italic">Породное районирование имеет целью наиболее эффективное использование потенциала сельскохозяйственных животных в конкретных природно-климатических условиях. Для лесостепной и степной зон республики  характерно развитие молочно-мясного скотоводства, <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+            <p class="lead font-italic">При составлении карты породного районирования сельскохозяйственных животных Казахстана в масштабе 1:1 500000, был использован значительный объем разновременной информации, дающей разнообразные сведения о породном районировании животных Казахстана. Использование статистического и фондового материала районных и областных акиматов, Министерства сельского хозяйства РК и Агентства Республики Казахстан по статистике за 2005-2015 годы, позволило проанализировать динамику численности племенного скота. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
         </div>
         <div class="col-md-5">
             <img src="~/images/Main/foto_003.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
         </div>
     </div>
-
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">@SharedLocalizer["PasturesBurden"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <p class="lead font-italic">
+                Основным методическим приемом при составлении карты нагрузки сельскохозяйственных животных на пастбища Казахстан в масштабе 1:1 500 000, является определение допустимых норм нагрузки сельскохозяйственных животных на фоновые и деградированные пастбища в рамках природных границ кормовых угодий с учетом их природных свойств, преобладающих типов пастбищ и степени их деградации,
+                типа почв и механического состава, особенностей рельефа, климата, обводненности территорий и др. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a>
+            </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">@SharedLocalizer["Wells"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <p class="lead font-italic">Создание карты обводнение пастбищ Казахстана в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.0, путем оцифровывания существующих колодцев и скважин с 
+            топографических карт масштаба 1:200 000 и 1:100 000. Использовались материалы обследования пастбищных колодцев и скважин проведенные КазНИИ водного хозяйства МСХ РК в 2013-2015 годы, материалы инвентаризации 
+            колодцев на землях сельскохозяйственного назначения проведенные РГП «ГИСХАГИ» РК, данных Института гидрогеологии и геоэкологии им. У.А. Ахмедсафина. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+        </div>
+        <div class="col-md-5">
+            <img src="~/images/Main/foto_003.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Спутниковые данные Modis <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <p class="lead font-italic">
+                NDVI нашел широкое применение в изучении растительности; он используется для оценки состояния и урожайности сельскохозяйственных культур, продуктивности пастбищ, оценки залежей и т.д. Очень часто индекс напрямую связан с другими наземными параметрами, такими как проективное покрытие,
+                фотосинтетическая активность растений, поверхностная влага, индекс площади листвы и количество биомассы.  В целом, здоровая растительность поглощает почти весь видимый свет, падающий на нее, и отражает большую часть инфракрасного света. Угнетённая или разреженная растительность отражает 
+                больше видимого и меньше инфракрасного света. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a>
+            </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
+    </div>
     <hr class="featurette-divider">
     <div class="row float-right mb-5  mr-5">
         <a href="" class="btn btn-outline-primary btn-circle d-inline float-right">View all</a>

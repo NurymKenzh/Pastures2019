@@ -525,6 +525,59 @@ namespace Pastures2019.Controllers
             decimal objectid,
             string sourceproduct,
             string dataset,
+            int yearstart,
+            int yearfinish)
+        {
+            string raster = sourceproduct + "_B01_NDVI_3857_KZ";
+            if (dataset == "Anomaly")
+            {
+                raster += "_Anomaly";
+            }
+            raster += ".tif";
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            List<analytic> analytics = new List<analytic>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                    $" FROM public.analytics" +
+                    $" WHERE objectid = {objectid.ToString()}" +
+                    $" AND raster LIKE '%{raster}%';";
+                var analyticsDB = connection.Query<analytic>(query);
+                analytics = analyticsDB.Where(a => !a.raster.Contains("BASE")).ToList();
+            }
+            for (int i = 0; i < analytics.Count(); i++)
+            {
+                analytics[i].day = Convert.ToInt32(analytics[i].raster.Substring(5, 3));
+                analytics[i].date = new DateTime(Convert.ToInt32(analytics[i].raster.Substring(1, 4)), 1, 1);
+                analytics[i].date = analytics[i].date.AddDays(analytics[i].day - 1);
+            }
+            analytics = analytics.Where(a => a.date.Year >= yearstart && a.date.Year <= yearfinish).OrderBy(a => a.date).ToList();
+
+            // years
+            List<string> labels = analytics.Select(a => a.date.ToString("yyyy.MM.dd")).ToList();
+            List<decimal?> years_min = analytics.Select(a => (decimal?)a.min).ToList(),
+                years_max = analytics.Select(a => (decimal?)a.max).ToList(),
+                years_median = analytics.Select(a => (decimal?)a.median).ToList();
+
+            return Json(new
+            {
+                labels,
+                years_min,
+                years_max,
+                years_median
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetChart2Data(
+            decimal objectid,
+            string sourceproduct,
+            string dataset,
             int monthstart,
             int monthscount,
             int[] years)
@@ -549,7 +602,7 @@ namespace Pastures2019.Controllers
                     $" WHERE objectid = {objectid.ToString()}" +
                     $" AND raster LIKE '%{raster}%';";
                 var analyticsDB = connection.Query<analytic>(query);
-                analytics = analyticsDB.ToList();
+                analytics = analyticsDB.Where(a => !a.raster.Contains("BASE")).ToList();
             }
             for (int i = 0; i < analytics.Count(); i++)
             {

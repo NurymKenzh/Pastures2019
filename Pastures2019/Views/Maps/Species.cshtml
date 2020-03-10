@@ -174,11 +174,11 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-hover table-sm small" id="table_info_species">
-
+                    <table class="table table-info table-sm small" id="table_info_species">
                     </table>
+                </div>
+                <div class="modal-white table-responsive-sm" style="display: none" id="InfoBreadCont">
                     <table class="table table-hover table-sm small" id="table_info_breed">
-
                     </table>
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
@@ -855,7 +855,6 @@
             id: 'modal-white',
             maxWidth: 500,
             maxHeight: 400,
-            adjustTracker: 'scroll',
             zIndex: 'auto',
             draggable: 'title',
             closeOnClick: false,
@@ -1070,6 +1069,8 @@
 @* InfoCATO, GetCATOSpeciesInfo *@
 <script>
     var InfoSpeciesModal;
+    var InfoBreadModal;
+    var i = 1;
     $(document).ready(function () {
         new jBox('Modal', {
             attach: '#FilterKATOBtn',
@@ -1090,29 +1091,36 @@
     $(document).ready(function () {
         InfoSpeciesModal = new jBox('Modal', {
             id: 'modal-white',
-            responsiveWidth: true,
-            maxWidth: 460,
-            maxHeight: 600,
+            maxWidth: 400,
+            maxHeight: 500,
             blockScroll: false,
             zIndex: 'auto',
             closeButton: 'title',
             animation: 'pulse',
             draggable: 'title',
             overlay: false,
-            reload: 'strict',
-            position: {
-                x: 'right',
-                y: 'top'
-            },
-            offset: {
-                x: -10,
-                y: 170
-            },
             onOpen: function () {
                 // Add t
                 this.setTitle('<div class="ajax-complete">@SharedLocalizer["FreeInformation"]</div>');
                 this.setContent($('#InfoSpeciesCont'));
             },
+        });
+    });
+    $(document).ready(function () {
+        InfoBreadModal = new jBox('Modal', {
+            id: 'modal-white',
+            maxWidth: 460,
+            maxHeight: 600,
+            blockScroll: false,
+            zIndex: 'auto',
+            closeButton: 'box',
+            animation: 'pulse',
+            overlay: false,
+            content: $('#InfoBreadCont'),
+            position: {
+                x: i * 10,
+                y: i * 10
+            }
         });
     });
     function InfoCATO() {
@@ -1163,8 +1171,9 @@
                 catote: te,
             },
             type: 'POST',
+            spinner: true,
             success: function (dataDB) {
-                var content = "<table>"
+                var content = "<table>"                
                 for (i = 0; i < dataDB.camels.length; i++) {
                     content += '<tr><td>@SharedLocalizer["Camel"]</td>'
                         + '<td style="padding-left: 10px;">' + dataDB.camels[i].breed + '</td>'
@@ -1205,6 +1214,7 @@
             },
             type: 'POST',
             success: function (data) {
+                InfoBreadModal.open();
                 var content = "<table>";
                 if (Code > 400) {
                     content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.breed + '</td></tr>';

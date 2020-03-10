@@ -19,6 +19,7 @@
     string maxYear_MOLA_MYD13Q1006 = yearDays_MOLA_MYD13Q1006.Max(y => y.year),
         maxDay_MOLA_MYD13Q1006 = yearDays_MOLA_MYD13Q1006.Where(y => y.year == maxYear_MOLA_MYD13Q1006).Max(y => y.day);
 }
+@await Html.PartialAsync("_StylesTabAndShart")
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
@@ -186,8 +187,8 @@
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
                             @*<label class="form-check-label" for="layerBaseShow">
-                                @SharedLocalizer["BaseLayer"]
-                            </label>*@
+                                    @SharedLocalizer["BaseLayer"]
+                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -229,7 +230,7 @@
             </div>
             <div class="card-body">
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
-                    <table class="table table-striped table-hover table-sm small">
+                    <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <tbody>
                             <tr>
                                 <th class="modal-white" scope="row" id="infoOtdel"></th>
@@ -282,7 +283,15 @@
                             </tr>
                         </tbody>
                     </table>
-
+                    <div class="btn-group float-right" role="group">
+                        <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Download
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -319,15 +328,9 @@
             <div class="row align-items-center m-1">
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        @*<div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["SearchForAnAreaDistrictRuralCounties"]"></i></button>
-                        </div>*@
-                        @*<div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="SelectPasturesBtn" type="button" class="btn btn-outline-primary btn-sm" onclick="ChangeTool()"><i class="SomeInfo fa fa-arrow-up " InfoTitle="@SharedLocalizer["SelectPastures"]"></i></button>
-                        </div>*@
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm">
-                            <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="@SharedLocalizer["Charts"]"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
+                                <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="@SharedLocalizer["Charts"]"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
                             </button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
@@ -348,7 +351,7 @@
     </footer>
 </div>
 
-<input id="objectid" type="hidden"/>
+<input id="objectid" type="hidden" />
 
 @* layers *@
 <script>
@@ -955,7 +958,7 @@
                 $("#Year_MOLA_MYD13Q1006 option:selected").text() + '. ' + $("#DayOfYear_MOLT_MOD13Q1006 option:selected").text()
             );
         }
-        
+
     }
 </script>
 
@@ -1119,18 +1122,18 @@
 
 @* ChangeTool *@
 @*<script>
-    var tool = 'select_raster';
-    function ChangeTool() {
-        if (tool == 'select_raster') {
-            tool = 'select_pasture';
-            $('#SelectPasturesBtn').addClass('btn-danger');
+        var tool = 'select_raster';
+        function ChangeTool() {
+            if (tool == 'select_raster') {
+                tool = 'select_pasture';
+                $('#SelectPasturesBtn').addClass('btn-danger');
+            }
+            else if (tool == 'select_pasture') {
+                tool = 'select_raster';
+                $('#SelectPasturesBtn').removeClass('btn-danger');
+            }
         }
-        else if (tool == 'select_pasture') {
-            tool = 'select_raster';
-            $('#SelectPasturesBtn').removeClass('btn-danger');
-        }
-    }
-</script>*@
+    </script>*@
 
 @* map.on('singleclick') *@
 <script>
@@ -1250,6 +1253,33 @@
 
         }
     })
+    // function for export table
+    var $table = $('#InfoTableContent')
+    var $excelbutton = $('#excelbutton')
+    var $pdfbutton = $('#pdfbutton') 
+    $(function () {
+        $excelbutton.click(function () {
+            $('#InfoTableContent').tableExport({type:'excel'});
+        })
+        $pdfbutton.click(function () {
+            $('#InfoTableContent').tableExport({
+                type: 'pdf',
+                jspdf: {
+                    orientation: 'p',
+                    format: 'a4',
+                    margins: { left: 10, right: 10, top: 20, bottom: 20 },
+                    autotable: {
+                        styles: {
+                            fillColor: 'inherit',
+                            textColor: 'inherit'
+                        },
+                        tableWidth: 'wrap',
+                    }
+                }
+            });
+        })
+
+    })
 </script>
 
 @* Charts *@
@@ -1368,7 +1398,7 @@
             overlay: false,
             reposition: true,
             repositionOnOpen: false
-        }).open();
+        });
         // Tooltip below to the right
         new jBox('Tooltip', {
             theme: 'TooltipDark',

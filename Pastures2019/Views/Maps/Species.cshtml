@@ -5,6 +5,7 @@
     ViewData["Title"] = SharedLocalizer["Species"];
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
+@await Html.PartialAsync("_StylesTabAndShart")
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
 <script src="~/lib/ol/ol.js"></script>
@@ -13,7 +14,7 @@
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
-<div class="container-fluid sticky-top p-0">    
+<div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
         <div class="page-wrapper chiller-theme">
@@ -65,13 +66,12 @@
                                 <label class="form-check-label" for="layerspeciesXShow">
                                     @SharedLocalizer["speciesXLayer"]
                                 </label>
-                                <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
+                                <br />
+                                <input id="radiosok" type="radio" name="speciesX" value="species3" checked onclick="ChangeLayers()">@SharedLocalizer["RuralCounties"]<br>
+                                <input id="radioray" type="radio" name="speciesX" value="species2" onclick="ChangeLayers()">@SharedLocalizer["Districts"]<br>
+                                <input id="radioobl" type="radio" name="speciesX" value="species1" onclick="ChangeLayers()">@SharedLocalizer["Areas"]<br>
+                                <input id="layerspeciesXOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                             </div>
-                            <br />
-                            <input id="radiosok" type="radio" name="speciesX" value="species3" checked onclick="ChangeLayers()">@SharedLocalizer["RuralCounties"]<br>
-                            <input id="radioray" type="radio" name="speciesX" value="species2" onclick="ChangeLayers()">@SharedLocalizer["Districts"]<br>
-                            <input id="radioobl" type="radio" name="speciesX" value="species1" onclick="ChangeLayers()">@SharedLocalizer["Areas"]<br>
-                            <input id="layerspeciesXOpacity" type="range" class="form-control-range" min="0" max="100" value="100" oninput="ChangeLayers()" />
                         </div>
                     </div>
                 </li>
@@ -123,15 +123,15 @@
                 <div class="col-md-12" style="display: none" id="FilterKatoCont">
                     <form>
                         <div class="form-group m-0">
-                            <label for="cato1" class="col-sm-2 col-form-label col-form-label-sm">@SharedLocalizer["Areas"]</label>
+                            <label for="cato1" class="col-sm-auto col-form-label col-form-label-sm mt-0">@SharedLocalizer["Areas"]</label>
                             <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
                         </div>
                         <div class="form-group m-0">
-                            <label for="cato2" class="col-sm-2 col-form-label col-form-label-sm">@SharedLocalizer["Districts"]</label>
+                            <label for="cato2" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Districts"]</label>
                             <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
                         </div>
                         <div class="form-group m-0">
-                            <label for="cato3" class="col-sm-2 col-form-label col-form-label-sm">@SharedLocalizer["RuralCounties"]</label>
+                            <label for="cato3" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["RuralCounties"]</label>
                             <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
                         </div>
                         <input id="InfoSpeciesBtn" class="btn btn-warning btn-block mt-3" type="button" value="@SharedLocalizer["Information"]" onclick="InfoCATO()" />
@@ -174,8 +174,61 @@
                             </tr>
                         </tbody>
                     </table>
-                    <table class="table table-hover table-sm small" id="table_info_species"></table>
-                    <table class="table table-hover table-sm small" id="table_info_breed"></table>
+                    <table class="table table-hover table-sm small" id="table_info_species">
+
+                    </table>
+                    <table class="table table-hover table-sm small" id="table_info_breed">
+
+                    </table>
+                </div>
+                <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
+                    <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
+                        <thead>
+                            <tr>
+                                <th scope="col">@SharedLocalizer["CattleGoals"]</th>
+                                <th scope="col" id="infoCattleGoals">First</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["HorsesGoals"]</th>
+                                <td class="font-italic" id="infoHorsesGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["SheepGoals"]</th>
+                                <td class="font-italic" id="infoSheepGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["CamelsGoals"]</th>
+                                <td class="font-italic" id="infoCamelsGoals"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]</th>
+                                <td class="font-italic" id="infoTotalConditionalGoalsInTermsOfSheep"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["AsOf"]</th>
+                                <td class="font-italic" id="infoAsOf"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["Population"]</th>
+                                <td class="font-italic" id="infoPopulation"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">@SharedLocalizer["AreaOfPasturesha"]</th>
+                                <td class="font-italic" id="infoAreaOfPasturesha"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="btn-group float-right" role="group">
+                        <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Download
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Exaple 1 -->
@@ -222,6 +275,9 @@
                             </div>*@
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="FilterKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-pie-chart" InfoTitle="@SharedLocalizer["FreeInformation"]"></i></button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Third group">
+                            <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
                         </div>
                     </div>
                 </div>
@@ -671,6 +727,26 @@
         map.getView().setRotation(event.state.rotation);
         shouldUpdate = false;
     });
+    function ToHome() {
+        map.getView().fit([5028944.964937042, 4754994.655562972, 10214432.963802021, 7494497.74930296], map.getSize());
+
+        filter_found = "otdely_id = 'none'";
+        filterParams_found = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams_found["CQL_FILTER"] = filter_found;
+        }
+        Layer_found_pasturepol.getSource().updateParams(filterParams_found);
+        Layer_found_pasturepol.getSource().refresh();
+
+        Layer_select_pasturepol.getSource().clear();
+        if (Layer_admXpol_Navigate.getSource()) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+    };
 </script>
 
 @* ChangeLayers *@
@@ -773,8 +849,36 @@
 
 @* map.on('singleclick') *@
 <script>
+    var InfoMapModal;
+    $(document).ready(function () {
+        InfoMapModal = new jBox('Modal', {
+            id: 'modal-white',
+            maxWidth: 500,
+            maxHeight: 400,
+            adjustTracker: 'scroll',
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'zoomIn',
+            overlay: false,
+            onOpen: function () {
+                // Add t
+                this.setContent($('#InfoMap'));
+                this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
+            },
+        });
+    })
     map.on('singleclick', function (evt) {
         Source_select_species.clear();
+        $('#valueCattleGoals').text('');
+        $('#valueHorsesGoals').text('');
+        $('#valueSheepGoals').text('');
+        $('#valueCamelsGoals').text('');
+        $('#valueTotalConditionalGoalsInTermsOfSheep').text('');
+        $('#valueAsOf').text('');
+        $('#valuePopulation').text('');
+        $('#valueAreaOfPasturesha').text('');
         document.getElementById("table_info_species").innerHTML = "";
 
         var viewResolution = (map.getView().getResolution());
@@ -820,18 +924,53 @@
                     // data from species
                     var parser = new ol.format.GeoJSON();
                     var features = parser.readFeatures(data);
-                    console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + features[0].get('cattle'));
+                    InfoMapModal.open();
+                    $('#infoCattleGoals').text(features[0].get('cattle'));
+                    $('#infoHorsesGoals').text(features[0].get('horses'));
+                    $('#infoSheepGoals').text(features[0].get('smallcattl'));
+                    $('#infoCamelsGoals').text(features[0].get('camels'));
+                    $('#infoTotalConditionalGoalsInTermsOfSheep').text(features[0].get('totalgoals'));
+                    $('#infoAsOf').text(features[0].get('date'));
+                    $('#infoPopulation').text(features[0].get('population'));
+                    $('#infoAreaOfPasturesha').text(features[0].get('pastures'));
+                    @*console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + features[0].get('cattle'));
                     console.log('@Html.Raw(SharedLocalizer["HorsesGoals"]): ' + features[0].get('horses'));
                     console.log('@Html.Raw(SharedLocalizer["SheepGoals"]): ' + features[0].get('smallcattl'));
                     console.log('@Html.Raw(SharedLocalizer["CamelsGoals"]): ' + features[0].get('camels'));
                     console.log('@Html.Raw(SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]): ' + features[0].get('totalgoals'));
                     console.log('@Html.Raw(SharedLocalizer["AsOf"]): ' + features[0].get('date'));
                     console.log('@Html.Raw(SharedLocalizer["Population"]): ' + features[0].get('population'));
-                    console.log('@Html.Raw(SharedLocalizer["AreaOfPasturesha"]): ' + features[0].get('pastures'));
+                    console.log('@Html.Raw(SharedLocalizer["AreaOfPasturesha"]): ' + features[0].get('pastures'));*@
                     GetCATOSpeciesInfo(features[0].get('kato_te'));
                 }
             });
         }
+    })
+    // function for export table
+    var $excelbutton = $('#excelbutton')
+    var $pdfbutton = $('#pdfbutton')
+    $(function () {
+        $excelbutton.click(function () {
+            $('#InfoTableContent').tableExport({type:'excel'});
+        })
+        $pdfbutton.click(function () {
+            $('#InfoTableContent').tableExport({
+                type: 'pdf',
+                jspdf: {
+                    orientation: 'p',
+                    format: 'a4',
+                    margins: { left: 10, right: 10, top: 20, bottom: 20 },
+                    autotable: {
+                        styles: {
+                            fillColor: 'inherit',
+                            textColor: 'inherit'
+                        },
+                        tableWidth: 'wrap',
+                    }
+                }
+            });
+        })
+
     })
 </script>
 
@@ -969,7 +1108,6 @@
                 x: -10,
                 y: 170
             },
-            repositionOnOpen: true,
             onOpen: function () {
                 // Add t
                 this.setTitle('<div class="ajax-complete">@SharedLocalizer["FreeInformation"]</div>');
@@ -1012,14 +1150,6 @@
                     $('#valueAsOf').text(data.features[0].properties.date);
                     $('#valuePopulation').text(data.features[0].properties.population);
                     $('#valueAreaOfPasturesha').text(data.features[0].properties.pastures);
-                    console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + data.features[0].properties.cattle);
-                    console.log('@Html.Raw(SharedLocalizer["HorsesGoals"]): ' + data.features[0].properties.horses);
-                    console.log('@Html.Raw(SharedLocalizer["SheepGoals"]): ' + data.features[0].properties.smallcattl);
-                    console.log('@Html.Raw(SharedLocalizer["CamelsGoals"]): ' + data.features[0].properties.camels);
-                    console.log('@Html.Raw(SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]): ' + data.features[0].properties.totalgoals);
-                    console.log('@Html.Raw(SharedLocalizer["AsOf"]): ' + data.features[0].properties.date);
-                    console.log('@Html.Raw(SharedLocalizer["Population"]): ' + data.features[0].properties.population);
-                    console.log('@Html.Raw(SharedLocalizer["AreaOfPasturesha"]): ' + data.features[0].properties.pastures);
                 }
                 GetCATOSpeciesInfo(te);
             }
@@ -1189,10 +1319,7 @@
                 x: -10,
                 y: 70
             },
-            content: (
-                '<h5 class="Card-title text-center text-white">@SharedLocalizer["FodderResources"]</h5>' +
-                '<p class="card-text text-center text-white">@SharedLocalizer["ForageLandsOfTheRepublicOfKazakhstan"]</p>'
-            ),
+            content: ('<h5 class="Card-title text-center text-white">@SharedLocalizer["Species"]</h5>'),
             overlay: false,
             reposition: true,
             repositionOnOpen: false
@@ -1201,7 +1328,7 @@
         new jBox('Modal', {
             attach: '#LegendBtn',
             theme: 'TooltipBorder',
-            width: 500,
+            width: 400,
             maxHeight: 600,
             responsiveHeight: true,
             blockScroll: false,
@@ -1215,7 +1342,7 @@
                 x: -10,
                 y: -60
             },
-            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
+            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/species.jpg"></div>',
             overlay: false,
             reposition: true,
         });

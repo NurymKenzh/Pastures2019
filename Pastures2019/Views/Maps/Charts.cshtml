@@ -159,6 +159,10 @@
                             yAxes: [{
                                 stacked: true
                             }]
+                        },
+                        title: {
+                            display: true,
+                            text: '@Html.Raw(SharedLocalizer["AllocationNumber"]): @ViewBag.group_id' + ', ' +  $('#sourceproduct1 option:selected').text() + ', ' + $('#dataset1 option:selected').text()
                         }
                     }
                 });
@@ -250,7 +254,11 @@
                     type: 'line',
                     data: chart2Data,
                     options: {
-                        responsive: true
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: '@Html.Raw(SharedLocalizer["AllocationNumber"]): @ViewBag.group_id' + ', ' +  $('#sourceproduct2 option:selected').text() + ', ' + $('#dataset2 option:selected').text()
+                        }
                     }
                 });
             },

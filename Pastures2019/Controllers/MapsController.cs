@@ -128,6 +128,23 @@ namespace Pastures2019.Controllers
         public ActionResult Charts(decimal objectid)
         {
             ViewBag.objectid = objectid;
+            string DefaultConnection = Microsoft
+              .Extensions
+              .Configuration
+              .ConfigurationExtensions
+              .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            pasturepol pasturepol = new pasturepol();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                var pasturepols = connection.Query<pasturepol>($"SELECT gid, objectid, class_id, otdely_id, " +
+                    $"subtype_id, group_id, ur_v, ur_l, ur_o, ur_z, korm_v, korm_l, korm_o, korm_z, " +
+                    $"recommend_, recom_catt, relief_id, zone_id, haying_id, shape_leng, shape_area " +
+                    $"FROM public.pasturepol " +
+                    $"WHERE objectid = {objectid};");
+                pasturepol = pasturepols.FirstOrDefault();
+            }
+            ViewBag.group_id = pasturepol.group_id;
             return View();
         }
 

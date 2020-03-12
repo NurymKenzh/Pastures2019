@@ -447,6 +447,9 @@
   <data name="FreeInformation" xml:space="preserve">
     <value>Free information</value>
   </data>
+  <data name="Further" xml:space="preserve">
+    <value>Further</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Go</value>
   </data>

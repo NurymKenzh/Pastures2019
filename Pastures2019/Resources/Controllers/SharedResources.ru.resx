@@ -447,6 +447,9 @@
   <data name="FreeInformation" xml:space="preserve">
     <value>Сводная информация</value>
   </data>
+  <data name="Further" xml:space="preserve">
+    <value>Далее</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Перейти</value>
   </data>

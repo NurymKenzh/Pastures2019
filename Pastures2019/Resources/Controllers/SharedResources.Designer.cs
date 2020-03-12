@@ -1053,6 +1053,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Further {
+            get {
+                return ResourceManager.GetString("Further", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Go {
             get {
                 return ResourceManager.GetString("Go", resourceCulture);

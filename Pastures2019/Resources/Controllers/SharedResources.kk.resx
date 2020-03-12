@@ -447,6 +447,9 @@
   <data name="FreeInformation" xml:space="preserve">
     <value>Қысқаша ақпарат</value>
   </data>
+  <data name="Further" xml:space="preserve">
+    <value>Келесі</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Өту</value>
   </data>

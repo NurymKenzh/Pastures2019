@@ -45,7 +45,8 @@
     }
 </select>
 <input type="button" onclick="Chart1()" value="@SharedLocalizer["Refresh"]" />
-<canvas class="my-1 w-100 chartjs-render-monitor" id="chart1Canvas" width="900" height="380"></canvas>
+@*<canvas class="my-1 w-100 chartjs-render-monitor" id="chart1Canvas" width="900" height="380"></canvas>*@
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart1Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
 <br />
 <br />
 
@@ -99,7 +100,8 @@
     <label for="@checkboxid">@y.ToString()</label>
 }
 <input type="button" onclick="Chart2()" value="@SharedLocalizer["Refresh"]" />
-<canvas class="my-1 w-100 chartjs-render-monitor" id="chart2Canvas" width="900" height="380"></canvas>
+@*<canvas class="my-1 w-100 chartjs-render-monitor" id="chart2Canvas" width="900" height="380"></canvas>*@
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart2Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
 
 <script>
     var chart1 = null;
@@ -162,7 +164,12 @@
                         },
                         title: {
                             display: true,
-                            text: '@Html.Raw(SharedLocalizer["AllocationNumber"]): @ViewBag.group_id' + ', ' +  $('#sourceproduct1 option:selected').text() + ', ' + $('#dataset1 option:selected').text()
+                            text: [$('#sourceproduct1 option:selected').text() + ', ' + $('#dataset1 option:selected').text() + '. ',
+                                '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                                '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                                '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
                         }
                     }
                 });
@@ -257,7 +264,12 @@
                         responsive: true,
                         title: {
                             display: true,
-                            text: '@Html.Raw(SharedLocalizer["AllocationNumber"]): @ViewBag.group_id' + ', ' +  $('#sourceproduct2 option:selected').text() + ', ' + $('#dataset2 option:selected').text()
+                            text: [$('#sourceproduct2 option:selected').text() + ', ' + $('#dataset2 option:selected').text() + '. ',
+                                '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                                '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                                '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
                         }
                     }
                 });

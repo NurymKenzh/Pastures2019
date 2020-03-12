@@ -123,6 +123,9 @@
   <data name="acting" xml:space="preserve">
     <value>действующий</value>
   </data>
+  <data name="AdministrativeUnit" xml:space="preserve">
+    <value>Административная единица</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
@@ -755,6 +758,12 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="SearchForWaterSources" xml:space="preserve">
+    <value>Поиск водоисточников</value>
   </data>
   <data name="Shearings" xml:space="preserve">
     <value>Настриг шерсти</value>

@@ -219,11 +219,11 @@
                     </table>
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            @SharedLocalizer["Download"]
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
-                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
                         </div>
                     </div>
                 </div>
@@ -269,7 +269,7 @@
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="Поиск области, района, сельского округа"></i></button>
+                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["Search"]"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Second group">
                             <button id="FilterPastureBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-binoculars" InfoTitle="@SharedLocalizer["PastureSearch"]"></i></button>
@@ -952,7 +952,7 @@
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Сводная информация',
+            title: '@SharedLocalizer["Search"]',
             content: $('#FindKATOContent'),
             overlay: false
         });

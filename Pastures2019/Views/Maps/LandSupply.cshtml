@@ -182,14 +182,12 @@
                             <table class="table table-borderless table-sm">
                                 <tbody class="text-white-50">
                                     <tr>
-                                        <th scope="row">Среднегодовая урожайность, ц/га</th>
-                                        <td>-</td>
-                                        <td> value </td>
+                                        <th scope="row">@SharedLocalizer["AverageAnnualProductivitykgha"]</th>
+                                        <td id="ur_avgyear"></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Средний кормозапас, ц</th>
-                                        <td>-</td>
-                                        <td> value</td>
+                                        <th scope="row">@SharedLocalizer["AverageFeedStockc"]</th>
+                                        <td id="korm_avgye"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -197,7 +195,7 @@
                         <div class="tab-pane fade" id="ZemFondStr" role="tabpanel" aria-labelledby="ZemFondStr-tab">
                             <h5 class="card-title text-center">Структура земель</h5>
                             <canvas id="chart1" width="400" height="380"></canvas>
-                            <button id="download-pdf" onclick="saveAsPDF();" type="button" class="btn btn-primary btn-sm float-right">Download PDF</button>
+                            <button id="download-pdf" onclick="saveAsPDF();" type="button" class="btn btn-primary btn-sm float-right">PDF</button>
                         </div>
                         <div class="tab-pane fade" id="ZemFondRec" role="tabpanel" aria-labelledby="ZemFondRec-tab">
                             <h5 class="card-title text-center">Рекомендации по сезонам</h5>
@@ -232,11 +230,11 @@
                     </table>
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            @SharedLocalizer["Download"]
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
-                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
                         </div>
                     </div>
                 </div>
@@ -879,8 +877,8 @@
                     var features = parser.readFeatures(data);
                     $('#valueUr_avgyear').text(features[0].get('ur_avgyear'));
                     $('#valueKorm_avgye').text(features[0].get('korm_avgye'));
-                    console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + features[0].get('ur_avgyear').toFixed(2));
-                    console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + features[0].get('korm_avgye').toFixed(2));
+                    @*console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + features[0].get('ur_avgyear').toFixed(2));
+                    console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + features[0].get('korm_avgye').toFixed(2));*@
                     $.ajax({
                         url: '@Url.Action("GetZemfondInfo")',
                         data: {
@@ -1322,8 +1320,8 @@
     }
 
     function TableCATO(zemfondpol) {
-        console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + zemfondpol.ur_avgyear.toFixed(2));
-        console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + zemfondpol.korm_avgye.toFixed(2));
+        $('#ur_avgyear').text(zemfondpol.ur_avgyear.toFixed(2));
+        $('#korm_avgye').text(zemfondpol.korm_avgye.toFixed(2));
     }
     //add button to generate PDF
     function saveAsPDF() {

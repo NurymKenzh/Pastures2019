@@ -199,6 +199,10 @@
                     <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <tbody>
                             <tr>
+                                <th class="modal-white" scope="row" id="infoVydel">@SharedLocalizer["AllocationNumber"]</th>
+                                <td class="font-italic" colspan="2" id="valueVydel"></td>
+                            </tr>
+                            <tr>
                                 <th class="modal-white" scope="row" id="infoOtdel">@SharedLocalizer["Otdel"]</th>
                                 <td class="font-italic" colspan="2" id="valueOtdel"></td>
                             </tr>
@@ -251,11 +255,11 @@
                     </table>
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            @SharedLocalizer["Download"]
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
-                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
                         </div>
                     </div>
                 </div>
@@ -889,6 +893,7 @@
     });
     map.on('singleclick', function (evt) {
         Source_select_pasturepol.clear();
+        $('#valueVydel').text('');
         $('#valueOtdel').text('');
         $('#valuePClass').text('');
         $('#valueGroup').text('');
@@ -938,6 +943,7 @@
                         type: 'POST',
                         success: function (dataDB) {
                             InfoMapModal.open();
+                            $('#valueVydel').text(dataDB.pasturepol.group_id);
                             $('#valueOtdel').text(dataDB.pasturepol.otdel);
                             $('#valuePClass').text(dataDB.pasturepol.ptype);
                             $('#valueGroup').text(dataDB.pasturepol.group);
@@ -1290,7 +1296,7 @@
             onOpen: function () {
                 // Add t
                 this.setContent('<div class="col" id="chartContainer"><canvas id="chart" id="chart_0" height="300px" width="400px"></canvas></div>' +
-                    '<button id="download-pdf" onclick="saveAsPDF();" type="button" class="btn btn-primary btn-sm float-right">Download PDF</button>');
+                    '<button id="download-pdf" onclick="saveAsPDF();" type="button" class="btn btn-primary btn-sm float-right">PDF</button>');
                 this.setTitle('<div class="ajax-complete">@SharedLocalizer["FreeInformation"]</div>');
             },
         });

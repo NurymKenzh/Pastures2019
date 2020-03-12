@@ -81,6 +81,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string AdministrativeUnit {
+            get {
+                return ResourceManager.GetString("AdministrativeUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Administrator {
             get {
                 return ResourceManager.GetString("Administrator", resourceCulture);
@@ -1974,6 +1983,24 @@ namespace Pastures2019.Resources.Controllers {
         public static string Save {
             get {
                 return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SearchForWaterSources {
+            get {
+                return ResourceManager.GetString("SearchForWaterSources", resourceCulture);
             }
         }
         

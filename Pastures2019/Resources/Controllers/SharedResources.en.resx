@@ -123,6 +123,9 @@
   <data name="acting" xml:space="preserve">
     <value>acting</value>
   </data>
+  <data name="AdministrativeUnit" xml:space="preserve">
+    <value>Administrative unit</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Administration</value>
   </data>
@@ -755,6 +758,12 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchForWaterSources" xml:space="preserve">
+    <value>Search for water sources</value>
   </data>
   <data name="Shearings" xml:space="preserve">
     <value>Sheared wool</value>

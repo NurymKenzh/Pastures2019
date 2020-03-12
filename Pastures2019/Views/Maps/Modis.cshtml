@@ -20,6 +20,7 @@
         maxDay_MOLA_MYD13Q1006 = yearDays_MOLA_MYD13Q1006.Where(y => y.year == maxYear_MOLA_MYD13Q1006).Max(y => y.day);
 }
 @await Html.PartialAsync("_StylesTabAndShart")
+
 <div class="container-fluid sticky-top p-0">
     <!-- Sidebar -->
     <nav class="sidebar border border-light">
@@ -229,67 +230,87 @@
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
             </div>
             <div class="card-body">
+                <div class="col-md-12" style="display: none" id="FindKATOContent">
+                    <form>
+                        <div class="form-group m-0">
+                            <label for="cato1" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Areas"]</label>
+                            <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato2" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Districts"]</label>
+                            <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                        </div>
+                        <div class="form-group m-0">
+                            <label for="cato3" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["RuralCounties"]</label>
+                            <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                        </div>
+                    </form>
+                </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
                     <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <tbody>
                             <tr>
-                                <th class="modal-white" scope="row" id="infoOtdel"></th>
+                                <th class="modal-white" scope="row" id="infoVydel">@SharedLocalizer["AllocationNumber"]</th>
+                                <td class="font-italic" colspan="2" id="valueVydel"></td>
+                            </tr>
+                            <tr>
+                                <th class="modal-white" scope="row" id="infoOtdel">@SharedLocalizer["Otdel"]</th>
                                 <td class="font-italic" colspan="2" id="valueOtdel"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoPClass"></th>
+                                <th scope="row" id="infoPClass">@SharedLocalizer["PClass"]</th>
                                 <td class="font-italic" colspan="2" id="valuePClass"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoGroup"></th>
+                                <th scope="row" id="infoGroup">@SharedLocalizer["Group"]</th>
                                 <td class="font-italic" colspan="2" id="valueGroup"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoGroupLat"></th>
+                                <th scope="row" id="infoGroupLat">@SharedLocalizer["GroupLat"]</th>
                                 <td class="font-italic" colspan="2" id="valueGroupLat"></td>
                             </tr>
                             <tr class="table-active">
-                                <th scope="row" id="infoAllocatedFeedResources"></th>
-                                <td id="infocha"></td>
-                                <td id="infoсhaFeedUnits"></td>
+                                <th scope="row" id="infoAllocatedFeedResources">@SharedLocalizer["AllocatedFeedResources"]</th>
+                                <td id="infocha">@SharedLocalizer["cha"]</td>
+                                <td id="infoсhaFeedUnits">@SharedLocalizer["сhaFeedUnits"]</td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoSpring"></th>
+                                <th scope="row" id="infoSpring">@SharedLocalizer["Spring"]</th>
                                 <td class="font-italic" id="valueUr_v"></td>
                                 <td class="font-italic" id="valueKorm_v"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoSummer"></th>
+                                <th scope="row" id="infoSummer">@SharedLocalizer["Summer"]</th>
                                 <td class="font-italic" id="valueUr_l"></td>
                                 <td class="font-italic" id="valueKorm_l"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoAutumn"></th>
+                                <th scope="row" id="infoAutumn">@SharedLocalizer["Autumn"]</th>
                                 <td class="font-italic" id="valueUr_o"></td>
                                 <td class="font-italic" id="valueKorm_o"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoWinter"></th>
+                                <th scope="row" id="infoWinter">@SharedLocalizer["Winter"]</th>
                                 <td class="font-italic" id="valueUr_z"></td>
                                 <td class="font-italic" id="valueKorm_z"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoRecommendationForUse"></th>
+                                <th scope="row" id="infoRecommendationForUse">@SharedLocalizer["RecommendationForUse"]</th>
                                 <td class="font-italic" colspan="2" id="valueRecommendationForUse"></td>
                             </tr>
                             <tr>
-                                <th scope="row" id="infoRecomCattles"></th>
+                                <th scope="row" id="infoRecomCattles">@SharedLocalizer["RecomCattles"]</th>
                                 <td class="font-italic" colspan="2" id="valueRecomCattles"></td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            @SharedLocalizer["Download"]
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
-                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
                         </div>
                     </div>
                 </div>
@@ -332,6 +353,9 @@
                             <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm">
                                 <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="@SharedLocalizer["Charts"]"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
                             </button>
+                        </div>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["Search"]"></i></button>
                         </div>
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
                             <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
@@ -603,6 +627,19 @@
     });
     Layer_adm3pol.set('name', 'admxpol');
     Layer_adm3pol.setVisible(false);
+
+    var Layer_admXpol_Navigate = new ol.layer.Vector({
+        style: new ol.style.Style({
+            fill: new ol.style.Fill({
+                color: 'transparent'
+            }),
+            stroke: new ol.style.Stroke({
+                color: 'red',
+                width: 4
+            })
+        })
+    });
+    Layer_admXpol_Navigate.set('name', 'admxpolnavigate');
 
     var url_hdrlin = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_hdrlin = new ol.source.TileWMS({
@@ -1121,19 +1158,19 @@
 </script>
 
 @* ChangeTool *@
-@*<script>
-        var tool = 'select_raster';
-        function ChangeTool() {
-            if (tool == 'select_raster') {
-                tool = 'select_pasture';
-                $('#SelectPasturesBtn').addClass('btn-danger');
-            }
-            else if (tool == 'select_pasture') {
-                tool = 'select_raster';
-                $('#SelectPasturesBtn').removeClass('btn-danger');
-            }
-        }
-    </script>*@
+<script>
+    //var tool = 'select_raster';
+    //function ChangeTool() {
+    //    if (tool == 'select_raster') {
+    //        tool = 'select_pasture';
+    //        $('#SelectPasturesBtn').addClass('btn-danger');
+    //    }
+    //    else if (tool == 'select_pasture') {
+    //        tool = 'select_raster';
+    //        $('#SelectPasturesBtn').removeClass('btn-danger');
+    //    }
+    //}
+</script>
 
 @* map.on('singleclick') *@
 <script>
@@ -1162,8 +1199,23 @@
         if (/*tool == 'select_pasture' && */Layer_pasturepol.getVisible()) {
             $('#objectid').val(null);
             $('#chartspan').text('0');
-            InfoMapModal.open();
             Source_select_pasturepol.clear();
+            $('#valueVydel').text('');
+            $('#valueOtdel').text('');
+            $('#valuePClass').text('');
+            $('#valueGroup').text('');
+            $('#valueGroupLat').text('');
+            $('#valueUr_v').text('');
+            $('#valueKorm_v').text('');
+            $('#valueUr_l').text('');
+            $('#valueKorm_l').text('');
+            $('#valueUr_o').text('');
+            $('#valueKorm_o').text('');
+            $('#valueUr_z').text('');
+            $('#valueKorm_z').text('');
+            $('#valueRecommendationForUse').text('');
+            $('#valueRecomCattles').text('');
+
             var viewResolution = (map.getView().getResolution());
             var url_pasturepol = Source_pasturepol.getGetFeatureInfoUrl(
                 evt.coordinate, viewResolution, 'EPSG:3857',
@@ -1200,47 +1252,22 @@
                             },
                             type: 'POST',
                             success: function (dataDB) {
-                                $('#infoOtdel').text('@Html.Raw(SharedLocalizer["Otdel"])');
+                                InfoMapModal.open();
+                                $('#valueVydel').text(dataDB.pasturepol.group_id);
                                 $('#valueOtdel').text(dataDB.pasturepol.otdel);
-                                $('#infoPClass').text('@Html.Raw(SharedLocalizer["PClass"])');
                                 $('#valuePClass').text(dataDB.pasturepol.ptype);
-                                $('#infoGroup').text('@Html.Raw(SharedLocalizer["Group"])');
                                 $('#valueGroup').text(dataDB.pasturepol.group);
-                                $('#infoGroupLat').text('@Html.Raw(SharedLocalizer["GroupLat"])');
                                 $('#valueGroupLat').text(dataDB.pasturepol.group_lat);
-                                $('#infoAllocatedFeedResources').text('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                                $('#infoGrossYieldOfPlantsEatenOnAverageCropYearDryWeight').text('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                                $('#infocha').text('@Html.Raw(SharedLocalizer["cha"])');
-                                $('#infoсhaFeedUnits').text('@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                                $('#infoSpring').text('@Html.Raw(SharedLocalizer["Spring"])');
                                 $('#valueUr_v').text(features[0].get('ur_v'));
                                 $('#valueKorm_v').text(features[0].get('korm_v'));
-                                $('#infoSummer').text('@Html.Raw(SharedLocalizer["Summer"])');
                                 $('#valueUr_l').text(features[0].get('ur_l'));
                                 $('#valueKorm_l').text(features[0].get('korm_l'));
-                                $('#infoAutumn').text('@Html.Raw(SharedLocalizer["Autumn"])');
                                 $('#valueUr_o').text(features[0].get('ur_o'));
                                 $('#valueKorm_o').text(features[0].get('korm_o'));
-                                $('#infoWinter').text('@Html.Raw(SharedLocalizer["Winter"])');
                                 $('#valueUr_z').text(features[0].get('ur_z'));
                                 $('#valueKorm_z').text(features[0].get('korm_z'));
-                                $('#infoRecommendationForUse').text('@Html.Raw(SharedLocalizer["RecommendationForUse"])');
                                 $('#valueRecommendationForUse').text(dataDB.pasturepol.recommend);
-                                $('#infoRecomCattles').text('@Html.Raw(SharedLocalizer["RecommendationForUse"])');
                                 $('#valueRecomCattles').text(dataDB.pasturepol.recomcatt);
-                                @*console.log('@Html.Raw(SharedLocalizer["PClass"]): ' + dataDB.pasturepol.ptype);
-                                console.log('@Html.Raw(SharedLocalizer["Group"]): ' + dataDB.pasturepol.group);
-                                console.log('@Html.Raw(SharedLocalizer["GroupLat"]): ' + dataDB.pasturepol.group_lat);
-                                console.log('@Html.Raw(SharedLocalizer["AllocatedFeedResources"])');
-                                console.log('@Html.Raw(SharedLocalizer["GrossYieldOfPlantsEatenOnAverageCropYearDryWeight"])');
-                                console.log('\t' + '@Html.Raw(SharedLocalizer["cha"])' + '\t' + '@Html.Raw(SharedLocalizer["сhaFeedUnits"])');
-                                console.log('@Html.Raw(SharedLocalizer["Spring"])' + '\t' + features[0].get('ur_v') + '\t' + features[0].get('korm_v'));
-                                console.log('@Html.Raw(SharedLocalizer["Summer"])' + '\t' + features[0].get('ur_l') + '\t' + features[0].get('korm_l'));
-                                console.log('@Html.Raw(SharedLocalizer["Autumn"])' + '\t' + features[0].get('ur_o') + '\t' + features[0].get('korm_o'));
-                                console.log('@Html.Raw(SharedLocalizer["Winter"])' + '\t' + features[0].get('ur_z') + '\t' + features[0].get('korm_z'));
-                                console.log('@Html.Raw(SharedLocalizer["RecommendationForUse"]): ' + dataDB.pasturepol.recommend);
-                                console.log('@Html.Raw(SharedLocalizer["RecomCattles"]): ' + dataDB.pasturepol.recomcatt);
-                                console.log('----------------------------------------------');*@
                             },
                             error: function () {
                             }
@@ -1256,7 +1283,7 @@
     // function for export table
     var $table = $('#InfoTableContent')
     var $excelbutton = $('#excelbutton')
-    var $pdfbutton = $('#pdfbutton') 
+    var $pdfbutton = $('#pdfbutton')
     $(function () {
         $excelbutton.click(function () {
             $('#InfoTableContent').tableExport({type:'excel'});
@@ -1280,6 +1307,114 @@
         })
 
     })
+</script>
+
+@* CATO *@
+<script>
+    $(document).ready(function () {
+        new jBox('Modal', {
+            attach: '#FindKATOBtn',
+            width: 300,
+            responsiveHeight: true,
+            zIndex: 'auto',
+            draggable: 'title',
+            closeOnClick: false,
+            closeButton: 'title',
+            animation: 'slide',
+            title: '@SharedLocalizer["Search"]',
+            content: $('#FindKATOContent'),
+            overlay: false
+        });
+    });
+    var cato = new Array();
+    @foreach (CATO cATO in ViewBag.CATO)
+    {
+        @:var cato_new = {};
+        @:cato_new["te"] = '@cATO.TE';
+        @:cato_new["ab"] = '@cATO.AB';
+        @:cato_new["cd"] = '@cATO.CD';
+        @:cato_new["ef"] = '@cATO.EF';
+        @:cato_new["hij"] = '@cATO.HIJ';
+        @:cato_new["name"] = '@Html.Raw(cATO.Name)';
+        @:cato.push(cato_new);
+    }
+    $('#cato1').append($("<option />"));
+    $.each(cato, function () {
+        if (this.cd == '00') {
+            $('#cato1').append($("<option />").val(this.te).text(this.name));
+        }
+    });
+
+    function ChangeCATO1() {
+        NavigateToCATO($('#cato1').val(), 1);
+        var ab = $('#cato1').val().substr(0, 2);
+        $('#cato2').empty();
+        $('#cato3').empty();
+        $('#cato2').append($("<option />"));
+        $.each(cato, function () {
+            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
+                $('#cato2').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO2() {
+        NavigateToCATO($('#cato2').val(), 2);
+        var ab = $('#cato2').val().substr(0, 2),
+            cd = $('#cato2').val().substr(2, 2);
+        $('#cato3').empty();
+        $('#cato3').append($("<option />"));
+        $.each(cato, function () {
+            if (this.hij == '000' && this.ab == ab && this.cd == cd && this.ef != '00') {
+                $('#cato3').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATO3() {
+        NavigateToCATO($('#cato3').val(), 3);
+    }
+
+    var first_admXpol_Navigate = true;
+    function NavigateToCATO(te, layer) {
+        if (Layer_admXpol_Navigate.getSource() != null) {
+            Layer_admXpol_Navigate.getSource().clear();
+        }
+        if (te == '') {
+            return;
+        }
+        var filter = "kato_te = '" + te + "'";
+        var filterParams = {
+            'FILTER': null,
+            'CQL_FILTER': null,
+            'FEATUREID': null
+        };
+        if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
+            filterParams["CQL_FILTER"] = filter;
+        }
+        url_admXpol_Navigate = geoserver_url + geoserver_workspace_name + "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=" + geoserver_workspace_name + ":adm" + layer.toString() + "pol&CQL_FILTER=" + filter + "&outputFormat=text/javascript&format_options=callback:getJson";
+        $.ajax({
+            jsonp: false,
+            jsonpCallback: 'getJson',
+            type: 'GET',
+            url: url_admXpol_Navigate,
+            async: false,
+            dataType: 'jsonp',
+            success: function (data_admXpol_Navigate) {
+                var new_source = new ol.source.Vector({
+                    features: (new ol.format.GeoJSON()).readFeatures(data_admXpol_Navigate, {
+                        featureProjection: 'EPSG:3857'
+                    })
+                });
+                Layer_admXpol_Navigate.setSource(new_source);
+                map.getView().fit(Layer_admXpol_Navigate.getSource().getExtent());
+                if (first_admXpol_Navigate) {
+                    map.addLayer(Layer_admXpol_Navigate);
+                    first_admXpol_Navigate = false;
+                }
+            }
+        });
+    }
 </script>
 
 @* Charts *@

@@ -183,13 +183,19 @@
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
                     <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
-                        <thead>
+                        <tbody>
+                            <tr>
+                                <th scope="col">@SharedLocalizer["AdministrativeUnit"]</th>
+                                <td scope="col" id="infoCATO"></td>
+                            </tr>
+                            <tr>
+                                <th scope="col">@SharedLocalizer["ZType"]</th>
+                                <td scope="col" id="infoZType"></td>
+                            </tr>
                             <tr>
                                 <th scope="col">@SharedLocalizer["CattleGoals"]</th>
-                                <th scope="col" id="infoCattleGoals">First</th>
+                                <td scope="col" id="infoCattleGoals"></td>
                             </tr>
-                        </thead>
-                        <tbody>
                             <tr>
                                 <th scope="row">@SharedLocalizer["HorsesGoals"]</th>
                                 <td class="font-italic" id="infoHorsesGoals"></td>
@@ -222,11 +228,11 @@
                     </table>
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            @SharedLocalizer["Download"]
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
-                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
                         </div>
                     </div>
                 </div>
@@ -932,15 +938,15 @@
                     $('#infoAsOf').text(features[0].get('date'));
                     $('#infoPopulation').text(features[0].get('population'));
                     $('#infoAreaOfPasturesha').text(features[0].get('pastures'));
-                    @*console.log('@Html.Raw(SharedLocalizer["CattleGoals"]): ' + features[0].get('cattle'));
-                    console.log('@Html.Raw(SharedLocalizer["HorsesGoals"]): ' + features[0].get('horses'));
-                    console.log('@Html.Raw(SharedLocalizer["SheepGoals"]): ' + features[0].get('smallcattl'));
-                    console.log('@Html.Raw(SharedLocalizer["CamelsGoals"]): ' + features[0].get('camels'));
-                    console.log('@Html.Raw(SharedLocalizer["TotalConditionalGoalsInTermsOfSheep"]): ' + features[0].get('totalgoals'));
-                    console.log('@Html.Raw(SharedLocalizer["AsOf"]): ' + features[0].get('date'));
-                    console.log('@Html.Raw(SharedLocalizer["Population"]): ' + features[0].get('population'));
-                    console.log('@Html.Raw(SharedLocalizer["AreaOfPasturesha"]): ' + features[0].get('pastures'));*@
-                    GetCATOSpeciesInfo(features[0].get('kato_te'));
+                    if ($('input[name="speciesX"]:checked').val() == 'species1') {
+                        GetCATOSpeciesInfo(features[0].get('kato_te'));
+                    }
+                    if ($('input[name="speciesX"]:checked').val() == 'species2') {
+                        GetCATOSpeciesInfo(features[0].get('kato'));
+                    }
+                    if ($('input[name="speciesX"]:checked').val() == 'species3') {
+                        GetCATOSpeciesInfo(features[0].get('kato_te'));
+                    }
                 }
             });
         }
@@ -1173,6 +1179,8 @@
             type: 'POST',
             spinner: true,
             success: function (dataDB) {
+                $('#infoCATO').text(dataDB.cato);
+                $('#infoZType').text(dataDB.type_k);
                 var content = "<table>"                
                 for (i = 0; i < dataDB.camels.length; i++) {
                     content += '<tr><td>@SharedLocalizer["Camel"]</td>'

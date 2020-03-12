@@ -123,6 +123,9 @@
   <data name="acting" xml:space="preserve">
     <value>актерлік</value>
   </data>
+  <data name="AdministrativeUnit" xml:space="preserve">
+    <value>Әкімшілік бөлім</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Әкімшілік</value>
   </data>
@@ -755,6 +758,12 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Сақтау</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Іздеу</value>
+  </data>
+  <data name="SearchForWaterSources" xml:space="preserve">
+    <value>Су көздерін іздеу</value>
   </data>
   <data name="Shearings" xml:space="preserve">
     <value>Кесілген жүн</value>

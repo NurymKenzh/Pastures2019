@@ -661,7 +661,7 @@
     <value>Азық-түлік ресурстары</value>
   </data>
   <data name="PasturesBurden" xml:space="preserve">
-    <value>Жайылымдарға ауылшаруашылық жануарларының жүктемесі</value>
+    <value>Жайылымдарға жүктемесі</value>
   </data>
   <data name="PastureSearch" xml:space="preserve">
     <value>Жайылымдарды іздеу</value>
@@ -817,7 +817,7 @@
     <value>Қоғамдастықтар</value>
   </data>
   <data name="Species" xml:space="preserve">
-    <value>Ауылшаруашылық жануарларын асылдандыру</value>
+    <value>Асылдандыру</value>
   </data>
   <data name="speciesXLayer" xml:space="preserve">
     <value>Ауылшаруашылық жануарларын асылдандыру</value>

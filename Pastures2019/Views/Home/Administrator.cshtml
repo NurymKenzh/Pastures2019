@@ -15,11 +15,11 @@
                 <!--left col-->
                 <div class="text-center">
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-                </div></hr><br>
+                </div><hr><br>
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Users" asp-action="Index">@SharedLocalizer["Users"]</a>
                     <a class="list-group-item list-group-item-action" asp-area="" asp-controller="MODIS" asp-action="Index">MODIS</a>
-                    <a class="list-group-item list-group-item-action">Others</a>
+                    @*<a class="list-group-item list-group-item-action">Others</a>*@
                 </div>  
             </div>
     <!--/col-3-->
@@ -31,19 +31,19 @@
                                 <a class="nav-link active" id="Modis-tab" data-toggle="tab" href="#Modis" role="tab" aria-controls="Modis" aria-selected="true">Modis</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Pasture-tab" data-toggle="tab" role="tab" aria-controls="Pasture" aria-selected="false" href="#Pasture">Pastures</a>
+                                <a class="nav-link" id="Pasture-tab" data-toggle="tab" role="tab" aria-controls="Pasture" aria-selected="false" href="#Pasture">@SharedLocalizer["FodderResources"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Landcover-tab" data-toggle="tab" role="tab" aria-controls="Landcover" aria-selected="false" href="#Landcover">Landcover</a>
+                                <a class="nav-link" id="Landcover-tab" data-toggle="tab" role="tab" aria-controls="Landcover" aria-selected="false" href="#Landcover">@SharedLocalizer["LandSupply"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Homeanimals-tab" data-toggle="tab" role="tab" aria-controls="Homeanimals" aria-selected="false" href="#Homeanimals">Breeding</a>
+                                <a class="nav-link" id="Homeanimals-tab" data-toggle="tab" role="tab" aria-controls="Homeanimals" aria-selected="false" href="#Homeanimals">@SharedLocalizer["Species"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Watering-tab" data-toggle="tab" role="tab" aria-controls="Watering" aria-selected="false" href="#Watering">Watering</a>
+                                <a class="nav-link" id="Watering-tab" data-toggle="tab" role="tab" aria-controls="Watering" aria-selected="false" href="#Watering">@SharedLocalizer["Wells"]</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="Vegatation-tab" data-toggle="tab" role="tab" aria-controls="Vegatation" aria-selected="false" href="#Vegatation">Pasture Type</a>
+                                <a class="nav-link" id="Vegatation-tab" data-toggle="tab" role="tab" aria-controls="Vegatation" aria-selected="false" href="#Vegatation">@SharedLocalizer["PasturesBurden"]</a>
                             </li>
                         </ul>
                     </div>

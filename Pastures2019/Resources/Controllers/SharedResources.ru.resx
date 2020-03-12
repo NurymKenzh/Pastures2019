@@ -661,7 +661,7 @@
     <value>Кормовые ресурсы</value>
   </data>
   <data name="PasturesBurden" xml:space="preserve">
-    <value>Нагрузка сельскохозяйственных животных на пастбища</value>
+    <value>Нагрузка на пастбища</value>
   </data>
   <data name="PastureSearch" xml:space="preserve">
     <value>Поиск пастбищ</value>
@@ -817,7 +817,7 @@
     <value>Сообщества</value>
   </data>
   <data name="Species" xml:space="preserve">
-    <value>Породное районирование сельскохозяйственных животных</value>
+    <value>Породное районирование</value>
   </data>
   <data name="speciesXLayer" xml:space="preserve">
     <value>Породное районирование сельскохозяйственных животных</value>

@@ -661,7 +661,7 @@
     <value>Feed resources</value>
   </data>
   <data name="PasturesBurden" xml:space="preserve">
-    <value>The load of farm animals on pastures</value>
+    <value>The load on pastures</value>
   </data>
   <data name="PastureSearch" xml:space="preserve">
     <value>Pasture search</value>
@@ -817,7 +817,7 @@
     <value>Communities</value>
   </data>
   <data name="Species" xml:space="preserve">
-    <value>Breeding zoning of farm animals</value>
+    <value>Breeding zoning</value>
   </data>
   <data name="speciesXLayer" xml:space="preserve">
     <value>Breeding zoning of farm animals</value>

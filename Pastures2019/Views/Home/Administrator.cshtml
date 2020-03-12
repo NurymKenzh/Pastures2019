@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-10"><h2>@SharedLocalizer["Administrator"]</h2></div>
-            <div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>
+            @*<div class="col-sm-2"><a href="/users" class="pull-right"><img title="profile image" class="img-circle img-responsive" src="http://www.gravatar.com/avatar/28fd20ccec6865e2d5f0e1f4446eb7bf?s=100"></a></div>*@
         </div>
         <div class="row">
             <div class="col-md-3">
@@ -58,10 +58,27 @@
                                             <a class="nav-link" asp-area="" asp-controller="MODISDataSets" asp-action="Index">@SharedLocalizer["MODISDataSets"]</a>
                                         </div>
                                     </div>
-                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                        <strong class="d-block text-gray-dark">MODIS</strong>
-                                        MODIS (or Moderate Resolution Imaging Spectroradiometer) is a key instrument aboard the Terra (originally known as EOS AM-1) and Aqua (originally known as EOS PM-1) satellites. Terra's orbit around the Earth is timed so that it passes from north to south across the equator in the morning, while Aqua passes south to north over the equator in the afternoon.
-                                    </p>
+                                    @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                    {
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">MODIS</strong>
+                                    MODIS (или Спектрорадиометр для получения изображений с умеренным разрешением) является ключевым инструментом на борту спутников Terra (первоначально известный как EOS AM-1) и Aqua (первоначально известный как EOS PM-1). Орбита Терры вокруг Земли рассчитана таким образом, что утром она проходит с севера на юг через экватор, а днем аква проходит с юга на север через экватор.
+                                </p>
+                                    }
+                                    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                    {
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">MODIS</strong>
+                                    MODIS (немесе Орташа ажыратымдылықтағы бейнелеу спектрадиометрі) - Terra (бастапқыда EOS AM-1 деп аталады) және Aqua (бастапқыда EOS PM-1 деп аталады) жерсеріктерінің негізгі құралы. Терраның Жердегі орбитасы солтүстіктен оңтүстікке экватор арқылы таңертең өтеді, ал Аква күндіз экватордан оңтүстікке солтүстікке өтеді.
+                                </p>
+                                    }
+                                    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                    {
+                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                    <strong class="d-block text-gray-dark">MODIS</strong>
+                                    MODIS (or Moderate Resolution Imaging Spectroradiometer) is a key instrument aboard the Terra (originally known as EOS AM-1) and Aqua (originally known as EOS PM-1) satellites. Terra's orbit around the Earth is timed so that it passes from north to south across the equator in the morning, while Aqua passes south to north over the equator in the afternoon.
+                                </p>
+                                    }
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="Pasture" role="tabpanel" aria-labelledby="Pasture-tab">

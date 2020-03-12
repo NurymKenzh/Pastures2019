@@ -507,6 +507,9 @@
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Кіру әрекеті жарамсыз.</value>
   </data>
+  <data name="LandStructure" xml:space="preserve">
+    <value>Жер құрылымы</value>
+  </data>
   <data name="LandSupply" xml:space="preserve">
     <value>Жер резерві</value>
   </data>
@@ -633,6 +636,9 @@
   <data name="Number" xml:space="preserve">
     <value>Сан</value>
   </data>
+  <data name="OnPastureBackground" xml:space="preserve">
+    <value>Жайылым фонында</value>
+  </data>
   <data name="Otdel" xml:space="preserve">
     <value>Бөлім</value>
   </data>
@@ -644,6 +650,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="PastureOnReserveLands" xml:space="preserve">
+    <value>Босалқы жерлердегі жайылым</value>
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Азық-түлік ресурстары</value>
@@ -671,6 +680,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Халық саны</value>
+  </data>
+  <data name="Productivity" xml:space="preserve">
+    <value>Өнімділік</value>
+  </data>
+  <data name="ProductivityForage" xml:space="preserve">
+    <value>Өнімділік, жемшөп</value>
   </data>
   <data name="Productivityhha" xml:space="preserve">
     <value>Өнімділік, т / га</value>
@@ -719,6 +734,9 @@
   </data>
   <data name="RecommendationForUse" xml:space="preserve">
     <value>Пайдалануға ұсыныс</value>
+  </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value>Ұсыныстар</value>
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Маусымдық ұсыныстар</value>
@@ -804,6 +822,9 @@
   <data name="Spring" xml:space="preserve">
     <value>Көктем</value>
   </data>
+  <data name="Structure" xml:space="preserve">
+    <value>Құрылымы</value>
+  </data>
   <data name="SType" xml:space="preserve">
     <value>Жер санаттары бойынша жер қоры</value>
   </data>
@@ -833,6 +854,12 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Құпия сөз және растау паролі сәйкес келмейді.</value>
+  </data>
+  <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
+    <value>Жайылымдық жүктеме нормасы, млн. мақсат / 100 га</value>
+  </data>
+  <data name="ToDegradedPastures" xml:space="preserve">
+    <value>Тозған жайылымдарға</value>
   </data>
   <data name="ToHome" xml:space="preserve">
     <value>Үйге</value>

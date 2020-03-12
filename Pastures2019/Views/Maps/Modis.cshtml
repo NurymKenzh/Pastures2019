@@ -19,6 +19,7 @@
     string maxYear_MOLA_MYD13Q1006 = yearDays_MOLA_MYD13Q1006.Max(y => y.year),
         maxDay_MOLA_MYD13Q1006 = yearDays_MOLA_MYD13Q1006.Where(y => y.year == maxYear_MOLA_MYD13Q1006).Max(y => y.day);
 }
+
 @await Html.PartialAsync("_StylesTabAndShart")
 
 <div class="container-fluid sticky-top p-0">
@@ -187,9 +188,6 @@
                     </a>
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
-                            @*<label class="form-check-label" for="layerBaseShow">
-                                    @SharedLocalizer["BaseLayer"]
-                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -350,7 +348,7 @@
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                         <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="ChartsButton" value="Выделять" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm">
+                            <button id="ChartsButton" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm">
                                 <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="@SharedLocalizer["Charts"]"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
                             </button>
                         </div>
@@ -364,7 +362,7 @@
                 </div>
                 <div class="col-md-auto">
                     <div class="float-right">
-                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК
                     </div>
                 </div>
                 <div class="col col-lg-2">
@@ -379,7 +377,7 @@
 
 @* layers *@
 <script>
-    var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
+    var geoserver_url = '@ViewBag.GeoServerUrl',
         geoserver_MODIS_workspace_name = '@ViewBag.ModisWorkspace', //'MODIS',
         geoserver_workspace_name = 'Pastures2019',
         layerModisTemplate1 = '@ViewBag.ModisLayerTemplate1', //'A',
@@ -999,7 +997,7 @@
     }
 </script>
 
-@* DateMinusMOLT_MOD13Q1006 *@
+@* DateMinus *@
 <script>
     function DateMinusMOLT_MOD13Q1006() {
         if ($("#DayOfYear_MOLT_MOD13Q1006").prop('selectedIndex') > 0) {
@@ -1244,7 +1242,6 @@
                         var features = parser.readFeatures(data);
                         $('#objectid').val(features[0].get('objectid'));
                         $('#chartspan').text('1');
-                        //console.log('@Html.Raw(SharedLocalizer["AllocationNumber"]): ' + features[0].get('group_id'));
                         $.ajax({
                             url: '@Url.Action("GetPastureInfo")',
                             data: {
@@ -1459,9 +1456,7 @@
 @*Sidebar Menu*@
 <script>
     jQuery(document).ready(function () {
-        /*
-            Sidebar
-        */
+        /* Sidebar */
         $('.dismiss, .overlay').on('click', function () {
             $('.sidebar').removeClass('active');
         });

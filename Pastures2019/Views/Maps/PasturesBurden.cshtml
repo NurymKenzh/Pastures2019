@@ -77,9 +77,6 @@
                     </a>
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
-                            @*<label class="form-check-label" for="layerBaseShow">
-                                    @SharedLocalizer["BaseLayer"]
-                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -160,16 +157,16 @@
                                 <td colspan="3"><select class="form-control form-control-sm" id="find_BGroup" asp-items="@((IEnumerable<SelectListItem>)ViewBag.BGroup)" name="BGroup" value=""><option value=""></option></select></td>
                             </tr>
                             <tr>
-                                <th colspan="4" scope="row" class="font-italic">Норма пастбищной нагрузки, усл. гол. / 100 га</th>
+                                <th colspan="4" scope="row" class="font-italic">@SharedLocalizer["TheRateOfPastureLoadsrvcGoal100ha"]</th>
                             </tr>
                             <tr>
-                                <th scope="row">На фоновые пастбища</th>
+                                <th scope="row">@SharedLocalizer["OnPastureBackground"]</th>
                                 <td><input class="form-control form-control-sm" id="find_burden_gro_from" type="text" /></td>
                                 <td>-</td>
                                 <td><input class="form-control form-control-sm" id="find_burden_gro_to" type="text" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">На деградированные пастбища</th>
+                                <th scope="row">@SharedLocalizer["ToDegradedPastures"]</th>
                                 <td><input class="form-control form-control-sm" id="find_burden_deg_from" type="text" /></td>
                                 <td>-</td>
                                 <td><input class="form-control form-control-sm" id="find_burden_deg_to" type="text" /></td>
@@ -281,7 +278,7 @@
                 </div>
                 <div class="col-md-auto">
                     <div class="float-right">
-                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК
                     </div>
                 </div>
                 <div class="col col-lg-2">
@@ -294,7 +291,7 @@
 
 @* layers *@
 <script>
-    var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
+    var geoserver_url = '@ViewBag.GeoServerUrl',
         geoserver_workspace_name = 'Pastures2019';
     var HEREappId = 'SLdBasp4s1oq2oUbVGxy';
     var HEREappCode = 'D9-h9iVhjgUB_9eUlFETXA';
@@ -894,7 +891,7 @@
                         },
                         type: 'POST',
                         success: function (dataDB) {
-                             InfoMapModal.open();
+                            InfoMapModal.open();
                             $('#valueAllocationNumber').text(dataDB.burden_pasture.num_vydel);
                             $('#valueBurOtdel').text(dataDB.burden_pasture.burotdel);
                             $('#valueBType').text(dataDB.burden_pasture.btype);
@@ -1060,7 +1057,7 @@
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Поиск пастбищ',
+            title: '@SharedLocalizer["PastureSearch"]',
             content: $('#FilterPasture'),
             overlay: false
         });

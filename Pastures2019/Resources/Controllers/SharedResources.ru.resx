@@ -507,6 +507,9 @@
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Неверная попытка входа.</value>
   </data>
+  <data name="LandStructure" xml:space="preserve">
+    <value>Структура земель</value>
+  </data>
   <data name="LandSupply" xml:space="preserve">
     <value>Земельный запас</value>
   </data>
@@ -633,6 +636,9 @@
   <data name="Number" xml:space="preserve">
     <value>Номер</value>
   </data>
+  <data name="OnPastureBackground" xml:space="preserve">
+    <value>На фоновые пастбища</value>
+  </data>
   <data name="Otdel" xml:space="preserve">
     <value>Отдел</value>
   </data>
@@ -644,6 +650,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="PastureOnReserveLands" xml:space="preserve">
+    <value>Пастбища на землях запаса</value>
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Кормовые ресурсы</value>
@@ -671,6 +680,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Численность населения, чел.</value>
+  </data>
+  <data name="Productivity" xml:space="preserve">
+    <value>Урожайность</value>
+  </data>
+  <data name="ProductivityForage" xml:space="preserve">
+    <value>Урожайность, кормозапас</value>
   </data>
   <data name="Productivityhha" xml:space="preserve">
     <value>Урожайность, ц/га</value>
@@ -719,6 +734,9 @@
   </data>
   <data name="RecommendationForUse" xml:space="preserve">
     <value>Рекомендация по использованию</value>
+  </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value>Рекомендации</value>
   </data>
   <data name="Recommends" xml:space="preserve">
     <value>Рекомендации по сезонам</value>
@@ -804,6 +822,9 @@
   <data name="Spring" xml:space="preserve">
     <value>Весна</value>
   </data>
+  <data name="Structure" xml:space="preserve">
+    <value>Структура</value>
+  </data>
   <data name="SType" xml:space="preserve">
     <value>Земельный фонд по категориям земель</value>
   </data>
@@ -833,6 +854,12 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
+    <value>Норма пастбищной нагрузки, усл. гол. / 100 га</value>
+  </data>
+  <data name="ToDegradedPastures" xml:space="preserve">
+    <value>На деградированные пастбища</value>
   </data>
   <data name="ToHome" xml:space="preserve">
     <value>Домой</value>

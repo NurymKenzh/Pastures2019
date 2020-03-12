@@ -78,9 +78,6 @@
                     </a>
                     <div id="BaseLayerSections" class="collapse collapse in" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
-                            @*<label class="form-check-label" for="layerBaseShow">
-                                    @SharedLocalizer["BaseLayer"]
-                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -317,7 +314,7 @@
                 </div>
                 <div class="col-md-auto">
                     <div class="float-right">
-                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК
                     </div>
                 </div>
                 <div class="col col-lg-2">
@@ -332,7 +329,7 @@
 
 @* layers *@
 <script>
-    var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
+    var geoserver_url = '@ViewBag.GeoServerUrl',
         geoserver_workspace_name = 'Pastures2019';
     var HEREappId = 'SLdBasp4s1oq2oUbVGxy';
     var HEREappCode = 'D9-h9iVhjgUB_9eUlFETXA';
@@ -1101,7 +1098,7 @@
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Поиск пастбищ',
+            title: '@SharedLocalizer["PastureSearch"]',
             content: $('#FilterPasture'),
             overlay: false
         });
@@ -1261,7 +1258,7 @@
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Сводная информация',
+            title: '@SharedLocalizer["FreeInformation"]',
             content: $('#FilterKato'),
             overlay: false,
             repositionOnOpen: true,
@@ -1401,9 +1398,7 @@
 @*Sidebar Menu*@
 <script>
     jQuery(document).ready(function () {
-        /*
-            Sidebar
-        */
+        /* Sidebar */
         $('.dismiss, .overlay').on('click', function () {
             $('.sidebar').removeClass('active');
         });

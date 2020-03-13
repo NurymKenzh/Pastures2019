@@ -23,7 +23,7 @@
                 <i class="fa fa-arrow-left"></i>
             </div>
             <div class="logo">
-                <h3>Pasture</h3>
+                <h3><a href="#">Gis-Pasture</a></h3>
             </div>
             <!-- Other sections -->
             <ul class="list-unstyled menu-elements">
@@ -175,10 +175,17 @@
                         </tbody>
                     </table>
                     <table class="table table-hover table-sm small" id="table_info_species">
-
                     </table>
                     <table class="table table-hover table-sm small" id="table_info_breed">
-
+                    </table>
+                    <table class="table table-hover table-sm small" id="table_info_breed_test">
+                        <tr>
+                            <th>
+                                @SharedLocalizer["Breed"] test
+                            </th>
+                            <td id="Breed400">
+                            </td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
@@ -1207,7 +1214,8 @@
             success: function (data) {
                 var content = "<table>";
                 if (Code > 400) {
-                    content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.breed + '</td></tr>';
+                    $('#Breed400').text(data.smallcattle.breed + 'TEST');
+                    @*content += '<tr><td>@SharedLocalizer["Breed"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.breed + '</td></tr>';*@
                     content += '<tr><td>@SharedLocalizer["Direction"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.direction + '</td></tr>';
                     content += '<tr><td>@SharedLocalizer["Weight"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.weight + '</td></tr>';
                     content += '<tr><td>@SharedLocalizer["Shearings"]</td>' + '<td style="padding-left: 10px;">' + data.smallcattle.shearings + '</td></tr>';

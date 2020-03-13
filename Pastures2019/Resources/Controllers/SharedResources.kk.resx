@@ -153,6 +153,9 @@
   <data name="Autumn" xml:space="preserve">
     <value>Күз</value>
   </data>
+  <data name="average" xml:space="preserve">
+    <value>орташа</value>
+  </data>
   <data name="AverageAnnualProductivitykgha" xml:space="preserve">
     <value>Орташа жылдық өнімділік, кг/га</value>
   </data>

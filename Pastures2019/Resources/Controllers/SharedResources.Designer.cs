@@ -171,6 +171,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string average {
+            get {
+                return ResourceManager.GetString("average", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string AverageAnnualProductivitykgha {
             get {
                 return ResourceManager.GetString("AverageAnnualProductivitykgha", resourceCulture);

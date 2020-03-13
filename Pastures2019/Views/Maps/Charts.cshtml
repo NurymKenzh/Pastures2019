@@ -101,6 +101,48 @@
 <input type="button" onclick="Chart2()" value="@SharedLocalizer["Refresh"]" />
 <canvas width="611" height="305" class="chartjs-render-monitor" id="chart2Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
 
+<select id="sourceproduct3">
+    <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
+    <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
+</select>
+<select id="yearstart3">
+    @for (int y = 2000; y <= DateTime.Today.Year; y++)
+    {
+        if (y == DateTime.Today.Year)
+        {
+            <option value="@y" selected>@y.ToString()</option>
+        }
+        else
+        {
+            <option value="@y">@y.ToString()</option>
+        }
+    }
+</select>
+<select id="yearfinish3">
+    @for (int y = 2000; y <= DateTime.Today.Year; y++)
+    {
+        if (y == DateTime.Today.Year)
+        {
+            <option value="@y" selected>@y.ToString()</option>
+        }
+        else
+        {
+            <option value="@y">@y.ToString()</option>
+        }
+    }
+</select>
+<select id="type3">
+    <option value="minimum">@SharedLocalizer["minimum"]</option>
+    <option value="maximum">@SharedLocalizer["maximum"]</option>
+    <option value="median">@SharedLocalizer["median"]</option>
+</select>
+<input type="button" onclick="Chart3()" value="@SharedLocalizer["Refresh"]" />
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart31Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart32Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
+<br />
+<br />
+<br />
+
 <script>
     var chart1 = null;
     function Chart1() {
@@ -278,9 +320,230 @@
         });
     }
 
+    var chart31 = null,
+        chart32 = null;
+    function Chart3() {
+        $.ajax({
+            url: '@Url.Action("GetChart3Data")',
+            data: {
+                objectid: $('#objectid').val(),
+                sourceproduct: $('#sourceproduct3').val(),
+                yearstart: $('#yearstart3').val(),
+                yearfinish: $('#yearfinish3').val()
+            },
+            type: 'POST',
+            success: function (data) {
+                var color = random_rgba(),
+                    color_avg = random_rgba();
+                var chart31Data = { };
+                if ($('#type3').val() == 'minimum') {
+                    chart31Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: '@Html.Raw(SharedLocalizer["minimum"]) (@Html.Raw(SharedLocalizer["average"]))',
+                                backgroundColor: color_avg,
+                                borderColor: color_avg,
+                                borderWidth: 2,
+                                data: data.years_avg_min,
+                                fill: false
+                            },
+                            {
+                                type: 'bar',
+                                label: '@Html.Raw(SharedLocalizer["minimum"])',
+                                backgroundColor: color,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_min
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'maximum') {
+                    chart31Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: '@Html.Raw(SharedLocalizer["maximum"]) (@Html.Raw(SharedLocalizer["average"]))',
+                                backgroundColor: color_avg,
+                                borderColor: color_avg,
+                                borderWidth: 2,
+                                data: data.years_avg_max,
+                                fill: false
+                            },
+                            {
+                                type: 'bar',
+                                label: '@Html.Raw(SharedLocalizer["maximum"])',
+                                backgroundColor: color,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_max
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'median') {
+                    chart31Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: '@Html.Raw(SharedLocalizer["median"]) (@Html.Raw(SharedLocalizer["average"]))',
+                                backgroundColor: color_avg,
+                                borderColor: color_avg,
+                                borderWidth: 2,
+                                data: data.years_avg_median,
+                                fill: false
+                            },
+                            {
+                                type: 'bar',
+                                label: '@Html.Raw(SharedLocalizer["median"])',
+                                backgroundColor: color,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_median
+                            }]
+                    };
+                }
+                var ctx31 = document.getElementById('chart31Canvas').getContext('2d');
+                if (chart31 != null) {
+                    chart31.destroy();
+                }
+                chart31 = new Chart(ctx31, {
+                    type: 'bar',
+                    data: chart31Data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: [$('#sourceproduct3 option:selected').text() + ', NDVI. ',
+                                '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                                '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                                '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
+                        }
+                    }
+                });
+
+                var chart32Data = { };
+                var color_a = [];
+                if ($('#type3').val() == 'minimum') {
+                    for (i = 0; i < data.years_min_a.length; i++) {
+                        if (data.years_min_a[i] > 0) {
+                            color_a.push('rgba(0, 215, 0, 1)');
+                        }
+                        else {
+                            color_a.push('rgba(215, 0, 0, 1)')
+                        }
+                    }
+                    chart32Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '@Html.Raw(SharedLocalizer["minimum"])',
+                                backgroundColor: color_a,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_min_a,
+
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'maximum') {
+                    for (i = 0; i < data.years_max_a.length; i++) {
+                        if (data.years_max_a[i] > 0) {
+                            color_a.push('rgba(0, 215, 0, 1)');
+                        }
+                        else {
+                            color_a.push('rgba(215, 0, 0, 1)')
+                        }
+                    }
+                    chart32Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '@Html.Raw(SharedLocalizer["maximum"])',
+                                backgroundColor: color_a,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_max_a
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'median') {
+                    for (i = 0; i < data.years_median_a.length; i++) {
+                        if (data.years_median_a[i] > 0) {
+                            color_a.push('rgba(0, 215, 0, 1)');
+                        }
+                        else {
+                            color_a.push('rgba(215, 0, 0, 1)')
+                        }
+                    }
+                    chart32Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '@Html.Raw(SharedLocalizer["median"])',
+                                backgroundColor: color_a,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_median_a
+                            }]
+                    };
+                }
+
+                var ctx32 = document.getElementById('chart32Canvas').getContext('2d');
+                if (chart32 != null) {
+                    chart32.destroy();
+                }
+                chart32 = new Chart(ctx32, {
+                    type: 'bar',
+                    data: chart32Data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: [$('#sourceproduct3 option:selected').text() + ', @Html.Raw(SharedLocalizer["Anomaly"]). ',
+                                '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                                '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                                '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
+                        }
+                    }
+                });
+            },
+            error: function () {
+                console.log('Error chart 3');
+            }
+        });
+    }
+
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+        //return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',1)';
     }
 </script>
 
@@ -288,5 +551,6 @@
     $(document).ready(function () {
         Chart1();
         Chart2();
+        Chart3();
     });
 </script>

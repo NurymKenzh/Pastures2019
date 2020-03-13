@@ -793,5 +793,98 @@ namespace Pastures2019.Controllers
                 year_median_datasets
             });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetChart3Data(
+            decimal objectid,
+            string sourceproduct,
+            int yearstart,
+            int yearfinish)
+        {
+            string rasterNDVI = sourceproduct + "_B01_NDVI_3857_KZ",
+                rasterNDVI_a = sourceproduct + "_B01_NDVI_3857_KZ_Anomaly";
+            rasterNDVI += ".tif";
+            rasterNDVI_a += ".tif";
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            List<analytic> analytics = new List<analytic>(),
+                analytics_full = new List<analytic>(),
+                analytics_a = new List<analytic>(),
+                analytics_full_a = new List<analytic>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                    $" FROM public.analytics" +
+                    $" WHERE objectid = {objectid.ToString()}" +
+                    $" AND raster LIKE '%{rasterNDVI}%';";
+                var analyticsDB = connection.Query<analytic>(query);
+                analytics_full = analyticsDB.Where(a => !a.raster.Contains("BASE")).ToList();
+
+                string query_a = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                    $" FROM public.analytics" +
+                    $" WHERE objectid = {objectid.ToString()}" +
+                    $" AND raster LIKE '%{rasterNDVI_a}%';";
+                analyticsDB = connection.Query<analytic>(query_a);
+                analytics_full_a = analyticsDB.Where(a => !a.raster.Contains("BASE")).ToList();
+            }
+
+            for (int i = 0; i < analytics_full.Count(); i++)
+            {
+                analytics_full[i].day = Convert.ToInt32(analytics_full[i].raster.Substring(5, 3));
+                analytics_full[i].date = new DateTime(Convert.ToInt32(analytics_full[i].raster.Substring(1, 4)), 1, 1);
+                analytics_full[i].date = analytics_full[i].date.AddDays(analytics_full[i].day - 1);
+            }
+            for (int i = 0; i < analytics_full_a.Count(); i++)
+            {
+                analytics_full_a[i].day = Convert.ToInt32(analytics_full_a[i].raster.Substring(5, 3));
+                analytics_full_a[i].date = new DateTime(Convert.ToInt32(analytics_full_a[i].raster.Substring(1, 4)), 1, 1);
+                analytics_full_a[i].date = analytics_full_a[i].date.AddDays(analytics_full_a[i].day - 1);
+            }
+
+            analytics = analytics_full.Where(a => a.date.Year >= yearstart && a.date.Year <= yearfinish).OrderBy(a => a.date).ToList();
+            analytics_a = analytics_full_a.Where(a => a.date.Year >= yearstart && a.date.Year <= yearfinish).OrderBy(a => a.date).ToList();
+
+            // years
+            List<string> labels = analytics.Select(a => a.date.ToString("yyyy.MM.dd")).ToList();
+            List<decimal?> years_min = analytics.Select(a => (decimal?)a.min).ToList(),
+                years_max = analytics.Select(a => (decimal?)a.max).ToList(),
+                years_median = analytics.Select(a => (decimal?)a.median).ToList();
+
+            List<string> labels_a = analytics_a.Select(a => a.date.ToString("yyyy.MM.dd")).ToList();
+            List<decimal?> years_min_a = analytics_a.Select(a => (decimal?)a.min).ToList(),
+                years_max_a = analytics_a.Select(a => (decimal?)a.max).ToList(),
+                years_median_a = analytics_a.Select(a => (decimal?)a.median).ToList();
+
+            // years average
+            List<decimal?> years_avg_min = new List<decimal?>(),
+                years_avg_max = new List<decimal?>(),
+                years_avg_median = new List<decimal?>();
+            for (int i = 0; i < analytics.Count(); i++)
+            {
+                List<analytic> analytics_day = analytics_full.Where(a => a.day == analytics[i].day).ToList();
+                years_avg_min.Add(analytics_day.Average(a => a.min));
+                years_avg_max.Add(analytics_day.Average(a => a.max));
+                years_avg_median.Add(analytics_day.Average(a => a.median));
+            }
+
+            return Json(new
+            {
+                labels,
+                years_min,
+                years_max,
+                years_median,
+                years_avg_min,
+                years_avg_max,
+                years_avg_median,
+                labels_a,
+                years_min_a,
+                years_max_a,
+                years_median_a
+            });
+        }
     }
 }

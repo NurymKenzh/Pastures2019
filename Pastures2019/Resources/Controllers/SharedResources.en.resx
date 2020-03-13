@@ -153,6 +153,9 @@
   <data name="Autumn" xml:space="preserve">
     <value>Autumn</value>
   </data>
+  <data name="average" xml:space="preserve">
+    <value>average</value>
+  </data>
   <data name="AverageAnnualProductivitykgha" xml:space="preserve">
     <value>Average annual productivity, kg / ha</value>
   </data>

@@ -88,10 +88,21 @@
                         </div>
                         <div class="media-body">
                             <h4 class="mt-0 tex-dark">Modis</h4>
-                            <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                            {
+                        <p class=" text-secondary">NDVI нашел широкое применение в изучении растительности; он используется для оценки состояния и урожайности сельскохозяйственных культур, продуктивности пастбищ, оценки залежей и т.д. Очень часто индекс напрямую связан с другими наземными параметрами, такими как проективное покрытие, фотосинтетическая активность растений, поверхностная влага, индекс площади листвы и количество биомассы. В целом, здоровая растительность поглощает почти весь видимый свет, падающий на нее, и отражает большую часть инфракрасного света. Угнетённая или разреженная растительность отражает больше видимого и меньше инфракрасного света.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                            {
+                        <p class=" text-secondary">NDVI өсімдіктерді зерттеуде кеңінен қолданылады; ол дақылдардың жай-күйі мен өнімділігін, жайылым өнімділігін, кен орындарын бағалауды және т.б. бағалау үшін қолданылады. Көбінесе индекс басқа жер бетіндегі параметрлермен, мысалы проекциялық жамылғымен, өсімдіктердің фотосинтетикалық белсенділігімен, беткей ылғалдылығымен, жапырақтар аймағымен және биомассаның мөлшерімен тікелей байланысты. Жалпы алғанда, сау өсімдіктер оған көрінетін жарық оқиғаларын дерлік сіңіреді және инфрақызыл жарықтың көп бөлігін көрсетеді. Тұндырылған немесе сирек кездесетін өсімдіктер көрінетін және азырақ инфрақызыл сәулені көрсетеді.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                            {
+                        <p class=" text-secondary">NDVI is widely used in the study of vegetation; it is used to assess the condition and yield of crops, pasture productivity, assessment of deposits, etc. Very often, the index is directly related to other terrestrial parameters, such as projective cover, photosynthetic activity of plants, surface moisture, leaf area index and amount of biomass. In general, healthy vegetation absorbs almost all visible light incident on it and reflects most of the infrared light. Depressed or sparse vegetation reflects more visible and less infrared light.</p>
+                            }
                             <nav class="marketing-pagination">
                                 <a class="btn btn-outline-primary btn-sm" asp-area="" asp-controller="Maps" asp-action="Modis">@SharedLocalizer["Go"]</a>
-                                <a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                @*<a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>*@
                             </nav>
                         </div>
                     </div>
@@ -107,10 +118,21 @@
                         </div>
                         <div class="media-body">
                             <h4 class="mt-0 tex-dark">@SharedLocalizer["FodderResources"]</h4>
-                            <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                            {
+                        <p class=" text-secondary">Картографирование кормовых угодий в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.1 путем экспертного дешифрирования космических снимков Landsat и MODIS 2014-2015 гг. Все выделенные кормовые ресурсы Казахстана систематизированы по составу растительности и экологическим уровням. Группы пастбищ определены по совокупности растительных сообществ (или их комплексов) близких по флористическому составу, условиям местообитания. Группы пастбищ объединяются в классы на основании преобладания определенных экобиоморф. Классы, в свою очередь, объединены в отделы – по крупным формам рельефа с определенными гидрогеологическими условиями.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                            {
+                        <p class=" text-secondary">ArcGIS 10.1 бағдарламалық өнімінде Landsat және MODIS 2014-2015 жылдардағы спутниктік суреттерді сараптамалық декодтау арқылы 1: 1 500 000 масштабта жемшөп алқаптарын картаға түсіру жүргізілді. Қазақстанның барлық бөлінген жемшөп ресурстары өсімдік құрамы мен экологиялық деңгейге сәйкес жүйелендірілген. Жайылым топтары флористикалық құрамы мен тіршілік ету жағдайларына жақын өсімдіктер қауымдастығының (немесе олардың кешендерінің) жиынтығымен анықталады. Жайылым топтары белгілі бір экобиоморфтардың таралуы негізінде сыныптарға топтастырылған. Сыныптар өз кезегінде бөлімдерге біріктіріледі - белгілі бір гидрогеологиялық жағдайлары бар үлкен рельеф формаларына сәйкес.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                            {
+                        <p class=" text-secondary">Mapping of fodder land at a scale of 1: 1,500,000 was carried out in the ArcGIS 10.1 software product through expert decoding of satellite images from Landsat and MODIS 2014-2015. All allocated fodder resources of Kazakhstan are systematized according to the composition of vegetation and ecological levels. Pasture groups are defined by the totality of plant communities (or their complexes) close in floristic composition and habitat conditions. Pasture groups are grouped into classes based on the prevalence of certain ecobiomorphs. Classes, in turn, are united into departments - according to large relief forms with certain hydrogeological conditions.</p>
+                            }
                             <nav class="marketing-pagination">
                                 <a class="btn btn-outline-primary btn-sm" asp-area="" asp-controller="Maps" asp-action="FodderResources">@SharedLocalizer["Go"]</a>
-                                <a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                @*<a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>*@
                             </nav>
                         </div>
                     </div>
@@ -130,12 +152,23 @@
                         <div class="media-body">
                             <h4 class="mt-0 tex-dark">@SharedLocalizer["PasturesBurden"]</h4>
                             <p class=" text-secondary">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                                {
+                                    <p class=" text-secondary">Основным методическим приемом при составлении карты нагрузки сельскохозяйственных животных на пастбища Казахстан в масштабе 1:1 500 000, является определение допустимых норм нагрузки сельскохозяйственных животных на фоновые и деградированные пастбища в рамках природных границ кормовых угодий с учетом их природных свойств, преобладающих типов пастбищ и степени их деградации, типа почв и механического состава, особенностей рельефа, климата, обводненности территорий и др.Создание карты обводнение пастбищ Казахстана в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.0, путем оцифровывания существующих колодцев и скважин с топографических карт масштаба 1:200 000 и 1:100 000. Использовались материалы обследования пастбищных колодцев и скважин проведенные КазНИИ водного хозяйства МСХ РК в 2013-2015 годы, материалы инвентаризации колодцев на землях сельскохозяйственного назначения проведенные РГП «ГИСХАГИ» РК, данных Института гидрогеологии и геоэкологии им. У.А. Ахмедсафина.</p>
+                                }
+                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                                {
+                                    <p class=" text-secondary">1: 1,50000 масштабта ауылшаруашылық жануарларының Қазақстан жайылымдарына түсіру картасын құрудың негізгі әдіснамалық әдісі - олардың табиғи қасиеттерін, жайылымдардың басым түрлері мен олардың дәрежесін ескере отырып, жемшөп алқаптарының табиғи шекаралары шегіндегі фондық және деградацияланған жайылымдарға ауылшаруашылық жануарларына арналған жүктеме нормативтерін анықтау. деградация, топырақ типі және механикалық құрамы, жер бедерінің ерекшеліктері, климат, аумақтардың батпақтануы және т.б. 1: 1 500 000 масштабында Қазақстанның жайылымдық жерлерін суару картасын жасау жүргізілді Бұл ArcGIS 10.0 бағдарламалық өнімінде 1: 200,000 және 1: 100,000 масштабтағы топографиялық карталардағы бар ұңғымалар мен скважиналарды сандық есептеу жолымен жазылған.Мұнда 2013-2015 жж. Қазақстан Республикасы Ауыл шаруашылығы министрлігінің Қазақ су шаруашылығы ғылыми-зерттеу институты жүргізген жайылымдық құдықтар мен скважиналарды зерттеу материалдарын пайдаландық. Қазақстан Республикасы «ГИШКАГИ» РМК жүргізетін ауылшаруашылық жерлер, гидрогеология және геоэкология институтының мәліметтері Ұ.Ә. Ахмедсафин.</p>
+                                }
+                                else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                                {
+                                    <p class=" text-secondary">The main methodological method for compiling a map of the load of farm animals on pastures of Kazakhstan on a scale of 1: 1,500,000 is to determine the allowable load standards for farm animals on background and degraded pastures within the natural boundaries of the forage land, taking into account their natural properties, the prevailing types of pastures and their degree degradation, soil type and mechanical composition, features of the relief, climate, waterlogging of territories, etc. Creating a map of irrigation of pastures of Kazakhstan on a scale of 1: 1,500,000 It was written in the ArcGIS 10.0 software product by digitizing existing wells and boreholes from topographic maps on a scale of 1: 200,000 and 1: 100,000. We used materials from the survey of pasture wells and boreholes conducted by the Kazakh Research Institute of Water Management of the Ministry of Agriculture of the Republic of Kazakhstan in 2013-2015, and inventory materials from agricultural lands conducted by RSE "GISKHAGI" of the Republic of Kazakhstan, data from the Institute of Hydrogeology and Geoecology named after U.A. Ahmedsafin.</p>
+                                }
                                 <nav class="marketing-pagination">
                                     <a class="btn btn-outline-primary btn-sm" asp-area="" asp-controller="Maps" asp-action="PasturesBurden">@SharedLocalizer["Go"]</a>
-                                    <a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                    @*<a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>*@
                                 </nav>
-                        </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -149,10 +182,21 @@
                         </div>
                         <div class="media-body">
                             <h4 class="mt-0 tex-dark">@SharedLocalizer["Species"]</h4>
-                            <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                            {
+                        <p class=" text-secondary">При составлении карты породного районирования сельскохозяйственных животных Казахстана в масштабе 1:1 500000, был использован значительный объем разновременной информации, дающей разнообразные сведения о породном районировании животных Казахстана. Использование статистического и фондового материала районных и областных акиматов, Министерства сельского хозяйства РК и Агентства Республики Казахстан по статистике за 2005-2015 годы, позволило проанализировать динамику численности племенного скота.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                            {
+                        <p class=" text-secondary">1: 1 500 000 масштабта Қазақстанның ауылшаруашылық жануарларын асыл тұқымды аудандастыру картасын жасау кезінде әр түрлі уақытта Қазақстанның жануарларын асыл тұқымды аудандастыру туралы көптеген мәліметтер келтірілген мәліметтер пайдаланылды. Аудандық және облыстық әкімдіктердің, Қазақстан Республикасы Ауыл шаруашылығы министрлігі мен Қазақстан Республикасы Статистика агенттігінің статистикалық және қор материалдарын пайдалану асыл тұқымды ірі қара мал санының динамикасын талдауға мүмкіндік берді.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                            {
+                        <p class=" text-secondary">When compiling a map of the pedigree zoning of farm animals of Kazakhstan on a scale of 1: 1,500,000, a significant amount of information at different times was used, giving a variety of information about the pedigree zoning of animals of Kazakhstan. The use of statistical and stock material of the district and regional akimats, the Ministry of Agriculture of the Republic of Kazakhstan and the Agency of the Republic of Kazakhstan on statistics for 2005-2015, allowed us to analyze the dynamics of the number of pedigree cattle.</p>
+                            }
                             <nav class="marketing-pagination">
                                 <a class="btn btn-outline-primary btn-sm" asp-area="" asp-controller="Maps" asp-action="Species">@SharedLocalizer["Go"]</a>
-                                <a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                @*<a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>*@
                             </nav>
                         </div>
                     </div>
@@ -170,10 +214,21 @@
                         </div>
                         <div class="media-body">
                             <h4 class="mt-0 tex-dark">@SharedLocalizer["LandSupply"]</h4>
-                            <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                            {
+                                <p class=" text-secondary">При составлении карты земельного запаса для перспектив развития отгонного животноводства Казахстана в масштабе 1:1 500 000, был использован значительный объем разновременных космических снимков, картографической и фондовой информации, дающей разнообразные сведения о земельном запасе Казахстана. Использование статистического и фондового материала районных и областных акиматов, Министерства сельского хозяйства РК и Агентства Республики Казахстан по статистике за 2005-2015 годы, позволило проанализировать динамику изменения пастбищ земельного запаса.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                            {
+                                <p class=" text-secondary">1: 1 500 000 масштабта Қазақстандағы ірі қара мал шаруашылығының даму перспективалары үшін жер резервінің картасын жасау кезінде әр түрлі уақыттық спутниктік кескіндер, картографиялық және қорлық ақпарат пайдаланылды, бұл Қазақстанның жер резерві туралы әртүрлі ақпарат берді. Аудандық және облыстық әкімдіктердің, Қазақстан Республикасы Ауыл шаруашылығы министрлігі мен Қазақстан Республикасы Статистика агенттігінің 2005-2015 жылдарға арналған статистикалық және қор материалдарын пайдалану бізге жер жайылымдарының өзгеру динамикасын талдауға мүмкіндік берді.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                            {
+                                <p class=" text-secondary">In compiling a map of the land reserve for the prospects for the development of transhumance livestock breeding in Kazakhstan at a scale of 1: 1,500,000, a significant amount of different-time satellite images, cartographic and stock information was used, giving a variety of information about the land reserve of Kazakhstan. The use of statistical and stock material of the district and regional akimats, the Ministry of Agriculture of the Republic of Kazakhstan and the Agency of the Republic of Kazakhstan on statistics for 2005-2015, allowed us to analyze the dynamics of changes in land pastures.</p>
+                            }
                             <nav class="marketing-pagination">
                                 <a class="btn btn-outline-primary btn-sm" asp-area="" asp-controller="Maps" asp-action="LandSupply">@SharedLocalizer["Go"]</a>
-                                <a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                @*<a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>*@
                             </nav>
                         </div>
                     </div>
@@ -189,10 +244,21 @@
                         </div>
                         <div class="media-body">
                             <h4 class="mt-0 tex-dark">@SharedLocalizer["Wells"]</h4>
-                            <p class=" text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                            {
+                        <p class=" text-secondary">Создание карты обводнение пастбищ Казахстана в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.0, путем оцифровывания существующих колодцев и скважин с топографических карт масштаба 1:200 000 и 1:100 000. Использовались материалы обследования пастбищных колодцев и скважин проведенные КазНИИ водного хозяйства МСХ РК в 2013-2015 годы, материалы инвентаризации колодцев на землях сельскохозяйственного назначения проведенные РГП «ГИСХАГИ» РК, данных Института гидрогеологии и геоэкологии им. У.А. Ахмедсафина.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                            {
+                        <p class=" text-secondary">1: 1,500,000 масштабта Қазақстанның жайылымдық жерлерін суару картасын жасау ArcGIS 10.0 бағдарламалық өнімінде қолданыстағы ұңғымалар мен ұңғымаларды топографиялық карталардан 1: 200,000 және 1: 100,000 масштабында сандық есептеу жолымен жүргізілді.Қазақ Су шаруашылығы ғылыми-зерттеу институты жүргізген жайылымдық құдықтар мен құдықтардың зерттеу материалдары пайдаланылды. 2013-2015 жж. Қазақстан Республикасы Ауыл шаруашылығы министрлігі, Қазақстан Республикасы «ГИШАГИ» РМК жүргізген ауылшаруашылық жерлеріндегі ұңғымаларға түгендеу материалдары, Гидрогеология және геоэкология институтының мәліметтері Ұ.Ә. Ахмедсафин.</p>
+                            }
+                            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                            {
+                        <p class=" text-secondary">The creation of a map for irrigation of pastures of Kazakhstan on a scale of 1: 1,500,000 was carried out in the ArcGIS 10.0 software product by digitizing existing wells and boreholes from topographic maps on a scale of 1: 200,000 and 1: 100,000. The survey materials of pasture wells and wells conducted by the Kazakh Research Institute of Water Management were used Ministry of Agriculture of the Republic of Kazakhstan in 2013-2015, inventory materials of wells on agricultural lands conducted by the RSE "GISHAGI" of the Republic of Kazakhstan, data from the Institute of Hydrogeology and Geoecology named after U.A. Ahmedsafin.</p>
+                            }
                             <nav class="marketing-pagination">
                                 <a class="btn btn-outline-primary btn-sm" asp-area="" asp-controller="Maps" asp-action="Wells">@SharedLocalizer["Go"]</a>
-                                <a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>
+                                @*<a class="btn btn-outline-info btn-sm" href="#" tabindex="-1" aria-disabled="true">Info</a>*@
                             </nav>
                         </div>
                     </div>
@@ -206,30 +272,80 @@
 <!-- Section 2 -->
 <div class="container-fluid marketing bg-light border-top" id="section-2">    
     <div class="row justify-content-center">
-        <h2 class="featurette-heading">ОБЩИЕ ПОЛОЖЕНИЯ <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-        <div class="col-md-9">
-            <p class="lead text-justify font-italic ml-5">
-                Созданный сайт дает возможность широкому кругу общественности, фермерам и другим заинтересованным лицам использовать картографический материал и информационно-аналитическую базу для устойчивого развития пастбищного животноводства Казахстана.
-            </p>
-            <p class="lead text-justify font-italic ml-5">
-                Казахстан обладает огромным потенциалом для эффективного развития животноводства. Благоприятные природно-климатические условия и громадные площади сельскохозяйственных угодий, должны стать огромным подспорьем, как для насыщения внутреннего рынка продукцией животноводства, так и для реализации ее на экспорт.
-                Пастбищные ресурсы республики значительны, но используются далеко не полностью. В настоящее время чрезмерное стравливание пастбищ около сельских поселений является одной из проблем, вместе с резким истощением природных пастбищ в густонаселенных местностях, в особенности в юго-восточной части страны. Согласно статистическим данным площадь опустыненных и деградированных земель составляет более 15% территории страны. Из 186,5 млн. га пастбищ, в крайней степени деградации находятся 27,1 млн. га. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a>
-            </p>
-        </div>
-        <div class="col-md-3 text-center">
-            <img src="~/images/logoKazniijik.svg" style="width: 150px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
-            <h3>КазНИИЖиК</h3>
-            <p class="font-weight-light">Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</p>
-        </div>
+        @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+        {
+            <h2 class="featurette-heading">ОБЩИЕ ПОЛОЖЕНИЯ <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <div class="col-md-9">
+                <p class="lead text-justify font-italic ml-5">
+                    Созданный сайт дает возможность широкому кругу общественности, фермерам и другим заинтересованным лицам использовать картографический материал и информационно-аналитическую базу для устойчивого развития пастбищного животноводства Казахстана.
+                </p>
+                <p class="lead text-justify font-italic ml-5">
+                    Казахстан обладает огромным потенциалом для эффективного развития животноводства. Благоприятные природно-климатические условия и громадные площади сельскохозяйственных угодий, должны стать огромным подспорьем, как для насыщения внутреннего рынка продукцией животноводства, так и для реализации ее на экспорт.
+                    Пастбищные ресурсы республики значительны, но используются далеко не полностью. В настоящее время чрезмерное стравливание пастбищ около сельских поселений является одной из проблем, вместе с резким истощением природных пастбищ в густонаселенных местностях, в особенности в юго-восточной части страны. Согласно статистическим данным площадь опустыненных и деградированных земель составляет более 15% территории страны. Из 186,5 млн. га пастбищ, в крайней степени деградации находятся 27,1 млн. га. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a>
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <img src="~/images/logoKazniijik.svg" style="width: 150px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+                <h3>КазНИИЖиК</h3>
+                <p class="font-weight-light">Казахский научно-исследовательский институт животноводства и кормопроизводства Министерства сельского хозяйства Республики Казахстан</p>
+            </div>
+        }
+        else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+        {
+    <h2 class="featurette-heading">ЖАЛПЫ ЕРЕЖЕЛЕР <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <div class="col-md-9">
+                <p class="lead text-justify font-italic ml-5">
+                    Құрылған сайт қалың жұртшылыққа, фермерлерге және басқа да мүдделі тараптарға Қазақстандағы жайылымдық мал шаруашылығының тұрақты дамуы үшін картографиялық материалдар мен ақпараттық-аналитикалық базаны пайдалануға мүмкіндік береді.
+                </p>
+                <p class="lead text-justify font-italic ml-5">
+                    Қазақстан мал шаруашылығын тиімді дамыту үшін үлкен әлеуетке ие. Қолайлы климаттық жағдайлар мен ауылшаруашылық алқаптарының үлкен аудандары ішкі нарықты мал шаруашылығы өнімдерімен қанықтыру үшін де, оларды экспорттау үшін де үлкен көмек болуы керек.
+                    Республиканың жайылым ресурстары айтарлықтай, бірақ толық пайдаланылмайды. Қазіргі уақытта ауылдық елді мекендердің маңында малдың жайылымдығы проблемалар қатарына жатады, сонымен бірге халық тығыз қоныстанған аудандарда, әсіресе елдің оңтүстік-шығыс бөлігінде табиғи жайылымдардың күрт сарқылуы. Статистикаға сәйкес шөлейген және деградацияға ұшыраған жерлердің ауданы ел аумағының 15% құрайды. 186,5 миллион гектар жайылымның 27,1 миллион гектары деградация дәрежесінде. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a>
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <img src="~/images/logoKazniijik.svg" style="width: 150px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+                <h3>КазНИИЖиК</h3>
+                <p class="font-weight-light">Қазақстан Республикасы Ауыл шаруашылығы министрлігінің Қазақ мал шаруашылығы және жем өндірісі ғылыми-зерттеу институты</p>
+            </div>
+        }
+        else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+        {
+    <h2 class="featurette-heading">GENERAL PROVISIONS <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            <div class="col-md-9">
+                <p class="lead text-justify font-italic ml-5">
+                    The created site enables the wide circle of the public, farmers and other interested parties to use cartographic material and an information-analytical base for sustainable development of pastoral livestock in Kazakhstan.
+                </p>
+                <p class="lead text-justify font-italic ml-5">
+                    Kazakhstan has great potential for the effective development of livestock. Favorable climatic conditions and vast areas of agricultural land should be of great help, both for saturating the domestic market with livestock products and for exporting them.
+                    The pasture resources of the republic are significant, but not fully utilized. Currently, overgrazing near rural settlements is one of the problems, along with a sharp depletion of natural pastures in densely populated areas, especially in the south-eastern part of the country. According to statistics, the area of ​​desertified and degraded lands is more than 15% of the country's territory. Of the 186.5 million hectares of pastures, 27.1 million hectares are in the extreme degree of degradation. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a>
+                </p>
+            </div>
+            <div class="col-md-3 text-center">
+                <img src="~/images/logoKazniijik.svg" style="width: 150px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+                <h3>КазНИИЖиК</h3>
+                <p class="font-weight-light">Kazakh Research Institute of Livestock and Feed Production of the Ministry of Agriculture of the Republic of Kazakhstan</p>
+            </div>
+        }
     </div>
     <hr class="featurette-divider">
 </div>
 <div class="container marketing">
-    <!-- START THE FEATURETTES --> 
+    <!-- START THE FEATURETTES -->
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">@SharedLocalizer["FodderResources"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-            <p class="lead font-italic">Кормовые угодья Республики Казахстан занимают 191,6 млн. га или 70,3% территории, из них 186,5 млн. га приходится на пастбища и 5,1 млн. га на сенокосы. Естественные кормовые угодья являются главным источником пастбищных кормов и значительной части заготовляемого сена. 77% пастбищ республики расположены в условиях равнинного рельефа, <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+        <p class="lead font-italic">Картографирование кормовых угодий в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.1 путем экспертного дешифрирования космических снимков Landsat и MODIS 2014-2015 гг. Все выделенные кормовые ресурсы Казахстана систематизированы по составу растительности и экологическим уровням. Группы пастбищ определены по совокупности растительных сообществ (или их комплексов) близких по флористическому составу, условиям местообитания. Группы пастбищ объединяются в классы на основании преобладания определенных экобиоморф. Классы, в свою очередь, объединены в отделы – по крупным формам рельефа с определенными гидрогеологическими условиями. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+        <p class="lead font-italic">ArcGIS 10.1 бағдарламалық өнімінде Landsat және MODIS 2014-2015 жылдардағы спутниктік суреттерді сараптамалық декодтау арқылы 1: 1 500 000 масштабта жемшөп алқаптарын картаға түсіру жүргізілді. Қазақстанның барлық бөлінген жемшөп ресурстары өсімдік құрамы мен экологиялық деңгейге сәйкес жүйелендірілген. Жайылым топтары флористикалық құрамы мен тіршілік ету жағдайларына жақын өсімдіктер қауымдастығының (немесе олардың кешендерінің) жиынтығымен анықталады. Жайылым топтары белгілі бір экобиоморфтардың таралуы негізінде сыныптарға топтастырылған. Сыныптар өз кезегінде бөлімдерге біріктіріледі - белгілі бір гидрогеологиялық жағдайлары бар үлкен рельеф формаларына сәйкес. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+        <p class="lead font-italic">Mapping of fodder land at a scale of 1: 1,500,000 was carried out in the ArcGIS 10.1 software product through expert decoding of satellite images from Landsat and MODIS 2014-2015. All allocated fodder resources of Kazakhstan are systematized according to the composition of vegetation and ecological levels. Pasture groups are defined by the totality of plant communities (or their complexes) close in floristic composition and habitat conditions. Pasture groups are grouped into classes based on the prevalence of certain ecobiomorphs. Classes, in turn, are united into departments - according to large relief forms with certain hydrogeological conditions. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
         </div>
         <div class="col-md-5">
             <img src="~/images/Main/foto_001.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
@@ -240,30 +356,112 @@
 
     <div class="row featurette">
         <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading">@SharedLocalizer["PasturesBurden"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-            <p class="lead font-italic">Аккумулятивные равнины лесостепной зоны в пределах Костанайской, Северо-Казахстанской, Павлодарской и Акмолинской областей и приподнятые денудационные равнины Акмолинской области в настоящее время в основном распаханы. <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+            <h2 class="featurette-heading">@SharedLocalizer["LandSupply"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+        <p class="lead font-italic">При составлении карты земельного запаса для перспектив развития отгонного животноводства Казахстана в масштабе 1:1 500 000, был использован значительный объем разновременных космических снимков, картографической и фондовой информации, дающей разнообразные сведения о земельном запасе Казахстана. Использование статистического и фондового материала районных и областных акиматов, Министерства сельского хозяйства РК и Агентства Республики Казахстан по статистике за 2005-2015 годы, позволило проанализировать динамику изменения пастбищ земельного запаса. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+        <p class="lead font-italic">1: 1 500 000 масштабта Қазақстандағы ірі қара мал шаруашылығының даму перспективалары үшін жер резервінің картасын жасау кезінде әр түрлі уақыттық спутниктік кескіндер, картографиялық және қорлық ақпарат пайдаланылды, бұл Қазақстанның жер резерві туралы әртүрлі ақпарат берді. Аудандық және облыстық әкімдіктердің, Қазақстан Республикасы Ауыл шаруашылығы министрлігі мен Қазақстан Республикасы Статистика агенттігінің 2005-2015 жылдарға арналған статистикалық және қор материалдарын пайдалану бізге жер жайылымдарының өзгеру динамикасын талдауға мүмкіндік берді. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+        <p class="lead font-italic">In compiling a map of the land reserve for the prospects for the development of transhumance livestock breeding in Kazakhstan at a scale of 1: 1,500,000, a significant amount of different-time satellite images, cartographic and stock information was used, giving a variety of information about the land reserve of Kazakhstan. The use of statistical and stock material of the district and regional akimats, the Ministry of Agriculture of the Republic of Kazakhstan and the Agency of the Republic of Kazakhstan on statistics for 2005-2015, allowed us to analyze the dynamics of changes in land pastures. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
         </div>
         <div class="col-md-5 order-md-1">
             <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
         </div>
     </div>
-
     <hr class="featurette-divider">
-
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurette-heading">@SharedLocalizer["Species"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
-            <p class="lead font-italic">Породное районирование имеет целью наиболее эффективное использование потенциала сельскохозяйственных животных в конкретных природно-климатических условиях. Для лесостепной и степной зон республики  характерно развитие молочно-мясного скотоводства, <a asp-area="" asp-controller="Home" asp-action="About">Далее</a></p>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+        <p class="lead font-italic">При составлении карты породного районирования сельскохозяйственных животных Казахстана в масштабе 1:1 500000, был использован значительный объем разновременной информации, дающей разнообразные сведения о породном районировании животных Казахстана. Использование статистического и фондового материала районных и областных акиматов, Министерства сельского хозяйства РК и Агентства Республики Казахстан по статистике за 2005-2015 годы, позволило проанализировать динамику численности племенного скота. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+        <p class="lead font-italic">1: 1 500 000 масштабта Қазақстанның ауылшаруашылық жануарларын асыл тұқымды аудандастыру картасын жасау кезінде әр түрлі уақытта Қазақстанның жануарларын асыл тұқымды аудандастыру туралы көптеген мәліметтер келтірілген мәліметтер пайдаланылды. Аудандық және облыстық әкімдіктердің, Қазақстан Республикасы Ауыл шаруашылығы министрлігі мен Қазақстан Республикасы Статистика агенттігінің статистикалық және қор материалдарын пайдалану асыл тұқымды ірі қара мал санының динамикасын талдауға мүмкіндік берді. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+        <p class="lead font-italic">When compiling a map of the pedigree zoning of farm animals of Kazakhstan on a scale of 1: 1,500,000, a significant amount of information at different times was used, giving a variety of information about the pedigree zoning of animals of Kazakhstan. The use of statistical and stock material of the district and regional akimats, the Ministry of Agriculture of the Republic of Kazakhstan and the Agency of the Republic of Kazakhstan on statistics for 2005-2015, allowed us to analyze the dynamics of the number of pedigree cattle. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
         </div>
         <div class="col-md-5">
             <img src="~/images/Main/foto_003.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
         </div>
     </div>
-
     <hr class="featurette-divider">
-    <div class="row float-right mb-5  mr-5">
-        <a href="" class="btn btn-outline-primary btn-circle d-inline float-right">View all</a>
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">@SharedLocalizer["PasturesBurden"] <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+        <p class="lead font-italic">Основным методическим приемом при составлении карты нагрузки сельскохозяйственных животных на пастбища Казахстан в масштабе 1:1 500 000, является определение допустимых норм нагрузки сельскохозяйственных животных на фоновые и деградированные пастбища в рамках природных границ кормовых угодий с учетом их природных свойств, преобладающих типов пастбищ и степени их деградации, типа почв и механического состава, особенностей рельефа, климата, обводненности территорий и др.Создание карты обводнение пастбищ Казахстана в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.0, путем оцифровывания существующих колодцев и скважин с топографических карт масштаба 1:200 000 и 1:100 000. Использовались материалы обследования пастбищных колодцев и скважин проведенные КазНИИ водного хозяйства МСХ РК в 2013-2015 годы, материалы инвентаризации колодцев на землях сельскохозяйственного назначения проведенные РГП «ГИСХАГИ» РК, данных Института гидрогеологии и геоэкологии им. У.А. Ахмедсафина. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+        <p class="lead font-italic">1: 1,50000 масштабта ауылшаруашылық жануарларының Қазақстан жайылымдарына түсіру картасын құрудың негізгі әдіснамалық әдісі - олардың табиғи қасиеттерін, жайылымдардың басым түрлері мен олардың дәрежесін ескере отырып, жемшөп алқаптарының табиғи шекаралары шегіндегі фондық және деградацияланған жайылымдарға ауылшаруашылық жануарларына арналған жүктеме нормативтерін анықтау. деградация, топырақ типі және механикалық құрамы, жер бедерінің ерекшеліктері, климат, аумақтардың батпақтануы және т.б. 1: 1 500 000 масштабында Қазақстанның жайылымдық жерлерін суару картасын жасау жүргізілді Бұл ArcGIS 10.0 бағдарламалық өнімінде 1: 200,000 және 1: 100,000 масштабтағы топографиялық карталардағы бар ұңғымалар мен скважиналарды сандық есептеу жолымен жазылған.Мұнда 2013-2015 жж. Қазақстан Республикасы Ауыл шаруашылығы министрлігінің Қазақ су шаруашылығы ғылыми-зерттеу институты жүргізген жайылымдық құдықтар мен скважиналарды зерттеу материалдарын пайдаландық. Қазақстан Республикасы «ГИШКАГИ» РМК жүргізетін ауылшаруашылық жерлер, гидрогеология және геоэкология институтының мәліметтері Ұ.Ә. Ахмедсафин. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+        <p class="lead font-italic">The main methodological method for compiling a map of the load of farm animals on pastures of Kazakhstan on a scale of 1: 1,500,000 is to determine the allowable load standards for farm animals on background and degraded pastures within the natural boundaries of the forage land, taking into account their natural properties, the prevailing types of pastures and their degree degradation, soil type and mechanical composition, features of the relief, climate, waterlogging of territories, etc. Creating a map of irrigation of pastures of Kazakhstan on a scale of 1: 1,500,000 It was written in the ArcGIS 10.0 software product by digitizing existing wells and boreholes from topographic maps on a scale of 1: 200,000 and 1: 100,000. We used materials from the survey of pasture wells and boreholes conducted by the Kazakh Research Institute of Water Management of the Ministry of Agriculture of the Republic of Kazakhstan in 2013-2015, and inventory materials from agricultural lands conducted by RSE "GISKHAGI" of the Republic of Kazakhstan, data from the Institute of Hydrogeology and Geoecology named after U.A. Ahmedsafin. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
     </div>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurette-heading">@SharedLocalizer["Wells"]  <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+        <p class="lead font-italic">Создание карты обводнение пастбищ Казахстана в масштабе 1:1 500 000 осуществлялось в программном продукте ArcGIS 10.0, путем оцифровывания существующих колодцев и скважин с топографических карт масштаба 1:200 000 и 1:100 000. Использовались материалы обследования пастбищных колодцев и скважин проведенные КазНИИ водного хозяйства МСХ РК в 2013-2015 годы, материалы инвентаризации колодцев на землях сельскохозяйственного назначения проведенные РГП «ГИСХАГИ» РК, данных Института гидрогеологии и геоэкологии им. У.А. Ахмедсафина. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+        <p class="lead font-italic">1: 1,500,000 масштабта Қазақстанның жайылымдық жерлерін суару картасын жасау ArcGIS 10.0 бағдарламалық өнімінде қолданыстағы ұңғымалар мен ұңғымаларды топографиялық карталардан 1: 200,000 және 1: 100,000 масштабында сандық есептеу жолымен жүргізілді.Қазақ Су шаруашылығы ғылыми-зерттеу институты жүргізген жайылымдық құдықтар мен құдықтардың зерттеу материалдары пайдаланылды. 2013-2015 жж. Қазақстан Республикасы Ауыл шаруашылығы министрлігі, Қазақстан Республикасы «ГИШАГИ» РМК жүргізген ауылшаруашылық жерлеріндегі ұңғымаларға түгендеу материалдары, Гидрогеология және геоэкология институтының мәліметтері Ұ.Ә. Ахмедсафин. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+                <p class="lead font-italic">The creation of a map for irrigation of pastures of Kazakhstan on a scale of 1: 1,500,000 was carried out in the ArcGIS 10.0 software product by digitizing existing wells and boreholes from topographic maps on a scale of 1: 200,000 and 1: 100,000. The survey materials of pasture wells and wells conducted by the Kazakh Research Institute of Water Management were used Ministry of Agriculture of the Republic of Kazakhstan in 2013-2015, inventory materials of wells on agricultural lands conducted by the RSE "GISHAGI" of the Republic of Kazakhstan, data from the Institute of Hydrogeology and Geoecology named after U.A. Ahmedsafin. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+        </div>
+        <div class="col-md-5">
+            <img src="~/images/Main/foto_003.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
+    </div>
+    <hr class="featurette-divider">
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading">Modis <span class="text-muted"><i class="fa fa-leaf text-success" aria-hidden="true"></i></span></h2>
+            @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+            {
+        <p class="lead font-italic">NDVI нашел широкое применение в изучении растительности; он используется для оценки состояния и урожайности сельскохозяйственных культур, продуктивности пастбищ, оценки залежей и т.д. Очень часто индекс напрямую связан с другими наземными параметрами, такими как проективное покрытие, фотосинтетическая активность растений, поверхностная влага, индекс площади листвы и количество биомассы. В целом, здоровая растительность поглощает почти весь видимый свет, падающий на нее, и отражает большую часть инфракрасного света. Угнетённая или разреженная растительность отражает больше видимого и меньше инфракрасного света. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+            {
+        <p class="lead font-italic">NDVI өсімдіктерді зерттеуде кеңінен қолданылады; ол дақылдардың жай-күйі мен өнімділігін, жайылым өнімділігін, кен орындарын бағалауды және т.б. бағалау үшін қолданылады. Көбінесе индекс басқа жер бетіндегі параметрлермен, мысалы проекциялық жамылғымен, өсімдіктердің фотосинтетикалық белсенділігімен, беткей ылғалдылығымен, жапырақтар аймағымен және биомассаның мөлшерімен тікелей байланысты. Жалпы алғанда, сау өсімдіктер оған көрінетін жарық оқиғаларын дерлік сіңіреді және инфрақызыл жарықтың көп бөлігін көрсетеді. Тұндырылған немесе сирек кездесетін өсімдіктер көрінетін және азырақ инфрақызыл сәулені көрсетеді. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+            else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+            {
+        <p class="lead font-italic">NDVI is widely used in the study of vegetation; it is used to assess the condition and yield of crops, pasture productivity, assessment of deposits, etc. Very often, the index is directly related to other terrestrial parameters, such as projective cover, photosynthetic activity of plants, surface moisture, leaf area index and amount of biomass. In general, healthy vegetation absorbs almost all visible light incident on it and reflects most of the infrared light. Depressed or sparse vegetation reflects more visible and less infrared light. <a asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["Further"]</a></p>
+            }
+        </div>
+        <div class="col-md-5 order-md-1">
+            <img src="~/images/Main/foto_002.jpg" style="width: 500px; height: 500px;" class="bd-placeholder-img-lg featurette-image img-fluid mx-auto">
+        </div>
+    </div>
+    @*<hr class="featurette-divider">*@
+    @*<div class="row float-right mb-5  mr-5">
+        <a href="" class="btn btn-outline-primary btn-circle d-inline float-right">View all</a>
+    </div>*@
     <!-- /END THE FEATURETTES -->
 
 </div>

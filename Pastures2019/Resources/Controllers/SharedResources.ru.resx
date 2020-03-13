@@ -123,6 +123,9 @@
   <data name="acting" xml:space="preserve">
     <value>действующий</value>
   </data>
+  <data name="AdministrativeUnit" xml:space="preserve">
+    <value>Административная единица</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Администрирование</value>
   </data>
@@ -444,6 +447,9 @@
   <data name="FreeInformation" xml:space="preserve">
     <value>Сводная информация</value>
   </data>
+  <data name="Further" xml:space="preserve">
+    <value>Далее</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Перейти</value>
   </data>
@@ -503,6 +509,9 @@
   </data>
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Неверная попытка входа.</value>
+  </data>
+  <data name="LandStructure" xml:space="preserve">
+    <value>Структура земель</value>
   </data>
   <data name="LandSupply" xml:space="preserve">
     <value>Земельный запас</value>
@@ -630,6 +639,9 @@
   <data name="Number" xml:space="preserve">
     <value>Номер</value>
   </data>
+  <data name="OnPastureBackground" xml:space="preserve">
+    <value>На фоновые пастбища</value>
+  </data>
   <data name="Otdel" xml:space="preserve">
     <value>Отдел</value>
   </data>
@@ -642,11 +654,14 @@
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
+  <data name="PastureOnReserveLands" xml:space="preserve">
+    <value>Пастбища на землях запаса</value>
+  </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Кормовые ресурсы</value>
   </data>
   <data name="PasturesBurden" xml:space="preserve">
-    <value>Нагрузка сельскохозяйственных животных на пастбища</value>
+    <value>Нагрузка на пастбища</value>
   </data>
   <data name="PastureSearch" xml:space="preserve">
     <value>Поиск пастбищ</value>
@@ -668,6 +683,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Численность населения, чел.</value>
+  </data>
+  <data name="Productivity" xml:space="preserve">
+    <value>Урожайность</value>
+  </data>
+  <data name="ProductivityForage" xml:space="preserve">
+    <value>Урожайность, кормозапас</value>
   </data>
   <data name="Productivityhha" xml:space="preserve">
     <value>Урожайность, ц/га</value>
@@ -717,6 +738,9 @@
   <data name="RecommendationForUse" xml:space="preserve">
     <value>Рекомендация по использованию</value>
   </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value>Рекомендации</value>
+  </data>
   <data name="Recommends" xml:space="preserve">
     <value>Рекомендации по сезонам</value>
   </data>
@@ -756,6 +780,12 @@
   <data name="Save" xml:space="preserve">
     <value>Сохранить</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="SearchForWaterSources" xml:space="preserve">
+    <value>Поиск водоисточников</value>
+  </data>
   <data name="Shearings" xml:space="preserve">
     <value>Настриг шерсти</value>
   </data>
@@ -787,13 +817,16 @@
     <value>Сообщества</value>
   </data>
   <data name="Species" xml:space="preserve">
-    <value>Породное районирование сельскохозяйственных животных</value>
+    <value>Породное районирование</value>
   </data>
   <data name="speciesXLayer" xml:space="preserve">
     <value>Породное районирование сельскохозяйственных животных</value>
   </data>
   <data name="Spring" xml:space="preserve">
     <value>Весна</value>
+  </data>
+  <data name="Structure" xml:space="preserve">
+    <value>Структура</value>
   </data>
   <data name="SType" xml:space="preserve">
     <value>Земельный фонд по категориям земель</value>
@@ -824,6 +857,12 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
+    <value>Норма пастбищной нагрузки, усл. гол. / 100 га</value>
+  </data>
+  <data name="ToDegradedPastures" xml:space="preserve">
+    <value>На деградированные пастбища</value>
   </data>
   <data name="ToHome" xml:space="preserve">
     <value>Домой</value>

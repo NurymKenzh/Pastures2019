@@ -444,7 +444,7 @@ namespace Modis
                 // check if anomaly already exists
                 if (File.Exists(anomalyFile))
                 {
-                    return;
+                    continue;
                 }
 
                 // check if base layer for anomaly calculation already exists, if no then try to create it
@@ -464,7 +464,7 @@ namespace Modis
                     }
                     if (!baseExists)
                     {
-                        return;
+                        continue;
                     }
                     // create base file to day
                     for (int year = AnomalyStartYear; year <= AnomalyFinishYear; year++)

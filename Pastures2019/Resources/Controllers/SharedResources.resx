@@ -123,6 +123,9 @@
   <data name="acting" xml:space="preserve">
     <value />
   </data>
+  <data name="AdministrativeUnit" xml:space="preserve">
+    <value />
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value />
   </data>
@@ -444,6 +447,9 @@
   <data name="FreeInformation" xml:space="preserve">
     <value />
   </data>
+  <data name="Further" xml:space="preserve">
+    <value />
+  </data>
   <data name="Go" xml:space="preserve">
     <value />
   </data>
@@ -502,6 +508,9 @@
     <value />
   </data>
   <data name="InvalidLoginAttempt" xml:space="preserve">
+    <value />
+  </data>
+  <data name="LandStructure" xml:space="preserve">
     <value />
   </data>
   <data name="LandSupply" xml:space="preserve">
@@ -630,6 +639,9 @@
   <data name="Number" xml:space="preserve">
     <value />
   </data>
+  <data name="OnPastureBackground" xml:space="preserve">
+    <value />
+  </data>
   <data name="Otdel" xml:space="preserve">
     <value />
   </data>
@@ -640,6 +652,9 @@
     <value />
   </data>
   <data name="Password" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PastureOnReserveLands" xml:space="preserve">
     <value />
   </data>
   <data name="pasturepolLayer" xml:space="preserve">
@@ -667,6 +682,12 @@
     <value />
   </data>
   <data name="Population" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Productivity" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ProductivityForage" xml:space="preserve">
     <value />
   </data>
   <data name="Productivityhha" xml:space="preserve">
@@ -717,6 +738,9 @@
   <data name="RecommendationForUse" xml:space="preserve">
     <value />
   </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value />
+  </data>
   <data name="Recommends" xml:space="preserve">
     <value />
   </data>
@@ -754,6 +778,12 @@
     <value />
   </data>
   <data name="Save" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SearchForWaterSources" xml:space="preserve">
     <value />
   </data>
   <data name="Shearings" xml:space="preserve">
@@ -795,6 +825,9 @@
   <data name="Spring" xml:space="preserve">
     <value />
   </data>
+  <data name="Structure" xml:space="preserve">
+    <value />
+  </data>
   <data name="SType" xml:space="preserve">
     <value />
   </data>
@@ -823,6 +856,12 @@
     <value />
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
+    <value />
+  </data>
+  <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ToDegradedPastures" xml:space="preserve">
     <value />
   </data>
   <data name="ToHome" xml:space="preserve">

@@ -58,6 +58,7 @@ namespace Pastures2019.Controllers
 
         public IActionResult Modis()
         {
+            ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
             ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
             ViewBag.ModisWorkspace = Startup.Configuration["ModisWorkspace"].ToString();
             ViewBag.ModisLayerTemplate1 = Startup.Configuration["ModisLayerTemplate1"].ToString();
@@ -128,6 +129,29 @@ namespace Pastures2019.Controllers
         public ActionResult Charts(decimal objectid)
         {
             ViewBag.objectid = objectid;
+            string DefaultConnection = Microsoft
+              .Extensions
+              .Configuration
+              .ConfigurationExtensions
+              .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            pasturepol pasturepol = new pasturepol();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                var pasturepols = connection.Query<pasturepol>($"SELECT gid, objectid, class_id, otdely_id, " +
+                    $"subtype_id, group_id, ur_v, ur_l, ur_o, ur_z, korm_v, korm_l, korm_o, korm_z, " +
+                    $"recommend_, recom_catt, relief_id, zone_id, haying_id, shape_leng, shape_area " +
+                    $"FROM public.pasturepol " +
+                    $"WHERE objectid = {objectid};");
+                pasturepol = pasturepols.FirstOrDefault();
+                pasturepol.otdel = _context.Otdel.FirstOrDefault(o => o.Code == pasturepol.otdely_id)?.Description;
+                pasturepol.ptype = _context.PType.FirstOrDefault(p => p.Code == pasturepol.class_id)?.Description;
+                pasturepol.group = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.Description;
+                pasturepol.group_lat = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.DescriptionLat;
+                pasturepol.recommend = _context.Recommend.FirstOrDefault(r => r.Code == pasturepol.recommend_)?.Description;
+                pasturepol.recomcatt = _context.RecomCattle.FirstOrDefault(r => r.Code == pasturepol.recom_catt)?.Description;
+            }
+            ViewBag.pasturepol = pasturepol;
             return View();
         }
 
@@ -392,17 +416,61 @@ namespace Pastures2019.Controllers
             string catote)
         {
             List<CATOSpecies> cATOSpecies = new List<CATOSpecies>();
+            string cato = "",
+                type_k = "";
             if (!string.IsNullOrEmpty(catote))
             {
-                // область
+                // area
                 if (catote.Substring(2, 2) == "00")
                 {
                     cATOSpecies = _context.CATOSpecies.Where(c => c.CATOTE.Substring(0, 2) == catote.Substring(0, 2)).ToList();
+                    cato = _context.CATO.FirstOrDefault(c => c.TE == catote)?.Name;
                 }
-                // район
+                // district
                 else if (catote.Substring(4, 2) == "00")
                 {
                     cATOSpecies = _context.CATOSpecies.Where(c => c.CATOTE.Substring(0, 4) == catote.Substring(0, 4)).ToList();
+                    string te_area = catote.Substring(0, 2) + "0000000";
+                    cato = _context.CATO.FirstOrDefault(c => c.TE == te_area)?.Name;
+                    string cato_district = _context.CATO.FirstOrDefault(c => c.TE == catote)?.Name;
+                    if (!string.IsNullOrEmpty(cato_district))
+                    {
+                        cato += ", " + cato_district;
+                    }
+                }
+                // rural district
+                else if (catote.Substring(6, 3) == "000")
+                {
+                    string te_area = catote.Substring(0, 2) + "0000000";
+                    cato = _context.CATO.FirstOrDefault(c => c.TE == te_area)?.Name;
+                    string te_district = catote.Substring(0, 4) + "00000";
+                    string cato_district = _context.CATO.FirstOrDefault(c => c.TE == te_district)?.Name;
+                    if (!string.IsNullOrEmpty(cato_district))
+                    {
+                        cato += ", " + cato_district;
+                    }
+                    string cato_rural = _context.CATO.FirstOrDefault(c => c.TE == catote)?.Name;
+                    if (!string.IsNullOrEmpty(cato_rural))
+                    {
+                        cato += ", " + cato_rural;
+                    }
+                    string DefaultConnection = Microsoft
+                      .Extensions
+                      .Configuration
+                      .ConfigurationExtensions
+                      .GetConnectionString(Startup.Configuration, "DefaultConnection");
+                    species3 species3 = new species3();
+                    using (var connection = new NpgsqlConnection(DefaultConnection))
+                    {
+                        connection.Open();
+                        var species3DB = connection.Query<species3>($"SELECT gid, name_adm1, name_adm2, kato_te, type_k, name_adm3," +
+                            $" totalgoals, cattle, horses, smallcattl, camels, conditiona, date, source, population, pastures," +
+                            $" poultry, shape_leng, shape_area, objectid" +
+                            $" FROM public.species3" +
+                            $" WHERE kato_te = '{catote}';");
+                        species3 = species3DB.FirstOrDefault();
+                    }
+                    type_k = _context.ZType.FirstOrDefault(z => z.Code == species3.type_k).Description;
                 }
             }
             List<Camel> camels = _context.Camel.Where(c => cATOSpecies.Select(cs => cs.Code).Contains(c.Code)).Distinct().ToList();
@@ -411,6 +479,8 @@ namespace Pastures2019.Controllers
             List<SmallCattle> smallcattle = _context.SmallCattle.Where(s => cATOSpecies.Select(cs => cs.Code).Contains(s.Code)).ToList();
             return Json(new
             {
+                cato,
+                type_k,
                 camels,
                 cattle,
                 horses,
@@ -525,6 +595,59 @@ namespace Pastures2019.Controllers
             decimal objectid,
             string sourceproduct,
             string dataset,
+            int yearstart,
+            int yearfinish)
+        {
+            string raster = sourceproduct + "_B01_NDVI_3857_KZ";
+            if (dataset == "Anomaly")
+            {
+                raster += "_Anomaly";
+            }
+            raster += ".tif";
+            string DefaultConnection = Microsoft
+               .Extensions
+               .Configuration
+               .ConfigurationExtensions
+               .GetConnectionString(Startup.Configuration, "DefaultConnection");
+            List<analytic> analytics = new List<analytic>();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                    $" FROM public.analytics" +
+                    $" WHERE objectid = {objectid.ToString()}" +
+                    $" AND raster LIKE '%{raster}%';";
+                var analyticsDB = connection.Query<analytic>(query);
+                analytics = analyticsDB.Where(a => !a.raster.Contains("BASE")).ToList();
+            }
+            for (int i = 0; i < analytics.Count(); i++)
+            {
+                analytics[i].day = Convert.ToInt32(analytics[i].raster.Substring(5, 3));
+                analytics[i].date = new DateTime(Convert.ToInt32(analytics[i].raster.Substring(1, 4)), 1, 1);
+                analytics[i].date = analytics[i].date.AddDays(analytics[i].day - 1);
+            }
+            analytics = analytics.Where(a => a.date.Year >= yearstart && a.date.Year <= yearfinish).OrderBy(a => a.date).ToList();
+
+            // years
+            List<string> labels = analytics.Select(a => a.date.ToString("yyyy.MM.dd")).ToList();
+            List<decimal?> years_min = analytics.Select(a => (decimal?)a.min).ToList(),
+                years_max = analytics.Select(a => (decimal?)a.max).ToList(),
+                years_median = analytics.Select(a => (decimal?)a.median).ToList();
+
+            return Json(new
+            {
+                labels,
+                years_min,
+                years_max,
+                years_median
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetChart2Data(
+            decimal objectid,
+            string sourceproduct,
+            string dataset,
             int monthstart,
             int monthscount,
             int[] years)
@@ -549,7 +672,7 @@ namespace Pastures2019.Controllers
                     $" WHERE objectid = {objectid.ToString()}" +
                     $" AND raster LIKE '%{raster}%';";
                 var analyticsDB = connection.Query<analytic>(query);
-                analytics = analyticsDB.ToList();
+                analytics = analyticsDB.Where(a => !a.raster.Contains("BASE")).ToList();
             }
             for (int i = 0; i < analytics.Count(); i++)
             {

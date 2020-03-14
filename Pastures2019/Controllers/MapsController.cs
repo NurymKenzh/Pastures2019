@@ -239,7 +239,11 @@ namespace Pastures2019.Controllers
 
         [HttpPost]
         public async Task<IActionResult> GetPastureInfo(
-            string objectid)
+            string objectid,
+            string sourceproduct,
+            string dataset,
+            string year,
+            string day)
         {
             string DefaultConnection = Microsoft
                .Extensions
@@ -263,9 +267,28 @@ namespace Pastures2019.Controllers
             pasturepol.group_lat = _context.Soob.FirstOrDefault(s => s.Code == pasturepol.group_id)?.DescriptionLat;
             pasturepol.recommend = _context.Recommend.FirstOrDefault(r => r.Code == pasturepol.recommend_)?.Description;
             pasturepol.recomcatt = _context.RecomCattle.FirstOrDefault(r => r.Code == pasturepol.recom_catt)?.Description;
+
+            string raster = "A" + year + day + "_" + sourceproduct + "_B01_NDVI_3857_KZ";
+            if (dataset == "Anomaly")
+            {
+                raster += "_Anomaly";
+            }
+            raster += ".tif";
+            analytic analytic = new analytic();
+            using (var connection = new NpgsqlConnection(DefaultConnection))
+            {
+                connection.Open();
+                string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                    $" FROM public.analytics" +
+                    $" WHERE objectid = {objectid.ToString()}" +
+                    $" AND raster LIKE '%{raster}%';";
+                var analyticsDB = connection.Query<analytic>(query);
+                analytic = analyticsDB.Where(a => !a.raster.Contains("BASE")).FirstOrDefault();
+            }
             return Json(new
             {
-                pasturepol
+                pasturepol,
+                analytic
             });
         }
 

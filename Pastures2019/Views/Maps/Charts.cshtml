@@ -279,14 +279,14 @@
                     datasets: [
                         {
                             label: '@Html.Raw(SharedLocalizer["minimum"])',
-                            backgroundColor: 'rgba(195, 195, 195, 1)',
+                            backgroundColor: 'rgba(195, 195, 195, 0.3)',
                             borderColor: 'rgba(215, 215, 215, 1)',
                             data: data.years_min,
-                            fill: false
+                            fill: "+1"
                         },
                         {
                             label: '@Html.Raw(SharedLocalizer["maximum"])',
-                            backgroundColor: 'rgba(195, 195, 195, 1)',
+                            backgroundColor: 'rgba(195, 195, 195, 0.3)',
                             borderColor: 'rgba(215, 215, 215, 1)',
                             data: data.years_max,
                             fill: false
@@ -316,7 +316,8 @@
                         backgroundColor: color,
                         borderColor: color,
                         data: data.year_max_datasets[i].data,
-                        fill: false
+                        fill: false,
+                            order: 11
                     });
                 }
                 for (var i = 0; i < data.year_median_datasets.length; ++i) {

@@ -837,7 +837,7 @@
                 layer.setOpacity($('#layerrdslinOpacity').val() / 100);
             }
             if (layer.get('name') == 'speciesX') {
-                layer.setOpacity($('#layerspecies1Opacity').val() / 100);
+                layer.setOpacity($('#layerspeciesXOpacity').val() / 100);
                 layer.setVisible(false);
                 if (layer.get('subname') == $('input[name="speciesX"]:checked').val() || layer.get('subname') == null) {
                     layer.setVisible(document.getElementById("layerspeciesXShow").checked);

@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
 @await Html.PartialAsync("_StylesTabAndShart")
+
 <link href="~/lib/ol/ol.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/vendor/font-awesome/css/font-awesome.min.css" />
 <script src="~/lib/ol/ol.js"></script>
@@ -77,9 +78,6 @@
                     </a>
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
-                            @*<label class="form-check-label" for="layerBaseShow">
-                                    @SharedLocalizer["BaseLayer"]
-                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -129,19 +127,13 @@
                         <table class="table table-borderless table-sm mt-2">
                             <tbody>
                                 <tr>
-                                    <td scope="row">Среднегодовая урожайность, ц/га</td>
+                                    <td scope="row">@SharedLocalizer["AverageAnnualProductivitykgha"]</td>
                                     <td><input class="form-control form-control-sm" id="find_ur_avgyear_from" type="text" /></td>
                                     <td>-</td>
                                     <td><input class="form-control form-control-sm" id="find_ur_avgyear_to" type="text" /></td>
                                 </tr>
                                 <tr>
-                                    <td scope="row">Среднегодовая урожайность, ц/га</td>
-                                    <td><input class="form-control form-control-sm" id="find_ur_avgyear_from" type="text" /></td>
-                                    <td>-</td>
-                                    <td><input class="form-control form-control-sm" id="find_ur_avgyear_to" type="text" /></td>
-                                </tr>
-                                <tr>
-                                    <td scope="row">Средний кормозапас, ц</td>
+                                    <td scope="row">@SharedLocalizer["AverageFeedStockc"]</td>
                                     <td><input class="form-control form-control-sm" id="find_korm_avgye_from" type="text" /></td>
                                     <td>-</td>
                                     <td><input class="form-control form-control-sm" id="find_korm_avgye_to" type="text" /></td>
@@ -171,36 +163,34 @@
                 <div class="m-0" style="display: none" id="ZemFondChart">
                     <nav>
                         <div class="nav nav-tabs m-0 p-0" id="navZemFond" role="tablist">
-                            <a class="nav-item nav-link active" id="ZemFondUr-tab" data-toggle="tab" href="#ZemFondUr" role="tab" aria-controls="ZemFondUr" aria-selected="true">Урожайность</a>
-                            <a class="nav-item nav-link" id="ZemFondStr-tab" data-toggle="tab" href="#ZemFondStr" role="tab" aria-controls="ZemFondStr" aria-selected="false">Структура</a>
-                            <a class="nav-item nav-link" id="ZemFondRec-tab" data-toggle="tab" href="#ZemFondRec" role="tab" aria-controls="ZemFondRec" aria-selected="false">Рекомендации</a>
+                            <a class="nav-item nav-link active" id="ZemFondUr-tab" data-toggle="tab" href="#ZemFondUr" role="tab" aria-controls="ZemFondUr" aria-selected="true">@SharedLocalizer["Productivity"]</a>
+                            <a class="nav-item nav-link" id="ZemFondStr-tab" data-toggle="tab" href="#ZemFondStr" role="tab" aria-controls="ZemFondStr" aria-selected="false">@SharedLocalizer["Structure"]</a>
+                            <a class="nav-item nav-link" id="ZemFondRec-tab" data-toggle="tab" href="#ZemFondRec" role="tab" aria-controls="ZemFondRec" aria-selected="false">@SharedLocalizer["Recommendations"]</a>
                         </div>
                     </nav>
                     <div class="tab-content text-white" id="navZemFondContent">
                         <div class="tab-pane fade show active" id="ZemFondUr" role="tabpanel" aria-labelledby="ZemFondUr-tab">
-                            <h5 class="card-title text-center">Урожайность, кормозапас</h5>
+                            <h5 class="card-title text-center">@SharedLocalizer["ProductivityForage"]</h5>
                             <table class="table table-borderless table-sm">
                                 <tbody class="text-white-50">
                                     <tr>
-                                        <th scope="row">Среднегодовая урожайность, ц/га</th>
-                                        <td>-</td>
-                                        <td> value </td>
+                                        <th scope="row">@SharedLocalizer["AverageAnnualProductivitykgha"]</th>
+                                        <td id="ur_avgyear"></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row">Средний кормозапас, ц</th>
-                                        <td>-</td>
-                                        <td> value</td>
+                                        <th scope="row">@SharedLocalizer["AverageFeedStockc"]</th>
+                                        <td id="korm_avgye"></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="tab-pane fade" id="ZemFondStr" role="tabpanel" aria-labelledby="ZemFondStr-tab">
-                            <h5 class="card-title text-center">Структура земель</h5>
+                            <h5 class="card-title text-center">@SharedLocalizer["LandStructure"]</h5>
                             <canvas id="chart1" width="400" height="380"></canvas>
-                            <button id="download-pdf" onclick="saveAsPDF();" type="button" class="btn btn-primary btn-sm float-right">Download PDF</button>
+                            <button id="download-pdf" onclick="saveAsPDF();" type="button" class="btn btn-primary btn-sm float-right">PDF</button>
                         </div>
                         <div class="tab-pane fade" id="ZemFondRec" role="tabpanel" aria-labelledby="ZemFondRec-tab">
-                            <h5 class="card-title text-center">Рекомендации по сезонам</h5>
+                            <h5 class="card-title text-center">@SharedLocalizer["Recommends"]</h5>
                             <canvas id="chart2" width="400" height="380"></canvas>
                         </div>
                     </div>
@@ -232,11 +222,11 @@
                     </table>
                     <div class="btn-group float-right" role="group">
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Download
+                            @SharedLocalizer["Download"]
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
-                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i> Download Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i> Download PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
+                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
                         </div>
                     </div>
                 </div>
@@ -294,7 +284,7 @@
                 </div>
                 <div class="col-md-auto">
                     <div class="float-right">
-                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК
                     </div>
                 </div>
                 <div class="col col-lg-2">
@@ -879,8 +869,6 @@
                     var features = parser.readFeatures(data);
                     $('#valueUr_avgyear').text(features[0].get('ur_avgyear'));
                     $('#valueKorm_avgye').text(features[0].get('korm_avgye'));
-                    console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + features[0].get('ur_avgyear').toFixed(2));
-                    console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + features[0].get('korm_avgye').toFixed(2));
                     $.ajax({
                         url: '@Url.Action("GetZemfondInfo")',
                         data: {
@@ -1020,7 +1008,7 @@
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Поиск пастбищ',
+            title: '@SharedLocalizer["PastureSearch"]',
             content: $('#FilterZemfond'),
             overlay: false
         });
@@ -1125,7 +1113,7 @@
             closeOnClick: false,
             closeButton: 'title',
             animation: 'slide',
-            title: 'Сводная информация',
+            title: '@SharedLocalizer["FreeInformation"]',
             content: $('#FilterKato'),
             overlay: false
         });
@@ -1212,14 +1200,12 @@
                         yAxes: [{
                             ticks: {
                                 min: 0,
-                                //max: 100,
                                 callback: function (value) {
                                     return value + "%"
                                 }
                             },
                             scaleLabel: {
                                 display: true
-                                //labelString: "Percentage"
                             }
                         }]
                     }
@@ -1280,14 +1266,12 @@
                         yAxes: [{
                             ticks: {
                                 min: 0,
-                                //max: 100,
                                 callback: function (value) {
                                     return value + "%"
                                 }
                             },
                             scaleLabel: {
                                 display: true
-                                //labelString: "Percentage"
                             }
                         }]
                     }
@@ -1322,8 +1306,8 @@
     }
 
     function TableCATO(zemfondpol) {
-        console.log('@Html.Raw(SharedLocalizer["AverageAnnualProductivitykgha"]): ' + zemfondpol.ur_avgyear.toFixed(2));
-        console.log('@Html.Raw(SharedLocalizer["AverageFeedStockc"]): ' + zemfondpol.korm_avgye.toFixed(2));
+        $('#ur_avgyear').text(zemfondpol.ur_avgyear.toFixed(2));
+        $('#korm_avgye').text(zemfondpol.korm_avgye.toFixed(2));
     }
     //add button to generate PDF
     function saveAsPDF() {
@@ -1344,9 +1328,7 @@
 @*Sidebar Menu*@
 <script>
     jQuery(document).ready(function () {
-        /*
-            Sidebar
-        */
+        /* Sidebar */
         $('.dismiss, .overlay').on('click', function () {
             $('.sidebar').removeClass('active');
         });
@@ -1393,7 +1375,7 @@
             },
             content: (
                 '<h5 class="Card-title text-center text-white">@SharedLocalizer["LandSupply"]</h5>' +
-                '<p class="card-text text-center text-white">Пастбища на землях запаса</p>'
+                '<p class="card-text text-center text-white">@SharedLocalizer["PastureOnReserveLands"]</p>'
             ),
             overlay: false,
             reposition: true,

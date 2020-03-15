@@ -45,7 +45,25 @@
     }
 </select>
 <input type="button" onclick="Chart1()" value="@SharedLocalizer["Refresh"]" />
-<canvas class="my-1 w-100 chartjs-render-monitor" id="chart1Canvas" width="900" height="380"></canvas>
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart1Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
+<br />
+<br />
+<table id="table1" class="table">
+    <tr>
+        <th>
+            @SharedLocalizer["Date"]
+        </th>
+        <th>
+            @SharedLocalizer["minimum"]
+        </th>
+        <th>
+            @SharedLocalizer["maximum"]
+        </th>
+        <th>
+            @SharedLocalizer["median"]
+        </th>
+    </tr>
+</table>
 <br />
 <br />
 
@@ -99,7 +117,57 @@
     <label for="@checkboxid">@y.ToString()</label>
 }
 <input type="button" onclick="Chart2()" value="@SharedLocalizer["Refresh"]" />
-<canvas class="my-1 w-100 chartjs-render-monitor" id="chart2Canvas" width="900" height="380"></canvas>
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart2Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
+<br />
+<br />
+<table id="table2" class="table"></table>
+<br />
+<br />
+
+<select id="sourceproduct3">
+    <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
+    <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
+</select>
+<select id="yearstart3">
+    @for (int y = 2000; y <= DateTime.Today.Year; y++)
+    {
+        if (y == DateTime.Today.Year)
+        {
+            <option value="@y" selected>@y.ToString()</option>
+        }
+        else
+        {
+            <option value="@y">@y.ToString()</option>
+        }
+    }
+</select>
+<select id="yearfinish3">
+    @for (int y = 2000; y <= DateTime.Today.Year; y++)
+    {
+        if (y == DateTime.Today.Year)
+        {
+            <option value="@y" selected>@y.ToString()</option>
+        }
+        else
+        {
+            <option value="@y">@y.ToString()</option>
+        }
+    }
+</select>
+<select id="type3">
+    <option value="minimum">@SharedLocalizer["minimum"]</option>
+    <option value="maximum">@SharedLocalizer["maximum"]</option>
+    <option value="median">@SharedLocalizer["median"]</option>
+</select>
+<input type="button" onclick="Chart3()" value="@SharedLocalizer["Refresh"]" />
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart31Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
+<canvas width="611" height="305" class="chartjs-render-monitor" id="chart32Canvas" style="width: 611px; height: 305px; display: block;"></canvas>
+<br />
+<br />
+<table id="table3" class="table"></table>
+<br />
+<br />
+<br />
 
 <script>
     var chart1 = null;
@@ -159,9 +227,28 @@
                             yAxes: [{
                                 stacked: true
                             }]
+                        },
+                        title: {
+                            display: true,
+                            text: [$('#sourceproduct1 option:selected').text() + ', ' + $('#dataset1 option:selected').text() + '. ',
+                                '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                                '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                                '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
                         }
                     }
                 });
+
+                $('#table1 tr').not(':first').remove();
+                var html = '';
+                for (var i = 0; i < data.labels.length; i++) {
+                    html += '<tr><td>' + data.labels[i]
+                        + '</td><td>' + data.years_min[i]
+                        + '</td><td>' + data.years_max[i]
+                        + '</td><td>' + data.years_median[i] + '</td></tr>';
+                }
+                $('#table1 tr').first().after(html);
             },
             error: function () {
                 console.log('Error chart 1');
@@ -192,14 +279,14 @@
                     datasets: [
                         {
                             label: '@Html.Raw(SharedLocalizer["minimum"])',
-                            backgroundColor: 'rgba(195, 195, 195, 1)',
+                            backgroundColor: 'rgba(195, 195, 195, 0.3)',
                             borderColor: 'rgba(215, 215, 215, 1)',
                             data: data.years_min,
-                            fill: false
+                            fill: "+1"
                         },
                         {
                             label: '@Html.Raw(SharedLocalizer["maximum"])',
-                            backgroundColor: 'rgba(195, 195, 195, 1)',
+                            backgroundColor: 'rgba(195, 195, 195, 0.3)',
                             borderColor: 'rgba(215, 215, 215, 1)',
                             data: data.years_max,
                             fill: false
@@ -229,7 +316,8 @@
                         backgroundColor: color,
                         borderColor: color,
                         data: data.year_max_datasets[i].data,
-                        fill: false
+                        fill: false,
+                            order: 11
                     });
                 }
                 for (var i = 0; i < data.year_median_datasets.length; ++i) {
@@ -250,9 +338,51 @@
                     type: 'line',
                     data: chart2Data,
                     options: {
-                        responsive: true
+                        responsive: true,
+                        title: {
+                            display: true,
+                            text: [$('#sourceproduct2 option:selected').text() + ', ' + $('#dataset2 option:selected').text() + '. ',
+                                '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                                '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                                '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                                '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
+                        }
                     }
                 });
+
+                $('#table2 tr').remove();
+                var html = '<tr><th>@SharedLocalizer["Date"]'
+                    + '</th><th>@SharedLocalizer["minimum"]'
+                    + '</th><th>@SharedLocalizer["maximum"]'
+                    + '</th><th>@SharedLocalizer["median"]';
+                for (var i = 0; i < data.year_min_datasets.length; ++i) {
+                    html += '</th><th>' + data.year_min_datasets[i].year + ' @Html.Raw(SharedLocalizer["minimum"])';
+                }
+                for (var i = 0; i < data.year_max_datasets.length; ++i) {
+                    html += '</th><th>' + data.year_max_datasets[i].year + ' @Html.Raw(SharedLocalizer["maximum"])';
+                }
+                for (var i = 0; i < data.year_median_datasets.length; ++i) {
+                    html += '</th><th>' + data.year_median_datasets[i].year + ' @Html.Raw(SharedLocalizer["median"])';
+                }
+                html += '</th></tr>'
+                for (var i = 0; i < data.labels.length; i++) {
+                    html += '<tr><td>' + data.labels[i]
+                        + '</td><td>' + data.years_min[i]
+                        + '</td><td>' + data.years_max[i]
+                        + '</td><td>' + data.years_median[i];
+                    for (var j = 0; j < data.year_min_datasets.length; ++j) {
+                        html += '</td><td>' + (data.year_min_datasets[j].data[i] == null ? '' : data.year_min_datasets[j].data[i]);
+                    }
+                    for (var j = 0; j < data.year_max_datasets.length; ++j) {
+                        html += '</td><td>' + (data.year_max_datasets[j].data[i] == null ? '' : data.year_max_datasets[j].data[i]);
+                    }
+                    for (var j = 0; j < data.year_median_datasets.length; ++j) {
+                        html += '</td><td>' + (data.year_median_datasets[j].data[i] == null ? '' : data.year_median_datasets[j].data[i]);
+                    }
+                    html += '</td></tr>';
+                }
+                $('#table2').append(html);
             },
             error: function () {
                 console.log('Error chart 2');
@@ -260,9 +390,257 @@
         });
     }
 
+    var chart31 = null,
+        chart32 = null;
+    function Chart3() {
+        $.ajax({
+            url: '@Url.Action("GetChart3Data")',
+            data: {
+                objectid: $('#objectid').val(),
+                sourceproduct: $('#sourceproduct3').val(),
+                yearstart: $('#yearstart3').val(),
+                yearfinish: $('#yearfinish3').val()
+            },
+            type: 'POST',
+            success: function (data) {
+                var color = random_rgba(),
+                    color_avg = random_rgba();
+                var chart31Data = {};
+                if ($('#type3').val() == 'minimum') {
+                    chart31Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: '@Html.Raw(SharedLocalizer["minimum"]) (@Html.Raw(SharedLocalizer["average"]))',
+                                backgroundColor: color_avg,
+                                borderColor: color_avg,
+                                borderWidth: 2,
+                                data: data.years_avg_min,
+                                fill: false
+                            },
+                            {
+                                type: 'bar',
+                                label: '@Html.Raw(SharedLocalizer["minimum"])',
+                                backgroundColor: color,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_min
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'maximum') {
+                    chart31Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: '@Html.Raw(SharedLocalizer["maximum"]) (@Html.Raw(SharedLocalizer["average"]))',
+                                backgroundColor: color_avg,
+                                borderColor: color_avg,
+                                borderWidth: 2,
+                                data: data.years_avg_max,
+                                fill: false
+                            },
+                            {
+                                type: 'bar',
+                                label: '@Html.Raw(SharedLocalizer["maximum"])',
+                                backgroundColor: color,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_max
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'median') {
+                    chart31Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: '@Html.Raw(SharedLocalizer["median"]) (@Html.Raw(SharedLocalizer["average"]))',
+                                backgroundColor: color_avg,
+                                borderColor: color_avg,
+                                borderWidth: 2,
+                                data: data.years_avg_median,
+                                fill: false
+                            },
+                            {
+                                type: 'bar',
+                                label: '@Html.Raw(SharedLocalizer["median"])',
+                                backgroundColor: color,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_median
+                            }]
+                    };
+                }
+                var ctx31 = document.getElementById('chart31Canvas').getContext('2d');
+                if (chart31 != null) {
+                    chart31.destroy();
+                }
+                chart31 = new Chart(ctx31, {
+                    type: 'bar',
+                    data: chart31Data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: [$('#sourceproduct3 option:selected').text() + ', NDVI. ',
+                            '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                            '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                            '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                            '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                            '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
+                        }
+                    }
+                });
+
+                var chart32Data = {};
+                var color_a = [];
+                if ($('#type3').val() == 'minimum') {
+                    for (i = 0; i < data.years_min_a.length; i++) {
+                        if (data.years_min_a[i] > 0) {
+                            color_a.push('rgba(0, 215, 0, 1)');
+                        }
+                        else {
+                            color_a.push('rgba(215, 0, 0, 1)')
+                        }
+                    }
+                    chart32Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '@Html.Raw(SharedLocalizer["minimum"])',
+                                backgroundColor: color_a,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_min_a,
+
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'maximum') {
+                    for (i = 0; i < data.years_max_a.length; i++) {
+                        if (data.years_max_a[i] > 0) {
+                            color_a.push('rgba(0, 215, 0, 1)');
+                        }
+                        else {
+                            color_a.push('rgba(215, 0, 0, 1)')
+                        }
+                    }
+                    chart32Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '@Html.Raw(SharedLocalizer["maximum"])',
+                                backgroundColor: color_a,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_max_a
+                            }
+                        ]
+                    };
+                }
+                else if ($('#type3').val() == 'median') {
+                    for (i = 0; i < data.years_median_a.length; i++) {
+                        if (data.years_median_a[i] > 0) {
+                            color_a.push('rgba(0, 215, 0, 1)');
+                        }
+                        else {
+                            color_a.push('rgba(215, 0, 0, 1)')
+                        }
+                    }
+                    chart32Data = {
+                        labels: data.labels,
+                        datasets: [
+                            {
+                                label: '@Html.Raw(SharedLocalizer["median"])',
+                                backgroundColor: color_a,
+                                borderColor: 'rgba(215, 215, 215, 1)',
+                                borderWidth: 1,
+                                data: data.years_median_a
+                            }]
+                    };
+                }
+
+                var ctx32 = document.getElementById('chart32Canvas').getContext('2d');
+                if (chart32 != null) {
+                    chart32.destroy();
+                }
+                chart32 = new Chart(ctx32, {
+                    type: 'bar',
+                    data: chart32Data,
+                    options: {
+                        responsive: true,
+                        scales: {
+                            xAxes: [{
+                                stacked: true,
+                            }],
+                            yAxes: [{
+                                stacked: true
+                            }]
+                        },
+                        title: {
+                            display: true,
+                            text: [$('#sourceproduct3 option:selected').text() + ', @Html.Raw(SharedLocalizer["Anomaly"]). ',
+                            '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ',
+                            '@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ',
+                            '@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ',
+                            '@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + '. ',
+                            '@Html.Raw(SharedLocalizer["GroupLat"]): @Html.Raw(ViewBag.pasturepol.group_lat)' + '. ']
+                        }
+                    }
+                });
+
+                $('#table3 tr').remove();
+                var html = '<tr><th>@SharedLocalizer["Date"]'
+                    + '</th><th>NDVI ' + $("#type3 option:selected").text() + ' (@SharedLocalizer["average"])'
+                    + '</th><th>NDVI ' + $("#type3 option:selected").text()
+                    + '</th><th>@SharedLocalizer["Anomaly"] ' + $("#type3 option:selected").text() + '</th></tr>';
+                for (var i = 0; i < data.labels.length; i++) {
+                    if ($('#type3').val() == 'minimum') {
+                        html += '<tr><td>' + data.labels[i]
+                            + '</td><td>' + data.years_avg_min[i]
+                            + '</td><td>' + data.years_min[i]
+                            + '</td><td>' + data.years_min_a[i] + '</td></tr>';
+                    }
+                    else if ($('#type3').val() == 'maximum') {
+                        html += '<tr><td>' + data.labels[i]
+                            + '</td><td>' + data.years_avg_max[i]
+                            + '</td><td>' + data.years_max[i]
+                            + '</td><td>' + data.years_max_a[i] + '</td></tr>';
+                    }
+                    else if ($('#type3').val() == 'median') {
+                        html += '<tr><td>' + data.labels[i]
+                            + '</td><td>' + data.years_avg_median[i]
+                            + '</td><td>' + data.years_median[i]
+                            + '</td><td>' + data.years_median_a[i] + '</td></tr>';
+                    }
+                }
+                $('#table3').append(html);
+            },
+            error: function () {
+                console.log('Error chart 3');
+            }
+        });
+    }
+
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
-        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+        //return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
+        return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',1)';
     }
 </script>
 
@@ -270,5 +648,6 @@
     $(document).ready(function () {
         Chart1();
         Chart2();
+        Chart3();
     });
 </script>

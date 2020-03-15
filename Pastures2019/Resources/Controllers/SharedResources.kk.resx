@@ -123,6 +123,9 @@
   <data name="acting" xml:space="preserve">
     <value>актерлік</value>
   </data>
+  <data name="AdministrativeUnit" xml:space="preserve">
+    <value>Әкімшілік бөлім</value>
+  </data>
   <data name="Administrator" xml:space="preserve">
     <value>Әкімшілік</value>
   </data>
@@ -149,6 +152,9 @@
   </data>
   <data name="Autumn" xml:space="preserve">
     <value>Күз</value>
+  </data>
+  <data name="average" xml:space="preserve">
+    <value>орташа</value>
   </data>
   <data name="AverageAnnualProductivitykgha" xml:space="preserve">
     <value>Орташа жылдық өнімділік, кг/га</value>
@@ -444,6 +450,9 @@
   <data name="FreeInformation" xml:space="preserve">
     <value>Қысқаша ақпарат</value>
   </data>
+  <data name="Further" xml:space="preserve">
+    <value>Келесі</value>
+  </data>
   <data name="Go" xml:space="preserve">
     <value>Өту</value>
   </data>
@@ -503,6 +512,9 @@
   </data>
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Кіру әрекеті жарамсыз.</value>
+  </data>
+  <data name="LandStructure" xml:space="preserve">
+    <value>Жер құрылымы</value>
   </data>
   <data name="LandSupply" xml:space="preserve">
     <value>Жер резерві</value>
@@ -630,6 +642,9 @@
   <data name="Number" xml:space="preserve">
     <value>Сан</value>
   </data>
+  <data name="OnPastureBackground" xml:space="preserve">
+    <value>Жайылым фонында</value>
+  </data>
   <data name="Otdel" xml:space="preserve">
     <value>Бөлім</value>
   </data>
@@ -642,11 +657,14 @@
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
+  <data name="PastureOnReserveLands" xml:space="preserve">
+    <value>Босалқы жерлердегі жайылым</value>
+  </data>
   <data name="pasturepolLayer" xml:space="preserve">
     <value>Азық-түлік ресурстары</value>
   </data>
   <data name="PasturesBurden" xml:space="preserve">
-    <value>Жайылымдарға ауылшаруашылық жануарларының жүктемесі</value>
+    <value>Жайылымдарға жүктемесі</value>
   </data>
   <data name="PastureSearch" xml:space="preserve">
     <value>Жайылымдарды іздеу</value>
@@ -668,6 +686,12 @@
   </data>
   <data name="Population" xml:space="preserve">
     <value>Халық саны</value>
+  </data>
+  <data name="Productivity" xml:space="preserve">
+    <value>Өнімділік</value>
+  </data>
+  <data name="ProductivityForage" xml:space="preserve">
+    <value>Өнімділік, жемшөп</value>
   </data>
   <data name="Productivityhha" xml:space="preserve">
     <value>Өнімділік, т / га</value>
@@ -717,6 +741,9 @@
   <data name="RecommendationForUse" xml:space="preserve">
     <value>Пайдалануға ұсыныс</value>
   </data>
+  <data name="Recommendations" xml:space="preserve">
+    <value>Ұсыныстар</value>
+  </data>
   <data name="Recommends" xml:space="preserve">
     <value>Маусымдық ұсыныстар</value>
   </data>
@@ -756,6 +783,12 @@
   <data name="Save" xml:space="preserve">
     <value>Сақтау</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Іздеу</value>
+  </data>
+  <data name="SearchForWaterSources" xml:space="preserve">
+    <value>Су көздерін іздеу</value>
+  </data>
   <data name="Shearings" xml:space="preserve">
     <value>Кесілген жүн</value>
   </data>
@@ -787,13 +820,16 @@
     <value>Қоғамдастықтар</value>
   </data>
   <data name="Species" xml:space="preserve">
-    <value>Ауылшаруашылық жануарларын асылдандыру</value>
+    <value>Асылдандыру</value>
   </data>
   <data name="speciesXLayer" xml:space="preserve">
     <value>Ауылшаруашылық жануарларын асылдандыру</value>
   </data>
   <data name="Spring" xml:space="preserve">
     <value>Көктем</value>
+  </data>
+  <data name="Structure" xml:space="preserve">
+    <value>Құрылымы</value>
   </data>
   <data name="SType" xml:space="preserve">
     <value>Жер санаттары бойынша жер қоры</value>
@@ -824,6 +860,12 @@
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Құпия сөз және растау паролі сәйкес келмейді.</value>
+  </data>
+  <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
+    <value>Жайылымдық жүктеме нормасы, млн. мақсат / 100 га</value>
+  </data>
+  <data name="ToDegradedPastures" xml:space="preserve">
+    <value>Тозған жайылымдарға</value>
   </data>
   <data name="ToHome" xml:space="preserve">
     <value>Үйге</value>

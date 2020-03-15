@@ -895,7 +895,6 @@
             id: 'modal-white',
             maxWidth: 500,
             maxHeight: 400,
-            adjustTracker: 'scroll',
             title: 'My Modal',
             zIndex: 'auto',
             draggable: 'title',
@@ -1114,7 +1113,6 @@
         new jBox('Modal', {
             attach: '#FilterPastureBtn',
             width: 400,
-            responsiveHeight: true,
             zIndex: 'auto',
             draggable: 'title',
             closeOnClick: false,
@@ -1283,7 +1281,6 @@
             title: '@SharedLocalizer["FreeInformation"]',
             content: $('#FilterKato'),
             overlay: false,
-            repositionOnOpen: true,
             onOpen: function () {
                 // Add t
                 this.setTitle('<div class="ajax-complete">@SharedLocalizer["FreeInformation"]</div>');
@@ -1298,7 +1295,6 @@
             id: 'modal-white',
             width: 600,
             maxHeight: 500,
-            adjustTracker: 'scroll',
             zIndex: 'auto',
             closeButton: 'title',
             animation: 'pulse',
@@ -1457,7 +1453,6 @@
             attach: '#MapTitleBtn',
             theme: 'TooltipBorder',
             width: 260,
-            blockScroll: false,
             animation: 'flip',
             closeButton: false,
             position: {
@@ -1473,8 +1468,6 @@
                 '<p class="card-text text-center text-white">@SharedLocalizer["ForageLandsOfTheRepublicOfKazakhstan"]</p>'
             ),
             overlay: false,
-            reposition: true,
-            repositionOnOpen: false
         }).open();
         // Map Legend
         new jBox('Modal', {
@@ -1482,8 +1475,6 @@
             theme: 'TooltipBorder',
             width: 500,
             maxHeight: 600,
-            responsiveHeight: true,
-            blockScroll: false,
             animation: 'flip',
             closeButton: 'box',
             position: {
@@ -1496,7 +1487,6 @@
             },
             content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
             overlay: false,
-            reposition: true,
         });
         // Tooltip below to the right
         new jBox('Tooltip', {

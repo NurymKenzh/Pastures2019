@@ -83,14 +83,14 @@
                                 </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
-                                    <option value="OSM">OpenStreetMap</option>
+                                    <option value="OSM" selected>OpenStreetMap</option>
                                     <option value="BingAerialWithLabels">Bing Aerial</option>
                                     <option value="BingRoadStatic">Bing Road (static)</option>
                                     <option value="BingRoadDynamic">Bing Road (dynamic)</option>
                                     <option value="HERENormalDay">HERE Normal Day</option>
                                     <option value="HERENormalDayTransit">HERE Normal Day Transit</option>
                                     <option value="HERETerrainDay">HERE Terrain Day</option>
-                                    <option value="HEREHybridDay" selected>HERE Hybrid Day</option>
+                                    <option value="HEREHybridDay">HERE Hybrid Day</option>
                                     <option value="StamenWatercolor">Stamen Watercolor</option>
                                     <option value="StamenTerrain">Stamen Terrain</option>
                                     <option value="StamenToner">Stamen Toner</option>
@@ -325,7 +325,6 @@
     </footer>
 </div>
 
-
 @* layers *@
 <script>
     var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
@@ -402,7 +401,7 @@
     };
     var Source_HEREHybridDay = new ol.source.XYZ({
         url: HEREcreateUrl(urlTpl, HERElayerDescHybridDay),
-        attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' + '<a href="http://developer.here.com">HERE</a>'
+        attributions: 'Разработка &copy;' + '<a href="http://kazniizhik.kz/">КазНИИЖиК</a>'+' & Map Tiles &copy; ' + new Date().getFullYear() + ' ' + '<a href="http://developer.here.com">HERE</a>'
     });
     var Source_StamenWatercolor = new ol.source.Stamen({
         layer: 'watercolor'
@@ -456,7 +455,7 @@
             '?apikey=6746f4299ea3479aba8726b09f049c1b'
     });
     var Layer_Base = new ol.layer.Tile({
-        source: Source_HEREHybridDay
+        source: Source_OSM
     });
     Layer_Base.set('name', 'Base');
     Layer_Base.setOpacity(1);
@@ -964,7 +963,7 @@
     // function for export table
     var $table = $('#InfoTableContent')
     var $excelbutton = $('#excelbutton')
-    var $pdfbutton = $('#pdfbutton')    
+    var $pdfbutton = $('#pdfbutton')
     $(function () {
         $excelbutton.click(function () {
             $('#InfoTableContent').tableExport({type:'excel'});
@@ -1481,6 +1480,29 @@
             minWidth: 100,
             adjustPosition: true,
             adjustTracker: true
+        });
+    });
+</script>
+
+@*Word wrap options in a select list*@
+<script>
+    var optionText, array = [], newString, maxChar = 70;
+    $('select').each(function () {
+        $(this).find('option').each(function (i, e) {
+            $(e).attr('title', $(e).text());
+            optionText = $(e).text();
+            newString = '';
+            if (optionText.length > maxChar) {
+                array = optionText.split(' ');
+                $.each(array, function (ind, ele) {
+                    newString += ele + ' ';
+                    if (ind > 0 && newString.length > maxChar) {
+                        $(e).text(newString);
+                        return false;
+                    }
+                });
+
+            }
         });
     });
 </script>

@@ -7,252 +7,255 @@
     Layout = "~/Views/Shared/_LayoutMap.cshtml";
 }
 
-<h1>@SharedLocalizer["Delete"]</h1>
+<div class="container">
+    <div class="jumbotron p-2 mt-2">
+        <h1>@SharedLocalizer["Delete"]</h1>
+        <h4>@SharedLocalizer["FarmPasture"]</h4>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-md-auto">
+            <dl class="row">
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.tid)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.tid)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.CATOTE)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.CATOTE)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Farm)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.Farm)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.NaturalArea)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.NaturalArea)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.PType)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.PType)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Relief)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.Relief)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ThePresenceOfEconomicallySignificantContours)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ThePresenceOfEconomicallySignificantContours)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.LandAreaAccordingToLandUseAct)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.LandAreaAccordingToLandUseAct)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ProjectiveCoverageFrom)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ProjectiveCoverageFrom)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ProjectiveCoverageTo)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ProjectiveCoverageTo)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.AveragePastureProductivitySpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.AveragePastureProductivitySpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.AveragePastureProductivitySummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.AveragePastureProductivitySummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.AveragePastureProductivityAutumn)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.AveragePastureProductivityAutumn)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TypeOfGrazedAnimalsBreed)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TypeOfGrazedAnimalsBreed)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheNumberOfGrazedAnimalsGoals)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheNumberOfGrazedAnimalsGoals)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.NumberOfGrazingDaysSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.NumberOfGrazingDaysSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.NumberOfGrazingDaysSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.NumberOfGrazingDaysSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.NumberOfGrazingDaysFall)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.NumberOfGrazingDaysFall)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.FloodingEatSourcesWells)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.FloodingEatSourcesWells)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheNeedForPastureFeedSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheNeedForPastureFeedSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheNeedForPastureFeedSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheNeedForPastureFeedSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheNeedForPastureFeedAutumn)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheNeedForPastureFeedAutumn)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.FeedStockOfUsedPasturesSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.FeedStockOfUsedPasturesSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.FeedStockOfUsedPasturesSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.FeedStockOfUsedPasturesSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.FeedStockOfUsedPasturesAutumn)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.FeedStockOfUsedPasturesAutumn)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheCostPer1HeadForTheBillingPeriodSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheCostPer1HeadForTheBillingPeriodSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheCostPer1HeadForTheBillingPeriodSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheCostPer1HeadForTheBillingPeriodSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.TheCostPer1HeadForTheBillingPeriodFall)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.TheCostPer1HeadForTheBillingPeriodFall)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.LoadSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.LoadSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.LoadSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.LoadSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.LoadFall)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.LoadFall)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ShortageSurplusOfPastureFeedSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ShortageSurplusOfPastureFeedSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ShortageSurplusOfPastureFeedSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ShortageSurplusOfPastureFeedSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ShortageSurplusOfPastureFeedAutumn)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ShortageSurplusOfPastureFeedAutumn)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSpring)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSpring)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSummer)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSummer)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesAutumn)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesAutumn)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.ThePresenceOfDegradedSitesIfAvailable)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.ThePresenceOfDegradedSitesIfAvailable)
+                </dd>
+                <dt class="col-md-4">
+                    @Html.DisplayNameFor(model => model.RecommendationsForImprovingThisDegradedArea)
+                </dt>
+                <dd class="col-md-8">
+                    @Html.DisplayFor(model => model.RecommendationsForImprovingThisDegradedArea)
+                </dd>
+            </dl>
 
-<h3>@SharedLocalizer["Delete"]?</h3>
-<div>
-    <h4>@SharedLocalizer["FarmPasture"]</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.tid)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.tid)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CATOTE)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CATOTE)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Farm)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Farm)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NaturalArea)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NaturalArea)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Relief)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Relief)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ThePresenceOfEconomicallySignificantContours)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ThePresenceOfEconomicallySignificantContours)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LandAreaAccordingToLandUseAct)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LandAreaAccordingToLandUseAct)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectiveCoverageFrom)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProjectiveCoverageFrom)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ProjectiveCoverageTo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ProjectiveCoverageTo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AveragePastureProductivitySpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AveragePastureProductivitySpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AveragePastureProductivitySummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AveragePastureProductivitySummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AveragePastureProductivityAutumn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AveragePastureProductivityAutumn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TypeOfGrazedAnimalsBreed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TypeOfGrazedAnimalsBreed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheNumberOfGrazedAnimalsGoals)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheNumberOfGrazedAnimalsGoals)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfGrazingDaysSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfGrazingDaysSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfGrazingDaysSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfGrazingDaysSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NumberOfGrazingDaysFall)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NumberOfGrazingDaysFall)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FloodingEatSourcesWells)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FloodingEatSourcesWells)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheNeedForPastureFeedSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheNeedForPastureFeedSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheNeedForPastureFeedSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheNeedForPastureFeedSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheNeedForPastureFeedAutumn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheNeedForPastureFeedAutumn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FeedStockOfUsedPasturesSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FeedStockOfUsedPasturesSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FeedStockOfUsedPasturesSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FeedStockOfUsedPasturesSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FeedStockOfUsedPasturesAutumn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FeedStockOfUsedPasturesAutumn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheCostPer1HeadForTheBillingPeriodSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheCostPer1HeadForTheBillingPeriodSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheCostPer1HeadForTheBillingPeriodSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheCostPer1HeadForTheBillingPeriodSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.TheCostPer1HeadForTheBillingPeriodFall)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.TheCostPer1HeadForTheBillingPeriodFall)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LoadSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LoadSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LoadSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LoadSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LoadFall)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LoadFall)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ShortageSurplusOfPastureFeedSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ShortageSurplusOfPastureFeedSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ShortageSurplusOfPastureFeedSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ShortageSurplusOfPastureFeedSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ShortageSurplusOfPastureFeedAutumn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ShortageSurplusOfPastureFeedAutumn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSpring)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSpring)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSummer)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesSummer)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesAutumn)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RequiredAdditionalAreaIfNecessaryPasturesAutumn)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ThePresenceOfDegradedSitesIfAvailable)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ThePresenceOfDegradedSitesIfAvailable)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecommendationsForImprovingThisDegradedArea)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecommendationsForImprovingThisDegradedArea)
-        </dd>
-    </dl>
-
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
-        <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
-    </form>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="@SharedLocalizer["Delete"]" class="btn btn-danger" /> |
+                <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+            </form>
+        </div>
+    </div>
 </div>

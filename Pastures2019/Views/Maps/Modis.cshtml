@@ -885,10 +885,12 @@
         if ($('#DataSet').val() == 'NDVI') {
             Layer_NDVI.setVisible(true);
             Layer_Anomaly.setVisible(false);
+            $('#legend').attr('src', '/images/Legends/LegendNDVI.svg');
         }
         else if ($('#DataSet').val() == 'Anomaly') {
             Layer_NDVI.setVisible(false);
             Layer_Anomaly.setVisible(true);
+            $('#legend').attr('src', '/images/Legends/LegendNDVIAnomaly.svg');
         }
         ChangeMapTitle();
     }

@@ -45,5 +45,6 @@ namespace Pastures2019.Data
         public DbSet<Pastures2019.Models.Zone> Zone { get; set; }
         public DbSet<Pastures2019.Models.ZSubType> ZSubType { get; set; }
         public DbSet<Pastures2019.Models.ZType> ZType { get; set; }
+        public DbSet<Pastures2019.Models.FarmPasture> FarmPasture { get; set; }
     }
 }

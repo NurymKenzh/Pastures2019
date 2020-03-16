@@ -1,0 +1,235 @@
+﻿@model Pastures2019.Models.FarmPasture
+@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Create"];
+    Layout = "~/Views/Shared/_LayoutMap.cshtml";
+}
+
+<h1>@SharedLocalizer["Create"]</h1>
+
+<h4>@SharedLocalizer["FarmPasture"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="tid" class="control-label"></label>
+                <input asp-for="tid" class="form-control" />
+                <span asp-validation-for="tid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CATOTE" class="control-label"></label>
+                <input asp-for="CATOTE" class="form-control" />
+                <span asp-validation-for="CATOTE" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Farm" class="control-label"></label>
+                <input asp-for="Farm" class="form-control" />
+                <span asp-validation-for="Farm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NaturalArea" class="control-label"></label>
+                <input asp-for="NaturalArea" class="form-control" />
+                <span asp-validation-for="NaturalArea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PType" class="control-label"></label>
+                <input asp-for="PType" class="form-control" />
+                <span asp-validation-for="PType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Relief" class="control-label"></label>
+                <input asp-for="Relief" class="form-control" />
+                <span asp-validation-for="Relief" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThePresenceOfEconomicallySignificantContours" class="control-label"></label>
+                <input asp-for="ThePresenceOfEconomicallySignificantContours" class="form-control" />
+                <span asp-validation-for="ThePresenceOfEconomicallySignificantContours" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LandAreaAccordingToLandUseAct" class="control-label"></label>
+                <input asp-for="LandAreaAccordingToLandUseAct" class="form-control" />
+                <span asp-validation-for="LandAreaAccordingToLandUseAct" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectiveCoverageFrom" class="control-label"></label>
+                <input asp-for="ProjectiveCoverageFrom" class="form-control" />
+                <span asp-validation-for="ProjectiveCoverageFrom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProjectiveCoverageTo" class="control-label"></label>
+                <input asp-for="ProjectiveCoverageTo" class="form-control" />
+                <span asp-validation-for="ProjectiveCoverageTo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AveragePastureProductivitySpring" class="control-label"></label>
+                <input asp-for="AveragePastureProductivitySpring" class="form-control" />
+                <span asp-validation-for="AveragePastureProductivitySpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AveragePastureProductivitySummer" class="control-label"></label>
+                <input asp-for="AveragePastureProductivitySummer" class="form-control" />
+                <span asp-validation-for="AveragePastureProductivitySummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AveragePastureProductivityAutumn" class="control-label"></label>
+                <input asp-for="AveragePastureProductivityAutumn" class="form-control" />
+                <span asp-validation-for="AveragePastureProductivityAutumn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TypeOfGrazedAnimalsBreed" class="control-label"></label>
+                <input asp-for="TypeOfGrazedAnimalsBreed" class="form-control" />
+                <span asp-validation-for="TypeOfGrazedAnimalsBreed" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheNumberOfGrazedAnimalsGoals" class="control-label"></label>
+                <input asp-for="TheNumberOfGrazedAnimalsGoals" class="form-control" />
+                <span asp-validation-for="TheNumberOfGrazedAnimalsGoals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfGrazingDaysSpring" class="control-label"></label>
+                <input asp-for="NumberOfGrazingDaysSpring" class="form-control" />
+                <span asp-validation-for="NumberOfGrazingDaysSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfGrazingDaysSummer" class="control-label"></label>
+                <input asp-for="NumberOfGrazingDaysSummer" class="form-control" />
+                <span asp-validation-for="NumberOfGrazingDaysSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumberOfGrazingDaysFall" class="control-label"></label>
+                <input asp-for="NumberOfGrazingDaysFall" class="form-control" />
+                <span asp-validation-for="NumberOfGrazingDaysFall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FloodingEatSourcesWells" class="control-label"></label>
+                <input asp-for="FloodingEatSourcesWells" class="form-control" />
+                <span asp-validation-for="FloodingEatSourcesWells" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheNeedForPastureFeedSpring" class="control-label"></label>
+                <input asp-for="TheNeedForPastureFeedSpring" class="form-control" />
+                <span asp-validation-for="TheNeedForPastureFeedSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheNeedForPastureFeedSummer" class="control-label"></label>
+                <input asp-for="TheNeedForPastureFeedSummer" class="form-control" />
+                <span asp-validation-for="TheNeedForPastureFeedSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheNeedForPastureFeedAutumn" class="control-label"></label>
+                <input asp-for="TheNeedForPastureFeedAutumn" class="form-control" />
+                <span asp-validation-for="TheNeedForPastureFeedAutumn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeedStockOfUsedPasturesSpring" class="control-label"></label>
+                <input asp-for="FeedStockOfUsedPasturesSpring" class="form-control" />
+                <span asp-validation-for="FeedStockOfUsedPasturesSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeedStockOfUsedPasturesSummer" class="control-label"></label>
+                <input asp-for="FeedStockOfUsedPasturesSummer" class="form-control" />
+                <span asp-validation-for="FeedStockOfUsedPasturesSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FeedStockOfUsedPasturesAutumn" class="control-label"></label>
+                <input asp-for="FeedStockOfUsedPasturesAutumn" class="form-control" />
+                <span asp-validation-for="FeedStockOfUsedPasturesAutumn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheCostPer1HeadForTheBillingPeriodSpring" class="control-label"></label>
+                <input asp-for="TheCostPer1HeadForTheBillingPeriodSpring" class="form-control" />
+                <span asp-validation-for="TheCostPer1HeadForTheBillingPeriodSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheCostPer1HeadForTheBillingPeriodSummer" class="control-label"></label>
+                <input asp-for="TheCostPer1HeadForTheBillingPeriodSummer" class="form-control" />
+                <span asp-validation-for="TheCostPer1HeadForTheBillingPeriodSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TheCostPer1HeadForTheBillingPeriodFall" class="control-label"></label>
+                <input asp-for="TheCostPer1HeadForTheBillingPeriodFall" class="form-control" />
+                <span asp-validation-for="TheCostPer1HeadForTheBillingPeriodFall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoadSpring" class="control-label"></label>
+                <input asp-for="LoadSpring" class="form-control" />
+                <span asp-validation-for="LoadSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoadSummer" class="control-label"></label>
+                <input asp-for="LoadSummer" class="form-control" />
+                <span asp-validation-for="LoadSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LoadFall" class="control-label"></label>
+                <input asp-for="LoadFall" class="form-control" />
+                <span asp-validation-for="LoadFall" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortageSurplusOfPastureFeedSpring" class="control-label"></label>
+                <input asp-for="ShortageSurplusOfPastureFeedSpring" class="form-control" />
+                <span asp-validation-for="ShortageSurplusOfPastureFeedSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortageSurplusOfPastureFeedSummer" class="control-label"></label>
+                <input asp-for="ShortageSurplusOfPastureFeedSummer" class="form-control" />
+                <span asp-validation-for="ShortageSurplusOfPastureFeedSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShortageSurplusOfPastureFeedAutumn" class="control-label"></label>
+                <input asp-for="ShortageSurplusOfPastureFeedAutumn" class="form-control" />
+                <span asp-validation-for="ShortageSurplusOfPastureFeedAutumn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredAdditionalAreaIfNecessaryPasturesSpring" class="control-label"></label>
+                <input asp-for="RequiredAdditionalAreaIfNecessaryPasturesSpring" class="form-control" />
+                <span asp-validation-for="RequiredAdditionalAreaIfNecessaryPasturesSpring" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredAdditionalAreaIfNecessaryPasturesSummer" class="control-label"></label>
+                <input asp-for="RequiredAdditionalAreaIfNecessaryPasturesSummer" class="form-control" />
+                <span asp-validation-for="RequiredAdditionalAreaIfNecessaryPasturesSummer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequiredAdditionalAreaIfNecessaryPasturesAutumn" class="control-label"></label>
+                <input asp-for="RequiredAdditionalAreaIfNecessaryPasturesAutumn" class="form-control" />
+                <span asp-validation-for="RequiredAdditionalAreaIfNecessaryPasturesAutumn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThePresenceOfDegradedSitesIfAvailable" class="control-label"></label>
+                <input asp-for="ThePresenceOfDegradedSitesIfAvailable" class="form-control" />
+                <span asp-validation-for="ThePresenceOfDegradedSitesIfAvailable" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecommendationsForImprovingThisDegradedArea" class="control-label"></label>
+                <input asp-for="RecommendationsForImprovingThisDegradedArea" class="form-control" />
+                <span asp-validation-for="RecommendationsForImprovingThisDegradedArea" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@SharedLocalizer["Create"]" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@SharedLocalizer["BackToList"]</a>
+</div>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@
+<script>
+    $.validator.methods.range = function (value, element, param) {
+        var globalizedValue = value.replace(",", ".");
+        return this.optional(element) || (globalizedValue >= param[0] && globalizedValue <= param[1]);
+    }
+    $.validator.methods.number = function (value, element) {
+        return this.optional(element) || /-?(?:\d+|\d{1,3}(?:[\s\.,]\d{3})+)(?:[\.,]\d+)?$/.test(value);
+    }
+</script>

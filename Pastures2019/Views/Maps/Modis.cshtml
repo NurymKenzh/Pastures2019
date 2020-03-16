@@ -152,6 +152,13 @@
                                 <input id="layerpasturepolOpacity" type="range" class="form-control-range" min="0" max="100" value="50" oninput="ChangeLayers()" />
                             </div>
                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="layerpasfarmpolShow" checked="checked" onchange="ChangeLayers()">
+                                <label class="form-check-label" for="layerpasfarmpolShow">
+                                    @SharedLocalizer["FarmPastures"]
+                                </label>
+                                <input id="layerpasfarmpolOpacity" type="range" class="form-control-range" min="0" max="100" value="50" oninput="ChangeLayers()" />
+                            </div>
+                            <div class="form-check">
                                 <input class="form-check-input" type="checkbox" id="layerpopShow" checked="checked" onchange="ChangeLayers()">
                                 <label class="form-check-label" for="layerpopShow">
                                     @SharedLocalizer["popLayer"]
@@ -738,6 +745,24 @@
     Layer_rdslin.set('name', 'rdslin');
     Layer_rdslin.setVisible(false);
 
+    var url_pasfarmpol = geoserver_url + geoserver_workspace_name + '/wms';
+    var Source_pasfarmpol = new ol.source.TileWMS({
+        url: url_pasfarmpol,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':pasfarmpol',
+            'STYLES': 'pasfarmpol',
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_pasfarmpol = new ol.layer.Tile({
+        source: Source_pasfarmpol
+    });
+    Layer_pasfarmpol.set('name', 'pasfarmpol');
+    Layer_pasfarmpol.setOpacity(0.5);
+
     var url_pasturepol = geoserver_url + geoserver_workspace_name + '/wms';
     var Source_pasturepol = new ol.source.TileWMS({
         url: url_pasturepol,
@@ -804,6 +829,7 @@
             Layer_Anomaly,
             Layer_pasturepol,
             Layer_select_pasturepol,
+            Layer_pasfarmpol,
             Layer_hdrlin,
             Layer_rdslin,
             Layer_adm1pol,
@@ -1168,6 +1194,10 @@
             if (layer.get('name') == 'pasturepol') {
                 layer.setVisible(document.getElementById("layerpasturepolShow").checked);
                 layer.setOpacity($('#layerpasturepolOpacity').val() / 100);
+            }
+            if (layer.get('name') == 'pasfarmpol') {
+                layer.setVisible(document.getElementById("layerpasfarmpolShow").checked);
+                layer.setOpacity($('#layerpasfarmpolOpacity').val() / 100);
             }
         })
     }

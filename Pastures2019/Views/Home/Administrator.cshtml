@@ -45,6 +45,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" id="Vegatation-tab" data-toggle="tab" role="tab" aria-controls="Vegatation" aria-selected="false" href="#Vegatation">@SharedLocalizer["PasturesBurden"]</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="FarmPastures-tab" data-toggle="tab" role="tab" aria-controls="FarmPastures" aria-selected="false" href="#FarmPastures">@SharedLocalizer["FarmPastures"]</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="card-body">
@@ -60,24 +63,24 @@
                                     </div>
                                     @if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
                                     {
-                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                    <strong class="d-block text-gray-dark">MODIS</strong>
-                                    MODIS (или Спектрорадиометр для получения изображений с умеренным разрешением) является ключевым инструментом на борту спутников Terra (первоначально известный как EOS AM-1) и Aqua (первоначально известный как EOS PM-1). Орбита Терры вокруг Земли рассчитана таким образом, что утром она проходит с севера на юг через экватор, а днем аква проходит с юга на север через экватор.
-                                </p>
+                                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                            <strong class="d-block text-gray-dark">MODIS</strong>
+                                            MODIS (или Спектрорадиометр для получения изображений с умеренным разрешением) является ключевым инструментом на борту спутников Terra (первоначально известный как EOS AM-1) и Aqua (первоначально известный как EOS PM-1). Орбита Терры вокруг Земли рассчитана таким образом, что утром она проходит с севера на юг через экватор, а днем аква проходит с юга на север через экватор.
+                                        </p>
                                     }
                                     else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
                                     {
-                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                    <strong class="d-block text-gray-dark">MODIS</strong>
-                                    MODIS (немесе Орташа ажыратымдылықтағы бейнелеу спектрадиометрі) - Terra (бастапқыда EOS AM-1 деп аталады) және Aqua (бастапқыда EOS PM-1 деп аталады) жерсеріктерінің негізгі құралы. Терраның Жердегі орбитасы солтүстіктен оңтүстікке экватор арқылы таңертең өтеді, ал Аква күндіз экватордан оңтүстікке солтүстікке өтеді.
-                                </p>
+                                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                            <strong class="d-block text-gray-dark">MODIS</strong>
+                                            MODIS (немесе Орташа ажыратымдылықтағы бейнелеу спектрадиометрі) - Terra (бастапқыда EOS AM-1 деп аталады) және Aqua (бастапқыда EOS PM-1 деп аталады) жерсеріктерінің негізгі құралы. Терраның Жердегі орбитасы солтүстіктен оңтүстікке экватор арқылы таңертең өтеді, ал Аква күндіз экватордан оңтүстікке солтүстікке өтеді.
+                                        </p>
                                     }
                                     else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
                                     {
-                                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                                    <strong class="d-block text-gray-dark">MODIS</strong>
-                                    MODIS (or Moderate Resolution Imaging Spectroradiometer) is a key instrument aboard the Terra (originally known as EOS AM-1) and Aqua (originally known as EOS PM-1) satellites. Terra's orbit around the Earth is timed so that it passes from north to south across the equator in the morning, while Aqua passes south to north over the equator in the afternoon.
-                                </p>
+                                        <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                            <strong class="d-block text-gray-dark">MODIS</strong>
+                                            MODIS (or Moderate Resolution Imaging Spectroradiometer) is a key instrument aboard the Terra (originally known as EOS AM-1) and Aqua (originally known as EOS PM-1) satellites. Terra's orbit around the Earth is timed so that it passes from north to south across the equator in the morning, while Aqua passes south to north over the equator in the afternoon.
+                                        </p>
                                     }
                                 </div>
                             </div>
@@ -276,6 +279,23 @@
                                                     </h>
                                                 }
                                             }
+                                        </strong>
+                                        Some text
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="FarmPastures" role="tabpanel" aria-labelledby="FarmPastures-tab">
+                                <div class="media text-muted">
+                                    <div class="col-7">
+                                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            <a class="nav-link active" asp-area="" asp-controller="FarmPastures" asp-action="Index">@SharedLocalizer["FarmPastures"]</a>
+                                        </div>
+                                    </div>
+                                    <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                                        <strong class="d-block text-gray-dark">
+                                            <h>
+                                                @SharedLocalizer["FarmPastures"]
+                                            </h>
                                         </strong>
                                         Some text
                                     </p>

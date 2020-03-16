@@ -288,6 +288,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value />
   </data>
+  <data name="Chart" xml:space="preserve">
+    <value />
+  </data>
   <data name="Charts" xml:space="preserve">
     <value />
   </data>
@@ -844,6 +847,9 @@
     <value />
   </data>
   <data name="SupplyRecommends" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Table" xml:space="preserve">
     <value />
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">

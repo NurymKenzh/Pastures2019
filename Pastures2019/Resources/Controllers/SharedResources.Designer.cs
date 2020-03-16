@@ -576,6 +576,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string Chart {
+            get {
+                return ResourceManager.GetString("Chart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Charts {
             get {
                 return ResourceManager.GetString("Charts", resourceCulture);
@@ -2244,6 +2253,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string SupplyRecommends {
             get {
                 return ResourceManager.GetString("SupplyRecommends", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Table {
+            get {
+                return ResourceManager.GetString("Table", resourceCulture);
             }
         }
         

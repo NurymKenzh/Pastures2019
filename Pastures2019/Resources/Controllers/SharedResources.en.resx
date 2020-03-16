@@ -288,6 +288,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Change your account settings</value>
   </data>
+  <data name="Chart" xml:space="preserve">
+    <value>Chart</value>
+  </data>
   <data name="Charts" xml:space="preserve">
     <value>Charts</value>
   </data>
@@ -845,6 +848,9 @@
   </data>
   <data name="SupplyRecommends" xml:space="preserve">
     <value>Seasonal Recommendations (Land Reserve)</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Table</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>

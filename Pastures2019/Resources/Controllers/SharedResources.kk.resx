@@ -288,6 +288,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Тіркелгі параметрлерін өзгертіңіз</value>
   </data>
+  <data name="Chart" xml:space="preserve">
+    <value>График</value>
+  </data>
   <data name="Charts" xml:space="preserve">
     <value>Графиктер</value>
   </data>
@@ -845,6 +848,9 @@
   </data>
   <data name="SupplyRecommends" xml:space="preserve">
     <value>Маусымдық ұсыныстар (қорық)</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Кесте</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} кемінде {2} және максимум {1} таңбадан тұруы керек.</value>

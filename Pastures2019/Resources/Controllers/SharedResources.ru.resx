@@ -288,6 +288,9 @@
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Изменить настройки вашего аккаунта</value>
   </data>
+  <data name="Chart" xml:space="preserve">
+    <value>График</value>
+  </data>
   <data name="Charts" xml:space="preserve">
     <value>Графики</value>
   </data>
@@ -845,6 +848,9 @@
   </data>
   <data name="SupplyRecommends" xml:space="preserve">
     <value>Рекомендации по сезонам (Земли запаса)</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Таблица</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>

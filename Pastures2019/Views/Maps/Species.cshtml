@@ -134,11 +134,11 @@
                         <input id="InfoSpeciesBtn" class="btn btn-warning btn-block mt-3" type="button" value="@SharedLocalizer["Information"]" onclick="InfoCATO()" />
                     </form>
                 </div>
-                <div class="modal-white table-responsive-sm" style="display: none" id="InfoSpeciesCont">
+                <div class="table-responsive-sm" style="display: none" id="InfoSpeciesCont">
                     <table class="table table-striped table-hover table-sm small">
                         <tbody>
                             <tr>
-                                <th class="modal-white" scope="row" id="infoOtdel">@SharedLocalizer["CattleGoals"]</th>
+                                <th scope="row" id="infoOtdel">@SharedLocalizer["CattleGoals"]</th>
                                 <td class="font-italic" colspan="2" id="valueCattleGoals"></td>
                             </tr>
                             <tr>
@@ -174,11 +174,11 @@
                     <table class="table table-info table-sm small" id="table_info_species">
                     </table>
                 </div>
-                <div class="modal-white table-responsive-sm" style="display: none" id="InfoBreadCont">
+                <div class="table-responsive-sm" style="display: none" id="InfoBreadCont">
                     <table class="table table-hover table-sm small" id="table_info_breed">
                     </table>
                 </div>
-                <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
+                <div class="table-responsive-sm" style="display: none" id="InfoMap">
                     <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <tbody>
                             <tr>
@@ -852,7 +852,7 @@
     var InfoMapModal;
     $(document).ready(function () {
         InfoMapModal = new jBox('Modal', {
-            id: 'modal-white',
+            id: 'modal-info',
             maxWidth: 500,
             maxHeight: 400,
             zIndex: 'auto',

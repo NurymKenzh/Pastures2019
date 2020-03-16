@@ -175,7 +175,7 @@
                     </table>
                     <input class="btn btn-warning btn-block mt-3" type="button" value="@SharedLocalizer["Find"]" onclick="FindPastures()" />
                 </div>
-                <div class="modal-white table-responsive-sm" style="display: none" id="InfoMap">
+                <div class="table-responsive-sm" style="display: none" id="InfoMap">
                     <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <thead>
                             <tr>
@@ -831,7 +831,7 @@
     var InfoMapModal;
     $(document).ready(function () {
         InfoMapModal = new jBox('Modal', {
-            id: 'modal-white',
+            id: 'modal-info',
             maxWidth: 500,
             maxHeight: 400,
             adjustTracker: 'scroll',

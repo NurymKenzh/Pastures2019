@@ -301,6 +301,10 @@
                                 <td class="font-italic" colspan="2" id="valueRecomCattles"></td>
                             </tr>
                             <tr>
+                                <th scope="row" id="infoDate">@SharedLocalizer["Date"]</th>
+                                <td class="font-italic" colspan="2" id="valueDate"></td>
+                            </tr>
+                            <tr>
                                 <th scope="row" id="infomin">@SharedLocalizer["minimum"]</th>
                                 <td class="font-italic" colspan="2" id="valuemin"></td>
                             </tr>
@@ -1287,6 +1291,7 @@
                                 $('#valueKorm_z').text(features[0].get('korm_z'));
                                 $('#valueRecommendationForUse').text(dataDB.pasturepol.recommend);
                                 $('#valueRecomCattles').text(dataDB.pasturepol.recomcatt);
+                                $('#valueDate').text($('#MapTitleLong').text());
                                 $('#valuemin').text(dataDB.analytic.min);
                                 $('#valuemax').text(dataDB.analytic.max);
                                 $('#valuemedian').text(dataDB.analytic.median);

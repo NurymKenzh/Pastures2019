@@ -10,7 +10,7 @@
 
 <input id="objectid" type="hidden" value="@ViewBag.objectid" />
 
-<section class="jumbotron text-center p-2">
+<section class="jumbotron text-center p-3">
     <div class="container-fluid">
         <h3 id="valueAllocationNumber"></h3>
         <h5 class="card-title" id="valueOtdel"></h5>
@@ -94,7 +94,7 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-chart2" role="tabpanel" aria-labelledby="nav-chart2-tab">
-                    <h5 class="mb-3">@SharedLocalizer["TimeSequence"]</h5>
+                    <h5 class="font-weight-light">@SharedLocalizer["TimeSequence"]</h5>
                     <canvas class="my-4 w-100 chartjs-render-monitor" id="chart2Canvas" width="600" height="400"></canvas>
                 </div>
                 <div class="tab-pane fade" id="nav-chart2table" role="tabpanel" aria-labelledby="nav-chart2table-tab">
@@ -105,92 +105,92 @@
     </div>
     <hr class="my-4 border-info">
     @*<div class="row align-items-end">
-        <div class="col-md-3 order-md-2 mb-4">
-            <div class="card border-dark">
-                <h5 class="card-header text-muted">Featured</h5>
-                <div class="card-body p-2">
-                    <form>
-                        <div class="form-group m-0">
-                            <label for="sourceproduct1">@SharedLocalizer["Satellite"]</label>
-                            <select class="form-control form-control-sm" id="sourceproduct1">
-                                <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
-                                <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
-                            </select>
-                            <label for="dataset1">@SharedLocalizer["Dataset"]</label>
-                            <select class="form-control form-control-sm" id="dataset1">
-                                <option value="NDVI">NDVI</option>
-                                <option value="Anomaly">@SharedLocalizer["Anomaly"]</option>
-                            </select>
-                            <label for="yearstart1">Starting Years</label>
-                            <select class="form-control form-control-sm" id="yearstart1">
-                                @for (int y = 2000; y <= DateTime.Today.Year; y++)
-                                {
-                                    if (y == DateTime.Today.Year)
+            <div class="col-md-3 order-md-2 mb-4">
+                <div class="card border-dark">
+                    <h5 class="card-header text-muted">Featured</h5>
+                    <div class="card-body p-2">
+                        <form>
+                            <div class="form-group m-0">
+                                <label for="sourceproduct1">@SharedLocalizer["Satellite"]</label>
+                                <select class="form-control form-control-sm" id="sourceproduct1">
+                                    <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
+                                    <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
+                                </select>
+                                <label for="dataset1">@SharedLocalizer["Dataset"]</label>
+                                <select class="form-control form-control-sm" id="dataset1">
+                                    <option value="NDVI">NDVI</option>
+                                    <option value="Anomaly">@SharedLocalizer["Anomaly"]</option>
+                                </select>
+                                <label for="yearstart1">Starting Years</label>
+                                <select class="form-control form-control-sm" id="yearstart1">
+                                    @for (int y = 2000; y <= DateTime.Today.Year; y++)
                                     {
-                                        <option value="@y" selected>@y.ToString()</option>
+                                        if (y == DateTime.Today.Year)
+                                        {
+                                            <option value="@y" selected>@y.ToString()</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@y">@y.ToString()</option>
+                                        }
                                     }
-                                    else
+                                </select>
+                                <label for="yearstart1">Finishing Years</label>
+                                <select class="form-control form-control-sm" id="yearfinish1">
+                                    @for (int y = 2000; y <= DateTime.Today.Year; y++)
                                     {
-                                        <option value="@y">@y.ToString()</option>
+                                        if (y == DateTime.Today.Year)
+                                        {
+                                            <option value="@y" selected>@y.ToString()</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@y">@y.ToString()</option>
+                                        }
                                     }
-                                }
-                            </select>
-                            <label for="yearstart1">Finishing Years</label>
-                            <select class="form-control form-control-sm" id="yearfinish1">
-                                @for (int y = 2000; y <= DateTime.Today.Year; y++)
-                                {
-                                    if (y == DateTime.Today.Year)
-                                    {
-                                        <option value="@y" selected>@y.ToString()</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@y">@y.ToString()</option>
-                                    }
-                                }
-                            </select>
-                            <input type="button" class="btn btn-primary btn-sm btn-block mt-3" onclick="Chart1()" value="@SharedLocalizer["Refresh"]" />
-                        </div>
-                    </form>
+                                </select>
+                                <input type="button" class="btn btn-primary btn-sm btn-block mt-3" onclick="Chart1()" value="@SharedLocalizer["Refresh"]" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 order-md-1">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tabchart1" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-chart1-tab" data-toggle="tab" href="#nav-chart1" role="tab" aria-controls="nav-chart1" aria-selected="true">Chart</a>
+                        <a class="nav-item nav-link" id="nav-chart1table-tab" data-toggle="tab" href="#nav-chart1table" role="tab" aria-controls="nav-chart1table" aria-selected="false">Table</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-chart1" role="tabpanel" aria-labelledby="nav-chart1-tab">
+                        <h5 class="mb-3">Cumulative Time Series</h5>
+                        <canvas class="my-4 w-100 chartjs-render-monitor" id="chart1Canvas" width="600" height="400"></canvas>
+                    </div>
+                    <div class="tab-pane fade" id="nav-chart1table" role="tabpanel" aria-labelledby="nav-chart1table-tab">
+                        <table id="table1" class="table">
+                            <tr>
+                                <th>
+                                    @SharedLocalizer["Date"]
+                                </th>
+                                <th>
+                                    @SharedLocalizer["minimum"]
+                                </th>
+                                <th>
+                                    @SharedLocalizer["maximum"]
+                                </th>
+                                <th>
+                                    @SharedLocalizer["median"]
+                                </th>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-9 order-md-1">
-            <nav>
-                <div class="nav nav-tabs" id="nav-tabchart1" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-chart1-tab" data-toggle="tab" href="#nav-chart1" role="tab" aria-controls="nav-chart1" aria-selected="true">Chart</a>
-                    <a class="nav-item nav-link" id="nav-chart1table-tab" data-toggle="tab" href="#nav-chart1table" role="tab" aria-controls="nav-chart1table" aria-selected="false">Table</a>
-                </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-chart1" role="tabpanel" aria-labelledby="nav-chart1-tab">
-                    <h5 class="mb-3">Cumulative Time Series</h5>
-                    <canvas class="my-4 w-100 chartjs-render-monitor" id="chart1Canvas" width="600" height="400"></canvas>
-                </div>
-                <div class="tab-pane fade" id="nav-chart1table" role="tabpanel" aria-labelledby="nav-chart1table-tab">
-                    <table id="table1" class="table">
-                        <tr>
-                            <th>
-                                @SharedLocalizer["Date"]
-                            </th>
-                            <th>
-                                @SharedLocalizer["minimum"]
-                            </th>
-                            <th>
-                                @SharedLocalizer["maximum"]
-                            </th>
-                            <th>
-                                @SharedLocalizer["median"]
-                            </th>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr class="my-4 border-info">*@
-    <div class="row align-items-end">
-        <div class="col-md-3 order-md-2 mb-4">
+        <hr class="my-4 border-info">*@
+    <div class="row align-items-start">
+        <div class="col-md-3 order-md-2 mb-4 mt-5">
             <div class="card border-dark">
                 <h5 class="card-header text-muted">@SharedLocalizer["Parameters"]:</h5>
                 <div class="card-body p-2">
@@ -231,9 +231,9 @@
                             </select>
                             <label for="type3">@SharedLocalizer["Type"]</label>
                             <select class="form-control form-control-sm" id="type3">
+                                <option value="median">@SharedLocalizer["median"]</option>
                                 <option value="minimum">@SharedLocalizer["minimum"]</option>
                                 <option value="maximum">@SharedLocalizer["maximum"]</option>
-                                <option value="median">@SharedLocalizer["median"]</option>
                             </select>
                             <input type="button" class="btn btn-primary btn-sm btn-block mt-3" onclick="Chart3()" value="@SharedLocalizer["Refresh"]" />
                         </div>
@@ -250,9 +250,9 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-chart3" role="tabpanel" aria-labelledby="nav-chart3-tab">
-                    <h5 class="mb-3">@SharedLocalizer["HistoricalTimeSeries"]</h5>
-                    <canvas class="my-4 w-100 chartjs-render-monitor" id="chart31Canvas" width="600" height="400"></canvas>
-                    <canvas class="my-4 w-100 chartjs-render-monitor" id="chart32Canvas" width="600" height="400"></canvas>
+                    <h5 class="font-weight-light">@SharedLocalizer["HistoricalTimeSeries"]</h5>
+                    <canvas class="my-4 w-100 chartjs-render-monitor" id="chart31Canvas" width="600" height="200"></canvas>
+                    <canvas class="my-4 w-100 chartjs-render-monitor" id="chart32Canvas" width="600" height="200"></canvas>
                 </div>
                 <div class="tab-pane fade" id="nav-chart3table" role="tabpanel" aria-labelledby="nav-chart3table-tab">
                     <table id="table3" class="table"></table>
@@ -260,16 +260,13 @@
             </div>
         </div>
     </div>
+    <hr class="my-4 border-info">
 </div>
 
 
 <script>
     var chart1 = null;
     function Chart1() {
-        $('#valueAllocationNumber').text('@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ');
-        $('#valueOtdel').text('@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ');
-        $('#valuePClass').text('@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ');
-        $('#valueGroup').html('@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + ' (' + '<em>@Html.Raw(ViewBag.pasturepol.group_lat)</em>' + ')');
         $.ajax({
             url: '@Url.Action("GetChart1Data")',
             data: {
@@ -349,6 +346,10 @@
 
     var chart2 = null;
     function Chart2() {
+        $('#valueAllocationNumber').text('@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ');
+        $('#valueOtdel').text('@Html.Raw(SharedLocalizer["Otdel"]): @Html.Raw(ViewBag.pasturepol.otdel)' + '. ');
+        $('#valuePClass').text('@Html.Raw(SharedLocalizer["PClass"]): @Html.Raw(ViewBag.pasturepol.ptype)' + '. ');
+        $('#valueGroup').html('@Html.Raw(SharedLocalizer["Group"]): @Html.Raw(ViewBag.pasturepol.group)' + ' (' + '<em>@Html.Raw(ViewBag.pasturepol.group_lat)</em>' + ')');
         var chart2years = [];
         $("input:checkbox[name=chart2years]:checked").each(function(){
             chart2years.push($(this).val());
@@ -498,8 +499,6 @@
             },
             type: 'POST',
             success: function (data) {
-                var color = random_rgba(),
-                    color_avg = random_rgba();
                 var chart31Data = {};
                 if ($('#type3').val() == 'minimum') {
                     chart31Data = {
@@ -508,8 +507,7 @@
                             {
                                 type: 'line',
                                 label: '@Html.Raw(SharedLocalizer["minimum"]) (@Html.Raw(SharedLocalizer["average"]))',
-                                backgroundColor: color_avg,
-                                borderColor: color_avg,
+                                borderColor: 'rgba(0, 0, 0, 1)',
                                 borderWidth: 2,
                                 data: data.years_avg_min,
                                 fill: false
@@ -517,9 +515,8 @@
                             {
                                 type: 'bar',
                                 label: '@Html.Raw(SharedLocalizer["minimum"])',
-                                backgroundColor: color,
-                                borderColor: 'rgba(215, 215, 215, 1)',
-                                borderWidth: 1,
+                                backgroundColor: 'rgba(255, 217, 0, 1)',
+                                borderColor: 'rgba(255, 217, 0, 1)',
                                 data: data.years_min
                             }
                         ]
@@ -532,8 +529,7 @@
                             {
                                 type: 'line',
                                 label: '@Html.Raw(SharedLocalizer["maximum"]) (@Html.Raw(SharedLocalizer["average"]))',
-                                backgroundColor: color_avg,
-                                borderColor: color_avg,
+                                borderColor: 'rgba(0, 0, 0, 1)',
                                 borderWidth: 2,
                                 data: data.years_avg_max,
                                 fill: false
@@ -541,9 +537,8 @@
                             {
                                 type: 'bar',
                                 label: '@Html.Raw(SharedLocalizer["maximum"])',
-                                backgroundColor: color,
-                                borderColor: 'rgba(215, 215, 215, 1)',
-                                borderWidth: 1,
+                                backgroundColor: 'rgba(49, 119, 0, 1)',
+                                borderColor: 'rgba(49, 119, 0, 1)',
                                 data: data.years_max
                             }
                         ]
@@ -556,8 +551,7 @@
                             {
                                 type: 'line',
                                 label: '@Html.Raw(SharedLocalizer["median"]) (@Html.Raw(SharedLocalizer["average"]))',
-                                backgroundColor: color_avg,
-                                borderColor: color_avg,
+                                borderColor: 'rgba(0, 0, 0, 1)',
                                 borderWidth: 2,
                                 data: data.years_avg_median,
                                 fill: false
@@ -565,9 +559,8 @@
                             {
                                 type: 'bar',
                                 label: '@Html.Raw(SharedLocalizer["median"])',
-                                backgroundColor: color,
-                                borderColor: 'rgba(215, 215, 215, 1)',
-                                borderWidth: 1,
+                                backgroundColor: 'rgba(100, 170, 43, 1)',
+                                borderColor: 'rgba(100, 170, 43, 1)',
                                 data: data.years_median
                             }]
                     };
@@ -581,6 +574,18 @@
                     data: chart31Data,
                     options: {
                         responsive: true,
+                        elements: {
+                            point: {
+                                radius: 0
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                fontColor: 'rgb(26, 26, 26)'
+                            }
+                        },
                         scales: {
                             xAxes: [{
                                 stacked: true,
@@ -597,13 +602,21 @@
                                 }
                             }],
                             yAxes: [{
-                                stacked: true
+                                stacked: true,
+                                ticks: {
+                                    max: 0.8,
+                                    min: 0,
+                                    stepSize: 0.1
+                                }
                             }]
                         },
                         title: {
                             display: true,
-                            text: [$('#sourceproduct3 option:selected').text() + ', NDVI. ',
-                            '@Html.Raw(SharedLocalizer["AllocationNumber"]): @Html.Raw(ViewBag.pasturepol.group_id)' + '. ']
+                            fontSize: 14,
+                            fontFamily: 'Arial',
+                            fontColor: '#1A1A1A',
+                            fontStyle: 'bold',                            
+                            text: [$('#sourceproduct3 option:selected').text() + ', NDVI. ']
                         },
                         tooltips: {
                             callbacks: {
@@ -714,7 +727,18 @@
                         },
                         title: {
                             display: true,
+                            fontSize: 14,
+                            fontFamily: 'Arial',
+                            fontColor: '#1A1A1A',
+                            fontStyle: 'bold', 
                             text: [$('#sourceproduct3 option:selected').text() + ', @Html.Raw(SharedLocalizer["Anomaly"]). ']
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                fontColor: 'rgb(26, 26, 26)'
+                            }
                         },
                         tooltips: {
                             callbacks: {

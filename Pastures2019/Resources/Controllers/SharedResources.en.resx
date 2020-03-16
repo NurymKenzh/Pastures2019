@@ -162,6 +162,15 @@
   <data name="AverageFeedStockc" xml:space="preserve">
     <value>Average feed stock, c</value>
   </data>
+  <data name="AveragePastureProductivityAutumn" xml:space="preserve">
+    <value>Average pasture productivity (autumn), t / ha</value>
+  </data>
+  <data name="AveragePastureProductivitySpring" xml:space="preserve">
+    <value>Average pasture productivity (spring), t / ha</value>
+  </data>
+  <data name="AveragePastureProductivitySummer" xml:space="preserve">
+    <value>Average pasture productivity (summer), t / ha</value>
+  </data>
   <data name="BackgroundLayers" xml:space="preserve">
     <value>Background Layers</value>
   </data>
@@ -287,6 +296,9 @@
   </data>
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Change your account settings</value>
+  </data>
+  <data name="Chart" xml:space="preserve">
+    <value>Chart</value>
   </data>
   <data name="Charts" xml:space="preserve">
     <value>Charts</value>
@@ -414,6 +426,24 @@
   <data name="ExtractStarted" xml:space="preserve">
     <value>Extract started</value>
   </data>
+  <data name="Farm" xml:space="preserve">
+    <value>Farm</value>
+  </data>
+  <data name="FarmPasture" xml:space="preserve">
+    <value>Farm Pasture</value>
+  </data>
+  <data name="FarmPastures" xml:space="preserve">
+    <value>Farm Pastures</value>
+  </data>
+  <data name="FeedStockOfUsedPasturesAutumn" xml:space="preserve">
+    <value>Feed stock of used pastures (autumn), c</value>
+  </data>
+  <data name="FeedStockOfUsedPasturesSpring" xml:space="preserve">
+    <value>Feed stock of used pastures (spring), c</value>
+  </data>
+  <data name="FeedStockOfUsedPasturesSummer" xml:space="preserve">
+    <value>Feed stock of used pastures (summer), c</value>
+  </data>
   <data name="Fertility" xml:space="preserve">
     <value>Fertility</value>
   </data>
@@ -431,6 +461,9 @@
   </data>
   <data name="Find" xml:space="preserve">
     <value>Find</value>
+  </data>
+  <data name="FloodingEatSourcesWells" xml:space="preserve">
+    <value>Flooding (eat sources, wells)</value>
   </data>
   <data name="FodderResources" xml:space="preserve">
     <value>Feed resources</value>
@@ -513,6 +546,9 @@
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Invalid login attempt.</value>
   </data>
+  <data name="LandAreaAccordingToLandUseAct" xml:space="preserve">
+    <value>Land area according to land use act</value>
+  </data>
   <data name="LandStructure" xml:space="preserve">
     <value>Land structure</value>
   </data>
@@ -527,6 +563,15 @@
   </data>
   <data name="Legend" xml:space="preserve">
     <value>Legend</value>
+  </data>
+  <data name="LoadFall" xml:space="preserve">
+    <value>Load (fall), goals</value>
+  </data>
+  <data name="LoadSpring" xml:space="preserve">
+    <value>Load (spring), goals</value>
+  </data>
+  <data name="LoadSummer" xml:space="preserve">
+    <value>Load (summer), goals</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
@@ -615,6 +660,9 @@
   <data name="NameRU" xml:space="preserve">
     <value>Name (Russian)</value>
   </data>
+  <data name="NaturalArea" xml:space="preserve">
+    <value>Natural area</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>
@@ -641,6 +689,15 @@
   </data>
   <data name="Number" xml:space="preserve">
     <value>Number</value>
+  </data>
+  <data name="NumberOfGrazingDaysFall" xml:space="preserve">
+    <value>Number of grazing days (fall)</value>
+  </data>
+  <data name="NumberOfGrazingDaysSpring" xml:space="preserve">
+    <value>Number of grazing days (spring)</value>
+  </data>
+  <data name="NumberOfGrazingDaysSummer" xml:space="preserve">
+    <value>Number of grazing days (summer)</value>
   </data>
   <data name="OnPastureBackground" xml:space="preserve">
     <value>On pasture background</value>
@@ -702,6 +759,12 @@
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="ProjectiveCoverageFrom" xml:space="preserve">
+    <value>Projective coverage (from),%</value>
+  </data>
+  <data name="ProjectiveCoverageTo" xml:space="preserve">
+    <value>Projective coverage (up to),%</value>
+  </data>
   <data name="PSubType" xml:space="preserve">
     <value>Pasture subtype</value>
   </data>
@@ -744,6 +807,9 @@
   <data name="Recommendations" xml:space="preserve">
     <value>Recommendations</value>
   </data>
+  <data name="RecommendationsForImprovingThisDegradedArea" xml:space="preserve">
+    <value>Recommendations for improving this degraded area</value>
+  </data>
   <data name="Recommends" xml:space="preserve">
     <value>Seasonal Recommendations</value>
   </data>
@@ -761,6 +827,15 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Remember me?</value>
+  </data>
+  <data name="RequiredAdditionalAreaIfNecessaryPasturesAutumn" xml:space="preserve">
+    <value>The required additional area (if necessary) of pastures (autumn), ha.</value>
+  </data>
+  <data name="RequiredAdditionalAreaIfNecessaryPasturesSpring" xml:space="preserve">
+    <value>Required additional area (if necessary) pastures (spring), ha.</value>
+  </data>
+  <data name="RequiredAdditionalAreaIfNecessaryPasturesSummer" xml:space="preserve">
+    <value>Required additional area (if necessary) pastures (summer), ha.</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Reset</value>
@@ -804,6 +879,15 @@
   <data name="SheepGoals" xml:space="preserve">
     <value>Sheep, goals</value>
   </data>
+  <data name="ShortageSurplusOfPastureFeedAutumn" xml:space="preserve">
+    <value>Deficiency (surplus) of pasture feed (autumn), c.</value>
+  </data>
+  <data name="ShortageSurplusOfPastureFeedSpring" xml:space="preserve">
+    <value>Shortage (surplus) of pasture feed (spring), c.</value>
+  </data>
+  <data name="ShortageSurplusOfPastureFeedSummer" xml:space="preserve">
+    <value>Shortage (surplus) of pasture feed (summer), c.</value>
+  </data>
   <data name="SlaughterYield" xml:space="preserve">
     <value>Killer exit</value>
   </data>
@@ -846,8 +930,20 @@
   <data name="SupplyRecommends" xml:space="preserve">
     <value>Seasonal Recommendations (Land Reserve)</value>
   </data>
+  <data name="Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>
+  </data>
+  <data name="TheCostPer1HeadForTheBillingPeriodFall" xml:space="preserve">
+    <value>Cost per 1 head for the billing period (fall), ha.</value>
+  </data>
+  <data name="TheCostPer1HeadForTheBillingPeriodSpring" xml:space="preserve">
+    <value>The cost per 1 head for the billing period (spring), ha.</value>
+  </data>
+  <data name="TheCostPer1HeadForTheBillingPeriodSummer" xml:space="preserve">
+    <value>The cost per 1 head for the billing period (summer), ha.</value>
   </data>
   <data name="TheFieldIsNotAValidEmailAddress" xml:space="preserve">
     <value>The {0} field is not a valid e-mail address.</value>
@@ -855,14 +951,35 @@
   <data name="TheFieldIsRequired" xml:space="preserve">
     <value>The {0} field is required.</value>
   </data>
+  <data name="TheNeedForPastureFeedAutumn" xml:space="preserve">
+    <value>The need for pasture feed (autumn), c</value>
+  </data>
+  <data name="TheNeedForPastureFeedSpring" xml:space="preserve">
+    <value>The need for pasture feed (spring), c</value>
+  </data>
+  <data name="TheNeedForPastureFeedSummer" xml:space="preserve">
+    <value>The need for pasture feed (summer), c</value>
+  </data>
   <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>The new password and confirmation password do not match.</value>
+  </data>
+  <data name="TheNumberOfGrazedAnimalsGoals" xml:space="preserve">
+    <value>The number of grazed animals, goals</value>
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>
   </data>
+  <data name="ThePresenceOfDegradedSitesIfAvailable" xml:space="preserve">
+    <value>The presence of degraded sites (if available)</value>
+  </data>
+  <data name="ThePresenceOfEconomicallySignificantContours" xml:space="preserve">
+    <value>The presence of economically significant contours</value>
+  </data>
   <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
     <value>The rate of pasture load, srvc. Goal. / 100 ha</value>
+  </data>
+  <data name="tid" xml:space="preserve">
+    <value>Cartographic Object Id</value>
   </data>
   <data name="ToDegradedPastures" xml:space="preserve">
     <value>To degraded pastures</value>
@@ -875,6 +992,9 @@
   </data>
   <data name="TotalGoals" xml:space="preserve">
     <value>Total Goals</value>
+  </data>
+  <data name="TypeOfGrazedAnimalsBreed" xml:space="preserve">
+    <value>Type of grazed animals (breed)</value>
   </data>
   <data name="UnwateredTerritory" xml:space="preserve">
     <value>Unwatered territory</value>

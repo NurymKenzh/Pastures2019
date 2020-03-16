@@ -195,10 +195,10 @@
                 <div class="modal-white table-responsive-sm" style="display: none" id="InfoKatoContent">
                     <ul class="nav nav-pills" id="InfoKatoTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active text-white" id="pills-chart-tab" data-toggle="pill" href="#pills-chart" role="tab" aria-controls="pills-chart" aria-selected="true">Chart</a>
+                            <a class="nav-link active text-white" id="pills-chart-tab" data-toggle="pill" href="#pills-chart" role="tab" aria-controls="pills-chart" aria-selected="true">@SharedLocalizer["Chart"]</a>
                         </li>
                         <li class="nav-item text-white">
-                            <a class="nav-link text-white" id="pills-table-tab" data-toggle="pill" href="#pills-table" role="tab" aria-controls="pills-table" aria-selected="false">Table</a>
+                            <a class="nav-link text-white" id="pills-table-tab" data-toggle="pill" href="#pills-table" role="tab" aria-controls="pills-table" aria-selected="false">@SharedLocalizer["Table"]</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="InfoKatoTabContent">
@@ -1342,6 +1342,13 @@
     }
     function ChartCATO(pasturepols) {
         ctx = document.getElementById('chart').getContext('2d');
+        var title = $('#cato1 option:selected').text();
+        if ($('#cato2 option:selected').text() != '') {
+            title += ', ' + $('#cato2 option:selected').text()
+        }
+        if ($('#cato3 option:selected').text() != '') {
+            title += ', ' + $('#cato3 option:selected').text()
+        }
         var config = {
             type: 'pie',
             data: {
@@ -1378,6 +1385,10 @@
                             return data.labels[tooltipItem[0].index];
                         }
                     }
+                },
+                title: {
+                    display: true,
+                    text:  title
                 }
             }
         };
@@ -1393,13 +1404,20 @@
         chart = new Chart(ctx, config);
     }
     function TableCATO(pasturepols) {
-        var content = "<table table-striped table-sm>"
+        var title = $('#cato1 option:selected').text();
+        if ($('#cato2 option:selected').text() != '') {
+            title += ', ' + $('#cato2 option:selected').text()
+        }
+        if ($('#cato3 option:selected').text() != '') {
+            title += ', ' + $('#cato3 option:selected').text()
+        }
+        $('#table_info_ptype tr').remove();
+        var content = '<tr><th colspan="2">' + title + '</th></tr>';
         for (var i = 0; i < pasturepols.length; ++i) {            
             content += '<tr>'+'<td>' + pasturepols[i].percent.toFixed(2) + "%"+'\t'+'</td>'
             + '<td>' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text() + '</td>'+ '</tr>';
-            console.log(pasturepols[i].percent.toFixed(2) + '\t' + $("#find_ptype option[value=" + pasturepols[i].class_id + "]").text());
         }
-        content += "</table>"
+        content += ""
         $('#table_info_ptype').append(content);
     }
     //add button to generate PDF

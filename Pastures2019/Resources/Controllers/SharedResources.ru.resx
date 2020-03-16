@@ -162,6 +162,15 @@
   <data name="AverageFeedStockc" xml:space="preserve">
     <value>Средний кормозапас, ц</value>
   </data>
+  <data name="AveragePastureProductivityAutumn" xml:space="preserve">
+    <value>Средняя урожайность пастбищ (осень), ц/га</value>
+  </data>
+  <data name="AveragePastureProductivitySpring" xml:space="preserve">
+    <value>Средняя урожайность пастбищ (весна), ц/га</value>
+  </data>
+  <data name="AveragePastureProductivitySummer" xml:space="preserve">
+    <value>Средняя урожайность пастбищ (лето), ц/га</value>
+  </data>
   <data name="BackgroundLayers" xml:space="preserve">
     <value>Фоновые слои</value>
   </data>
@@ -287,6 +296,9 @@
   </data>
   <data name="ChangeYourAccountSettings" xml:space="preserve">
     <value>Изменить настройки вашего аккаунта</value>
+  </data>
+  <data name="Chart" xml:space="preserve">
+    <value>График</value>
   </data>
   <data name="Charts" xml:space="preserve">
     <value>Графики</value>
@@ -414,6 +426,24 @@
   <data name="ExtractStarted" xml:space="preserve">
     <value>Извлечение запущено</value>
   </data>
+  <data name="Farm" xml:space="preserve">
+    <value>Хозяйство</value>
+  </data>
+  <data name="FarmPasture" xml:space="preserve">
+    <value>Пастбище хозяйств</value>
+  </data>
+  <data name="FarmPastures" xml:space="preserve">
+    <value>Пастбища хозяйств</value>
+  </data>
+  <data name="FeedStockOfUsedPasturesAutumn" xml:space="preserve">
+    <value>Кормозапас используемых пастбищ (осень), ц</value>
+  </data>
+  <data name="FeedStockOfUsedPasturesSpring" xml:space="preserve">
+    <value>Кормозапас используемых пастбищ (весна), ц</value>
+  </data>
+  <data name="FeedStockOfUsedPasturesSummer" xml:space="preserve">
+    <value>Кормозапас используемых пастбищ (лето), ц</value>
+  </data>
   <data name="Fertility" xml:space="preserve">
     <value>Плодовитость</value>
   </data>
@@ -431,6 +461,9 @@
   </data>
   <data name="Find" xml:space="preserve">
     <value>Найти</value>
+  </data>
+  <data name="FloodingEatSourcesWells" xml:space="preserve">
+    <value>Обводнение (ест. источники, колодцы)</value>
   </data>
   <data name="FodderResources" xml:space="preserve">
     <value>Кормовые ресурсы</value>
@@ -513,6 +546,9 @@
   <data name="InvalidLoginAttempt" xml:space="preserve">
     <value>Неверная попытка входа.</value>
   </data>
+  <data name="LandAreaAccordingToLandUseAct" xml:space="preserve">
+    <value>Площадь пастбищ по акту землепользования</value>
+  </data>
   <data name="LandStructure" xml:space="preserve">
     <value>Структура земель</value>
   </data>
@@ -527,6 +563,15 @@
   </data>
   <data name="Legend" xml:space="preserve">
     <value>Легенда</value>
+  </data>
+  <data name="LoadFall" xml:space="preserve">
+    <value>Нагрузка (осень), голов</value>
+  </data>
+  <data name="LoadSpring" xml:space="preserve">
+    <value>Нагрузка (весна), голов</value>
+  </data>
+  <data name="LoadSummer" xml:space="preserve">
+    <value>Нагрузка (лето), голов</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Войти</value>
@@ -615,6 +660,9 @@
   <data name="NameRU" xml:space="preserve">
     <value>Название (русский)</value>
   </data>
+  <data name="NaturalArea" xml:space="preserve">
+    <value>Природная зона</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>
   </data>
@@ -641,6 +689,15 @@
   </data>
   <data name="Number" xml:space="preserve">
     <value>Номер</value>
+  </data>
+  <data name="NumberOfGrazingDaysFall" xml:space="preserve">
+    <value>Количество выпасных дней (осень)</value>
+  </data>
+  <data name="NumberOfGrazingDaysSpring" xml:space="preserve">
+    <value>Количество выпасных дней (весна)</value>
+  </data>
+  <data name="NumberOfGrazingDaysSummer" xml:space="preserve">
+    <value>Количество выпасных дней (лето)</value>
   </data>
   <data name="OnPastureBackground" xml:space="preserve">
     <value>На фоновые пастбища</value>
@@ -702,6 +759,12 @@
   <data name="Profile" xml:space="preserve">
     <value>Профиль</value>
   </data>
+  <data name="ProjectiveCoverageFrom" xml:space="preserve">
+    <value>Проективное покрытие (от), %</value>
+  </data>
+  <data name="ProjectiveCoverageTo" xml:space="preserve">
+    <value>Проективное покрытие (до), %</value>
+  </data>
   <data name="PSubType" xml:space="preserve">
     <value>Подтип пастбищ</value>
   </data>
@@ -744,6 +807,9 @@
   <data name="Recommendations" xml:space="preserve">
     <value>Рекомендации</value>
   </data>
+  <data name="RecommendationsForImprovingThisDegradedArea" xml:space="preserve">
+    <value>Рекомендации по улучшению данного деградированного участка</value>
+  </data>
   <data name="Recommends" xml:space="preserve">
     <value>Рекомендации по сезонам</value>
   </data>
@@ -761,6 +827,15 @@
   </data>
   <data name="RememberMe" xml:space="preserve">
     <value>Запомнить меня?</value>
+  </data>
+  <data name="RequiredAdditionalAreaIfNecessaryPasturesAutumn" xml:space="preserve">
+    <value>Требуемая дополнительная площадь (если необходимо) пастбищ (осень), га.</value>
+  </data>
+  <data name="RequiredAdditionalAreaIfNecessaryPasturesSpring" xml:space="preserve">
+    <value>Требуемая дополнительная площадь (если необходимо) пастбищ (весна), га.</value>
+  </data>
+  <data name="RequiredAdditionalAreaIfNecessaryPasturesSummer" xml:space="preserve">
+    <value>Требуемая дополнительная площадь (если необходимо) пастбищ (лето), га.</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Сбросить</value>
@@ -804,6 +879,15 @@
   <data name="SheepGoals" xml:space="preserve">
     <value>Овцы, голов</value>
   </data>
+  <data name="ShortageSurplusOfPastureFeedAutumn" xml:space="preserve">
+    <value>Дефицит (профицит) пастбищного корма (осень), ц.</value>
+  </data>
+  <data name="ShortageSurplusOfPastureFeedSpring" xml:space="preserve">
+    <value>Дефицит (профицит) пастбищного корма (весна), ц.</value>
+  </data>
+  <data name="ShortageSurplusOfPastureFeedSummer" xml:space="preserve">
+    <value>Дефицит (профицит) пастбищного корма (лето), ц.</value>
+  </data>
   <data name="SlaughterYield" xml:space="preserve">
     <value>Убойный выход</value>
   </data>
@@ -846,8 +930,20 @@
   <data name="SupplyRecommends" xml:space="preserve">
     <value>Рекомендации по сезонам (Земли запаса)</value>
   </data>
+  <data name="Table" xml:space="preserve">
+    <value>Таблица</value>
+  </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>
+  </data>
+  <data name="TheCostPer1HeadForTheBillingPeriodFall" xml:space="preserve">
+    <value>Скотоемкость на 1 голову за расчетный период (осень), га.</value>
+  </data>
+  <data name="TheCostPer1HeadForTheBillingPeriodSpring" xml:space="preserve">
+    <value>Скотоемкость на 1 голову за расчетный период (весна), га.</value>
+  </data>
+  <data name="TheCostPer1HeadForTheBillingPeriodSummer" xml:space="preserve">
+    <value>Скотоемкость на 1 голову за расчетный период (лето), га.</value>
   </data>
   <data name="TheFieldIsNotAValidEmailAddress" xml:space="preserve">
     <value>Поле {0} не является действительным адресом электронной почты.</value>
@@ -855,14 +951,35 @@
   <data name="TheFieldIsRequired" xml:space="preserve">
     <value>Поле {0} обязательно для заполнения.</value>
   </data>
+  <data name="TheNeedForPastureFeedAutumn" xml:space="preserve">
+    <value>Потребность в пастбищном корме (осень), ц</value>
+  </data>
+  <data name="TheNeedForPastureFeedSpring" xml:space="preserve">
+    <value>Потребность в пастбищном корме (весна), ц</value>
+  </data>
+  <data name="TheNeedForPastureFeedSummer" xml:space="preserve">
+    <value>Потребность в пастбищном корме (лето), ц</value>
+  </data>
   <data name="TheNewPasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Новый пароль и подтверждение пароля не совпадают.</value>
+  </data>
+  <data name="TheNumberOfGrazedAnimalsGoals" xml:space="preserve">
+    <value>Количество выпасаемых животных, голов</value>
   </data>
   <data name="ThePasswordAndConfirmationPasswordDoNotMatch" xml:space="preserve">
     <value>Пароль и подтверждение пароля не совпадают.</value>
   </data>
+  <data name="ThePresenceOfDegradedSitesIfAvailable" xml:space="preserve">
+    <value>Наличие деградированных участков (если есть в наличие)</value>
+  </data>
+  <data name="ThePresenceOfEconomicallySignificantContours" xml:space="preserve">
+    <value>Наличие хозяйственно-значимых контуров</value>
+  </data>
   <data name="TheRateOfPastureLoadsrvcGoal100ha" xml:space="preserve">
     <value>Норма пастбищной нагрузки, усл. гол. / 100 га</value>
+  </data>
+  <data name="tid" xml:space="preserve">
+    <value>Id картографического объекта</value>
   </data>
   <data name="ToDegradedPastures" xml:space="preserve">
     <value>На деградированные пастбища</value>
@@ -875,6 +992,9 @@
   </data>
   <data name="TotalGoals" xml:space="preserve">
     <value>Всего голов</value>
+  </data>
+  <data name="TypeOfGrazedAnimalsBreed" xml:space="preserve">
+    <value>Вид выпасаемых животных (порода)</value>
   </data>
   <data name="UnwateredTerritory" xml:space="preserve">
     <value>Не обводненная территория</value>

@@ -936,6 +936,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string EndYear {
+            get {
+                return ResourceManager.GetString("EndYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string EwesYield {
             get {
                 return ResourceManager.GetString("EwesYield", resourceCulture);
@@ -1263,6 +1272,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string HeightRU {
             get {
                 return ResourceManager.GetString("HeightRU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string HistoricalTimeSeries {
+            get {
+                return ResourceManager.GetString("HistoricalTimeSeries", resourceCulture);
             }
         }
         
@@ -1809,6 +1827,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string NumberOfMonths {
+            get {
+                return ResourceManager.GetString("NumberOfMonths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string OnPastureBackground {
             get {
                 return ResourceManager.GetString("OnPastureBackground", resourceCulture);
@@ -1839,6 +1866,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string Others {
             get {
                 return ResourceManager.GetString("Others", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Parameters {
+            get {
+                return ResourceManager.GetString("Parameters", resourceCulture);
             }
         }
         
@@ -2448,6 +2484,24 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string StartMonth {
+            get {
+                return ResourceManager.GetString("StartMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string StartYear {
+            get {
+                return ResourceManager.GetString("StartYear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Structure {
             get {
                 return ResourceManager.GetString("Structure", resourceCulture);
@@ -2655,6 +2709,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string TimeSequence {
+            get {
+                return ResourceManager.GetString("TimeSequence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string ToDegradedPastures {
             get {
                 return ResourceManager.GetString("ToDegradedPastures", resourceCulture);
@@ -2685,6 +2748,15 @@ namespace Pastures2019.Resources.Controllers {
         public static string TotalGoals {
             get {
                 return ResourceManager.GetString("TotalGoals", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
         

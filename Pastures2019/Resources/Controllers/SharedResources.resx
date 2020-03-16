@@ -408,6 +408,9 @@
   <data name="Email" xml:space="preserve">
     <value />
   </data>
+  <data name="EndYear" xml:space="preserve">
+    <value />
+  </data>
   <data name="EwesYield" xml:space="preserve">
     <value />
   </data>
@@ -517,6 +520,9 @@
     <value />
   </data>
   <data name="HeightRU" xml:space="preserve">
+    <value />
+  </data>
+  <data name="HistoricalTimeSeries" xml:space="preserve">
     <value />
   </data>
   <data name="Home" xml:space="preserve">
@@ -699,6 +705,9 @@
   <data name="NumberOfGrazingDaysSummer" xml:space="preserve">
     <value />
   </data>
+  <data name="NumberOfMonths" xml:space="preserve">
+    <value />
+  </data>
   <data name="OnPastureBackground" xml:space="preserve">
     <value />
   </data>
@@ -709,6 +718,9 @@
     <value />
   </data>
   <data name="Others" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Parameters" xml:space="preserve">
     <value />
   </data>
   <data name="Password" xml:space="preserve">
@@ -912,6 +924,12 @@
   <data name="Spring" xml:space="preserve">
     <value />
   </data>
+  <data name="StartMonth" xml:space="preserve">
+    <value />
+  </data>
+  <data name="StartYear" xml:space="preserve">
+    <value />
+  </data>
   <data name="Structure" xml:space="preserve">
     <value />
   </data>
@@ -981,6 +999,9 @@
   <data name="tid" xml:space="preserve">
     <value />
   </data>
+  <data name="TimeSequence" xml:space="preserve">
+    <value />
+  </data>
   <data name="ToDegradedPastures" xml:space="preserve">
     <value />
   </data>
@@ -991,6 +1012,9 @@
     <value />
   </data>
   <data name="TotalGoals" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Type" xml:space="preserve">
     <value />
   </data>
   <data name="TypeOfGrazedAnimalsBreed" xml:space="preserve">

@@ -408,6 +408,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="EndYear" xml:space="preserve">
+    <value>End year</value>
+  </data>
   <data name="EwesYield" xml:space="preserve">
     <value>Uterine milk</value>
   </data>
@@ -518,6 +521,9 @@
   </data>
   <data name="HeightRU" xml:space="preserve">
     <value>Height at the withers (Russian)</value>
+  </data>
+  <data name="HistoricalTimeSeries" xml:space="preserve">
+    <value>Historical time series</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
@@ -699,6 +705,9 @@
   <data name="NumberOfGrazingDaysSummer" xml:space="preserve">
     <value>Number of grazing days (summer)</value>
   </data>
+  <data name="NumberOfMonths" xml:space="preserve">
+    <value>Number of months</value>
+  </data>
   <data name="OnPastureBackground" xml:space="preserve">
     <value>On pasture background</value>
   </data>
@@ -710,6 +719,9 @@
   </data>
   <data name="Others" xml:space="preserve">
     <value>Others</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Parameters</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -912,6 +924,12 @@
   <data name="Spring" xml:space="preserve">
     <value>Spring</value>
   </data>
+  <data name="StartMonth" xml:space="preserve">
+    <value>Start month</value>
+  </data>
+  <data name="StartYear" xml:space="preserve">
+    <value>Start year</value>
+  </data>
   <data name="Structure" xml:space="preserve">
     <value>Structure</value>
   </data>
@@ -981,6 +999,9 @@
   <data name="tid" xml:space="preserve">
     <value>Cartographic Object Id</value>
   </data>
+  <data name="TimeSequence" xml:space="preserve">
+    <value>Time sequence</value>
+  </data>
   <data name="ToDegradedPastures" xml:space="preserve">
     <value>To degraded pastures</value>
   </data>
@@ -992,6 +1013,9 @@
   </data>
   <data name="TotalGoals" xml:space="preserve">
     <value>Total Goals</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
   </data>
   <data name="TypeOfGrazedAnimalsBreed" xml:space="preserve">
     <value>Type of grazed animals (breed)</value>

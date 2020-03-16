@@ -408,6 +408,9 @@
   <data name="Email" xml:space="preserve">
     <value>Эл. адрес</value>
   </data>
+  <data name="EndYear" xml:space="preserve">
+    <value>Конечный год</value>
+  </data>
   <data name="EwesYield" xml:space="preserve">
     <value>Удой маток</value>
   </data>
@@ -518,6 +521,9 @@
   </data>
   <data name="HeightRU" xml:space="preserve">
     <value>Высота в холке (русский)</value>
+  </data>
+  <data name="HistoricalTimeSeries" xml:space="preserve">
+    <value>Исторический временной ряд</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>
@@ -699,6 +705,9 @@
   <data name="NumberOfGrazingDaysSummer" xml:space="preserve">
     <value>Количество выпасных дней (лето)</value>
   </data>
+  <data name="NumberOfMonths" xml:space="preserve">
+    <value>Количество месяцев</value>
+  </data>
   <data name="OnPastureBackground" xml:space="preserve">
     <value>На фоновые пастбища</value>
   </data>
@@ -710,6 +719,9 @@
   </data>
   <data name="Others" xml:space="preserve">
     <value>Другое</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Параметры</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -912,6 +924,12 @@
   <data name="Spring" xml:space="preserve">
     <value>Весна</value>
   </data>
+  <data name="StartMonth" xml:space="preserve">
+    <value>Начальный месяц</value>
+  </data>
+  <data name="StartYear" xml:space="preserve">
+    <value>Начальный год</value>
+  </data>
   <data name="Structure" xml:space="preserve">
     <value>Структура</value>
   </data>
@@ -981,6 +999,9 @@
   <data name="tid" xml:space="preserve">
     <value>Id картографического объекта</value>
   </data>
+  <data name="TimeSequence" xml:space="preserve">
+    <value>Временная последовательность</value>
+  </data>
   <data name="ToDegradedPastures" xml:space="preserve">
     <value>На деградированные пастбища</value>
   </data>
@@ -992,6 +1013,9 @@
   </data>
   <data name="TotalGoals" xml:space="preserve">
     <value>Всего голов</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Тип</value>
   </data>
   <data name="TypeOfGrazedAnimalsBreed" xml:space="preserve">
     <value>Вид выпасаемых животных (порода)</value>

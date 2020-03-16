@@ -894,9 +894,24 @@ namespace Pastures2019.Controllers
                 years_avg_median.Add(analytics_day.Average(a => a.median));
             }
 
+            // X axes labels
+            List<string> labelsx = new List<string>();
+            for (int i = 0; i < labels.Count(); i++)
+            {
+                labelsx.Add(labels[i].Substring(0, 4));
+                if (i > 0)
+                {
+                    if (labels[i].Substring(0, 4) == labels[i - 1].Substring(0, 4))
+                    {
+                        labelsx[i] = "";
+                    }
+                }
+            }
+
             return Json(new
             {
                 labels,
+                labelsx,
                 years_min,
                 years_max,
                 years_median,

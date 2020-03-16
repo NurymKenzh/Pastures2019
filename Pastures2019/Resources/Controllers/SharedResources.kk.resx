@@ -408,6 +408,9 @@
   <data name="Email" xml:space="preserve">
     <value>Электрондық пошта</value>
   </data>
+  <data name="EndYear" xml:space="preserve">
+    <value>Жылдың соңы</value>
+  </data>
   <data name="EwesYield" xml:space="preserve">
     <value>Жатыр сүті</value>
   </data>
@@ -518,6 +521,9 @@
   </data>
   <data name="HeightRU" xml:space="preserve">
     <value>Биіктігі құрғақ жерде (орыс)</value>
+  </data>
+  <data name="HistoricalTimeSeries" xml:space="preserve">
+    <value>Тарихи уақыт сериясы</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Басты</value>
@@ -699,6 +705,9 @@
   <data name="NumberOfGrazingDaysSummer" xml:space="preserve">
     <value>Жайылым күндерінің саны (жаз)</value>
   </data>
+  <data name="NumberOfMonths" xml:space="preserve">
+    <value>Айлар саны</value>
+  </data>
   <data name="OnPastureBackground" xml:space="preserve">
     <value>Жайылым фонында</value>
   </data>
@@ -710,6 +719,9 @@
   </data>
   <data name="Others" xml:space="preserve">
     <value>Басқа</value>
+  </data>
+  <data name="Parameters" xml:space="preserve">
+    <value>Параметрлер</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
@@ -912,6 +924,12 @@
   <data name="Spring" xml:space="preserve">
     <value>Көктем</value>
   </data>
+  <data name="StartMonth" xml:space="preserve">
+    <value>Айдың басталуы</value>
+  </data>
+  <data name="StartYear" xml:space="preserve">
+    <value>Басталу жылы</value>
+  </data>
   <data name="Structure" xml:space="preserve">
     <value>Құрылымы</value>
   </data>
@@ -981,6 +999,9 @@
   <data name="tid" xml:space="preserve">
     <value>Картографиялық нысан идентификаторы</value>
   </data>
+  <data name="TimeSequence" xml:space="preserve">
+    <value>Уақыт реттілігі</value>
+  </data>
   <data name="ToDegradedPastures" xml:space="preserve">
     <value>Тозған жайылымдарға</value>
   </data>
@@ -992,6 +1013,9 @@
   </data>
   <data name="TotalGoals" xml:space="preserve">
     <value>Жалпы мақсаттар</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Түрі</value>
   </data>
   <data name="TypeOfGrazedAnimalsBreed" xml:space="preserve">
     <value>Жайылған жануарлардың түрі (тұқымы)</value>

@@ -5,6 +5,7 @@
     ViewData["Title"] = SharedLocalizer["Charts"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@await Html.PartialAsync("_StylesTabAndShart")
 <link href="~/lib/сhart.js/dist/Chart.css" rel="stylesheet" />
 <script src="~/lib/сhart.js/dist/Chart.js"></script>
 
@@ -94,11 +95,27 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-chart2" role="tabpanel" aria-labelledby="nav-chart2-tab">
-                    <h5 class="font-weight-light">@SharedLocalizer["TimeSequence"]</h5>
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center m-2">
+                        <h5 class="font-weight-light">@SharedLocalizer["TimeSequence"]</h5>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group mr-2">
+                                <button id="download-pdf" onclick="saveAsPDF1();" type="button" class="btn btn-sm btn-outline-secondary"><i class="SomeInfo fa fa-file-image-o" InfoTitle="Export to PDF"> PDF</i></button>
+                                <button id="excelbutton" type="button" class="btn btn-sm btn-outline-secondary"><i class="SomeInfo fa fa-file-excel-o" InfoTitle="Export to Excel"> Excel</i></button>
+                            </div>
+                        </div>
+                    </div>
                     <canvas class="my-4 w-100 chartjs-render-monitor" id="chart2Canvas" width="600" height="400"></canvas>
                 </div>
                 <div class="tab-pane fade" id="nav-chart2table" role="tabpanel" aria-labelledby="nav-chart2table-tab">
-                    <table id="table2" class="table"></table>
+                    <div class="card-body overflow-auto" style="max-height: 38rem">
+                        <div class="table-responsive-md">
+                            <table class="table table-bordered table-striped table-sm small" id="TableContent2">
+                                <tbody id="table2">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -191,8 +208,8 @@
         <hr class="my-4 border-info">*@
     <div class="row align-items-start">
         <div class="col-md-3 order-md-2 mb-4 mt-5">
-            <div class="card border-dark">
-                <h5 class="card-header text-muted">@SharedLocalizer["Parameters"]:</h5>
+            <div class="card bg-light">
+                <h6 class="card-header text-muted">@SharedLocalizer["Parameters"]:</h6>
                 <div class="card-body p-2">
                     <form>
                         <div class="form-group m-0">
@@ -250,12 +267,28 @@
             </nav>
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-chart3" role="tabpanel" aria-labelledby="nav-chart3-tab">
-                    <h5 class="font-weight-light">@SharedLocalizer["HistoricalTimeSeries"]</h5>
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center m-2">
+                        <h5 class="font-weight-light">@SharedLocalizer["HistoricalTimeSeries"]</h5>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group mr-2">
+                                <button id="download-pdf" onclick="saveAsPDF2();" type="button" class="btn btn-sm btn-outline-secondary"><i class="SomeInfo fa fa-file-image-o" InfoTitle="Export to PDF"> PDF</i></button>
+                                <button id="excelbutton3" type="button" class="btn btn-sm btn-outline-secondary"><i class="SomeInfo fa fa-file-excel-o" InfoTitle="Export to Excel"> Excel</i></button>
+                            </div>
+                        </div>
+                    </div>
                     <canvas class="my-4 w-100 chartjs-render-monitor" id="chart31Canvas" width="600" height="200"></canvas>
+                    <hr class="my-0 border-light">
                     <canvas class="my-4 w-100 chartjs-render-monitor" id="chart32Canvas" width="600" height="200"></canvas>
                 </div>
                 <div class="tab-pane fade" id="nav-chart3table" role="tabpanel" aria-labelledby="nav-chart3table-tab">
-                    <table id="table3" class="table"></table>
+                    <div class="card-body overflow-auto" style="max-height: 38rem">
+                        <div class="table-responsive-md">
+                            <table class="table table-bordered table-striped table-sm small" id="TableContent3">
+                                <tbody id="table3">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -300,9 +333,9 @@
                             xAxes: [{
                                 gridLines: {
                                    display: false,
-                                }                                
+                                }
                             }],
-                            yAxes: [{                               
+                            yAxes: [{
                                 ticks: {
                                     max: 0.8,
                                     min: 0,
@@ -315,7 +348,7 @@
                             fontSize: 14,
                             fontFamily: 'Arial',
                             fontColor: '#1A1A1A',
-                            fontStyle: 'bold',                            
+                            fontStyle: 'bold',
                             text: [$('#sourceproduct2 option:selected').text() + ', ' + $('#dataset2 option:selected').text() + '. ']
                         },
                         legend: {
@@ -390,7 +423,7 @@
                             data: data.years_median,
                             fill: false
                         }]
-                };                
+                };
                 for (var i = 0; i < data.year_median_datasets.length; ++i) {
                     var color = random_rgba();
                     chart2Data.datasets.push({
@@ -420,7 +453,7 @@
                             fontSize: 14,
                             fontFamily: 'Arial',
                             fontColor: '#1A1A1A',
-                            fontStyle: 'bold',                            
+                            fontStyle: 'bold',
                             text: [$('#sourceproduct2 option:selected').text() + ', ' + $('#dataset2 option:selected').text() + '. ']
                         },
                         legend: {
@@ -448,10 +481,10 @@
                 });
 
                 $('#table2 tr').remove();
-                var html = '<tr><th>@SharedLocalizer["Date"]'
-                    + '</th><th>@SharedLocalizer["minimum"]'
-                    + '</th><th>@SharedLocalizer["maximum"]'
-                    + '</th><th>@SharedLocalizer["median"]';
+                var html = '<tr class="table-primary"><th scope="col">@SharedLocalizer["Date"]'
+                    + '</th><th scope="col">@SharedLocalizer["minimum"]'
+                    + '</th><th scope="col">@SharedLocalizer["maximum"]'
+                    + '</th><th scope="col">@SharedLocalizer["median"]';
                 for (var i = 0; i < data.year_min_datasets.length; ++i) {
                     html += '</th><th>' + data.year_min_datasets[i].year + ' @Html.Raw(SharedLocalizer["minimum"])';
                 }
@@ -463,18 +496,18 @@
                 }
                 html += '</th></tr>'
                 for (var i = 0; i < data.labels.length; i++) {
-                    html += '<tr><td>' + data.labels[i]
-                        + '</td><td>' + data.years_min[i]
-                        + '</td><td>' + data.years_max[i]
-                        + '</td><td>' + data.years_median[i];
+                    html += '<tr ><th scope="row">' + data.labels[i]
+                        + '</th><td>' + data.years_min[i].toFixed(3)
+                        + '</td><td>' + data.years_max[i].toFixed(3)
+                        + '</td><td>' + data.years_median[i].toFixed(3);
                     for (var j = 0; j < data.year_min_datasets.length; ++j) {
-                        html += '</td><td>' + (data.year_min_datasets[j].data[i] == null ? '' : data.year_min_datasets[j].data[i]);
+                        html += '</td><td>' + (data.year_min_datasets[j].data[i] == null ? '' : data.year_min_datasets[j].data[i].toFixed(3));
                     }
                     for (var j = 0; j < data.year_max_datasets.length; ++j) {
-                        html += '</td><td>' + (data.year_max_datasets[j].data[i] == null ? '' : data.year_max_datasets[j].data[i]);
+                        html += '</td><td>' + (data.year_max_datasets[j].data[i] == null ? '' : data.year_max_datasets[j].data[i].toFixed(3));
                     }
                     for (var j = 0; j < data.year_median_datasets.length; ++j) {
-                        html += '</td><td>' + (data.year_median_datasets[j].data[i] == null ? '' : data.year_median_datasets[j].data[i]);
+                        html += '</td><td>' + (data.year_median_datasets[j].data[i] == null ? '' : data.year_median_datasets[j].data[i].toFixed(3));
                     }
                     html += '</td></tr>';
                 }
@@ -615,7 +648,7 @@
                             fontSize: 14,
                             fontFamily: 'Arial',
                             fontColor: '#1A1A1A',
-                            fontStyle: 'bold',                            
+                            fontStyle: 'bold',
                             text: [$('#sourceproduct3 option:selected').text() + ', NDVI. ']
                         },
                         tooltips: {
@@ -730,7 +763,7 @@
                             fontSize: 14,
                             fontFamily: 'Arial',
                             fontColor: '#1A1A1A',
-                            fontStyle: 'bold', 
+                            fontStyle: 'bold',
                             text: [$('#sourceproduct3 option:selected').text() + ', @Html.Raw(SharedLocalizer["Anomaly"]). ']
                         },
                         legend: {
@@ -751,28 +784,28 @@
                 });
 
                 $('#table3 tr').remove();
-                var html = '<tr><th>@SharedLocalizer["Date"]'
-                    + '</th><th>NDVI ' + $("#type3 option:selected").text() + ' (@SharedLocalizer["average"])'
-                    + '</th><th>NDVI ' + $("#type3 option:selected").text()
-                    + '</th><th>@SharedLocalizer["Anomaly"] ' + $("#type3 option:selected").text() + '</th></tr>';
+                var html = '<tr class="table-primary"><th scope="col">@SharedLocalizer["Date"]'
+                    + '</th><th scope="col">NDVI ' + $("#type3 option:selected").text() + ' (@SharedLocalizer["average"])'
+                    + '</th><th scope="col">NDVI ' + $("#type3 option:selected").text()
+                    + '</th><th scope="col">@SharedLocalizer["Anomaly"] ' + $("#type3 option:selected").text() + '</th></tr>';
                 for (var i = 0; i < data.labels.length; i++) {
                     if ($('#type3').val() == 'minimum') {
-                        html += '<tr><td>' + data.labels[i]
-                            + '</td><td>' + data.years_avg_min[i]
-                            + '</td><td>' + data.years_min[i]
-                            + '</td><td>' + data.years_min_a[i] + '</td></tr>';
+                        html += '<tr><th scope="row">' + data.labels[i]
+                            + '</th><td>' + data.years_avg_min[i].toFixed(3)
+                            + '</td><td>' + data.years_min[i].toFixed(3)
+                            + '</td><td>' + data.years_min_a[i].toFixed(3) + '</td></tr>';
                     }
                     else if ($('#type3').val() == 'maximum') {
-                        html += '<tr><td>' + data.labels[i]
-                            + '</td><td>' + data.years_avg_max[i]
-                            + '</td><td>' + data.years_max[i]
-                            + '</td><td>' + data.years_max_a[i] + '</td></tr>';
+                        html += '<tr><th scope="row">' + data.labels[i]
+                            + '</th><td>' + data.years_avg_max[i].toFixed(3)
+                            + '</td><td>' + data.years_max[i].toFixed(3)
+                            + '</td><td>' + data.years_max_a[i].toFixed(3) + '</td></tr>';
                     }
                     else if ($('#type3').val() == 'median') {
-                        html += '<tr><td>' + data.labels[i]
-                            + '</td><td>' + data.years_avg_median[i]
-                            + '</td><td>' + data.years_median[i]
-                            + '</td><td>' + data.years_median_a[i] + '</td></tr>';
+                        html += '<tr><th scope="row">' + data.labels[i]
+                            + '</th><td>' + data.years_avg_median[i].toFixed(3)
+                            + '</td><td>' + data.years_median[i].toFixed(3)
+                            + '</td><td>' + data.years_median_a[i].toFixed(3) + '</td></tr>';
                     }
                 }
                 $('#table3').append(html);
@@ -796,4 +829,47 @@
         Chart2();
         Chart3();
     });
+    //add button to generate PDF
+    function saveAsPDF1() {
+        html2canvas(document.getElementById("chart2Canvas"), {
+            onrendered: function (canvas) {
+                // get size of report page
+                var reportPageHeight = 430;
+                var reportPageWidth = 650;
+                var img = canvas.toDataURL(); //image data of canvas
+                var doc = new jsPDF('a4', 'pt', [reportPageWidth, reportPageHeight]);
+                doc.addImage(img, 10, 10);
+                doc.save('NDVI.pdf');
+            }
+        });
+    }
+    function saveAsPDF2() {
+        html2canvas(document.getElementById("nav-chart3"), {
+            onrendered: function (canvas) {
+                // get size of report page
+                var reportPageHeight = 500;
+                var reportPageWidth = 670;
+                var img = canvas.toDataURL(); //image data of canvas
+                var doc = new jsPDF('a4', 'pt', [reportPageWidth, reportPageHeight]);
+                doc.addImage(img, 10, 10);
+                doc.save('NDVI_Hist.pdf');
+            }
+        });
+    }
+    // function for export table
+    var $table = $('#TableContent1')
+    var $excelbutton = $('#excelbutton')
+    $(function () {
+        $excelbutton.click(function () {
+            $('#TableContent1').tableExport({type:'csv'});
+        })
+
+    })
+    var $excelbutton3 = $('#excelbutton3')
+    $(function () {
+        $excelbutton3.click(function () {
+            $('#TableContent3').tableExport({type:'csv'});
+        })
+
+    })
 </script>

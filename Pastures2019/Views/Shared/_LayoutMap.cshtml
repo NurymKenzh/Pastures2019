@@ -40,31 +40,89 @@
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
+@{
+    var controllerName = string.Empty;
+    object controllerObj;
+    var actionName = string.Empty;
+    object actionObj;
+
+    if (ViewContext.RouteData.Values.TryGetValue("controller", out controllerObj))
+    {
+        controllerName = controllerObj.ToString();
+    }
+
+    if (ViewContext.RouteData.Values.TryGetValue("action", out actionObj))
+    {
+        actionName = actionObj.ToString();
+    }
+}
 <body>
     <header>
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark position-sticky border-bottom border-light shadow" style="background-color: #0d77b6;">
             <div class="container">
                 @*<a class="navbar-brand" href="#">Pasture 2019</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>*@
                 <div class="collapse navbar-collapse" id="navbarPasture">
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="mapmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Maps"]</a>
+                            <a class="nav-link dropdown-toggle active" href="#" id="mapmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Maps"]</a>
                             <div class="dropdown-menu" aria-labelledby="mapmenu">
-                                <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="Modis">NDVI Greenness Maps</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="FodderResources">@SharedLocalizer["FodderResources"]</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="LandSupply">@SharedLocalizer["LandSupply"]</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="Species">@SharedLocalizer["Species"]</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="PasturesBurden">@SharedLocalizer["PasturesBurden"]</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="Wells">@SharedLocalizer["Wells"]</a>
+                                @if (controllerName == "Maps" && actionName == "Modis")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Maps" asp-action="Modis">NDVI Greenness Maps</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="Modis">NDVI Greenness Maps</a>
+                                }
+                                @if (controllerName == "Maps" && actionName == "FodderResources")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Maps" asp-action="FodderResources">@SharedLocalizer["FodderResources"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="FodderResources">@SharedLocalizer["FodderResources"]</a>
+                                }
+                                @if (controllerName == "Maps" && actionName == "LandSupply")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Maps" asp-action="LandSupply">@SharedLocalizer["LandSupply"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="LandSupply">@SharedLocalizer["LandSupply"]</a>
+                                }
+                                @if (controllerName == "Maps" && actionName == "Species")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Maps" asp-action="Species">@SharedLocalizer["Species"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="Species">@SharedLocalizer["Species"]</a>
+                                }
+                                @if (controllerName == "Maps" && actionName == "PasturesBurden")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Maps" asp-action="PasturesBurden">@SharedLocalizer["PasturesBurden"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="PasturesBurden">@SharedLocalizer["PasturesBurden"]</a>
+                                }
+                                @if (controllerName == "Maps" && actionName == "Wells")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Maps" asp-action="Wells">@SharedLocalizer["Wells"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Maps" asp-action="Wells">@SharedLocalizer["Wells"]</a>
+                                }
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -92,6 +150,6 @@
         @RenderBody()
         @RenderSection("Scripts", required: false)
     </main>
-    
+
 </body>
 </html>

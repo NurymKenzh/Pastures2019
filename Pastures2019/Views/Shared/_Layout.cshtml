@@ -41,21 +41,51 @@
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </head>
+@{
+    var controllerName = string.Empty;
+    object controllerObj;
+    var actionName = string.Empty;
+    object actionObj;
+
+    if (ViewContext.RouteData.Values.TryGetValue("controller", out controllerObj))
+    {
+        controllerName = controllerObj.ToString();
+    }
+
+    if (ViewContext.RouteData.Values.TryGetValue("action", out actionObj))
+    {
+        actionName = actionObj.ToString();
+    }
+}
 <body>
     <header>
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark position-sticky border-bottom border-light shadow" style="background-color: #0d77b6;">
             <div class="container">
                 @*<a class="navbar-brand" href="#">Pasture 2019</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>*@
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>*@
                 <div class="collapse navbar-collapse" id="navbarPasture">
                     <ul class="navbar-nav mr-auto">
                         <li>
-                            <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
+                            @if (controllerName == "Home" && actionName == "Index")
+                            {
+                                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">@SharedLocalizer["Home"]</a>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
+                            @if (controllerName == "Home" && actionName == "About")
+                            {
+                                <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="About">@SharedLocalizer["About"]</a>
+                            }
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="mapmenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Maps"]</a>
@@ -69,20 +99,48 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Others"]</a>
+                            @if (controllerName == "Home" && (actionName == "Instruction" || actionName == "Contact"))
+                            {
+                                <a class="nav-link dropdown-toggle active" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Others"]</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link dropdown-toggle" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Others"]</a>
+                            }
                             <div class="dropdown-menu" aria-labelledby="somemenu">
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                                @if (controllerName == "Home" && actionName == "Instruction")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
+                                }
+                                @if (controllerName == "Home" && actionName == "Contact")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                                }
                                 @*<a class="dropdown-item" href="#">Something else here</a>*@
                             </div>
                         </li>
                         @if (User.IsInRole("Administrator"))
                         {
                             <li class="nav-item ">
-                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
+                                @if (controllerName == "Home" && actionName == "Administrator")
+                                {
+                                    <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Administrator">@SharedLocalizer["Administrator"]</a>
+                                }
                             </li>
                         }
-                    </ul>                    
+                    </ul>
                     @await Html.PartialAsync("_LoginPartial")
                 </div>
             </div>

@@ -716,8 +716,8 @@ namespace Pastures2019.Controllers
                 years_median_.Add(analytics.Where(a => a.day == d).Average(a => a.median));
                 try
                 {
-                    years_min_.Add(analytics.Where(a => a.day == d && years.Contains(a.date.Year)).Min(a => a.median));
-                    years_max_.Add(analytics.Where(a => a.day == d && years.Contains(a.date.Year)).Max(a => a.median));
+                    years_min_.Add(analytics.Where(a => a.day == d).Min(a => a.median));
+                    years_max_.Add(analytics.Where(a => a.day == d).Max(a => a.median));
                 }
                 catch(Exception ex)
                 {

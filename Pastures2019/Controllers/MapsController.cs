@@ -713,9 +713,17 @@ namespace Pastures2019.Controllers
             foreach (int d in analytics.Select(a => a.day).Distinct().OrderBy(v => v))
             {
                 labels_.Add((new DateTime(2001, 1, 1).AddDays(d - 1).ToString("MM.dd")));
-                years_min_.Add(analytics.Where(a => a.day == d).Min(a => a.min));
-                years_max_.Add(analytics.Where(a => a.day == d).Max(a => a.max));
                 years_median_.Add(analytics.Where(a => a.day == d).Average(a => a.median));
+                try
+                {
+                    years_min_.Add(analytics.Where(a => a.day == d && years.Contains(a.date.Year)).Min(a => a.median));
+                    years_max_.Add(analytics.Where(a => a.day == d && years.Contains(a.date.Year)).Max(a => a.median));
+                }
+                catch(Exception ex)
+                {
+                    years_min_.Add(null);
+                    years_max_.Add(null);
+                }
             }
 
             // years

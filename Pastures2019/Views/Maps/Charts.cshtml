@@ -497,17 +497,17 @@
                 html += '</th></tr>'
                 for (var i = 0; i < data.labels.length; i++) {
                     html += '<tr ><th scope="row">' + data.labels[i]
-                        + '</th><td>' + data.years_min[i].toFixed(3)
-                        + '</td><td>' + data.years_max[i].toFixed(3)
-                        + '</td><td>' + data.years_median[i].toFixed(3);
+                        + '</th><td>' + parseFloat(data.years_min[i]).toFixed(3)
+                        + '</td><td>' + parseFloat(data.years_max[i]).toFixed(3)
+                        + '</td><td>' + parseFloat(data.years_median[i]).toFixed(3);
                     for (var j = 0; j < data.year_min_datasets.length; ++j) {
-                        html += '</td><td>' + (data.year_min_datasets[j].data[i] == null ? '' : data.year_min_datasets[j].data[i].toFixed(3));
+                        html += '</td><td>' + (data.year_min_datasets[j].data[i] == null ? '' : parseFloat(data.year_min_datasets[j].data[i]).toFixed(3));
                     }
                     for (var j = 0; j < data.year_max_datasets.length; ++j) {
-                        html += '</td><td>' + (data.year_max_datasets[j].data[i] == null ? '' : data.year_max_datasets[j].data[i].toFixed(3));
+                        html += '</td><td>' + (data.year_max_datasets[j].data[i] == null ? '' : parseFloat(data.year_max_datasets[j].data[i]).toFixed(3));
                     }
                     for (var j = 0; j < data.year_median_datasets.length; ++j) {
-                        html += '</td><td>' + (data.year_median_datasets[j].data[i] == null ? '' : data.year_median_datasets[j].data[i].toFixed(3));
+                        html += '</td><td>' + (data.year_median_datasets[j].data[i] == null ? '' : parseFloat(data.year_median_datasets[j].data[i]).toFixed(3));
                     }
                     html += '</td></tr>';
                 }

@@ -332,7 +332,7 @@
                         scales: {
                             xAxes: [{
                                 gridLines: {
-                                   display: false,
+                                   display: true,
                                 }
                             }],
                             yAxes: [{
@@ -406,6 +406,7 @@
                             label: '@Html.Raw(SharedLocalizer["minimum"])',
                             borderColor: 'rgba(212, 212, 212, 1)',
                             borderWidth: 1,
+                            pointRadius: 0,
                             data: data.years_min,
                             fill: "+1"
                         },
@@ -413,6 +414,7 @@
                             label: '@Html.Raw(SharedLocalizer["maximum"])',
                             borderColor: 'rgba(212, 212, 212, 3)',
                             borderWidth: 1,
+                            pointRadius: 0,
                             data: data.years_max,
                             fill: false
                         },
@@ -420,6 +422,7 @@
                             label: '@Html.Raw(SharedLocalizer["median"])',
                             borderColor: 'rgba(0, 0, 0, 1)',
                             borderWidth: 4,
+                            pointRadius: 0,
                             data: data.years_median,
                             fill: false
                         }]
@@ -445,7 +448,7 @@
                         responsive: true,
                         elements: {
                             point: {
-                                radius: 0
+                                radius: 2
                             }
                         },
                         title: {
@@ -466,14 +469,14 @@
                         scales: {
                             yAxes: [{
                                 ticks: {
-                                    max: 1,
+                                    max: 0.8,
                                     min: -0.2,
                                     stepSize: 0.2
                                 }
                             }],
                             xAxes: [{
                                 gridLines: {
-                                   display: false,
+                                   display: true,
                                 },
                             }]
                         }

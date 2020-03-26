@@ -424,7 +424,7 @@
     <value>Удой маток (русский)</value>
   </data>
   <data name="Extract" xml:space="preserve">
-    <value>Извлекать</value>
+    <value>Извлечь</value>
   </data>
   <data name="ExtractStarted" xml:space="preserve">
     <value>Извлечение запущено</value>
@@ -589,7 +589,7 @@
     <value>Понижение, м</value>
   </data>
   <data name="ManageYourAccount" xml:space="preserve">
-    <value>Управлять учетной записью</value>
+    <value>Управление учетной записью</value>
   </data>
   <data name="Maps" xml:space="preserve">
     <value>Карты</value>

@@ -114,24 +114,27 @@
             </ul>
             <!-- Exaple 1 -->
             <div class="card-body">
-                <div class="col-md-12" style="display: none" id="FilterPasture">
+                <div class="col-sm-12" style="display: none" id="FilterPasture">
                     <form>
-                        <div class="form-group m-0">
-                            <label for="Otdel">@SharedLocalizer["Otdel"]</label>
-                            <select class="form-control form-control-sm" id="find_otdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value=""><option value=""></option></select>
-                        </div>
-                        <div class="form-group m-0">
-                            <label for="PType">@SharedLocalizer["PType"]</label>
-                            <select class="form-control form-control-sm" id="find_ptype" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="PType" value=""><option value=""></option></select>
-                        </div>
-                        <div class="form-group m-0">
-                            <label for="Soob">@SharedLocalizer["Soob"]</label>
-                            <select class="form-control form-control-sm" id="find_soob" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="Soob" value=""><option value=""></option></select>
-                        </div>
-                        <div class="form-row mt-1">
-                            <div class="col">
-                                <label for="Ur">@SharedLocalizer["Productivityhha"]</label>
+                        <div class="form-row">
+                            <label class="col-sm-4 col-form-label" for="Otdel">@SharedLocalizer["Otdel"]</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" id="find_otdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value=""><option value=""></option></select>
                             </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-sm-4 col-form-label" for="PType">@SharedLocalizer["PType"]</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" id="find_ptype" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="PType" value=""><option value=""></option></select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-sm-4 col-form-label" for="Soob">@SharedLocalizer["Soob"]</label>
+                            <div class="col-sm-8">
+                                <select class="form-control form-control-sm" id="find_soob" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="Soob" value=""><option value=""></option></select>
+                            </div>
+                        </div>
+                        <div class="form-row ">
                             <div class="col">
                                 <label for="Urandkorm">@SharedLocalizer["ProductivityhhaOfFeedUnits"]</label>
                             </div>
@@ -139,7 +142,7 @@
                         <table class="table table-borderless table-sm">
                             <tbody>
                                 <tr>
-                                    <th scope="row">@SharedLocalizer["Spring"]</th>
+                                    <th scope="row" style="min-width:80px">@SharedLocalizer["Spring"]</th>
                                     <td><input class="form-control form-control-sm" id="find_ur_v_from" type="text" /></td>
                                     <td>-</td>
                                     <td><input class="form-control form-control-sm" id="find_ur_v_to" type="text" /></td>
@@ -1492,16 +1495,16 @@
             attach: '#LegendBtn',
             theme: 'TooltipBorder',
             width: 500,
-            maxHeight: 600,
+            maxHeight: 550,
             animation: 'flip',
             closeButton: 'box',
             position: {
                 x: 'right',
-                y: 'bottom'
+                y: 'top'
             },
             offset: {
                 x: -10,
-                y: -60
+                y: 200
             },
             content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
             overlay: false,

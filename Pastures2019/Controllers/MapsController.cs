@@ -275,15 +275,18 @@ namespace Pastures2019.Controllers
             }
             raster += ".tif";
             analytic analytic = new analytic();
-            using (var connection = new NpgsqlConnection(DefaultConnection))
+            if (!string.IsNullOrEmpty(sourceproduct))
             {
-                connection.Open();
-                string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
-                    $" FROM public.analytics" +
-                    $" WHERE objectid = {objectid.ToString()}" +
-                    $" AND raster LIKE '%{raster}%';";
-                var analyticsDB = connection.Query<analytic>(query);
-                analytic = analyticsDB.Where(a => !a.raster.Contains("BASE")).FirstOrDefault();
+                using (var connection = new NpgsqlConnection(DefaultConnection))
+                {
+                    connection.Open();
+                    string query = $"SELECT raster, min, max, median, majority, mean, objectid" +
+                        $" FROM public.analytics" +
+                        $" WHERE objectid = {objectid}" +
+                        $" AND raster = '{raster}';";
+                    var analyticsDB = connection.Query<analytic>(query);
+                    analytic = analyticsDB.Where(a => !a.raster.Contains("BASE")).FirstOrDefault();
+                }
             }
             return Json(new
             {

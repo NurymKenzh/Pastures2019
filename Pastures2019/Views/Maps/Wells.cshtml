@@ -139,6 +139,10 @@
                                 <th scope="row" style="width: 40%">@SharedLocalizer["Number"]</th>
                                 <td colspan="3"><input class="form-control form-control-sm" id="find_num" type="text" /></td>
                             </tr>
+                            <tr hidden="hidden">
+                                <th scope="row" for="WClass">@SharedLocalizer["WClass"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_WClass" asp-items="@((IEnumerable<SelectListItem>)ViewBag.WClass)" name="WClass" value=""><option value=""></option></select></td>
+                            </tr>
                             <tr>
                                 <th scope="row" for="WType">@SharedLocalizer["WType"]</th>
                                 <td colspan="3"><select class="form-control form-control-sm" id="find_WType" asp-items="@((IEnumerable<SelectListItem>)ViewBag.WType)" name="WType" value=""><option value=""></option></select></td>

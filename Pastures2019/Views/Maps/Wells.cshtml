@@ -136,12 +136,8 @@
                     <table class="table table-borderless table-sm small">
                         <tbody>
                             <tr>
-                                <th scope="row" style="width: 40%">Id</th>
+                                <th scope="row" style="width: 40%">@SharedLocalizer["Number"]</th>
                                 <td colspan="3"><input class="form-control form-control-sm" id="find_num" type="text" /></td>
-                            </tr>
-                            <tr>
-                                <th scope="row" for="WClass">@SharedLocalizer["WClass"]</th>
-                                <td colspan="3"><select class="form-control form-control-sm" id="find_WClass" asp-items="@((IEnumerable<SelectListItem>)ViewBag.WClass)" name="WClass" value=""><option value=""></option></select></td>
                             </tr>
                             <tr>
                                 <th scope="row" for="WType">@SharedLocalizer["WType"]</th>
@@ -152,28 +148,32 @@
                                 <td colspan="3"><select class="form-control form-control-sm" id="find_WSubType" asp-items="@((IEnumerable<SelectListItem>)ViewBag.WSubType)" name="WSubType" value=""><option value=""></option></select></td>
                             </tr>
                             <tr>
-                                <th scope="row">Дебит, дм</th>
+                                <th scope="row">@SharedLocalizer["Debitdms"]</th>
                                 <td><input class="form-control form-control-sm" id="find_debit_from" type="text" /></td>
                                 <td>-</td>
                                 <td><input class="form-control form-control-sm" id="find_debit_to" type="text" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">Глубина до воды, м</th>
+                                <th scope="row">@SharedLocalizer["Loweringm"]</th>
                                 <td><input class="form-control form-control-sm" id="find_decrease_from" type="text" /></td>
                                 <td>-</td>
                                 <td><input class="form-control form-control-sm" id="find_decrease_to" type="text" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">Минерализация, г/дм</th>
+                                <th scope="row">@SharedLocalizer["DepthToWaterm"]</th>
                                 <td><input class="form-control form-control-sm" id="find_depth_from" type="text" /></td>
                                 <td>-</td>
                                 <td><input class="form-control form-control-sm" id="find_depth_to" type="text" /></td>
                             </tr>
                             <tr>
-                                <th scope="row">Химический состав</th>
+                                <th scope="row">@SharedLocalizer["Mineralizationgdm"]</th>
                                 <td><input class="form-control form-control-sm" id="find_minerali_from" type="text" /></td>
                                 <td>-</td>
                                 <td><input class="form-control form-control-sm" id="find_minerali_to" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row" for="ChemicalComp">@SharedLocalizer["ChemicalComp"]</th>
+                                <td colspan="3"><select class="form-control form-control-sm" id="find_ChemicalComp" asp-items="@((IEnumerable<SelectListItem>)ViewBag.ChemicalComp)" name="ChemicalComp" value=""><option value=""></option></select></td>
                             </tr>
                         </tbody>
                     </table>
@@ -966,26 +966,15 @@
                             $('#valueLoweringm').text(features[0].get('decrease'));
                             $('#valueDepthToWaterm').text(features[0].get('depth'));
                             $('#valueMineralizationgdm').text(features[0].get('minerali'));
-                            console.log('@Html.Raw(SharedLocalizer["Number"]): ' + features[0].get('num'));
-                            console.log('@Html.Raw(SharedLocalizer["WType"]): ' + dataDB.wellspnt.wtype);
-                            console.log('@Html.Raw(SharedLocalizer["WSubType"]): ' + dataDB.wellspnt.wsubtype);
-                            console.log('@Html.Raw(SharedLocalizer["Debitdms"]): ' + features[0].get('debit'));
-                            console.log('@Html.Raw(SharedLocalizer["Loweringm"]): ' + features[0].get('decrease'));
-                            console.log('@Html.Raw(SharedLocalizer["DepthToWaterm"]): ' + features[0].get('depth'));
-                            console.log('@Html.Raw(SharedLocalizer["Mineralizationgdm"]): ' + features[0].get('minerali'));
                             if (features[0].get('sost') == 1) {
                                 $('#infoCondition').text('@Html.Raw(SharedLocalizer["Condition"])');
                                 $('#valueActing').text('@Html.Raw(SharedLocalizer["acting"])');
-                                console.log('@Html.Raw(SharedLocalizer["Condition"]): ' + '@SharedLocalizer["acting"]');
                             }
                             else if (features[0].get('sost') == 2) {
                                 $('#infoCondition').text('@Html.Raw(SharedLocalizer["Condition"])');
                                 $('#valueActing').text('@Html.Raw(SharedLocalizer["notUsed"])');
-                                console.log('@Html.Raw(SharedLocalizer["Condition"]): ' + '@SharedLocalizer["notUsed"]');
                             }
                             $('#valueChemicalComp').text(dataDB.wellspnt.chemicalcomp);
-                            console.log('@Html.Raw(SharedLocalizer["ChemicalComp"]): ' + dataDB.wellspnt.chemicalcomp);
-                            console.log('----------------------------------------------');
                         },
                         error: function () {
                         }
@@ -1022,12 +1011,10 @@
 
                                 $('#infoWClass').text('@Html.Raw(SharedLocalizer["WClass"])');
                                 $('#valueWClass').text($("#find_WClass option[value='" + featurespol[0].get('class_id') + "']").text());
-                                console.log('@Html.Raw(SharedLocalizer["WClass"]): ' + $("#find_WClass option[value='" + featurespol[0].get('class_id') + "']").text());
                             }
                             else {
                                 $('#infoWClass').text('@Html.Raw(SharedLocalizer["WClass"])');
                                 $('#valueWClass').text('@Html.Raw(SharedLocalizer["UnwateredTerritory"])');
-                                console.log('@Html.Raw(SharedLocalizer["WClass"]): ' + '@Html.Raw(SharedLocalizer["UnwateredTerritory"])');
                             }
                         });
                     }

@@ -721,10 +721,10 @@
         if (filter_found.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
             filterParams_found["CQL_FILTER"] = filter_found;
         }
-        Layer_found_pasturepol.getSource().updateParams(filterParams_found);
-        Layer_found_pasturepol.getSource().refresh();
+        Layer_found_burden_pasture.getSource().updateParams(filterParams_found);
+        Layer_found_burden_pasture.getSource().refresh();
 
-        Layer_select_pasturepol.getSource().clear();
+        Layer_select_burden_pasture.getSource().clear();
         if (Layer_admXpol_Navigate.getSource()) {
             Layer_admXpol_Navigate.getSource().clear();
         }

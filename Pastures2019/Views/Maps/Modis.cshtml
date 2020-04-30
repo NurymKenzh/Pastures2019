@@ -1173,21 +1173,6 @@
     }
 </script>
 
-@* ChangeTool *@
-<script>
-    //var tool = 'select_raster';
-    //function ChangeTool() {
-    //    if (tool == 'select_raster') {
-    //        tool = 'select_pasture';
-    //        $('#SelectPasturesBtn').addClass('btn-danger');
-    //    }
-    //    else if (tool == 'select_pasture') {
-    //        tool = 'select_raster';
-    //        $('#SelectPasturesBtn').removeClass('btn-danger');
-    //    }
-    //}
-</script>
-
 @* map.on('singleclick') *@
 <script>
     var InfoMapModal;
@@ -1205,14 +1190,13 @@
             animation: 'zoomIn',
             overlay: false,
             onOpen: function () {
-                // Add t
                 this.setContent($('#InfoMap'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },
         });
     });
     map.on('singleclick', function (evt) {
-        if (/*tool == 'select_pasture' && */Layer_pasturepol.getVisible()) {
+        if (Layer_pasturepol.getVisible()) {
             $('#objectid').val(null);
             $('#chartspan').text('0');
             Source_select_pasturepol.clear();

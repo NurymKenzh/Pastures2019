@@ -121,91 +121,6 @@
         </div>
     </div>
     <hr class="my-4 border-info">
-    @*<div class="row align-items-end">
-            <div class="col-md-3 order-md-2 mb-4">
-                <div class="card border-dark">
-                    <h5 class="card-header text-muted">Featured</h5>
-                    <div class="card-body p-2">
-                        <form>
-                            <div class="form-group m-0">
-                                <label for="sourceproduct1">@SharedLocalizer["Satellite"]</label>
-                                <select class="form-control form-control-sm" id="sourceproduct1">
-                                    <option value="MOLT_MOD13Q1006">Terra MODIS 16-day</option>
-                                    <option value="MOLA_MYD13Q1006">Aqua MODIS 16-day</option>
-                                </select>
-                                <label for="dataset1">@SharedLocalizer["Dataset"]</label>
-                                <select class="form-control form-control-sm" id="dataset1">
-                                    <option value="NDVI">NDVI</option>
-                                    <option value="Anomaly">@SharedLocalizer["Anomaly"]</option>
-                                </select>
-                                <label for="yearstart1">Starting Years</label>
-                                <select class="form-control form-control-sm" id="yearstart1">
-                                    @for (int y = 2000; y <= DateTime.Today.Year; y++)
-                                    {
-                                        if (y == DateTime.Today.Year)
-                                        {
-                                            <option value="@y" selected>@y.ToString()</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@y">@y.ToString()</option>
-                                        }
-                                    }
-                                </select>
-                                <label for="yearstart1">Finishing Years</label>
-                                <select class="form-control form-control-sm" id="yearfinish1">
-                                    @for (int y = 2000; y <= DateTime.Today.Year; y++)
-                                    {
-                                        if (y == DateTime.Today.Year)
-                                        {
-                                            <option value="@y" selected>@y.ToString()</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@y">@y.ToString()</option>
-                                        }
-                                    }
-                                </select>
-                                <input type="button" class="btn btn-primary btn-sm btn-block mt-3" onclick="Chart1()" value="@SharedLocalizer["Refresh"]" />
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9 order-md-1">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tabchart1" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-chart1-tab" data-toggle="tab" href="#nav-chart1" role="tab" aria-controls="nav-chart1" aria-selected="true">Chart</a>
-                        <a class="nav-item nav-link" id="nav-chart1table-tab" data-toggle="tab" href="#nav-chart1table" role="tab" aria-controls="nav-chart1table" aria-selected="false">Table</a>
-                    </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-chart1" role="tabpanel" aria-labelledby="nav-chart1-tab">
-                        <h5 class="mb-3">Cumulative Time Series</h5>
-                        <canvas class="my-4 w-100 chartjs-render-monitor" id="chart1Canvas" width="600" height="400"></canvas>
-                    </div>
-                    <div class="tab-pane fade" id="nav-chart1table" role="tabpanel" aria-labelledby="nav-chart1table-tab">
-                        <table id="table1" class="table">
-                            <tr>
-                                <th>
-                                    @SharedLocalizer["Date"]
-                                </th>
-                                <th>
-                                    @SharedLocalizer["minimum"]
-                                </th>
-                                <th>
-                                    @SharedLocalizer["maximum"]
-                                </th>
-                                <th>
-                                    @SharedLocalizer["median"]
-                                </th>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr class="my-4 border-info">*@
     <div class="row align-items-start">
         <div class="col-md-3 order-md-2 mb-4 mt-5">
             <div class="card bg-light">
@@ -821,14 +736,12 @@
 
     function random_rgba() {
         var o = Math.round, r = Math.random, s = 255;
-        //return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',' + r().toFixed(1) + ')';
         return 'rgba(' + o(r() * s) + ',' + o(r() * s) + ',' + o(r() * s) + ',1)';
     }
 </script>
 
 <script>
     $(document).ready(function () {
-        //Chart1();
         Chart2();
         Chart3();
     });
@@ -866,13 +779,11 @@
         $excelbutton.click(function () {
             $('#TableContent1').tableExport({type:'csv'});
         })
-
     })
     var $excelbutton3 = $('#excelbutton3')
     $(function () {
         $excelbutton3.click(function () {
             $('#TableContent3').tableExport({type:'csv'});
         })
-
     })
 </script>

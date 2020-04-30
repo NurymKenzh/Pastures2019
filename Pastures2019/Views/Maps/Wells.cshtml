@@ -77,9 +77,6 @@
                     </a>
                     <div id="BaseLayerSections" class="collapse show" aria-labelledby="headingOne" data-parent="#BaseLayerSections">
                         <div class="card-body">
-                            @*<label class="form-check-label" for="layerBaseShow">
-                                    @SharedLocalizer["BaseLayer"]
-                                </label>*@
                             <div class="input-group input-group-sm">
                                 <select class="custom-select" id="layerBaseType" onchange="ChangeLayers()">
                                     <option value="OSM">OpenStreetMap</option>
@@ -305,7 +302,7 @@
                 </div>
                 <div class="col-md-auto">
                     <div class="float-right">
-                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                        &copy; @DateTime.Now.Year.ToString() - КазНИИЖиК
                     </div>
                 </div>
                 <div class="col col-lg-2">
@@ -318,7 +315,7 @@
 
 @* layers *@
 <script>
-    var geoserver_url = '@ViewBag.GeoServerUrl', //'http://89.250.84.186:8080/geoserver/',
+    var geoserver_url = '@ViewBag.GeoServerUrl',
         geoserver_workspace_name = 'Pastures2019';
     var HEREappId = 'SLdBasp4s1oq2oUbVGxy';
     var HEREappCode = 'D9-h9iVhjgUB_9eUlFETXA';
@@ -904,7 +901,6 @@
             animation: 'zoomIn',
             overlay: false,
             onOpen: function () {
-                // Add t
                 this.setContent($('#InfoWellsCont'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },
@@ -920,7 +916,6 @@
             animation: 'zoomIn',
             overlay: false,
             onOpen: function () {
-                // Add t
                 this.setContent($('#InfoWellsPolCont'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },

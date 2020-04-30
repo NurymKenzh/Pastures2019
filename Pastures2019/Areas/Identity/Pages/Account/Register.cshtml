@@ -7,8 +7,6 @@
     ViewData["Title"] = SharedLocalizer["Register"];
 }
 
-
-
 <div class="container">
     <form class="form-signin mt-5" asp-route-returnUrl="@Model.ReturnUrl" method="post">
         <div class="text-center mb-4">
@@ -40,28 +38,6 @@
         </div>
         <p class="mt-5 mb-3 text-muted text-center">&copy; @DateTime.Now.Year.ToString() - Pastures</p>
     </form>
-    @*<div class="col-md-4">
-            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.ConfirmPassword"></label>
-                    <input asp-for="Input.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">@SharedLocalizer["Register"]</button>
-            </form>
-        </div>*@
 </div>
 
 @section Scripts {

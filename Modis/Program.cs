@@ -127,7 +127,6 @@ namespace Modis
                 ModisDateStart = ModisDateStart2;
                 MODIS(DownloadDir2);
 
-                // 4 hours
                 Log("Sleep 4 hours");
                 Thread.Sleep(1000 * 60 * 60 * 4);
                 Log("Awake");
@@ -229,25 +228,8 @@ namespace Modis
 
 
                     Fiona(GeoServerModisDataDir);
-
-                    //// work with downloaded MODIS
-                    //foreach(string folder in Directory.EnumerateDirectories(DownloadDir, "*"))
-                    //{
-                    //    // mosaic
-                    //    ModisMosaic(folder);
-
-                    //    // convert
-                    //    ModisConvert(folder);
-
-                    //    // clip
-                    //    TifClip(folder);
-
-                    //    // move to GeoServer
-                    //    // publish
-                    //    Publish(folder);
-                    //}
                 }
-                catch(Exception ex)
+                catch
                 {
                     // delete folders which names start with "!" 
                     foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "!*"))
@@ -257,8 +239,6 @@ namespace Modis
 
                     if (dateTimeFinish.AddDays(30) > DateTime.Now)
                     {
-                        //// 3 hours
-                        //Thread.Sleep(1000 * 60 * 60 * 3);
                         break;
                     }
                 }
@@ -285,7 +265,6 @@ namespace Modis
                 }
 
                 // delete every empty folder
-                //if (Directory.Exists(folderDownloadFinale))
                 bool empty = false;
                 foreach (string folder in Directory.EnumerateDirectories(DownloadDir, "*", SearchOption.TopDirectoryOnly))
                 {
@@ -297,9 +276,6 @@ namespace Modis
                             Directory.Delete(folder, true);
                         }
                         catch { }
-
-                        //// 3 hours
-                        //Thread.Sleep(1000 * 60 * 60 * 3);
                     }
                 }
                 if (empty)
@@ -308,8 +284,6 @@ namespace Modis
                 }
                 if (dateTimeFinish == DateTime.Today)
                 {
-                    //// 1 hour
-                    //Thread.Sleep(1000 * 60 * 60);
                     break;
                 }
             }
@@ -363,12 +337,7 @@ namespace Modis
             {
                 string tifToClip = Path.GetFileName(tif),
                     tifClipped = $"{Path.GetFileNameWithoutExtension(tif)}_KZ.tif";
-                //// 1 (MODIS1) old clip
-                //string arguments = $"-cutline {ClipShape} {tifToClip} {tifClipped}";
-                // 0 (MODIS) with crop and compress
                 string arguments = $"-overwrite -dstnodata -3000 -co COMPRESS=LZW -cutline \"{ClipShape}\" -crop_to_cutline {tifToClip} {tifClipped}";
-                //// 2 (MODIS2) with crop without compress
-                //string arguments = $"-overwrite -dstnodata -3000 -cutline {ClipShape} -crop_to_cutline {tifToClip} {tifClipped}";
                 GDALExecute(
                     CMDPath,
                     "gdalwarp",
@@ -423,10 +392,7 @@ namespace Modis
             }
         }
 
-        private static void Anomaly(string Folder
-            // File - full path
-            //string FileCalc
-            )
+        private static void Anomaly(string Folder)
         {
             foreach (string FileCalc in Directory.EnumerateFiles(GeoServerModisDataDir, "*.tif", SearchOption.TopDirectoryOnly))
             {
@@ -609,10 +575,7 @@ namespace Modis
                                         break;
                                 }
                             }
-                            catch (Exception ex)
-                            {
-
-                            }
+                            catch { }
                         }
                         if (objectid >= 0)
                         {
@@ -629,10 +592,7 @@ namespace Modis
                                 connection.Execute(execute);
                                 connection.Close();
                             }
-                            catch(Exception ex)
-                            {
-
-                            }
+                            catch { }
                         }
                     }
                 }
@@ -736,9 +696,7 @@ namespace Modis
                 process.StartInfo.FileName = CMDPath;
                 process.Start();
 
-                //process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster.py\" \"D:/Documents/Google Drive/New/fiona/layers/adm1pol.shp\" \"D:/Documents/Google Drive/New/fiona/layers/A2000049_MOLT_MOD13Q1006_B01_NDVI_3857_KZ.tif\"");
                 process.StandardInput.WriteLine(Parameters);
-                //process.StandardInput.WriteLine($"python \"C:\\Users\\N\\source\\repos\\Pastures2019\\Modis\\ZonalStatRaster.py\"");
                 process.StandardInput.WriteLine("exit()");
 
                 string output = process.StandardOutput.ReadToEnd();

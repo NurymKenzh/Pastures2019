@@ -36,10 +36,6 @@
     <header>
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark position-sticky border-bottom border-light shadow" style="background-color: #0d77b6;">
             <div class="container">
-                @*<a class="navbar-brand" href="#">Pasture 2019</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPasture" aria-controls="navbarPasture" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>*@
                 <div class="collapse navbar-collapse" id="navbarPasture">
                     <ul class="navbar-nav mr-auto">
                         <li>
@@ -128,7 +124,7 @@
     </main>
     <footer class="footer fixed-bottom bg-light pt-2">
         <div class="container">
-            &copy; @DateTime.Now.Year.ToString() - ГИС-Пастбища @*- <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+            &copy; @DateTime.Now.Year.ToString() - ГИС-Пастбища
             @await Html.PartialAsync("_SelectLanguagePartial")
         </div>
     </footer>

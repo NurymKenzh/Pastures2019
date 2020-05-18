@@ -95,7 +95,6 @@
                                 {
                                     <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
                                 }
-                                @*<a class="dropdown-item" href="#">Something else here</a>*@
                             </div>
                         </li>
                         @if (User.IsInRole("Administrator"))
@@ -124,6 +123,22 @@
     </main>
     <footer class="footer fixed-bottom bg-light pt-2">
         <div class="container">
+            <!--LiveInternet counter--><a href="//www.liveinternet.ru/click"
+                                          target="_blank">
+                <img id="licnt1C2F" width="31" height="31" style="border:0"
+                     title="LiveInternet"
+                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
+                     alt="" />
+            </a>
+            <script>
+    (function (d, s) {
+                    d.getElementById("licnt1C2F").src =
+                    "//counter.yadro.ru/hit?t44.12;r" + escape(d.referrer) +
+                    ((typeof (s) == "undefined") ? "" : ";s" + s.width + "*" + s.height + "*" +
+                        (s.colorDepth ? s.colorDepth : s.pixelDepth)) + ";u" + escape(d.URL) +
+                    ";h" + escape(d.title.substring(0, 150)) + ";" + Math.random()
+                })
+                    (document, screen)</script><!--/LiveInternet-->
             &copy; @DateTime.Now.Year.ToString() - ГИС-Пастбища
             @await Html.PartialAsync("_SelectLanguagePartial")
         </div>

@@ -185,7 +185,7 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th scope="row" id="infoBurOtdel">@SharedLocalizer["BurOtdel"]</th>
+                                <th scope="row" id="infoBurOtdel" style="min-width:30%">@SharedLocalizer["BurOtdel"]</th>
                                 <td class="font-italic" id="valueBurOtdel"></td>
                             </tr>
                             <tr>
@@ -220,7 +220,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDownload">
                             <a class="dropdown-item" href="#" role="button" id="excelbutton"><i class="fa fa-file-excel-o"></i>Excel</a>
-                            <a class="dropdown-item" href="#" role="button" id="pdfbutton"><i class="fa fa-file-pdf-o"></i>PDF</a>
+                            <a class="dropdown-item" href="#" role="button" id="txtbutton"><i class="fa fa-file-text-o"></i>TXT</a>
                         </div>
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                     <div class="float-right">
                         <!--LiveInternet counter--><a href="//www.liveinternet.ru/click"
                                                       target="_blank">
-                            <img id="licnt1C2F" width="31" height="31" style="border:0"
+                            <img id="licnt1C2F" width="16" height="16" style="border:0"
                                  title="LiveInternet"
                                  src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7"
                                  alt="" />
@@ -925,26 +925,14 @@
     // function for export table
     var $table = $('#InfoTableContent')
     var $excelbutton = $('#excelbutton')
-    var $pdfbutton = $('#pdfbutton')    
+    var $txtbutton = $('#txtbutton')    
     $(function () {
         $excelbutton.click(function () {
             $('#InfoTableContent').tableExport({type:'excel'});
         })
-        $pdfbutton.click(function () {
+        $txtbutton.click(function () {
             $('#InfoTableContent').tableExport({
-                type: 'pdf',
-                jspdf: {
-                    orientation: 'p',
-                    format: 'a4',
-                    margins: { left: 10, right: 10, top: 20, bottom: 20 },
-                    autotable: {
-                        styles: {
-                            fillColor: 'inherit',
-                            textColor: 'inherit'
-                        },
-                        tableWidth: 'wrap',
-                    }
-                }
+                type: 'txt'
             });
         })
 

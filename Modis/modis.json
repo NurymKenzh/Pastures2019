@@ -2,6 +2,7 @@
   "Server": true,
   "ModisUser": "kazniizhik",
   "ModisPassword": "Pastures@2020",
+  "Connection": "Host=localhost;Database=Pastures2019;Username=postgres;Password=postgres;Port=5432",
   "ServerSettings": {
     "DownloadDir1": "D:\\MODIS\\MOLT\\MOD13Q1006",
     "DownloadDir2": "D:\\MODIS\\MOLA\\MYD13Q1006",

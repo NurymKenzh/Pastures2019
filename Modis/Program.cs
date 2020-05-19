@@ -18,6 +18,7 @@ namespace Modis
             ModisDateStart = DateTime.Now;
         const int ModisPeriod = 16,
             ModisDataSetIndex = 1;
+        static string connectionString = "";
         static string[] ModisSpans = { "h21v03", "h21v04", "h22v03", "h22v04", "h23v03", "h23v04" };
         const string ModisSource1 = "MOLT",
             ModisSource2 = "MOLA",
@@ -59,6 +60,10 @@ namespace Modis
                 var json = JObject.Parse(settingsString);
                 foreach (JProperty property in json.Properties())
                 {
+                    if (property.Name == "Connection")
+                    {
+                        connectionString = property.Value.ToString();
+                    }
                     if (property.Name == "Server")
                     {
                         Server = Convert.ToBoolean(property.Value);
@@ -506,7 +511,7 @@ namespace Modis
         {
             foreach (string raster in Directory.GetFiles(Folder, "*.tif"))
             {
-                var connection = new NpgsqlConnection("Host=localhost;Database=Pastures2019;Username=postgres;Password=postgresprod;Port=5432");
+                var connection = new NpgsqlConnection(connectionString);
                 connection.Open();
                 string query = $"SELECT raster" +
                     $" FROM public.analytics" +

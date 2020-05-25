@@ -4,7 +4,7 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = SharedLocalizer["Register"];
+    ViewData["Title"] = SharedLocalizer["Login"];
 }
 
 <div class="container">
@@ -12,16 +12,15 @@
         <div class="text-center mb-4">
             <img class="mb-4" src="~/images/logoKazniijik.svg" alt="" width="100" height="100">
             <h1 class="h3 mb-3 font-weight-normal">@ViewData["Title"]</h1>
-            <p>Login or register from here to access</p>
         </div>
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="form-label-group">
-            <input asp-for="Input.Email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+            <input asp-for="Input.Email" id="inputEmail" class="form-control" placeholder="@SharedLocalizer["Email"]" required autofocus>
             <label asp-for="Input.Email"></label>
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>
         <div class="form-label-group">
-            <input asp-for="Input.Password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+            <input asp-for="Input.Password" type="password" id="inputPassword" class="form-control" placeholder="@SharedLocalizer["Password"]" required>
             <label asp-for="Input.Password" for="inputPassword"></label>
             <span asp-validation-for="Input.Password" class="text-danger"></span>
         </div>

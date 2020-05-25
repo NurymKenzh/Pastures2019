@@ -925,6 +925,9 @@
                 this.setContent($('#InfoMap'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },
+            onClose: function () {
+                Source_select_pasturepol.clear();
+            }
         });
     });
     map.on('singleclick', function (evt) {

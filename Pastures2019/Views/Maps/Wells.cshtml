@@ -919,6 +919,9 @@
                 this.setContent($('#InfoWellsCont'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },
+            onClose: function () {
+                Source_select_wellspnt.clear();
+            }
         });
         InfoWellsPolModal = new jBox('Modal', {
             id: 'modal-info',
@@ -934,6 +937,9 @@
                 this.setContent($('#InfoWellsPolCont'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },
+            onClose: function () {
+                Source_select_wellspol.clear();
+            }
         });
     })
     map.on('singleclick', function (evt) {

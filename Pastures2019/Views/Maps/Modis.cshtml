@@ -1208,6 +1208,11 @@
                 this.setContent($('#InfoMap'));
                 this.setTitle('<div class="text-white font-weight-bold">@SharedLocalizer["Information"]</div>');
             },
+            onClose: function () {
+                $('#objectid').val(null);
+                $('#chartspan').text('0');
+                Source_select_pasturepol.clear();
+            }
         });
     });
     map.on('singleclick', function (evt) {

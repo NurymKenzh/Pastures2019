@@ -1328,8 +1328,10 @@
                     if (Layer_pasfarmpol.getVisible() && data.features.length > 0) {
                         var parser = new ol.format.GeoJSON();
                         var features = parser.readFeatures(data);
-                        var win = window.open('http://' + '@Context.Request.Host' + '/FarmPastures/Details/' + features[0].get('id'), '_blank');
-                        console.log('http://' + '@Context.Request.Host' + '/FarmPastures/Details/' + features[0].get('id'));
+                        var mapid = features[0].get('mapid');
+                        if (Number.isInteger(mapid)) {
+                            var win = window.open('http://' + '@Context.Request.Host' + '/FarmPastures/Details/' + mapid, '_blank');
+                        }
                     }
                 });
             }

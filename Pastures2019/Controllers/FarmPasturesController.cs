@@ -74,7 +74,7 @@ namespace Pastures2019.Controllers
             }
 
             var farmPasture = await _context.FarmPasture
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.tid == id);
             if (farmPasture == null)
             {
                 return NotFound();

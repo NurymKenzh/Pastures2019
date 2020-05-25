@@ -1307,6 +1307,33 @@
         else if (tool == 'select_raster') {
 
         }
+        if (Layer_pasfarmpol.getVisible()) {
+            var viewResolution = (map.getView().getResolution());
+            var url_pasfarmpol = Source_pasfarmpol.getGetFeatureInfoUrl(
+                evt.coordinate, viewResolution, 'EPSG:3857',
+                {
+                    'INFO_FORMAT': 'text/javascript'
+                });
+            if (url_pasfarmpol) {
+                jQuery.ajax({
+                    jsonp: false,
+                    jsonpCallback: 'getJson',
+                    type: 'GET',
+                    url: url_pasfarmpol + "&format_options=callback:getJson",
+                    async: false,
+                    dataType: 'jsonp',
+                    error: function () {
+                    }
+                }).then(function (data) {
+                    if (Layer_pasfarmpol.getVisible() && data.features.length > 0) {
+                        var parser = new ol.format.GeoJSON();
+                        var features = parser.readFeatures(data);
+                        var win = window.open('http://' + '@Context.Request.Host' + '/FarmPastures/Details/' + features[0].get('id'), '_blank');
+                        console.log('http://' + '@Context.Request.Host' + '/FarmPastures/Details/' + features[0].get('id'));
+                    }
+                });
+            }
+        }
     })
     // function for export table
     var $table = $('#InfoTableContent')

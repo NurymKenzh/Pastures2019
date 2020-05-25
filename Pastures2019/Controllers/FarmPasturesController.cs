@@ -66,7 +66,6 @@ namespace Pastures2019.Controllers
         }
 
         // GET: FarmPastures/Details/5
-        [Authorize(Roles = "Administrator, Moderator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

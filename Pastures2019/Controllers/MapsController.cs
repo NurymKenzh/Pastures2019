@@ -226,7 +226,11 @@ namespace Pastures2019.Controllers
                     foreach (dynamic layer in layerObjectArray)
                     {
                         string layerName = layer.name;
-                        if (layerName.Split(':')[0] == modisWorkspace)
+                        if ((layerName.Split(':')[0] == modisWorkspace) ||
+                            (layerName.Contains(Startup.Configuration["ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI"].ToString())) ||
+                            (layerName.Contains(Startup.Configuration["ModisLayerTemplate_MOLT_MOD13Q1006_B01_NDVI_Anomaly"].ToString())) ||
+                            (layerName.Contains(Startup.Configuration["ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI"].ToString())) ||
+                            (layerName.Contains(Startup.Configuration["ModisLayerTemplate_MOLA_MYD13Q1006_B01_NDVI_Anomaly"].ToString())))
                         {
                             layers.Add(layerName.Split(':')[1]);
                         }

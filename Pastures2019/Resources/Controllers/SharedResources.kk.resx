@@ -669,6 +669,9 @@
   <data name="NaturalArea" xml:space="preserve">
     <value>Табиғи аймақ</value>
   </data>
+  <data name="NDVI" xml:space="preserve">
+    <value>NDVI (Өсімдіктің дамуын бағалау индексі)</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Жаңа Құпия Сөз</value>
   </data>

@@ -669,6 +669,9 @@
   <data name="NaturalArea" xml:space="preserve">
     <value>Natural area</value>
   </data>
+  <data name="NDVI" xml:space="preserve">
+    <value>NDVI (Crop Development Assessment Index)</value>
+  </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>
   </data>

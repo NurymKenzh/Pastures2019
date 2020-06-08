@@ -135,7 +135,7 @@
                         </div>
                     </div>
                 </form>
-                <button id="FindKATOBtn" type="button" class="btn btn-warning btn-sm btn-block mt-3"><i class="fa fa-search"></i> @SharedLocalizer["Search"]</button>
+                <button id="FindKATOBtn" type="button" class="btn btn-warning btn-sm btn-block mt-3 SomeInfo" InfoTitle="Поиск по КАТО"><i class="fa fa-search"></i> @SharedLocalizer["Search"]</button>
             </div>
             <!-- Other sections -->
             <ul class="list-unstyled menu-elements mt-lg-2">
@@ -297,6 +297,9 @@
                         </tbody>
                     </table>
                     <div class="btn-group float-right" role="group">
+                        <button id="ChartsButton" onclick="Charts()" type="button" class="btn btn-outline-success btn-sm">
+                            <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="График временных рядов MODIS NDVI"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
+                        </button>
                         <button id="btnGroupDownload" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @SharedLocalizer["Download"]
                         </button>
@@ -344,11 +347,7 @@
             <div class="row align-items-center m-1">
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="ChartsButton" onclick="Charts()" type="button" class="btn btn-outline-primary btn-sm">
-                                <i class="SomeInfo fa fa-bar-chart-o" InfoTitle="Для построение Графика, сначало выберите объект на карте"></i><span id="chartspan" class="badge badge-pill badge-warning ml-1">0</span>
-                            </button>
-                        </div>
+                        
                         <div class="btn-group mr-2" role="group" aria-label="First group">
                             <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["Search"]"></i></button>
                         </div>
@@ -1587,6 +1586,7 @@
         // Tooltip below to the right
         new jBox('Tooltip', {
             theme: 'TooltipDark',
+            zIndex: 'auto',
             attach: '.SomeInfo',
             getTitle: 'InfoTitle',
             closeOnMouseleave: true,

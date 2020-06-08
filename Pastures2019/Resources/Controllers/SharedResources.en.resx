@@ -429,6 +429,9 @@
   <data name="ExtractStarted" xml:space="preserve">
     <value>Extract started</value>
   </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>Your questions</value>
+  </data>
   <data name="Farm" xml:space="preserve">
     <value>Farm</value>
   </data>

@@ -429,6 +429,9 @@
   <data name="ExtractStarted" xml:space="preserve">
     <value>Шығару басталды</value>
   </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>Сіздің сұрақтарыңыз</value>
+  </data>
   <data name="Farm" xml:space="preserve">
     <value>Шаруашылық</value>
   </data>

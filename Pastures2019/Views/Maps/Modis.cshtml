@@ -1018,7 +1018,8 @@
     }
 
     function ChangeMapTitle() {
-        $('#MapTitle').text($("#SourceProduct option:selected").text() + ' ' + $("#DataSet option:selected").text());
+        $('#MapTitle').text($("#SourceProduct option:selected").text() );
+        $('#MapTitleSub').text( $("#DataSet option:selected").text());
         if ($("#DataSet").val() == 'NDVI') {
             $('#MapTitleLong').text(
                 $("#Year_MOLT_MOD13Q1006 option:selected").text() + '. ' + $("#DayOfYear_MOLT_MOD13Q1006 option:selected").text()
@@ -1554,7 +1555,7 @@
         new jBox('Modal', {
             attach: '#MapTitleBtn',
             theme: 'TooltipBorder',
-            width: 260,
+            width: 320,
             blockScroll: false,
             animation: 'flip',
             closeButton: false,
@@ -1568,6 +1569,7 @@
             },
             content: (
                 '<h5 id="MapTitle" class="Card-title text-center text-white">Map title</h5>' +
+                '<p id="MapTitleSub" class="card-text text-center text-white m-0">This content is a little bit longer.</p>' +
                 '<p id="MapTitleLong" class="card-text text-center text-white">This content is a little bit longer.</p>'
             ),
             overlay: false,

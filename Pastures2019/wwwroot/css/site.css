@@ -857,3 +857,9 @@ a.btn-customized-4 {
 }
 
 
+/* openlayers */
+.ol-zoom {
+    left: unset !important;
+    right: 10px !important;
+    top: 150px !important;
+}

@@ -72,5 +72,10 @@ namespace Pastures2019.Controllers
         {
             return View();
         }
+
+        public ActionResult FAQ()
+        {
+            return View();
+        }
     }
 }

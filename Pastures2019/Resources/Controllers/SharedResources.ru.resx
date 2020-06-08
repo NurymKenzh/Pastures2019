@@ -429,6 +429,9 @@
   <data name="ExtractStarted" xml:space="preserve">
     <value>Извлечение запущено</value>
   </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>Ваши вопросы</value>
+  </data>
   <data name="Farm" xml:space="preserve">
     <value>Хозяйство</value>
   </data>
@@ -668,6 +671,9 @@
   </data>
   <data name="NaturalArea" xml:space="preserve">
     <value>Природная зона</value>
+  </data>
+  <data name="NDVI" xml:space="preserve">
+    <value>NDVI (индекс оценки развития культур)</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>Новый пароль</value>

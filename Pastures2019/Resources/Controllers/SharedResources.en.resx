@@ -429,6 +429,9 @@
   <data name="ExtractStarted" xml:space="preserve">
     <value>Extract started</value>
   </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>Your questions</value>
+  </data>
   <data name="Farm" xml:space="preserve">
     <value>Farm</value>
   </data>
@@ -668,6 +671,9 @@
   </data>
   <data name="NaturalArea" xml:space="preserve">
     <value>Natural area</value>
+  </data>
+  <data name="NDVI" xml:space="preserve">
+    <value>NDVI (Crop Development Assessment Index)</value>
   </data>
   <data name="NewPassword" xml:space="preserve">
     <value>New password</value>

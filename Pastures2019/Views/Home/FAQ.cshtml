@@ -1,0 +1,55 @@
+﻿@using Pastures2019.Controllers
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["FAQ"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-7">
+                @if (System.Threading.Thread.CurrentThread.CurrentCulture != null)
+                {
+                    if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "ru")
+                    {
+                        <dl>
+                            @*<dt>Что означает номер выдела?</dt>
+                            <dd></dd>*@
+                            <dt>Что такое NDVI?</dt>
+                            <dd>NDVI (Нормализованный вегетационный индекс) — это показатель здоровья растения, который вычисляется по тому, как растение отражает и поглощает разные световые волны.</dd>
+                            <dt>Как работает спутник?</dt>
+                            <dd>Для движения по орбите вокруг Земли аппарат должен иметь начальную скорость, равную или большую первой космической скорости. Полёты ИСЗ выполняются на высотах до нескольких сотен тысяч километров. Нижнюю границу высоты полёта ИСЗ обуславливает необходимость избегания процесса быстрого торможения в атмосфере.</dd>
+                            <dt>Для чего нужна регистрация?</dt>
+                            <dd>Регистрация требуется для администраторов и модераторов сайта.</dd>
+                        </dl>
+                    }
+                    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "kk")
+                    {
+                        <dl>
+                            @*<dt>Бөлу нөмірі нені білдіреді?</dt>
+                            <dd></dd>*@
+                            <dt>NDVI дегеніміз не?</dt>
+                            <dd>NDVI (вегетацияның қалыпқа келтірілген индексі) - бұл өсімдік әр түрлі жарық толқындарын қалай шағылыстыратыны мен сіңіретіндігімен есептелетін өсімдік денсаулығының көрсеткіші.</dd>
+                            <dt>Спутник қалай жұмыс істейді?</dt>
+                            <dd>Жердің айналасында орбитада қозғалу үшін құрылғының алғашқы жылдамдығы бірінші ғарыштық жылдамдыққа тең немесе одан үлкен болуы керек. AES рейстері бірнеше жүз мың шақырымға дейінгі биіктікте жүзеге асырылады. Спутниктің ұшу биіктігінің төменгі шегі атмосферада жылдам тежелу процесін болдырмауға мәжбүр етеді.</dd>
+                            <dt>Неліктен тіркелу керек?</dt>
+                            <dd>Тіркеу сайт әкімшілері мен модераторлар үшін қажет.</dd>
+                        </dl>
+                    }
+                    else if (System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "en")
+                    {
+                        <dl>
+                            @*<dt>What does the allotment number mean?</dt>
+                            <dd></dd>*@
+                            <dt>What is NDVI?</dt>
+                            <dd>NDVI (Normalized Vegetation Index) is a measure of plant health, which is calculated by how the plant reflects and absorbs different light waves.</dd>
+                            <dt>How does a satellite work?</dt>
+                            <dd>To move in orbit around the Earth, the device must have an initial velocity equal to or greater than the first cosmic velocity. AES flights are carried out at altitudes of up to several hundred thousand kilometers. The lower limit of the satellite’s flight altitude necessitates avoiding the process of rapid braking in the atmosphere.</dd>
+                            <dt>What is registration necessary for?</dt>
+                            <dd>Registration is required for site administrators and moderators.</dd>
+                        </dl>
+                    }
+                }
+            </div>
+        </div>
+    </div>

@@ -234,8 +234,8 @@
         </div>
         <div class="chiller-theme">
             <div class="sidebar-footer">
-                <a asp-area="" asp-controller="Home" asp-action="About">
-                    <i class="SomeInfo fa fa-file" InfoTitle="@SharedLocalizer["About"]"></i>
+                <a href="#">
+                    <i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i>
                 </a>
                 <a asp-area="" asp-controller="Home" asp-action="Instruction">
                     <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
@@ -959,7 +959,14 @@
             animation: 'slide',
             title: '@SharedLocalizer["Search"]',
             content: $('#FindKATOContent'),
-            overlay: false
+            overlay: false,
+            position: {
+                x: 'left',
+                y: 'center'
+            },
+            offset: {
+                x: 300
+            },
         });
     });
     var cato = new Array();
@@ -1067,7 +1074,14 @@
             animation: 'slide',
             title: '@SharedLocalizer["PastureSearch"]',
             content: $('#FilterPasture'),
-            overlay: false
+            overlay: false,
+            position: {
+                x: 'left',
+                y: 'center'
+            },
+            offset: {
+                x: 300
+            },
         });
     });
     function FindPastures() {

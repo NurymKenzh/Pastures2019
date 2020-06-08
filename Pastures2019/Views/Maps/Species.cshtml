@@ -245,7 +245,10 @@
                 <a asp-area="" asp-controller="Home" asp-action="About">
                     <i class="SomeInfo fa fa-file" InfoTitle="@SharedLocalizer["About"]"></i>
                 </a>
-                <a asp-area="" asp-controller="Home" asp-action="Instruction">
+                @*<a asp-area="" asp-controller="Home" asp-action="Instruction">
+                    <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
+                </a>*@
+                <a href="/Home/Instruction#Species">
                     <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
                 <a href="#" id="LegendBtn" class="target-click">

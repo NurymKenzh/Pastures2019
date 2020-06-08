@@ -339,6 +339,9 @@
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
                             <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
                         </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Four group">
+                            <button id="LegendBtn2" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-list-alt" InfoTitle="@SharedLocalizer["Legend"]"></i></button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-auto">
@@ -1499,25 +1502,15 @@
             ),
             overlay: false,
         }).open();
+
         // Map Legend
-        new jBox('Modal', {
-            attach: '#LegendBtn',
-            theme: 'TooltipBorder',
-            width: 500,
-            maxHeight: 550,
-            animation: 'flip',
-            closeButton: 'box',
-            position: {
-                x: 'right',
-                y: 'top'
-            },
-            offset: {
-                x: -10,
-                y: 200
-            },
-            content: '<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>',
-            overlay: false,
+        $('#LegendBtn').on('click', function () {
+            InfoLegendModal.open()
         });
+        $('#LegendBtn2').on('click', function () {
+            InfoLegendModal.open()
+        });
+
         // Tooltip below to the right
         new jBox('Tooltip', {
             theme: 'TooltipDark',
@@ -1529,6 +1522,32 @@
             minWidth: 100,
             adjustPosition: true,
             adjustTracker: true
+        });
+    });
+    $(document).ready(function () {
+        InfoLegendModal = new jBox('Modal', {
+            theme: 'TooltipBorder',
+            width: 500,
+            maxHeight: 550,
+            zIndex: 'auto',
+            closeButton: true,
+            overlay: false,
+            reload: 'strict',
+            animation: 'flip',
+            adjustPosition: false,
+            closeButton: true,
+            closeOnConfirm: true,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 300
+            },
+            onOpen: function () {
+                this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/pasturepol150.jpg"></div>');
+            },
         });
     });
 </script>

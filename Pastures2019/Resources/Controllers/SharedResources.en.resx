@@ -312,6 +312,9 @@
   <data name="ClickingHere" xml:space="preserve">
     <value>clicking here</value>
   </data>
+  <data name="ClickOnAPlaceOnTheMapToGetInformationAboutObjects" xml:space="preserve">
+    <value>Click on a place on the map to get information about objects</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
@@ -956,6 +959,9 @@
   </data>
   <data name="Table" xml:space="preserve">
     <value>Table</value>
+  </data>
+  <data name="TerritorySearch" xml:space="preserve">
+    <value>Territory Search</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>The {0} must be at least {2} and at max {1} characters long.</value>

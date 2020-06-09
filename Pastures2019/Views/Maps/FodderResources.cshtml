@@ -36,16 +36,16 @@
                         <div class="col">
                             <form>
                                 <div class="form-group mb-0">
-                                    <label class="m-0" for="cato1">@SharedLocalizer["Areas"]</label>
-                                    <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                                    <label class="m-0" for="catosearch1">@SharedLocalizer["Areas"]</label>
+                                    <select class="form-control form-control-sm" id="catosearch1" onchange="ChangeCATOsearch1()"></select>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <label for="cato2" class="m-0">@SharedLocalizer["Districts"]</label>
-                                    <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                                    <label for="catosearch2" class="m-0">@SharedLocalizer["Districts"]</label>
+                                    <select class="form-control form-control-sm" id="catosearch2" onchange="ChangeCATOsearch2()"></select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="cato3" class="m-0">@SharedLocalizer["RuralCounties"]</label>
-                                    <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                                    <label for="catosearch3" class="m-0">@SharedLocalizer["RuralCounties"]</label>
+                                    <select class="form-control form-control-sm" id="catosearch3" onchange="ChangeCATOsearch3()"></select>
                                 </div>
                             </form>
                         </div>
@@ -1076,9 +1076,11 @@
         @:cato.push(cato_new);
     }
     $('#cato1').append($("<option />"));
+    $('#catosearch1').append($("<option />"));
     $.each(cato, function () {
         if (this.cd == '00') {
             $('#cato1').append($("<option />").val(this.te).text(this.name));
+            $('#catosearch1').append($("<option />").val(this.te).text(this.name));
         }
     });
 
@@ -1110,6 +1112,36 @@
 
     function ChangeCATO3() {
         NavigateToCATO($('#cato3').val(), 3);
+    }
+
+    function ChangeCATOsearch1() {
+        NavigateToCATO($('#catosearch1').val(), 1);
+        var ab = $('#catosearch1').val().substr(0, 2);
+        $('#catosearch2').empty();
+        $('#catosearch3').empty();
+        $('#catosearch2').append($("<option />"));
+        $.each(cato, function () {
+            if (this.ef == '00' && this.ab == ab && this.cd != '00') {
+                $('#catosearch2').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATOsearch2() {
+        NavigateToCATO($('#catosearch2').val(), 2);
+        var ab = $('#catosearch2').val().substr(0, 2),
+            cd = $('#catosearch2').val().substr(2, 2);
+        $('#catosearch3').empty();
+        $('#catosearch3').append($("<option />"));
+        $.each(cato, function () {
+            if (this.hij == '000' && this.ab == ab && this.cd == cd && this.ef != '00') {
+                $('#catosearch3').append($("<option />").val(this.te).text(this.name));
+            }
+        });
+    }
+
+    function ChangeCATOsearch3() {
+        NavigateToCATO($('#catosearch3').val(), 3);
     }
 
     var first_admXpol_Navigate = true;

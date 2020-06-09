@@ -312,6 +312,9 @@
   <data name="ClickingHere" xml:space="preserve">
     <value>нажав здесь</value>
   </data>
+  <data name="ClickOnAPlaceOnTheMapToGetInformationAboutObjects" xml:space="preserve">
+    <value>Нажмите на нужно место на карте, чтобы получить информации об объектах</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>Код</value>
   </data>
@@ -956,6 +959,9 @@
   </data>
   <data name="Table" xml:space="preserve">
     <value>Таблица</value>
+  </data>
+  <data name="TerritorySearch" xml:space="preserve">
+    <value>Поиск территории</value>
   </data>
   <data name="The0MustBeAtLeast2AndAtMax1CharactersLong" xml:space="preserve">
     <value>{0} должен быть не менее {2} и не более {1} символов.</value>

@@ -135,10 +135,32 @@
                         </div>
                     </div>
                 </form>
-                <button id="FindKATOBtn" type="button" class="btn btn-warning btn-sm btn-block mt-3 SomeInfo" InfoTitle="Поиск по КАТО"><i class="fa fa-search"></i> @SharedLocalizer["Search"]</button>
             </div>
             <!-- Other sections -->
             <ul class="list-unstyled menu-elements mt-lg-2">
+                <li>
+                    <a href="#FindKATOSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="FindKATOSections">
+                        <i class="fa fa-search"></i>Поиск территории
+                    </a>
+                    <div id="FindKATOSections" class="collapse show" aria-labelledby="headingOne" data-parent="#FindKATOSections">
+                        <div class="col">
+                            <form>
+                                <div class="form-group mb-0">
+                                    <label class="m-0" for="cato1">@SharedLocalizer["Areas"]</label>
+                                    <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="cato2" class="m-0">@SharedLocalizer["Districts"]</label>
+                                    <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cato3" class="m-0">@SharedLocalizer["RuralCounties"]</label>
+                                    <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </li>
                 <li>
                     <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
                         <i class="fa fa-list"></i>@SharedLocalizer["BaseLayers"]
@@ -235,23 +257,7 @@
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
             </div>
-            <div class="card-body">
-                <div class="col-md-12" style="display: none" id="FindKATOContent">
-                    <form>
-                        <div class="form-group m-0">
-                            <label for="cato1" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Areas"]</label>
-                            <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
-                        </div>
-                        <div class="form-group m-0">
-                            <label for="cato2" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["Districts"]</label>
-                            <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
-                        </div>
-                        <div class="form-group m-0">
-                            <label for="cato3" class="col-sm-auto col-form-label col-form-label-sm">@SharedLocalizer["RuralCounties"]</label>
-                            <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
-                        </div>
-                    </form>
-                </div>
+            <div class="card-body">                
                 <div class="table-responsive-sm" style="display: none" id="InfoMap">
                     <table class="table table-striped table-hover table-sm small" id="InfoTableContent">
                         <tbody>
@@ -316,14 +322,11 @@
                 <a  href="#">
                     <i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]"  onclick="ToHome()"></i>
                 </a>
-                @*<a asp-area="" asp-controller="Home" asp-action="Instruction">
-                    <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
-                </a>*@
                 <a href="/Home/Instruction#MODIS">
                     <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
-                <a href="#" id="LegendBtn" class="target-click">
-                    <i class="SomeInfo fa fa-list-alt" InfoTitle="@SharedLocalizer["Legend"]"></i>
+                <a href="#" id="InfoBtn" class="target-click">
+                    <i class="SomeInfo fa fa-info-circle" InfoTitle="Нажмите на нужно место на карте, чтобы получить информации об объектах"></i>
                 </a>
                 <a href="#" id="MapTitleBtn" class="target-click">
                     <i class="SomeInfo fa fa-bookmark" InfoTitle="@SharedLocalizer["LayerInfo"]"></i>
@@ -347,10 +350,6 @@
             <div class="row align-items-center m-1">
                 <div class="col">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-                        
-                        <div class="btn-group mr-2" role="group" aria-label="First group">
-                            <button id="FindKATOBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-search" InfoTitle="@SharedLocalizer["Search"]"></i></button>
-                        </div>
                         <div class="btn-group mr-2" role="group" aria-label="Third group">
                             <button id="HomeBtn" type="button" class="btn btn-outline-primary btn-sm"><i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i></button>
                         </div>
@@ -1368,28 +1367,6 @@
 
 @* CATO *@
 <script>
-    $(document).ready(function () {
-        new jBox('Modal', {
-            attach: '#FindKATOBtn',
-            width: 300,
-            responsiveHeight: true,
-            zIndex: 'auto',
-            draggable: 'title',
-            closeOnClick: false,
-            closeButton: 'title',
-            animation: 'slide',
-            title: '@SharedLocalizer["Search"]',
-            content: $('#FindKATOContent'),
-            overlay: false,
-            position: {
-                x: 'left',
-                y: 'center'
-            },
-            offset: {
-                x: 300
-            },
-        });
-    });
     var cato = new Array();
     @foreach (CATO cATO in ViewBag.CATO)
     {
@@ -1576,13 +1553,29 @@
             repositionOnOpen: false
         }).open();
         // Map Legend
-        $('#LegendBtn').on('click', function () {
-            InfoLegendModal.open()
-        });
-        $('#LegendBtn2').on('click', function () {
-            InfoLegendModal.open()
-        });
-        
+        new jBox('Modal', {
+            attach: '#LegendBtn2',
+            theme: 'TooltipBorder',
+            minWidth: 100,
+            zIndex: 'auto',
+            closeButton: true,
+            overlay: false,
+            reload: 'strict',
+            animation: 'flip',
+            adjustPosition: false,
+            closeButton: true,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 350
+            },
+            onOpen: function () {
+                this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>');
+            }
+        });        
         // Tooltip below to the right
         new jBox('Tooltip', {
             theme: 'TooltipDark',
@@ -1597,30 +1590,5 @@
             adjustTracker: true
         });
         ChangeMapTitle();
-    });
-    $(document).ready(function () {
-        InfoLegendModal = new jBox('Modal', {
-            theme: 'TooltipBorder',
-            minWidth: 100,
-            zIndex: 'auto',
-            closeButton: true,
-            overlay: false,
-            reload: 'strict',
-            animation: 'flip',
-            adjustPosition: false,
-            closeButton: true,
-            closeOnConfirm: true,
-            position: {
-                x: 'right',
-                y: 'top'
-            },
-            offset: {
-                x: -10,
-                y: 300
-            },
-            onOpen: function () {
-                this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>');
-            },
-        });
     });
 </script>

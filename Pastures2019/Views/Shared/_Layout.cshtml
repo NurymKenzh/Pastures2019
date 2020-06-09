@@ -36,6 +36,10 @@
     <header>
         <nav class="navbar navbar-expand-lg fixed-top navbar-dark position-sticky border-bottom border-light shadow" style="background-color: #0d77b6;">
             <div class="container">
+                <a class="navbar-brand text-capitalize" href="http://kazniizhik.kz/">
+                    <img src="~/images/logoKazniijik.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                    КазНИИЖиК
+                </a>
                 <div class="collapse navbar-collapse" id="navbarPasture">
                     <ul class="navbar-nav mr-auto">
                         <li>
@@ -78,32 +82,32 @@
                             {
                                 <a class="nav-link dropdown-toggle" href="#" id="somemenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@SharedLocalizer["Others"]</a>
                             }
-                        <div class="dropdown-menu" aria-labelledby="somemenu">
-                            @if (controllerName == "Home" && actionName == "Instruction")
-                            {
-                                <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
-                            }
-                            else
-                            {
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
-                            }
-                            @if (controllerName == "Home" && actionName == "Contact")
-                            {
-                                <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
-                            }
-                            else
-                            {
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
-                            }
-                            @if (controllerName == "Home" && actionName == "FAQ")
-                            {
-                                <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="FAQ">@SharedLocalizer["FAQ"]</a>
-                            }
-                            else
-                            {
-                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="FAQ">@SharedLocalizer["FAQ"]</a>
-                            }
-                        </div>
+                            <div class="dropdown-menu" aria-labelledby="somemenu">
+                                @if (controllerName == "Home" && actionName == "Instruction")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Instruction">@SharedLocalizer["Instruction"]</a>
+                                }
+                                @if (controllerName == "Home" && actionName == "Contact")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">@SharedLocalizer["Contact"]</a>
+                                }
+                                @if (controllerName == "Home" && actionName == "FAQ")
+                                {
+                                    <a class="dropdown-item active" asp-area="" asp-controller="Home" asp-action="FAQ">@SharedLocalizer["FAQ"]</a>
+                                }
+                                else
+                                {
+                                    <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="FAQ">@SharedLocalizer["FAQ"]</a>
+                                }
+                            </div>
                         </li>
                         @if (User.IsInRole("Administrator"))
                         {

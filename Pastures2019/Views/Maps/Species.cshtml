@@ -28,6 +28,29 @@
             <!-- Other sections -->
             <ul class="list-unstyled menu-elements">
                 <li>
+                    <a href="#FindKATOSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="FindKATOSections">
+                        <i class="fa fa-search"></i>Поиск территории
+                    </a>
+                    <div id="FindKATOSections" class="collapse show" aria-labelledby="headingOne" data-parent="#FindKATOSections">
+                        <div class="col">
+                            <form>
+                                <div class="form-group mb-0">
+                                    <label class="m-0" for="cato1">@SharedLocalizer["Areas"]</label>
+                                    <select class="form-control form-control-sm" id="cato1" onchange="ChangeCATO1()"></select>
+                                </div>
+                                <div class="form-group mb-0">
+                                    <label for="cato2" class="m-0">@SharedLocalizer["Districts"]</label>
+                                    <select class="form-control form-control-sm" id="cato2" onchange="ChangeCATO2()"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="cato3" class="m-0">@SharedLocalizer["RuralCounties"]</label>
+                                    <select class="form-control form-control-sm" id="cato3" onchange="ChangeCATO3()"></select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li>
                     <a href="#TematicLayerSections" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" role="button" aria-controls="TematicLayerSections">
                         <i class="fa fa-list"></i>@SharedLocalizer["BaseLayers"]
                     </a>
@@ -245,14 +268,11 @@
                 <a href="#">
                     <i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i>
                 </a>
-                @*<a asp-area="" asp-controller="Home" asp-action="Instruction">
-                    <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
-                </a>*@
                 <a href="/Home/Instruction#Species">
                     <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
-                <a href="#" id="LegendBtn" class="target-click">
-                    <i class="SomeInfo fa fa-list-alt" InfoTitle="@SharedLocalizer["Legend"]"></i>
+                <a href="#" id="InfoBtn" class="target-click">
+                    <i class="SomeInfo fa fa-info-circle" InfoTitle="Нажмите на нужно место на карте, чтобы получить информации об объектах"></i>
                 </a>
                 <a href="#" id="MapTitleBtn" class="target-click">
                     <i class="SomeInfo fa fa-bookmark" InfoTitle="@SharedLocalizer["LayerInfo"]"></i>
@@ -1349,12 +1369,30 @@
         }).open();
 
         // Map Legend
-        $('#LegendBtn').on('click', function () {
-            InfoLegendModal.open()
-        });
-        $('#LegendBtn2').on('click', function () {
-            InfoLegendModal.open()
-        });
+        new jBox('Modal', {
+            attach: '#LegendBtn2',
+            theme: 'TooltipBorder',
+            width: 400,
+            maxHeight: 500,
+            zIndex: 'auto',
+            closeButton: true,
+            overlay: false,
+            reload: 'strict',
+            animation: 'flip',
+            adjustPosition: false,
+            closeButton: true,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            offset: {
+                x: -10,
+                y: 300
+            },
+            onOpen: function () {
+                this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/species.jpg"></div>');
+            }
+        }); 
 
         // Tooltip below to the right
         new jBox('Tooltip', {
@@ -1363,36 +1401,10 @@
             getTitle: 'InfoTitle',
             closeOnMouseleave: true,
             pointer: 'center:-20',
-            maxWidth: 400,
+            maxWidth: 450,
             minWidth: 100,
             adjustPosition: true,
             adjustTracker: true
-        });
-    });
-    $(document).ready(function () {
-        InfoLegendModal = new jBox('Modal', {
-            theme: 'TooltipBorder',
-            width: 400,
-            maxHeight: 550,
-            zIndex: 'auto',
-            closeButton: true,
-            overlay: false,
-            reload: 'strict',
-            animation: 'flip',
-            adjustPosition: false,
-            closeButton: true,
-            closeOnConfirm: true,
-            position: {
-                x: 'right',
-                y: 'bootom'
-            },
-            offset: {
-                x: -10,
-                y: -100
-            },
-            onOpen: function () {
-                this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/species.jpg"></div>');
-            },
         });
     });
 </script>

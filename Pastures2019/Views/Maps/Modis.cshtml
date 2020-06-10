@@ -1580,7 +1580,12 @@
                 y: 350
             },
             onOpen: function () {
-                this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>');
+                if ($('#DataSet').val() == 'NDVI') {
+                    this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVI.svg"></div>');
+                }
+                else if ($('#DataSet').val() == 'Anomaly') {
+                    this.setContent('<div class="p-0"><img id="legend" class="card-img-top" src="/images/Legends/LegendNDVIAnomaly.svg"></div>');
+                }
             }
         });        
         // Tooltip below to the right

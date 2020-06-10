@@ -48,12 +48,19 @@
                         </div>
                     </div>
                     <input id="layerMODISOpacity" type="range" class="form-control-range" min="0" max="100" value="80" oninput="ChangeLayers()" />
-                    <div class="form-group mb-0">
-                        <label class="m-0" for="DataSet">@SharedLocalizer["Dataset"]</label>
-                        <select class="form-control form-control-sm" id="DataSet" onchange="ChangeDataSet()">
+                    <label class="m-0" for="DataSet">@SharedLocalizer["Dataset"]</label>
+                    <div class="input-group input-group-sm">
+                        <select class="form-control" id="DataSet" onchange="ChangeDataSet()">
                             <option value="NDVI">@SharedLocalizer["NDVI"]</option>
                             <option value="Anomaly">@SharedLocalizer["Anomaly"]</option>
                         </select>
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <a href="/Home/FAQ#NDVI" target="_blank">
+                                    <i class="SomeInfo fa fa-info-circle" InfoTitle="@SharedLocalizer["Info"]"></i>
+                                </a>
+                            </span>                            
+                        </div>
                     </div>
                     <!-- Year for Terra -->
                     <div class="form-group mt-1 mb-1 MOLT_MOD13Q1006">

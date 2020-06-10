@@ -139,7 +139,7 @@
     <value>Бөлу нөмірі</value>
   </data>
   <data name="Anomaly" xml:space="preserve">
-    <value>Аномалия</value>
+    <value>NDVI Аномалияcы, %</value>
   </data>
   <data name="AreaOfPasturesha" xml:space="preserve">
     <value>Жайылымдық жерлердің ауданы, га</value>

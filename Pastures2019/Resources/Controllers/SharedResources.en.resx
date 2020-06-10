@@ -139,7 +139,7 @@
     <value>Allocation Number</value>
   </data>
   <data name="Anomaly" xml:space="preserve">
-    <value>Anomaly</value>
+    <value>NDVI Anomaly, %</value>
   </data>
   <data name="AreaOfPasturesha" xml:space="preserve">
     <value>Area of pasture lands, ha</value>

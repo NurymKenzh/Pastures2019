@@ -139,7 +139,7 @@
     <value>Номер выдела</value>
   </data>
   <data name="Anomaly" xml:space="preserve">
-    <value>Аномалия</value>
+    <value>NDVI Аномалия, %</value>
   </data>
   <data name="AreaOfPasturesha" xml:space="preserve">
     <value>Площадь патбищ, га</value>

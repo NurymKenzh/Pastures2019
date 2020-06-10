@@ -313,7 +313,7 @@
     <value>нажав здесь</value>
   </data>
   <data name="ClickOnAPlaceOnTheMapToGetInformationAboutObjects" xml:space="preserve">
-    <value>Нажмите на нужно место на карте, чтобы получить информации об объектах</value>
+    <value>Нажмите на нужное место на карте, чтобы получить информацию об объектах</value>
   </data>
   <data name="Code" xml:space="preserve">
     <value>Код</value>

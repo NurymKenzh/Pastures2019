@@ -139,25 +139,19 @@
             <div class="card-body">
                 <div class="col-sm-12" style="display: none" id="FilterPasture">
                     <form>
-                        <div class="form-row">
-                            <label class="col-sm-4 col-form-label" for="Otdel">@SharedLocalizer["Otdel"]</label>
-                            <div class="col-sm-8">
-                                <select class="form-control form-control-sm" id="find_otdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value=""><option value=""></option></select>
-                            </div>
+                        <div class="form-group m-0">
+                            <label for="Otdel">@SharedLocalizer["Otdel"]</label>
+                            <select class="form-control form-control-sm" id="find_otdel" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Otdel)" name="Otdel" value=""><option value=""></option></select>                            
                         </div>
-                        <div class="form-row">
-                            <label class="col-sm-4 col-form-label" for="PType">@SharedLocalizer["PType"]</label>
-                            <div class="col-sm-8">
-                                <select class="form-control form-control-sm" id="find_ptype" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="PType" value=""><option value=""></option></select>
-                            </div>
+                        <div class="form-group m-0">
+                            <label for="PType">@SharedLocalizer["PType"]</label>
+                            <select class="form-control form-control-sm" id="find_ptype" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="PType" value=""><option value=""></option></select>
                         </div>
-                        <div class="form-row">
-                            <label class="col-sm-4 col-form-label" for="Soob">@SharedLocalizer["Soob"]</label>
-                            <div class="col-sm-8">
-                                <select class="form-control form-control-sm" id="find_soob" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="Soob" value=""><option value=""></option></select>
-                            </div>
+                        <div class="form-group m-0">
+                            <label for="Soob">@SharedLocalizer["Soob"]</label>
+                            <select class="form-control form-control-sm" id="find_soob" asp-items="@((IEnumerable<SelectListItem>)ViewBag.PType)" name="Soob" value=""><option value=""></option></select>
                         </div>
-                        <div class="form-row ">
+                        @*<div class="form-row ">
                             <div class="col">
                                 <label for="Urandkorm">@SharedLocalizer["ProductivityhhaOfFeedUnits"]</label>
                             </div>
@@ -189,7 +183,7 @@
                                     <td><input class="form-control form-control-sm" id="find_ur_z_to" type="text" /></td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table>*@
                         <div class="form-group m-0">
                             <label for="Recommend">@SharedLocalizer["Recommend"]</label>
                             <select class="form-control form-control-sm" id="find_recommend" asp-items="@((IEnumerable<SelectListItem>)ViewBag.Recommend)" name="Recommend" value=""><option value=""></option></select>
@@ -321,10 +315,10 @@
                 </div>
             </div>
             <!-- Exaple 1 -->
-            <div class="dark-light-buttons">
+            @*<div class="dark-light-buttons">
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-            </div>
+            </div>*@
 
         </div>
         <div class="chiller-theme">
@@ -332,7 +326,7 @@
                 <a href="#">
                     <i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i>
                 </a>
-                <a href="/Home/Instruction#FodderResources">
+                <a href="/Home/Instruction#FodderResources" target="_blank">
                     <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
                 <a href="#" id="InfoBtn" class="target-click">

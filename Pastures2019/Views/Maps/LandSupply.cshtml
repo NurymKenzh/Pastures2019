@@ -147,7 +147,7 @@
                             <label for="DominantType">@SharedLocalizer["DominantType"]</label>
                             <select class="form-control form-control-sm" id="find_dominanttype" asp-items="@((IEnumerable<SelectListItem>)ViewBag.DominantType)" name="DominantType" value=""><option value=""></option></select>
                         </div>
-                        <table class="table table-borderless table-sm mt-2">
+                        @*<table class="table table-borderless table-sm mt-2">
                             <tbody>
                                 <tr>
                                     <td scope="row">@SharedLocalizer["AverageAnnualProductivitykgha"]</td>
@@ -162,7 +162,7 @@
                                     <td><input class="form-control form-control-sm" id="find_korm_avgye_to" type="text" /></td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table>*@
                         <div class="form-group m-0">
                             <label for="SupplyRecommend">@SharedLocalizer["SupplyRecommend"]</label>
                             <select class="form-control form-control-sm" id="find_supplyrecommend" asp-items="@((IEnumerable<SelectListItem>)ViewBag.SupplyRecommend)" name="SupplyRecommend" value=""><option value=""></option></select>
@@ -255,10 +255,10 @@
                 </div>
             </div>
             <!-- Exaple 1 -->
-            <div class="dark-light-buttons">
+            @*<div class="dark-light-buttons">
                 <a class="btn btn-primary btn-customized-4 btn-customized-dark" href="#" role="button">Dark</a>
                 <a class="btn btn-primary btn-customized-4 btn-customized-light" href="#" role="button">Light</a>
-            </div>
+            </div>*@
 
         </div>
         <div class="chiller-theme">
@@ -266,7 +266,7 @@
                 <a href="#">
                     <i class="SomeInfo fa fa-home" InfoTitle="@SharedLocalizer["ToHome"]" onclick="ToHome()"></i>
                 </a>
-                <a href="/Home/Instruction#LandSupply">
+                <a href="/Home/Instruction#LandSupply" target="_blank">
                     <i class="SomeInfo fa fa-film" InfoTitle="@SharedLocalizer["Instruction"]"></i>
                 </a>
                 <a href="#" id="InfoBtn" class="target-click">

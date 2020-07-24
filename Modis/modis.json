@@ -4,14 +4,14 @@
   "ModisPassword": "Pastures@2020",
   "Connection": "Host=localhost;Database=Pastures2019;Username=postgres;Password=postgres;Port=5432",
   "ServerSettings": {
-    "DownloadDir1": "D:\\MODIS\\MOLT\\MOD13Q1006",
-    "DownloadDir2": "D:\\MODIS\\MOLA\\MYD13Q1006",
+    "DownloadDir1": "M:\\MODIS\\MOLT\\MOD13Q1006",
+    "DownloadDir2": "M:\\MODIS\\MOLA\\MYD13Q1006",
     "CMDPath": "C:\\Windows\\system32\\cmd.exe",
-    "GeoServerModisDataDir": "D:\\GeoServer\\data_dir\\data\\MODIS",
+    "GeoServerModisDataDir": "M:\\GeoServer\\data_dir\\data\\MODIS",
     "GeoServerUser": "admin",
     "GeoServerPassword": "geoserver",
     "GeoServerURL": "http://localhost:8080/geoserver/",
-    "PasturepolShpPath": "D:\\GeoServer\\data_dir\\data\\Pastures2019\\pasturepol.shp"
+    "PasturepolShpPath": "M:\\GeoServer\\data_dir\\data\\Pastures2019\\pasturepol.shp"
   },
   "DebugSettings": {
     "DownloadDir1": "D:\\MODIS\\MOLT\\MOD13Q1006",

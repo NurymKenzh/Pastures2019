@@ -555,32 +555,64 @@ namespace Modis
                                 value = valueSNew.Split(',')[1].Replace("'", "");
                             try
                             {
-                                switch (name)
+                                try
                                 {
-                                    case "objectid":
-                                        objectid = Convert.ToDecimal(value);
-                                        break;
-                                    case "min":
-                                        min = Convert.ToDecimal(value) / 10000;
-                                        break;
-                                    case "max":
-                                        max = Convert.ToDecimal(value) / 10000;
-                                        break;
-                                    case "mean":
-                                        mean = Convert.ToDecimal(value) / 10000;
-                                        break;
-                                    case "median":
-                                        median = Convert.ToDecimal(value) / 10000;
-                                        break;
-                                    case "majority":
-                                        majority = Convert.ToDecimal(value) / 10000;
-                                        break;
-                                    case "nodata":
-                                        nodata = Convert.ToDecimal(value) / 10000;
-                                        break;
+                                    switch (name)
+                                    {
+                                        case "objectid":
+                                            objectid = Convert.ToDecimal(value.Replace('.', ','));
+                                            break;
+                                        case "min":
+                                            min = Convert.ToDecimal(value.Replace('.', ',')) / 10000;
+                                            break;
+                                        case "max":
+                                            max = Convert.ToDecimal(value.Replace('.', ',')) / 10000;
+                                            break;
+                                        case "mean":
+                                            mean = Convert.ToDecimal(value.Replace('.', ',')) / 10000;
+                                            break;
+                                        case "median":
+                                            median = Convert.ToDecimal(value.Replace('.', ',')) / 10000;
+                                            break;
+                                        case "majority":
+                                            majority = Convert.ToDecimal(value.Replace('.', ',')) / 10000;
+                                            break;
+                                        case "nodata":
+                                            nodata = Convert.ToDecimal(value.Replace('.', ',')) / 10000;
+                                            break;
+                                    }
+                                }
+                                catch
+                                {
+                                    switch (name)
+                                    {
+                                        case "objectid":
+                                            objectid = Convert.ToDecimal(value.Replace(',', '.'));
+                                            break;
+                                        case "min":
+                                            min = Convert.ToDecimal(value.Replace(',', '.')) / 10000;
+                                            break;
+                                        case "max":
+                                            max = Convert.ToDecimal(value.Replace(',', '.')) / 10000;
+                                            break;
+                                        case "mean":
+                                            mean = Convert.ToDecimal(value.Replace(',', '.')) / 10000;
+                                            break;
+                                        case "median":
+                                            median = Convert.ToDecimal(value.Replace(',', '.')) / 10000;
+                                            break;
+                                        case "majority":
+                                            majority = Convert.ToDecimal(value.Replace(',', '.')) / 10000;
+                                            break;
+                                        case "nodata":
+                                            nodata = Convert.ToDecimal(value.Replace(',', '.')) / 10000;
+                                            break;
+                                    }
                                 }
                             }
-                            catch { }
+                            catch {
+                            
+                            }
                         }
                         if (objectid >= 0)
                         {

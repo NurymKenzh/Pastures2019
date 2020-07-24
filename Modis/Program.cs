@@ -625,7 +625,7 @@ namespace Modis
                                     meanS = mean == null ? "NULL" : mean.ToString();
                                 string execute = $"INSERT" +
                                     $" INTO public.analytics(raster, objectid, min, max, median, majority, mean)" +
-                                    $" VALUES ('{Path.GetFileName(raster)}', {objectid.ToString()}, {minS}, {maxS}, {medianS}, {majorityS}, {meanS});";
+                                    $" VALUES ('{Path.GetFileName(raster)}', {objectid.ToString().Replace(',', '.')}, {minS.Replace(',', '.')}, {maxS.Replace(',', '.')}, {medianS.Replace(',', '.')}, {majorityS.Replace(',', '.')}, {meanS.Replace(',', '.')});";
                                 connection.Execute(execute);
                                 connection.Close();
                             }

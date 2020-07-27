@@ -1208,14 +1208,14 @@
         var otdely_id = $('#find_otdel').val(),
             class_id = $('#find_ptype').val(),
             group_id = $('#find_soob').val(),
-            ur_v_from = $('#find_ur_v_from').val().replace(',', '.'),
-            ur_v_to = $('#find_ur_v_to').val().replace(',', '.'),
-            ur_l_from = $('#find_ur_l_from').val().replace(',', '.'),
-            ur_l_to = $('#find_ur_l_to').val().replace(',', '.'),
-            ur_o_from = $('#find_ur_o_from').val().replace(',', '.'),
-            ur_o_to = $('#find_ur_o_to').val().replace(',', '.'),
-            ur_z_from = $('#find_ur_z_from').val().replace(',', '.'),
-            ur_z_to = $('#find_ur_z_to').val().replace(',', '.'),
+            //ur_v_from = $('#find_ur_v_from').val().replace(',', '.'),
+            //ur_v_to = $('#find_ur_v_to').val().replace(',', '.'),
+            //ur_l_from = $('#find_ur_l_from').val().replace(',', '.'),
+            //ur_l_to = $('#find_ur_l_to').val().replace(',', '.'),
+            //ur_o_from = $('#find_ur_o_from').val().replace(',', '.'),
+            //ur_o_to = $('#find_ur_o_to').val().replace(',', '.'),
+            //ur_z_from = $('#find_ur_z_from').val().replace(',', '.'),
+            //ur_z_to = $('#find_ur_z_to').val().replace(',', '.'),
             recommend = $('#find_recommend').val(),
             recomcattle = $('#find_recomcattle').val();
         filter_found = '';
@@ -1243,70 +1243,70 @@
                 filter_found += " && group_id = '" + group_id + "'";
             }
         }
-        if (ur_v_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_v >= " + ur_v_from + "";
-            }
-            else {
-                filter_found += " && ur_v >= " + ur_v_from + "";
-            }
-        }
-        if (ur_v_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_v <= " + ur_v_to + "";
-            }
-            else {
-                filter_found += " && ur_v <= " + ur_v_to + "";
-            }
-        }
-        if (ur_l_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_l >= " + ur_l_from + "";
-            }
-            else {
-                filter_found += " && ur_l >= " + ur_l_from + "";
-            }
-        }
-        if (ur_l_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_l <= " + ur_l_to + "";
-            }
-            else {
-                filter_found += " && ur_l <= " + ur_l_to + "";
-            }
-        }
-        if (ur_o_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_o >= " + ur_o_from + "";
-            }
-            else {
-                filter_found += " && ur_o >= " + ur_o_from + "";
-            }
-        }
-        if (ur_o_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_o <= " + ur_o_to + "";
-            }
-            else {
-                filter_found += " && ur_o <= " + ur_o_to + "";
-            }
-        }
-        if (ur_z_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_z >= " + ur_z_from + "";
-            }
-            else {
-                filter_found += " && ur_z >= " + ur_z_from + "";
-            }
-        }
-        if (ur_z_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_z <= " + ur_z_to + "";
-            }
-            else {
-                filter_found += " && ur_z <= " + ur_z_to + "";
-            }
-        }
+        //if (ur_v_from != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_v >= " + ur_v_from + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_v >= " + ur_v_from + "";
+        //    }
+        //}
+        //if (ur_v_to != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_v <= " + ur_v_to + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_v <= " + ur_v_to + "";
+        //    }
+        //}
+        //if (ur_l_from != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_l >= " + ur_l_from + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_l >= " + ur_l_from + "";
+        //    }
+        //}
+        //if (ur_l_to != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_l <= " + ur_l_to + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_l <= " + ur_l_to + "";
+        //    }
+        //}
+        //if (ur_o_from != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_o >= " + ur_o_from + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_o >= " + ur_o_from + "";
+        //    }
+        //}
+        //if (ur_o_to != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_o <= " + ur_o_to + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_o <= " + ur_o_to + "";
+        //    }
+        //}
+        //if (ur_z_from != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_z >= " + ur_z_from + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_z >= " + ur_z_from + "";
+        //    }
+        //}
+        //if (ur_z_to != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_z <= " + ur_z_to + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_z <= " + ur_z_to + "";
+        //    }
+        //}
         if (recommend != '') {
             if (filter_found.length == 0) {
                 filter_found = "recommend_ = '" + recommend + "'";

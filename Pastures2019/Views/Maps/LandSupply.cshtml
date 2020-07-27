@@ -1087,11 +1087,11 @@
     function FindPastures() {
         var type_k = $('#find_stype').val(),
             dominant_t = $('#find_dominanttype').val(),
-            s_recomend = $('#find_supplyrecommend').val(),
-            ur_avgyear_from = $('#find_ur_avgyear_from').val().replace(',', '.'),
-            ur_avgyear_to = $('#find_ur_avgyear_to').val().replace(',', '.'),
-            korm_avgye_from = $('#find_korm_avgye_from').val().replace(',', '.'),
-            korm_avgye_to = $('#find_korm_avgye_to').val().replace(',', '.');
+            s_recomend = $('#find_supplyrecommend').val();
+            //ur_avgyear_from = $('#find_ur_avgyear_from').val().replace(',', '.'),
+            //ur_avgyear_to = $('#find_ur_avgyear_to').val().replace(',', '.'),
+            //korm_avgye_from = $('#find_korm_avgye_from').val().replace(',', '.'),
+            //korm_avgye_to = $('#find_korm_avgye_to').val().replace(',', '.');
         filter_found = '';
         if (type_k != '') {
             if (filter_found.length == 0) {
@@ -1117,38 +1117,38 @@
                 filter_found += " && s_recomend = '" + s_recomend + "'";
             }
         }
-        if (ur_avgyear_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_avgyear >= " + ur_avgyear_from + "";
-            }
-            else {
-                filter_found += " && ur_avgyear >= " + ur_avgyear_from + "";
-            }
-        }
-        if (ur_avgyear_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "ur_avgyear <= " + ur_avgyear_to + "";
-            }
-            else {
-                filter_found += " && ur_avgyear <= " + ur_avgyear_to + "";
-            }
-        }
-        if (korm_avgye_from != '') {
-            if (filter_found.length == 0) {
-                filter_found = "korm_avgye >= " + korm_avgye_from + "";
-            }
-            else {
-                filter_found += " && korm_avgye >= " + korm_avgye_from + "";
-            }
-        }
-        if (korm_avgye_to != '') {
-            if (filter_found.length == 0) {
-                filter_found = "korm_avgye <= " + korm_avgye_to + "";
-            }
-            else {
-                filter_found += " && korm_avgye <= " + korm_avgye_to + "";
-            }
-        }
+        //if (ur_avgyear_from != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_avgyear >= " + ur_avgyear_from + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_avgyear >= " + ur_avgyear_from + "";
+        //    }
+        //}
+        //if (ur_avgyear_to != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "ur_avgyear <= " + ur_avgyear_to + "";
+        //    }
+        //    else {
+        //        filter_found += " && ur_avgyear <= " + ur_avgyear_to + "";
+        //    }
+        //}
+        //if (korm_avgye_from != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "korm_avgye >= " + korm_avgye_from + "";
+        //    }
+        //    else {
+        //        filter_found += " && korm_avgye >= " + korm_avgye_from + "";
+        //    }
+        //}
+        //if (korm_avgye_to != '') {
+        //    if (filter_found.length == 0) {
+        //        filter_found = "korm_avgye <= " + korm_avgye_to + "";
+        //    }
+        //    else {
+        //        filter_found += " && korm_avgye <= " + korm_avgye_to + "";
+        //    }
+        //}
         if (filter_found.length == 0) {
             filter_found = "type_k = 'none'";
         }

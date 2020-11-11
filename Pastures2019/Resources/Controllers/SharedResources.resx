@@ -354,6 +354,9 @@
   <data name="Debitdms" xml:space="preserve">
     <value />
   </data>
+  <data name="DegradationFieldTitle" xml:space="preserve">
+    <value />
+  </data>
   <data name="Delete" xml:space="preserve">
     <value />
   </data>
@@ -430,6 +433,15 @@
     <value />
   </data>
   <data name="ExtractStarted" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FAO" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FAOText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FAOTitle" xml:space="preserve">
     <value />
   </data>
   <data name="FAQ" xml:space="preserve">
@@ -1114,6 +1126,12 @@
     <value />
   </data>
   <data name="Year" xml:space="preserve">
+    <value />
+  </data>
+  <data name="YieldAfter" xml:space="preserve">
+    <value />
+  </data>
+  <data name="YieldBefore" xml:space="preserve">
     <value />
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">

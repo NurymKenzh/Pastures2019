@@ -354,6 +354,9 @@
   <data name="Debitdms" xml:space="preserve">
     <value>Дебит, дм³/с</value>
   </data>
+  <data name="DegradationFieldTitle" xml:space="preserve">
+    <value>Деградированный участок после коренного улучшения посевом житняка</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Удалить</value>
   </data>
@@ -431,6 +434,15 @@
   </data>
   <data name="ExtractStarted" xml:space="preserve">
     <value>Извлечение запущено</value>
+  </data>
+  <data name="FAO" xml:space="preserve">
+    <value>FAO</value>
+  </data>
+  <data name="FAOText" xml:space="preserve">
+    <value>Внедрение усовершенствованных практик управления пастбищами</value>
+  </data>
+  <data name="FAOTitle" xml:space="preserve">
+    <value>FAO Мероприятие 3.1.3.4</value>
   </data>
   <data name="FAQ" xml:space="preserve">
     <value>Ваши вопросы</value>
@@ -1115,6 +1127,12 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Год</value>
+  </data>
+  <data name="YieldAfter" xml:space="preserve">
+    <value>Средняя урожайность после улучшения, ц/га</value>
+  </data>
+  <data name="YieldBefore" xml:space="preserve">
+    <value>Средняя урожайность до улучшения, ц/га</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Ваш пароль был изменен.</value>

@@ -200,11 +200,11 @@
                             </tr>
                             <tr>
                                 <th scope="row" id="infoSpring">@SharedLocalizer["YieldBefore"]</th>
-                                <td class="font-italic" id="YieldBefore">1,5</td>
+                                <td class="font-italic" id="YieldBefore"></td>
                             </tr>
                             <tr>
                                 <th scope="row" id="infoSummer">@SharedLocalizer["YieldAfter"]</th>
-                                <td class="font-italic" id="YieldAfter">9,0</td>
+                                <td class="font-italic" id="YieldAfter"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -946,6 +946,8 @@
                     var features = parser.readFeatures(data);
                     switch (features[0].get('number')) {
                         case 0:
+                            $('#YieldBefore').text('1,5');
+                            $('#YieldAfter').text('9,0');
                             InfoMapModal.setContent($('#InfoMapDegradation'));
                             InfoMapModal.open();
                             break;
@@ -1002,6 +1004,12 @@
                             var parser = new ol.format.GeoJSON();
                             var features = parser.readFeatures(data);
                             switch (features[0].get('number')) {
+                                case 0:
+                                    $('#YieldBefore').text('14,3');
+                                    $('#YieldAfter').text('11,1');
+                                    InfoMapModal.setContent($('#InfoMapDegradation'));
+                                    InfoMapModal.open();
+                                    break;
                                 case 1:
                                     $('#valueGroupLat').text('Festuca Sulcata+ Artemisia Sublessigina+ Stipa Capillata');
                                     $('#valueUr_v').text('12,1');

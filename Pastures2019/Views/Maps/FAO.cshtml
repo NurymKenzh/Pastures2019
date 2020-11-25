@@ -73,6 +73,7 @@
                                 <select class="form-control form-control-sm" id="n_19_date" onchange="ChangeLayers()">
                                     <option value="n_19_20190506">2019-05-06</option>
                                     <option value="n_19_20190918">2019-09-08</option>
+                                    <option value="n_19_20200506">2020-05-06</option>
                                 </select>
                             </div>
                             <hr />
@@ -91,6 +92,7 @@
                                 <select class="form-control form-control-sm" id="n_63_date" onchange="ChangeLayers()">
                                     <option value="n_63_20190413">2019-04-13</option>
                                     <option value="n_63_20190801">2019-08-01</option>
+                                    <option value="n_63_20200530">2020-05-30</option>
                                 </select>
                             </div>
                             <hr />
@@ -614,6 +616,24 @@
     Layer_n_19_20190918_32644.set('date', 'n_19_20190918');
     Layer_n_19_20190918_32644.setVisible(false);
 
+    var url_n_19_20200506_32644 = geoserver_url_local + geoserver_workspace_name + '/wms';
+    var Source_n_19_20200506_32644 = new ol.source.TileWMS({
+        url: url_n_19_20200506_32644,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':n_19_20200506_32644'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_n_19_20200506_32644 = new ol.layer.Tile({
+        source: Source_n_19_20200506_32644
+    });
+    Layer_n_19_20200506_32644.set('name', 'n_19');
+    Layer_n_19_20200506_32644.set('date', 'n_19_20200506');
+    Layer_n_19_20200506_32644.setVisible(false);
+
     var url_n_63_20190413_32644 = geoserver_url_local + geoserver_workspace_name + '/wms';
     var Source_n_63_20190413_32644 = new ol.source.TileWMS({
         url: url_n_63_20190413_32644,
@@ -648,6 +668,24 @@
     Layer_n_63_20190801_32644.set('name', 'n_63');
     Layer_n_63_20190801_32644.set('date', 'n_63_20190801');
     Layer_n_63_20190801_32644.setVisible(false);
+
+    var url_n_63_20200530_32644 = geoserver_url_local + geoserver_workspace_name + '/wms';
+    var Source_n_63_20200530_32644 = new ol.source.TileWMS({
+        url: url_n_63_20200530_32644,
+        params: {
+            'FORMAT': 'image/png',
+            'VERSION': '1.1.1',
+            tiled: true,
+            'LAYERS': geoserver_workspace_name + ':n_63_20200530_32644'
+        },
+        serverType: 'geoserver'
+    });
+    var Layer_n_63_20200530_32644 = new ol.layer.Tile({
+        source: Source_n_63_20200530_32644
+    });
+    Layer_n_63_20200530_32644.set('name', 'n_63');
+    Layer_n_63_20200530_32644.set('date', 'n_63_20200530');
+    Layer_n_63_20200530_32644.setVisible(false);
 
     var url_pas19 = geoserver_url_local + geoserver_workspace_name + '/wms';
     var Source_pas19 = new ol.source.TileWMS({
@@ -726,8 +764,10 @@
             Layer_Base,
             Layer_n_19_20190506_32644,
             Layer_n_19_20190918_32644,
+            Layer_n_19_20200506_32644,
             Layer_n_63_20190413_32644,
             Layer_n_63_20190801_32644,
+            Layer_n_63_20200530_32644,
             Layer_pas19,
             Layer_pas63,
             Layer_select_pasturepol,

@@ -126,7 +126,7 @@ namespace Pastures2019.Controllers
             return View();
         }
 
-        public ActionResult FAO()
+        public ActionResult CACILM2()
         {
             ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
             ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();

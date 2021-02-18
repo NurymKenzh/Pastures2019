@@ -354,6 +354,9 @@
   <data name="Debitdms" xml:space="preserve">
     <value>Debit, dm³ / s</value>
   </data>
+  <data name="DegradationFieldTitle" xml:space="preserve">
+    <value>Degraded area after radical improvement by sowing wheat grass</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -431,6 +434,15 @@
   </data>
   <data name="ExtractStarted" xml:space="preserve">
     <value>Extract started</value>
+  </data>
+  <data name="FAO" xml:space="preserve">
+    <value>CACILM-2</value>
+  </data>
+  <data name="FAOText" xml:space="preserve">
+    <value>Implementation of improved pasture management practices</value>
+  </data>
+  <data name="FAOTitle" xml:space="preserve">
+    <value>CACILM-2 Activity 3.1.3.4</value>
   </data>
   <data name="FAQ" xml:space="preserve">
     <value>Your questions</value>
@@ -1115,6 +1127,12 @@
   </data>
   <data name="Year" xml:space="preserve">
     <value>Year</value>
+  </data>
+  <data name="YieldAfter" xml:space="preserve">
+    <value>Average yield after improvement, c/ha</value>
+  </data>
+  <data name="YieldBefore" xml:space="preserve">
+    <value>Average yield before improvement, c/ha</value>
   </data>
   <data name="YourPasswordHasBeenChanged" xml:space="preserve">
     <value>Your password has been changed.</value>

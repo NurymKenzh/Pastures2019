@@ -774,6 +774,15 @@ namespace Pastures2019.Resources.Controllers {
         /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
+        public static string DegradationFieldTitle {
+            get {
+                return ResourceManager.GetString("DegradationFieldTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
@@ -1002,6 +1011,33 @@ namespace Pastures2019.Resources.Controllers {
         public static string ExtractStarted {
             get {
                 return ResourceManager.GetString("ExtractStarted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string FAO {
+            get {
+                return ResourceManager.GetString("FAO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string FAOText {
+            get {
+                return ResourceManager.GetString("FAOText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string FAOTitle {
+            get {
+                return ResourceManager.GetString("FAOTitle", resourceCulture);
             }
         }
         
@@ -3054,6 +3090,24 @@ namespace Pastures2019.Resources.Controllers {
         public static string Year {
             get {
                 return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string YieldAfter {
+            get {
+                return ResourceManager.GetString("YieldAfter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string YieldBefore {
+            get {
+                return ResourceManager.GetString("YieldBefore", resourceCulture);
             }
         }
         

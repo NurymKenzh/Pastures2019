@@ -126,6 +126,13 @@ namespace Pastures2019.Controllers
             return View();
         }
 
+        public ActionResult CACILM2()
+        {
+            ViewBag.CATO = _context.CATO.OrderBy(c => c.Name).ToList();
+            ViewBag.GeoServerUrl = Startup.Configuration["GeoServerUrl"].ToString();
+            return View();
+        }
+
         public ActionResult Charts(decimal objectid)
         {
             ViewBag.objectid = objectid;
